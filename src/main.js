@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import { store } from './store/store.js'
-
+import { stayService } from '../services/stays-service-local'
 const options = {
   template: ``,
   store: store,
