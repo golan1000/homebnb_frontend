@@ -1,13 +1,17 @@
 <template>
-  <div class="wrapper">
-    <nav>NAV NAV NAV NAV NAV</nav>
+  <div class="app-main">
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 // import { RouterLink, RouterView } from "vue-router";
-export default {};
+export default {
+  name: "App",
+  created() {
+    this.$store.dispatch({ type: "loadStays" });
+  },
+};
 </script>
 
 <style></style>
