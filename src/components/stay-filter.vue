@@ -1,15 +1,15 @@
 <template>
   <section class="filter-container">
     <div class="location">
-      <label for="locations">Where are you going?</label>
+      <label for="locations">Location</label>
       <input
         list="addresses"
         name="addresses"
+        placeholder="Where are you going?"
         v-model="filterBy.address"
         @change="setfilter"
         @input="setfilter"
       />
-      {{ filterBy }}
       <datalist id="addresses">
         <option
           v-for="(addres, idx) in getAddresses"
@@ -33,11 +33,24 @@
         <button>-</button>
       </div>
     </div>
-    <button @click="setfilterParams">Search</button>
+    <div class="search-btn-container">
+      <el-button
+        :icon="Search"
+        size="large"
+        class="search-btn"
+        @click="setfilterParams"
+        color="#ff385c"
+        style="color: white"
+        circle
+        >Search
+      </el-button>
+      <!-- <button class="search-btn" @click="setfilterParams">S</button> -->
+    </div>
   </section>
 </template>
 
 <script>
+import { Search } from '@element-plus/icons-vue'
 export default {
   props: {
     stays: {
@@ -48,6 +61,7 @@ export default {
   created() {},
   data() {
     return {
+      Search,
       filterBy: {
         address: '',
         guests: {
@@ -79,11 +93,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.filter-container {
-  width: 757px;
-  height: 66px;
-  border-radius: 8px;
-  background: red;
-}
-</style>
+<style scoped></style>
