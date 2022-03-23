@@ -1,6 +1,7 @@
 <template>
   <!-- Tal -->
-  <stay-filter @filter="onSetFilter" :stays="stays" />
+  <h1>home page</h1>
+  <!-- <stay-filter @filter="onSetFilter" :stays="stays" /> -->
 </template>
 
 <script>

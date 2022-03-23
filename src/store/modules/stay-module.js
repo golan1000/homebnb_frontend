@@ -4,6 +4,13 @@ import { stayService } from '../../services/stays-service-local.js'
 export default {
   state: {
     stays: null,
+    filterBy: {
+      address: '',
+      guests: {
+        adults: 0,
+        children: 0,
+      },
+    },
   },
   getters: {
     getStays(state) {
@@ -14,6 +21,7 @@ export default {
     setStays(state, { stays }) {
       state.stays = stays
     },
+<<<<<<< HEAD
     //golan
     update(state, { stayToUpdate }) {
       console.log('mutate --- stay to update=', stayToUpdate)
@@ -22,11 +30,18 @@ export default {
       )
       console.log('foundIdx=', foundIdx)
       state.stays.splice(foundIdx, 1, stayToUpdate)
+=======
+
+    //Tal
+    setFilter(state, { filterBy }) {
+      state.filterBy = filterBy
+>>>>>>> 640f69093a831b2b86648fe0df786fef758caccb
     },
   },
   actions: {
     async loadStays({ commit, state }) {
       try {
+<<<<<<< HEAD
         const stays = await stayService.query()
         commit({ type: 'setStays', stays })
       } catch (err) {
@@ -56,6 +71,17 @@ export default {
       console.log('updated stay =', updatedStay)
 
       this.commit({ type: 'update', stayToUpdate })
+=======
+        const stays = await stayService.query(state.filterBy)
+        commit({ type: 'setStays', stays })
+      } catch (err) {
+        console.log('err in stay-module in loadStays:', err)
+      }
+    },
+    filter({ commit, dispatch }, { filterBy }) {
+      commit({ type: 'setFilter', filterBy }) //check
+      dispatch({ type: 'loadStays' })
+>>>>>>> 640f69093a831b2b86648fe0df786fef758caccb
     },
   },
 }

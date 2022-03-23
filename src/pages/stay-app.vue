@@ -1,4 +1,9 @@
 <script>
+<<<<<<< HEAD
+=======
+import stayFilter from '../components/stay-filter.vue'
+import stayList from '../components/stay-list.vue'
+>>>>>>> 640f69093a831b2b86648fe0df786fef758caccb
 export default {
   data() {
     return {
@@ -8,6 +13,7 @@ export default {
     };
   },
   methods: {
+<<<<<<< HEAD
     update() {
       console.log("stay to update=", this.stayToEdit);
       this.$store.dispatch({ type: "update", stayToUpdate: this.stayToEdit });
@@ -33,6 +39,22 @@ export default {
     }
   },
 };
+=======
+    onSetFilter(filterBy) {
+      // Tal
+
+      // console.log('filterrrrrrrrby address=', filterBy.address)
+      this.$store.dispatch({ type: 'filter', filterBy })
+    },
+  },
+  computed: {
+    stays() {
+      return this.$store.getters.getStays
+    },
+  },
+  components: { stayFilter, stayList },
+}
+>>>>>>> 640f69093a831b2b86648fe0df786fef758caccb
 </script>
 
 <template>

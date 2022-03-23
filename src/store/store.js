@@ -1,28 +1,18 @@
 import { createStore } from 'vuex'
-import { stayService } from '../services/stays-service-local'
+// import { stayService } from '../services/stays-service-local'
 import stayStore from './modules/stay-module'
+import userStore from './modules/user-module'
+import orderStore from './modules/order-module'
 
 export const store = createStore({
   strict: true,
-  state: {
-    stays: null,
-    filterBy: {},
-  },
-  actions: {
-    // Tal
-    filter({ commit, dispatch }, { filterBy }) {
-      commit({ type: 'setFilter', filterBy })
-      // dispatch({ type: 'loadStays' })
-    },
-  },
-  mutations: {
-    //Tal
-    setFilter(state, filterBy) {
-      state.filterBy = filterBy
-    },
-  },
+  state: {},
+  actions: {},
+  mutations: {},
   getters: {},
   modules: {
     stayStore,
+    userStore,
+    orderStore,
   },
 })

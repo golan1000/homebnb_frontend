@@ -13,8 +13,28 @@ export const stayService = {
 }
 
 // TODO: support paging and filtering and sorting
-function query() {
-  return storageService.query(KEY)
+async function query(filterBy) {
+  try {
+    const stays = await storageService.query(KEY)
+    console.log('stays', stays)
+    return _filterStays(filterBy, stays)
+  } catch (err) {
+    console.log('err', err)
+    throw new Error('could not get toys')
+  }
+}
+//Tal
+function _filterStays(filterBy, stays) {
+  if (!filterBy.address) {
+    console.log('no address')
+    return stays
+  }
+  console.log('stays', stays)
+  console.log('filterBy', filterBy)
+  let filteredStays = []
+  const regex = new RegExp(filterBy.address, 'i')
+  filteredStays = stays.filter(stay => regex.test(stay.loc.address))
+  return filteredStays
 }
 
 function getById(id) {
@@ -26,7 +46,6 @@ function remove(id) {
 }
 
 function save(stay) {
-  // const todoToSave = JSON.parse(JSON.stringify(todo))
   const prm = stay._id
     ? storageService.put(KEY, stay)
     : storageService.post(KEY, stay)

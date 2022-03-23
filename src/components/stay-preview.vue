@@ -1,10 +1,10 @@
 <template>
-  <li class="stay-preview">
+  <li class="stay-preview" @click="goToDetails">
     <div class="stay-preview-img-con">
       <img class="stay-preview-img" :src="stay.imgUrls[0]" alt="" />
     </div>
     <div class="stay-preview-content">
-      <div class="stay-preview-reviews">
+      <div class="stay-preview-content-reviews">
         <p>{{ getAvgRate }}</p>
         <p>{{ stay.reviews.length }}</p>
       </div>
@@ -12,8 +12,13 @@
         <p>{{ stay.type }}</p>
         <p>{{ stay.loc.address }}</p>
       </div>
+      <div class="stay-preview-desc">
+        <p>{{ stay.summary }}</p>
+      </div>
+      <div class="stay-preview-price">
+        <p>{{ $filters.currencyUSD(stay.price) }} /night</p>
+      </div>
     </div>
-    <p>{{ $filters.currencyUSD(stay.price) }}</p>
   </li>
 </template>
 
@@ -27,7 +32,11 @@ export default {
     console.log(this.stay.imgUrls[0]);
   },
   components: {},
-  methods: {},
+  methods: {
+    goToDetails() {
+      this.$router.push(`/stay/${this.stay._id}`);
+    },
+  },
   computed: {
     getAvgRate() {
       const sumRates = this.stay.reviews.reduce(
