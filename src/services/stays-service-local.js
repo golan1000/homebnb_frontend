@@ -3,9 +3,7 @@ import { storageService } from './async-storage-service.js'
 const KEY = 'stayDB'
 
 _createStays()
-console.log('blaaaaaa')
 window.createStays = _createStays
-
 export const stayService = {
   query,
   getById,
