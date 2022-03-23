@@ -1,17 +1,43 @@
 .stay-preview{
     display: flex;
     flex-direction: column;
-    height: 350px;
+    height: 380px;
     background-color: lightcoral ;
 
     .stay-preview-img-con {
         height: 60%;
         .stay-preview-img{
-            height: 50%;
+            height: 100%;
+            width: 100%;
             border-radius: 12px;
         }
     }
     .stay-preview-content {
-        height: 40%;
+        margin-top: 10%;
+        height: 30%;
+        
+        .stay-preview-content-reviews{
+            display: flex;
+            height: 25%;
+            align-items: center;
+        }
+
+        .stay-preview-details {
+            display: flex;
+            height: 25%;
+            align-items: center;
+        }
+
+        .stay-preview-desc {
+            display: flex;
+            height: 25%;
+            align-items: center;
+        }
+
+        .stay-preview-price {
+            display: flex;
+            height: 25%;
+            align-items: center;
+        }
     }
 }
