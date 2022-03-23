@@ -1,4 +1,4 @@
-import { ssrContextKey } from 'vue'
+// import { ssrContextKey } from 'vue'
 import { stayService } from '../../services/stays-service-local.js'
 
 export default {
@@ -21,27 +21,24 @@ export default {
     setStays(state, { stays }) {
       state.stays = stays
     },
-<<<<<<< HEAD
     //golan
     update(state, { stayToUpdate }) {
       console.log('mutate --- stay to update=', stayToUpdate)
       var foundIdx = state.stays.findIndex(
-        (stay) => stay._id === stayToUpdate._id,
+        stay => stay._id === stayToUpdate._id
       )
       console.log('foundIdx=', foundIdx)
       state.stays.splice(foundIdx, 1, stayToUpdate)
-=======
+    },
 
     //Tal
     setFilter(state, { filterBy }) {
       state.filterBy = filterBy
->>>>>>> 640f69093a831b2b86648fe0df786fef758caccb
     },
   },
   actions: {
     async loadStays({ commit, state }) {
       try {
-<<<<<<< HEAD
         const stays = await stayService.query()
         commit({ type: 'setStays', stays })
       } catch (err) {
@@ -65,13 +62,13 @@ export default {
 
     //golan
     async update(context, { stayToUpdate }) {
-      console.log('action ---- stay to update=', stayToUpdate)
-      const updatedStay = await stayService.save(stayToUpdate)
+      try {
+        console.log('action ---- stay to update=', stayToUpdate)
+        const updatedStay = await stayService.save(stayToUpdate)
 
-      console.log('updated stay =', updatedStay)
+        console.log('updated stay =', updatedStay)
 
-      this.commit({ type: 'update', stayToUpdate })
-=======
+        this.commit({ type: 'update', stayToUpdate })
         const stays = await stayService.query(state.filterBy)
         commit({ type: 'setStays', stays })
       } catch (err) {
@@ -81,7 +78,6 @@ export default {
     filter({ commit, dispatch }, { filterBy }) {
       commit({ type: 'setFilter', filterBy }) //check
       dispatch({ type: 'loadStays' })
->>>>>>> 640f69093a831b2b86648fe0df786fef758caccb
     },
   },
 }
