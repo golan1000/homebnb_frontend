@@ -1,4 +1,4 @@
-import { ssrContextKey } from 'vue'
+// import { ssrContextKey } from 'vue'
 import { stayService } from '../../services/stays-service-local.js'
 
 export default {
@@ -62,16 +62,12 @@ export default {
     //golan
     async update(context, { stayToUpdate }) {
       console.log('action ---- stay to update=', stayToUpdate)
-      const updatedStay = await stayService.save(stayToUpdate)
-
-      console.log('updated stay =', updatedStay)
-
-      this.commit({ type: 'update', stayToUpdate })
       try {
-        const stays = await stayService.query(state.filterBy)
-        commit({ type: 'setStays', stays })
+        const updatedStay = await stayService.save(stayToUpdate)
+        console.log('updated stay =', updatedStay)
+        this.commit({ type: 'update', stayToUpdate })
       } catch (err) {
-        console.log('err in stay-module in loadStays:', err)
+        console.log('err in update stay:', err)
       }
     },
     filter({ commit, dispatch }, { filterBy }) {
