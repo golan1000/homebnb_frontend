@@ -14,6 +14,7 @@ export const stayService = {
 
 // TODO: support paging and filtering and sorting
 async function query(filterBy) {
+  console.log('filterBy.address===============', filterBy.address)
   try {
     const stays = await storageService.query(KEY)
     console.log('stays', stays)

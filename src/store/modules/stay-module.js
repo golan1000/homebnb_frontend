@@ -25,7 +25,7 @@ export default {
     update(state, { stayToUpdate }) {
       console.log('mutate --- stay to update=', stayToUpdate)
       var foundIdx = state.stays.findIndex(
-        (stay) => stay._id === stayToUpdate._id,
+        stay => stay._id === stayToUpdate._id
       )
       console.log('foundIdx=', foundIdx)
       state.stays.splice(foundIdx, 1, stayToUpdate)
@@ -37,8 +37,12 @@ export default {
   },
   actions: {
     async loadStays({ commit, state }) {
+      console.log(
+        'filterBy.address----------------------------------------',
+        state.filterBy.address
+      )
       try {
-        const stays = await stayService.query()
+        const stays = await stayService.query(state.filterBy)
         commit({ type: 'setStays', stays })
       } catch (err) {
         console.log('err in stay-module in loadToys:', err)
