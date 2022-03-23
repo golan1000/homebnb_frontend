@@ -7,7 +7,11 @@
 
 <script>
 // import { RouterLink, RouterView } from "vue-router";
-export default {};
+export default {
+  created() {
+    console.log(this.$route.params);
+  },
+};
 </script>
 
 <style></style>
