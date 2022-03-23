@@ -1,18 +1,17 @@
 // SETUP
-@import 'setup/typography';
+@import "setup/typography";
+@import "setup/variables";
 
 // BASICS
-@import 'basics/base';
-@import 'basics/helpers';
-@import 'basics/layout';
-
+@import "basics/base";
+@import "basics/helpers";
+@import "basics/layout";
 
 // COMPONENTS
-@import './components/app-footer';
-@import './components/app-header';
-@import './components/chat-app';
-@import './components/main-header';
-@import './components/stay-filter';
-@import './components/stay-list';
-@import './components/stay-preview';
-@import './components/trip-settings';
+@import "./components/app-footer";
+@import "./components/app-header";
+@import "./components/chat-app";
+@import "./components/stay-list";
+@import "./components/stay-preview";
+@import "./components/trip-settings";
+@import "./components/stay-filter";

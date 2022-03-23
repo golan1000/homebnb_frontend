@@ -10,6 +10,9 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(faTwitter, faFacebook, faInstagram)
 
+// Element-Plus tal
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
 const options = {
   template: ``,
   store: store,
@@ -23,6 +26,8 @@ app.config.globalProperties.$filters = {
   },
 }
 
+// Element-Plus tal
+app.use(ElementPlus)
 
 app.use(router)
 app.use(store)
