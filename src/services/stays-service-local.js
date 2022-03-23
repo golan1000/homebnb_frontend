@@ -13,8 +13,7 @@ export const stayService = {
 }
 
 // TODO: support paging and filtering and sorting
-async function query(filterBy) {
-  console.log('filterBy.address===============', filterBy.address)
+async function query(filterBy = {}) {
   try {
     const stays = await storageService.query(KEY)
     console.log('stays', stays)
@@ -34,7 +33,7 @@ function _filterStays(filterBy, stays) {
   console.log('filterBy', filterBy)
   let filteredStays = []
   const regex = new RegExp(filterBy.address, 'i')
-  filteredStays = stays.filter(stay => regex.test(stay.loc.address))
+  filteredStays = stays.filter((stay) => regex.test(stay.loc.address))
   return filteredStays
 }
 
