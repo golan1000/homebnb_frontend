@@ -2,14 +2,18 @@
   <div class="about">
     <h1>This is an stay app</h1>
   </div>
+  <stay-filter :stays="stays" @filter="onSetFilter" />
 </template>
-
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
+<script>
+import stayFilter from '../components/stay-filter.vue'
+export default {
+  methods: {
+    onSetFilter(filterBy) {
+      // Tal
+      this.$store.dispatch({ type: 'filter', filterBy })
+    },
+  },
+  components: { stayFilter },
 }
-</style>
+</script>
+<style></style>

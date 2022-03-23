@@ -124,11 +124,11 @@ async function _createStays() {
             'https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small',
         },
         loc: {
-          country: 'Portugal',
-          countryCode: 'PT',
-          address: 'Porto, Portugal',
-          lat: -8.61308,
-          lng: 41.1413,
+          country: 'Israel',
+          countryCode: 'IL',
+          address: 'Tel Aviv, Israel',
+          lat: 32.109333,
+          lng: 34.855499,
         },
         reviews: [
           {

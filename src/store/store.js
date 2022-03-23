@@ -6,18 +6,20 @@ import { createStore } from 'vuex'
 export const store = createStore({
   strict: true,
   state: {
-    var1: 'bla',
+    stays: null,
+    filterBy: {},
   },
   actions: {
-    action1(context, { id }) {
-      console.log('id from payload=', id)
-      contex.commit({ type: 'mutate1', id })
+    // Tal
+    filter({ commit, dispatch }, { filterBy }) {
+      commit({ type: 'setFilter', filterBy })
+      // dispatch({ type: 'loadStays' })
     },
   },
   mutations: {
-    mutate1(state, id) {
-      console.log('id = ', id)
-      state.var1 = id
+    //Tal
+    setFilter(state, filterBy) {
+      state.filterBy = filterBy
     },
   },
   getters: {

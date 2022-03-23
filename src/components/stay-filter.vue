@@ -1,86 +1,227 @@
 <template>
-  <div class="item">
-    <i>
-      <slot name="icon"></slot>
-    </i>
-    <div class="details">
-      <h3>
-        <slot name="heading"></slot>
-      </h3>
-      <slot></slot>
+  <section class="filter-container">
+    <div class="location">
+      <label for="locations">Where are you going?</label>
+      <input
+        list="addresses"
+        name="addresses"
+        v-model="filterBy.address"
+        @change="setfilter"
+      />
+      <datalist id="addresses">
+        <option
+          v-for="(addres, idx) in getAddresses"
+          :key="idx"
+          :value="addres"
+        />
+      </datalist>
     </div>
-  </div>
+    <div class="guests">
+      <h4>Add guests</h4>
+      <div class="adults">
+        Adults:
+        <button>+</button>
+        <span>{{ filterBy.guests.adults }}</span>
+        <button>-</button>
+      </div>
+      <div class="children">
+        Children:
+        <button>+</button>
+        <span>{{ filterBy.guests.children }}</span>
+        <button>-</button>
+      </div>
+    </div>
+    <button @click="setfilterParams">Search</button>
+  </section>
 </template>
 
-<style scoped>
-.item {
-  margin-top: 2rem;
-  display: flex;
+<script>
+export default {
+  props: {
+    // stays: {
+    //   type: Array,
+    //   // required: true,
+    // },
+  },
+  created() {
+    this.stays = [
+      {
+        _id: '10006546',
+        name: 'Ribeira Charming Duplex',
+        type: 'House',
+        imgUrls: [
+          'https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large',
+          'otherImg.jpg',
+        ],
+        price: 80.0,
+        summary:
+          'Fantastic duplex apartment with three bedrooms, located in the historic area of Porto, Ribeira (Cube)...',
+        capacity: 8,
+        amenities: [
+          'TV',
+          'Wifi',
+          'Kitchen',
+          'Smoking allowed',
+          'Pets allowed',
+          'Cooking basics',
+        ],
+        host: {
+          _id: '51399391',
+          fullname: 'Davit Pok',
+          imgUrl:
+            'https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small',
+        },
+        loc: {
+          country: 'Portugal',
+          countryCode: 'PT',
+          address: 'Porto, Portugal',
+          lat: -8.61308,
+          lng: 41.1413,
+        },
+        reviews: [
+          {
+            id: 'madeId',
+            txt: 'Very helpful hosts. Cooked traditional...',
+            rate: 4,
+            by: {
+              _id: 'u102',
+              fullname: 'user2',
+              imgUrl: '/img/img2.jpg',
+            },
+          },
+        ],
+        likedByUsers: ['mini-user'], // for user-wishlist : use $in
+      },
+      {
+        _id: '10006542',
+        name: 'Ribeira Charming Duplex',
+        type: 'House',
+        imgUrls: [
+          'https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large',
+          'otherImg.jpg',
+        ],
+        price: 80.0,
+        summary:
+          'Fantastic duplex apartment with three bedrooms, located in the historic area of Porto, Ribeira (Cube)...',
+        capacity: 8,
+        amenities: [
+          'TV',
+          'Wifi',
+          'Kitchen',
+          'Smoking allowed',
+          'Pets allowed',
+          'Cooking basics',
+        ],
+        host: {
+          _id: '51399391',
+          fullname: 'Davit Pok',
+          imgUrl:
+            'https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small',
+        },
+        loc: {
+          country: 'Israel',
+          countryCode: 'IL',
+          address: 'Tel Aviv, Israel',
+          lat: 32.109333,
+          lng: 34.855499,
+        },
+        reviews: [
+          {
+            id: 'madeId',
+            txt: 'Very helpful hosts. Cooked traditional...',
+            rate: 4,
+            by: {
+              _id: 'u102',
+              fullname: 'user2',
+              imgUrl: '/img/img2.jpg',
+            },
+          },
+        ],
+        likedByUsers: ['mini-user'], // for user-wishlist : use $in
+      },
+      {
+        _id: '10006516',
+        name: 'Ribeira Charming Duplex',
+        type: 'House',
+        imgUrls: [
+          'https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large',
+          'otherImg.jpg',
+        ],
+        price: 80.0,
+        summary:
+          'Fantastic duplex apartment with three bedrooms, located in the historic area of Porto, Ribeira (Cube)...',
+        capacity: 8,
+        amenities: [
+          'TV',
+          'Wifi',
+          'Kitchen',
+          'Smoking allowed',
+          'Pets allowed',
+          'Cooking basics',
+        ],
+        host: {
+          _id: '51399391',
+          fullname: 'Davit Pok',
+          imgUrl:
+            'https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small',
+        },
+        loc: {
+          country: 'Portugal',
+          countryCode: 'PT',
+          address: 'Porto, Portugal',
+          lat: -8.61308,
+          lng: 41.1413,
+        },
+        reviews: [
+          {
+            id: 'madeId',
+            txt: 'Very helpful hosts. Cooked traditional...',
+            rate: 4,
+            by: {
+              _id: 'u102',
+              fullname: 'user2',
+              imgUrl: '/img/img2.jpg',
+            },
+          },
+        ],
+        likedByUsers: ['mini-user'], // for user-wishlist : use $in
+      },
+    ]
+  },
+  data() {
+    return {
+      filterBy: {
+        address: '',
+        guests: {
+          adults: 0,
+          children: 0,
+        },
+      },
+      stays: null,
+    }
+  },
+  methods: {
+    setfilter() {
+      this.$emit('filter', this.filterBy)
+    },
+    setfilterParams() {
+      this.$router.push(`/stay?address=${this.filterBy.address}`)
+    },
+  },
+  computed: {
+    getAddresses() {
+      return this.stays.map(stay => stay.loc.address)
+    },
+    addGuest() {},
+    removeGuest() {},
+  },
 }
+</script>
 
-.details {
-  flex: 1;
-  margin-left: 1rem;
-}
-
-i {
-  display: flex;
-  place-items: center;
-  place-content: center;
-  width: 32px;
-  height: 32px;
-
-  color: var(--color-text);
-}
-
-h3 {
-  font-size: 1.2rem;
-  font-weight: 500;
-  margin-bottom: 0.4rem;
-  color: var(--color-heading);
-}
-
-@media (min-width: 1024px) {
-  .item {
-    margin-top: 0;
-    padding: 0.4rem 0 1rem calc(var(--section-gap) / 2);
-  }
-
-  i {
-    top: calc(50% - 25px);
-    left: -26px;
-    position: absolute;
-    border: 1px solid var(--color-border);
-    background: var(--color-background);
-    border-radius: 8px;
-    width: 50px;
-    height: 50px;
-  }
-
-  .item:before {
-    content: ' ';
-    border-left: 1px solid var(--color-border);
-    position: absolute;
-    left: 0;
-    bottom: calc(50% + 25px);
-    height: calc(50% - 25px);
-  }
-
-  .item:after {
-    content: ' ';
-    border-left: 1px solid var(--color-border);
-    position: absolute;
-    left: 0;
-    top: calc(50% + 25px);
-    height: calc(50% - 25px);
-  }
-
-  .item:first-of-type:before {
-    display: none;
-  }
-
-  .item:last-of-type:after {
-    display: none;
-  }
+<style>
+.filter-container {
+  width: 757px;
+  height: 66px;
+  border-radius: 5px;
 }
 </style>

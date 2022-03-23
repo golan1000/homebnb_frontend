@@ -1,4 +1,8 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import {
+  createRouter,
+  createWebHistory,
+  createWebHashHistory,
+} from 'vue-router'
 import stayApp from '../pages/stay-app.vue'
 import stayDetails from '../pages/stay-details.vue'
 import stayEdit from '../pages/stay-edit.vue'
@@ -6,7 +10,9 @@ import userDetails from '../pages/user-details.vue'
 import loginSignupPage from '../pages/login-signup-page.vue'
 import homePage from '../pages/home-page.vue'
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  // history: createWebHashHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(import.meta.env.BASE_URL),
+  linkActiveClass: 'active',
   routes: [
     {
       path: '/',
