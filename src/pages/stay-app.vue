@@ -1,11 +1,14 @@
 <template>
-  <div class="about">
-    <h1>This is an stay app</h1>
-  </div>
   <stay-filter :stays="stays" @filter="onSetFilter" />
+  <h1>Stay-app page</h1>
+  <section class="app-main stay-app">
+    <stay-list v-if="stays" :stays="stays" />
+  </section>
 </template>
+
 <script>
 import stayFilter from '../components/stay-filter.vue'
+import stayList from '../components/stay-list.vue'
 export default {
   methods: {
     onSetFilter(filterBy) {
@@ -13,7 +16,13 @@ export default {
       this.$store.dispatch({ type: 'filter', filterBy })
     },
   },
-  components: { stayFilter },
+  computed: {
+    stays() {
+      return this.$store.getters.getStays
+    },
+  },
+  components: { stayFilter, stayList },
 }
 </script>
+
 <style></style>

@@ -1,8 +1,7 @@
 import { createStore } from 'vuex'
-// import {store1} from './store1.js'
-// import {store2} from './store2.js'
+import { stayService } from '../services/stays-service-local'
+import stayStore from './modules/stay-module'
 
-//don't forget to do in console "npm i vuex@next"
 export const store = createStore({
   strict: true,
   state: {
@@ -22,13 +21,8 @@ export const store = createStore({
       state.filterBy = filterBy
     },
   },
-  getters: {
-    getVar(state) {
-      return state.var1
-    },
-  },
+  getters: {},
   modules: {
-    // store1: store1,
-    // store2: store2,
+    stayStore,
   },
 })

@@ -1,0 +1,16 @@
+.stay-preview{
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+
+    .stay-preview-img-con {
+        height: 60%;
+        .stay-preview-img{
+            height: 50%;
+            border-radius: 12px;
+        }
+    }
+    .stay-preview-content {
+        height: 40%;
+    }
+}
