@@ -1,7 +1,9 @@
 <template>
   <li class="stay-preview" @click="goToDetails">
     <div class="stay-preview-img-con">
-      <img class="stay-preview-img" :src="stay.imgUrls[0]" alt="" />
+      <!-- <div class="stay-preview-second-con"> -->
+        <img class="stay-preview-img" :src="stay.imgUrls[0]" alt="" />
+      <!-- </div> -->
     </div>
     <div class="stay-preview-content">
       <div class="stay-preview-content-reviews">

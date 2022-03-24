@@ -1,0 +1,19 @@
+.app-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .app-footer-links {
+        display: flex;
+    }
+
+    .app-footer-currency {
+        filter: invert(26%) sepia(0%) saturate(0%) hue-rotate(161deg) brightness(103%) contrast(93%);
+        display: flex;
+        align-items: center;
+    }
+
+    .app-footer-socials {
+        font-size: 25px;
+    }
+}
