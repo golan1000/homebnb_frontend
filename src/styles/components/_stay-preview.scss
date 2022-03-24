@@ -1,42 +1,60 @@
 .stay-preview {
-    display: flex;
-    flex-direction: column;
-    height: 380px;
+  display: flex;
+  flex-direction: column;
+  height: 370px;
 
-    .stay-preview-img-con {
-        height: 60%;
-        .stay-preview-img {
-            height: 100%;
-            width: 100%;
-            border-radius: 12px;
-        }
+  .stay-preview-img-con {
+    .stay-preview-img {
+      height: 262.5px;
+      width: 100%;
+      border-radius: 12px;
     }
-    .stay-preview-content {
-        margin-top: 10%;
-        height: 30%;
+  }
+  .stay-preview-content {
+    height: 30%;
+    color: #222;
 
-        .stay-preview-content-reviews {
-            display: flex;
-            height: 25%;
-            align-items: center;
-        }
+    .stay-preview-content-reviews {
+      display: flex;
+      align-items: center;
+      padding-top: 10px;
+      font-size: 0.875rem;
 
-        .stay-preview-details {
-            display: flex;
-            height: 25%;
-            align-items: center;
-        }
+      .img-star {
+        margin-right: 0.25rem;
+        width: 1.125rem;
+        filter: invert(34%) sepia(91%) saturate(3121%) hue-rotate(328deg)
+          brightness(100%) contrast(103%);
+      }
 
-        .stay-preview-desc {
-            display: flex;
-            height: 25%;
-            align-items: center;
-        }
-
-        .stay-preview-price {
-            display: flex;
-            height: 25%;
-            align-items: center;
-        }
+      .reviews-number {
+        color: #717171;
+      }
     }
+
+    .stay-preview-details {
+      display: flex;
+      height: 25%;
+      align-items: center;
+      padding-top: 6px;
+    }
+
+    .stay-preview-desc {
+      display: flex;
+      height: 25%;
+      align-items: center;
+      padding-top: 2px;
+    }
+
+    .stay-preview-price {
+      display: flex;
+      height: 25%;
+      align-items: center;
+      padding-top: 4px;
+
+      .stay-preview-price-span {
+        font-weight: 700;
+      }
+    }
+  }
 }

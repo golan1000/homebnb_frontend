@@ -2,13 +2,14 @@
   <li class="stay-preview" @click="goToDetails">
     <div class="stay-preview-img-con">
       <!-- <div class="stay-preview-second-con"> -->
-        <img class="stay-preview-img" :src="stay.imgUrls[0]" alt="" />
+      <img class="stay-preview-img" :src="stay.imgUrls[0]" alt="" />
       <!-- </div> -->
     </div>
     <div class="stay-preview-content">
       <div class="stay-preview-content-reviews">
-        <p>{{ getAvgRate }}</p>
-        <p>{{ stay.reviews.length }}</p>
+        <img class="img-star" src="../assets/star.png" alt="" />
+        <p class="reviews-rate">{{ getAvgRate }}&nbsp;</p>
+        <p class="reviews-number">({{ stay.reviews.length }} Reviews)</p>
       </div>
       <div class="stay-preview-details">
         <p>{{ stay.type }}</p>
@@ -18,7 +19,7 @@
         <p>{{ stay.summary }}</p>
       </div>
       <div class="stay-preview-price">
-        <p>{{ $filters.currencyUSD(stay.price) }} /night</p>
+        <p><span class="stay-preview-price-span">{{ $filters.currencyUSD(stay.price) }}</span> /night</p>
       </div>
     </div>
   </li>
