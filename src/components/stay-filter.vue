@@ -1,15 +1,15 @@
 <template>
   <section class="filter-container">
     <div class="location">
-      <label for="locations">Where are you going?</label>
+      <label for="locations">Location</label>
       <input
         list="addresses"
         name="addresses"
+        placeholder="Where are you going?"
         v-model="filterBy.address"
         @change="setfilter"
         @input="setfilter"
       />
-      {{ filterBy }}
       <datalist id="addresses">
         <option
           v-for="(addres, idx) in getAddresses"
@@ -22,22 +22,47 @@
       <h4>Add guests</h4>
       <div class="adults">
         Adults:
-        <button @click="addGuest" :value="filterBy.guests.adults">+</button>
+        <button @click="addGuest('adult')">+</button>
         <span>{{ filterBy.guests.adults }}</span>
-        <button>-</button>
+        <button @click="removeGuest('adult')">-</button>
       </div>
+      <br />
+
       <div class="children">
         Children:
-        <button @click="addGuest" :value="filterBy.guests.children">+</button>
+        <button @click="addGuest('child')">+</button>
         <span>{{ filterBy.guests.children }}</span>
-        <button>-</button>
+        <button @click="removeGuest('child')">-</button>
       </div>
     </div>
-    <button @click="setfilterParams">Search</button>
+    <div class="block">
+      <el-date-picker
+        v-model="date"
+        type="daterange"
+        range-separator="To"
+        start-placeholder="Start date"
+        end-placeholder="End date"
+      />
+    </div>
+
+    <div class="search-btn-container">
+      <el-button
+        :icon="Search"
+        size="large"
+        class="search-btn"
+        @click="setfilterParams"
+        color="#ff385c"
+        style="color: white"
+        circle
+      >
+      </el-button>
+      <!-- <button class="search-btn" @click="setfilterParams">S</button> -->
+    </div>
   </section>
 </template>
 
 <script>
+import { Search } from '@element-plus/icons-vue'
 export default {
   props: {
     stays: {
@@ -48,20 +73,39 @@ export default {
   created() {},
   data() {
     return {
+      Search,
       filterBy: {
         address: '',
         guests: {
           adults: 0,
           children: 0,
         },
+        date: '',
       },
     }
   },
   methods: {
-    addGuest(val) {
-      console.log('val', val)
+    addGuest(guest) {
+      console.log('val', guest)
+      if (guest === 'adult') {
+        this.filterBy.guests.adults++
+        this.setfilter()
+      } else {
+        this.filterBy.guests.children++
+        this.setfilter()
+      }
     },
-    removeGuest() {},
+    removeGuest(guest) {
+      if (guest === 'adult') {
+        if (!this.filterBy.guests.adults) return
+        this.filterBy.guests.adults--
+        this.setfilter()
+      } else {
+        if (!this.filterBy.guests.children) return
+        this.filterBy.guests.children--
+        this.setfilter()
+      }
+    },
 
     setfilter() {
       this.$emit('filter', JSON.parse(JSON.stringify(this.filterBy)))
@@ -79,11 +123,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.filter-container {
-  width: 757px;
-  height: 66px;
-  border-radius: 8px;
-  background: red;
-}
-</style>
+<style scoped></style>
