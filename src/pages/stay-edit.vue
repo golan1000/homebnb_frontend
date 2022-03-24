@@ -1,40 +1,3 @@
-<script>
-export default {
-  data() {
-    return {
-      stays: null,
-      stayToEdit: null,
-      displayMsg: "Loading...",
-    };
-  },
-  methods: {
-    update() {
-      console.log("stay to update=", this.stayToEdit);
-      this.$store.dispatch({ type: "update", stayToUpdate: this.stayToEdit });
-    },
-  },
-  async created() {
-    console.log("params=", this.$route.params);
-
-    const { id } = this.$route.params;
-
-    if (id) {
-      const foundStay = await this.$store.dispatch({ type: "getById", stayId: id });
-
-      console.log("foundStay main=", foundStay);
-      if (foundStay) {
-        this.stayToEdit = JSON.parse(JSON.stringify(foundStay));
-
-        console.log("found id=", this.stayToEdit);
-      } else {
-        console.log("no such id");
-        this.displayMsg = "no such id";
-      }
-    }
-  },
-};
-</script>
-
 <template>
   <div class="about">
     <h1>This is an stay edit</h1>
@@ -76,7 +39,48 @@ export default {
   </div>
 </template>
 
-<style>
+<script>
+export default {
+  data() {
+    return {
+      stays: null,
+      stayToEdit: null,
+      displayMsg: "Loading...",
+    };
+  },
+  methods: {
+    update() {
+      console.log("stay to update=", this.stayToEdit);
+      this.$store.dispatch({ type: "update", stayToUpdate: this.stayToEdit });
+    },
+  },
+  async created() {
+    console.log("params=", this.$route.params);
+
+    const { id } = this.$route.params;
+
+    if (id) {
+      const foundStay = await this.$store.dispatch({ type: "getById", stayId: id });
+
+      console.log("foundStay main=", foundStay);
+      if (foundStay) {
+        this.stayToEdit = JSON.parse(JSON.stringify(foundStay));
+
+        console.log("found id=", this.stayToEdit);
+      } else {
+        console.log("no such id");
+        this.displayMsg = "no such id";
+      }
+    }
+  },
+};
+</script>
+
+<style scoped>
+img {
+  width: 200px;
+  height: 120px;
+}
 /* #toggle {
   position: absolute;
 } */
