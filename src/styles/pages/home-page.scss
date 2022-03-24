@@ -1,0 +1,105 @@
+.main-container {
+    background: black;
+    margin: 0 auto;
+    background: url("../assets/img/hero.jpeg") no-repeat;
+    background-size: 100%;
+    height: 600px;
+    width: 90%;
+    background-position: 50%;
+}
+.filter-cont {
+    margin-top: 4.375rem;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-right: 0;
+    margin-left: 0;
+}
+.destenations {
+    display: grid;
+    grid-template-rows: 100px 320px 100px 320px;
+    grid-template-columns: 100px 1fr 100px;
+    width: 100vw;
+    /* height: 800px; */
+    background-color: #fff;
+}
+.dest-con1 {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    background-color: blue;
+    justify-content: space-between;
+}
+.dest-info {
+    // border: 10px solid black;
+    img {
+        // width: 20rem;
+        // height: 20rem;
+        width: 80%;
+        height: auto;
+        border-radius: 10px;
+    }
+    .img-con10 {
+        width: 100%;
+        height: 100%;
+        border: 1px solid black;
+        background-color: white;
+    }
+}
+
+.dest-grid {
+    display: grid;
+    // grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    // grid-auto-columns: minmax(0, 1fr);
+    // grid-template-rows: 100%;
+    gap: 10px;
+    .dest-title {
+        background-color: lightseagreen;
+    }
+    .img-con10 {
+        // width: 10em;
+        // height: 20em;
+        // height: auto;
+        min-width: 25%;
+        background-color: blue;
+        // border: 1px solid black;
+    }
+    .imgs-con {
+        width: 100%;
+        height: 100%;
+        background-color: lightgreen;
+    }
+    .img1 {
+        object-fit: cover;
+        max-width: 100%;
+        max-height: 100%;
+        height: 100%;
+        width: 100%;
+        border-radius: 10px;
+        // max-width: 100%;
+        // height: auto;
+    }
+}
+
+.test-grid {
+    display: grid;
+    // grid-auto-flow: column;
+    // grid-template-columns: repeat(auto-fil, minmax(250px, 1fr));
+    grid-template-columns: repeat(4, auto);
+    grid-template-rows: repeat(4, auto);
+
+    margin-top: 20px;
+    background-color: gray;
+    width: 100%;
+    height: 300px;
+    gap: 10px;
+
+    .test-item {
+        height: 100%;
+    }
+    .div-test {
+        width: 100%;
+    }
+}
