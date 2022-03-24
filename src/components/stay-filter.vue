@@ -1,51 +1,48 @@
 <template>
   <section class="filter-container">
     <div class="location">
-      <label for="locations">Location</label>
-      <input
-        list="addresses"
-        name="addresses"
-        placeholder="Where are you going?"
-        v-model="filterBy.address"
-        @change="setfilter"
-        @input="setfilter"
-      />
-      <datalist id="addresses">
-        <option
-          v-for="(addres, idx) in getAddresses"
-          :key="idx"
-          :value="addres"
+      <label for="locations input-container"
+        >Location
+        <input
+          list="addresses"
+          name="addresses"
+          type="search"
+          placeholder="Where are you going?"
+          v-model="filterBy.address"
+          @change="setfilter"
+          @input="setfilter"
         />
-      </datalist>
+        <datalist id="addresses">
+          <option
+            v-for="(addres, idx) in getAddresses"
+            :key="idx"
+            :value="addres"
+          />
+        </datalist>
+      </label>
     </div>
-    <div class="guests">
+    <div class="guests input-container">
       <h4>Add guests</h4>
+    </div>
+
+    <section class="guests-modal">
       <div class="adults">
         Adults:
-        <button @click="addGuest('adult')">+</button>
+        <button class="btn" @click="addGuest('adult')">+</button>
+
         <span>{{ filterBy.guests.adults }}</span>
-        <button @click="removeGuest('adult')">-</button>
+        <button class="btn" @click="removeGuest('adult')">-</button>
       </div>
-      <br />
 
       <div class="children">
         Children:
-        <button @click="addGuest('child')">+</button>
+        <button class="btn" @click="addGuest('child')">+</button>
         <span>{{ filterBy.guests.children }}</span>
-        <button @click="removeGuest('child')">-</button>
+        <button class="btn" @click="removeGuest('child')">-</button>
       </div>
-    </div>
-    <div class="block">
-      <el-date-picker
-        v-model="date"
-        type="daterange"
-        range-separator="To"
-        start-placeholder="Start date"
-        end-placeholder="End date"
-      />
-    </div>
+    </section>
 
-    <div class="search-btn-container">
+    <div class="search-btn-container input-container">
       <el-button
         :icon="Search"
         size="large"
@@ -56,29 +53,36 @@
         circle
       >
       </el-button>
-      <!-- <button class="search-btn" @click="setfilterParams">S</button> -->
     </div>
   </section>
+  <button @click="test1">test</button>
 </template>
 
 <script>
 import { Search } from '@element-plus/icons-vue';
+import { shallowRef } from 'vue';
 export default {
   props: {},
   created() {
     this.stays = this.$store.getters.getStays;
+
+    // const { address } = this.$route.query;
+    // if (address) {
+    //   console.log('the query address======', address);
+    //   this.filterBy.address = address;
+    // }
   },
+
   data() {
     return {
       stays: null,
       Search,
       filterBy: {
-        address: '',
+        address: '' || this.$route.query,
         guests: {
           adults: 0,
           children: 0,
         },
-        date: '',
       },
     };
   },
@@ -106,7 +110,6 @@ export default {
     },
 
     setfilter() {
-      // this.$emit('filter', JSON.parse(JSON.stringify(this.filterBy)))
       this.$store.dispatch({
         type: 'filter',
         filterBy: JSON.parse(JSON.stringify(this.filterBy)),
@@ -114,6 +117,13 @@ export default {
     },
     setfilterParams() {
       this.$router.push(`/stay?address=${this.filterBy.address}`);
+    },
+    getFilters() {
+      //  this.filterFromStore = this.$store.getters.getFilter
+      // return null;
+    },
+    test1() {
+      console.log('this.$route.params', this.$route.query);
     },
   },
   computed: {
@@ -124,5 +134,4 @@ export default {
   },
 };
 </script>
-
 <style scoped></style>
