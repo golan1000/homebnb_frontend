@@ -1,6 +1,5 @@
 <template>
   <section class="app-main stay-app">
-    <h1>Stay-app page</h1>
     <stay-filter />
     <stay-list v-if="stays" :stays="stays" />
   </section>
