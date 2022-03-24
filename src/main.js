@@ -5,10 +5,10 @@ import { store } from './store/store.js'
 import { stayService } from './services/stays-service-local.js'
 import './styles/styles.scss'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTwitter, faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons'
+import { faTwitter, faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faTwitter, faFacebook, faInstagram)
+library.add(faTwitter, faFacebookF, faInstagram)
 
 // Element-Plus tal
 import ElementPlus from 'element-plus'

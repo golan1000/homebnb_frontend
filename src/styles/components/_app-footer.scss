@@ -2,18 +2,36 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 74px;
 
     .app-footer-links {
         display: flex;
+        width: 30vw;
+        padding-inline: 50px;
+        
     }
 
-    .app-footer-currency {
-        filter: invert(26%) sepia(0%) saturate(0%) hue-rotate(161deg) brightness(103%) contrast(93%);
+    .footer-right-div {
+
         display: flex;
+        justify-content: space-between;
+        width: 30vw;
+        padding-inline: 50px;
         align-items: center;
-    }
 
-    .app-footer-socials {
-        font-size: 25px;
+
+        .app-footer-currency {
+            filter: invert(26%) sepia(0%) saturate(0%) hue-rotate(161deg) brightness(103%) contrast(93%);
+            display: flex;
+            align-items: center;
+        }
+
+        .app-footer-socials {
+            width: 5vw;
+            font-size: 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            filter: invert(26%) sepia(0%) saturate(0%) hue-rotate(161deg) brightness(103%) contrast(93%);
+        }
     }
 }
