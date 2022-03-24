@@ -11,30 +11,28 @@
     <div class="item3" style="background-color: red">3</div>
     <div class="item4" style="background-color: purple">4</div>
     <div class="item5" style="background-color: white">
-      <div class="imgs-con">
-        <div class="dest-grid">
-          <div class="img-con10">
-            <img class="img1" src="../assets/img/dest/Dubai.jpg" />
-          </div>
-          <div class="img-con10">
-            <img class="img1" src="../assets/img/dest/London.jpg" />
-          </div>
-          <div class="img-con10">
-            <img class="img1" src="../assets/img/dest/NY.jpg" />
-          </div>
-          <div class="img-con10">
-            <img class="img1" src="../assets/img/dest/Sydny.jpg" />
-          </div>
+      <div class="dest-grid">
+        <div class="img-con10" style="background-color: grey">
+          <img class="img1" src="../assets/img/dest/Dubai.jpg" />
           <div class="dest-title">Dubai</div>
+        </div>
+        <div class="img-con10" style="background-color: lightgreen">
+          <img class="img1" src="../assets/img/dest/London.jpg" />
           <div class="dest-title">London</div>
+        </div>
+        <div class="img-con10" style="background-color: red">
+          <img class="img1" src="../assets/img/dest/NY.jpg" />
           <div class="dest-title">New york</div>
+        </div>
+        <div class="img-con10" style="background-color: yellow">
+          <img class="img1" src="../assets/img/dest/Sydny.jpg" />
           <div class="dest-title">Sydney</div>
         </div>
       </div>
     </div>
     <div class="item6" style="background-color: grey">6</div>
     <div class="item7" style="background-color: pink">7</div>
-    <div class="item5" style="background-color: lightcoral">title</div>
+    <div class="item5" style="background-color: lightcoral">Top Rated</div>
     <div class="item5" style="background-color: lightgreen">9</div>
     <div class="item7" style="background-color: #66f542">12</div>
     <div class="item5" style="background-color: #79a542"></div>
@@ -43,18 +41,6 @@
 
   <div class="div-test">
     <div class="test-grid">
-      <div class="test-item" style="background-color: blue">test1</div>
-      <div class="test-item" style="background-color: white">test2</div>
-      <div class="test-item" style="background-color: red">test3</div>
-      <div class="test-item" style="background-color: purple">test4</div>
-      <div class="test-item" style="background-color: blue">test1</div>
-      <div class="test-item" style="background-color: white">test2</div>
-      <div class="test-item" style="background-color: red">test3</div>
-      <div class="test-item" style="background-color: purple">test4</div>
-      <div class="test-item" style="background-color: blue">test1</div>
-      <div class="test-item" style="background-color: white">test2</div>
-      <div class="test-item" style="background-color: red">test3</div>
-      <div class="test-item" style="background-color: purple">test4</div>
       <div class="test-item" style="background-color: blue">test1</div>
       <div class="test-item" style="background-color: white">test2</div>
       <div class="test-item" style="background-color: red">test3</div>
