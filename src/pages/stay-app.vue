@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import stayFilter from "../components/stay-filter.vue";
-import stayList from "../components/stay-list.vue";
+import stayFilter from '../components/stay-filter.vue';
+import stayList from '../components/stay-list.vue';
 export default {
   data() {
     return {
