@@ -11,9 +11,9 @@
     </div>
     <div class="footer-right-div">
       <div class="app-footer-currency">
-        <img src="../assets/language.png" alt="" />
+        <img class="img-globe" src="../assets/language.png" alt="" />
         <p>English(US)</p>
-        <p>$(US)</p>
+        <p>$US</p>
       </div>
       <div class="app-footer-socials">
         <fa class="icon-facebook" :icon="['fab', 'facebook-f']" />

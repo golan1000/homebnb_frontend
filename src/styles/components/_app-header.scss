@@ -1,44 +1,75 @@
 .app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  position: fixed;
+  width: 89%;
+
+  .logo-con {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    height: 80px;
-
-    .logo {
-        color: #ff385c;
-        font-size: 45px;
+    .logo-txt {
+      color: #ff385c;
+      font-size: 3rem;
+      cursor: pointer;
+      padding: 0.27rem;
     }
 
-    .main-nav {
-
-        display: flex;
-        align-items: center;
-
-        .main-nav-host {
-            color: #222;
-            font-size: 20px;
-        }
-
-        .menu-link {
-            color: #222;
-            font-size: 20px;
-        }
-
-        .bell-img {
-            font-size: 20px;
-        }
-
-        .hamburger {
-            font-size: 20px;
-        }
-
-        .menu-btn {
-            display: flex;
-            align-items: center;
-        }
-
-        .user-img {
-            font-size: 25px;
-        }
+    .logo-img {
+      width: 3rem;
+      filter: invert(34%) sepia(91%) saturate(3121%) hue-rotate(328deg) brightness(100%) contrast(103%);
     }
+  }
+
+  .main-nav {
+    display: flex;
+    align-items: center;
+
+    .bell-img {
+      padding-right: 15px;
+      cursor: pointer;
+    }
+
+    .hamburger {
+      color: #484848;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .menu-btn {
+      padding: 5px 5px 5px 15px;
+      border-radius: 200px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .user-img {
+      filter: invert(25%) sepia(2%) saturate(24%) hue-rotate(314deg)
+        brightness(96%) contrast(85%);
+      width: 1.875rem;
+      margin-left: 12px;
+    }
+
+    .menu-btn-modal {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 70px;
+      right: 0px;
+      border-radius: 12px 12px;
+      width: 240px;
+      box-shadow: 0 0 3px 0 rgb(0 0 0 / 18%);
+      background-color: #fff;
+      z-index: 10;
+
+      .menu-modal-link {
+        font-size: 0.875rem;
+        padding: 15px 20px;
+      }
+    }
+  }
 }

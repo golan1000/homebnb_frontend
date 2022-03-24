@@ -2,13 +2,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 74px;
+    padding-block: 25px;
+    font-size: 0.9rem;
 
     .app-footer-links {
         display: flex;
         width: 30vw;
         padding-inline: 50px;
-        
+        justify-content: space-between;
+        color: #222222;
     }
 
     .footer-right-div {
@@ -24,6 +26,12 @@
             filter: invert(26%) sepia(0%) saturate(0%) hue-rotate(161deg) brightness(103%) contrast(93%);
             display: flex;
             align-items: center;
+            width: 10vw;
+            font-weight: 600;
+
+            .img-globe {
+                width: 1.5rem;
+            }
         }
 
         .app-footer-socials {
