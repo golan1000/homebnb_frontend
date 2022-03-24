@@ -1,22 +1,60 @@
 .filter-container {
-    width: 47.31rem;
+    max-width: 47.31rem;
     height: 4.12rem;
     border: 1px solid #dddddd;
     border-radius: 2em;
     box-shadow: 0 1px 2px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 5%);
     margin: 0 auto;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     background-color: #ffff;
+    top: 4.687rem;
+    transform-origin: top;
+    // position: absolute;
+    transition: all 0.2s;
 
-    div {
+    .input-container {
         height: 4rem;
         border-radius: 2.5rem;
         padding: 0.78rem 0.78rem 0.78rem 1.56rem;
         display: flex;
         flex-direction: column;
     }
+    .location {
+        text-indent: 13px;
+    }
+
+    // label {
+    //     font-size: 12px;
+    //     font-weight: 800;
+    // }
+
+    .guests-modal {
+        display: none;
+        // display: flex;
+        flex-direction: column;
+        // position: absolute;
+        // line-height: 20px;
+        top: 123.25px;
+        right: 300px;
+        width: 21.87rem;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 4px rgb(0 0 0 / 18%);
+        z-index: 2;
+        padding: 1.25rem;
+
+        .btn {
+            border: 1px solid #b0b0b0;
+            border-radius: 50%;
+            height: 2rem;
+            width: 2rem;
+            color: #717171;
+            text-align: center;
+        }
+    }
+
     .search-btn {
         border-radius: 50%;
         border: none;
@@ -31,7 +69,7 @@
             rgb(189, 30, 89) 75%,
             rgb(189, 30, 89) 100%
         );
-        transition: background-image 2s ease 3s;
+        // transition: background-image 2s ease 3s;
     }
     input {
         background-color: transparent;
