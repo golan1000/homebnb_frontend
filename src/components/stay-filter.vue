@@ -3,21 +3,9 @@
     <div class="location">
       <label for="locations input-container"
         >Location
-        <input
-          list="addresses"
-          name="addresses"
-          type="search"
-          placeholder="Where are you going?"
-          v-model="filterBy.address"
-          @change="setfilter"
-          @input="setfilter"
-        />
+        <input list="addresses" name="addresses" type="search" placeholder="Where are you going?" v-model="filterBy.address" @change="setfilter" @input="setfilter" />
         <datalist id="addresses">
-          <option
-            v-for="(addres, idx) in getAddresses"
-            :key="idx"
-            :value="addres"
-          />
+          <option v-for="(addres, idx) in getAddresses" :key="idx" :value="addres" />
         </datalist>
       </label>
     </div>
@@ -43,16 +31,7 @@
     </section>
 
     <div class="search-btn-container input-container">
-      <el-button
-        :icon="Search"
-        size="large"
-        class="search-btn"
-        @click="setfilterParams"
-        color="#ff385c"
-        style="color: white"
-        circle
-      >
-      </el-button>
+      <el-button :icon="Search" size="large" class="search-btn" @click="setfilterParams" color="#ff385c" style="color: white" circle> </el-button>
     </div>
   </section>
   <button @click="test1">test</button>
@@ -129,7 +108,7 @@ export default {
   computed: {
     getAddresses() {
       if (!this.stays) return;
-      return this.stays.map(stay => stay.loc.address);
+      return this.stays.map((stay) => stay.loc.address);
     },
   },
 };
