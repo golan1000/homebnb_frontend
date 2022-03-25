@@ -14,6 +14,8 @@
       font-size: 3rem;
       cursor: pointer;
       padding: 0.27rem;
+      font-family: airbnb-regular;
+      font-weight: 600;
     }
 
     .logo-img {
@@ -48,8 +50,7 @@
     }
 
     .user-img {
-      filter: invert(25%) sepia(2%) saturate(24%) hue-rotate(314deg)
-        brightness(96%) contrast(85%);
+      filter: invert(25%) sepia(2%) saturate(24%) hue-rotate(314deg) brightness(96%) contrast(85%);
       width: 1.875rem;
       margin-left: 12px;
     }
