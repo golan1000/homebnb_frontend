@@ -20,10 +20,7 @@
     <div class="guests input-container">
       <label>
         Add guests
-        <input
-          disabled
-          placeholder="Add guests"
-          @click="IsGuestModalOpen = !IsGuestModalOpen"
+        <input disabled placeholder="Add guests" @click="IsGuestModalOpen = !IsGuestModalOpen"
       /></label>
     </div>
 
@@ -44,24 +41,9 @@
       </div>
     </section>
 
-<<<<<<< HEAD
-    <div class="search-btn-container input-container">
-      <el-button :icon="Search" size="large" class="search-btn" @click="setfilterParams" color="#ff385c" style="color: white" circle> </el-button>
-    </div>
-=======
     <!-- <div class="search-btn-container input-container"> -->
-    <el-button
-      :icon="Search"
-      size="large"
-      class="search-btn"
-      @click="setfilterParams"
-      color="#ff385c"
-      style="color: white"
-      circle
-    >
-    </el-button>
+    <el-button :icon="Search" size="large" class="search-btn" @click="setfilterParams" color="#ff385c" style="color: white" circle> </el-button>
     <!-- </div> -->
->>>>>>> 16a893c15e8d3144a9f4e78aa90c36a88bf43ac3
   </section>
 </template>
 
