@@ -73,7 +73,6 @@ async function _createStays() {
         type: 'House',
         imgUrls: [
           'https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large',
-          'otherImg.jpg',
         ],
         price: 80.0,
         summary:
@@ -120,7 +119,6 @@ async function _createStays() {
         type: 'House',
         imgUrls: [
           'https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large',
-          'otherImg.jpg',
         ],
         price: 80.0,
         summary: 'Fantastic duplex',
@@ -176,7 +174,7 @@ async function _createStays() {
         type: 'House',
         imgUrls: [
           'https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large',
-          'otherImg.jpg',
+          'https://i.picsum.photos/id/680/500/300.jpg?hmac=EjmiHmKX6pWvWYjwlcAJFaD0RcFqbRy2jlYr0CY3SeY',
         ],
         price: 80.0,
         summary:
@@ -223,7 +221,7 @@ async function _createStays() {
         type: 'House',
         imgUrls: [
           'https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large',
-          'otherImg.jpg',
+          'https://i.picsum.photos/id/37/500/300.jpg?hmac=jKTewF_MIRJax9XsRXV86HCgzQnexu4WP-nSRf-5mHo',
         ],
         price: 80.0,
         summary:
@@ -270,7 +268,7 @@ async function _createStays() {
         type: 'House',
         imgUrls: [
           'https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large',
-          'otherImg.jpg',
+          'https://i.picsum.photos/id/162/500/300.jpg?hmac=5PQIOB3s_blPaD49iA9Q_PhuWLphROf1kbGQDQ1VQV0',
         ],
         price: 80.0,
         summary:
@@ -317,7 +315,7 @@ async function _createStays() {
         type: 'House',
         imgUrls: [
           'https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large',
-          'otherImg.jpg',
+          'https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large',
         ],
         price: 80.0,
         summary:

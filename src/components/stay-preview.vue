@@ -1,10 +1,10 @@
 <template>
   <li class="stay-preview" @click="goToDetails">
-    <div class="stay-preview-img-con">
-      <!-- <div class="stay-preview-second-con"> -->
-      <img class="stay-preview-img" :src="stay.imgUrls[0]" alt="" />
-      <!-- </div> -->
-    </div>
+    <carousel :slides="slides">
+      <!-- <div class="stay-preview-img-con">
+        <img class="stay-preview-img" :src="stay.imgUrls[0]" alt="" />
+      </div> -->
+    </carousel>
     <div class="stay-preview-content">
       <div class="stay-preview-content-reviews">
         <img class="img-star" src="../assets/star.png" alt="" />
@@ -19,17 +19,29 @@
         <p>{{ stay.summary }}</p>
       </div>
       <div class="stay-preview-price">
-        <p><span class="stay-preview-price-span">{{ $filters.currencyUSD(stay.price) }}</span> /night</p>
+        <p>
+          <span class="stay-preview-price-span">{{
+            $filters.currencyUSD(stay.price)
+          }}</span>
+          /night
+        </p>
       </div>
     </div>
   </li>
 </template>
 
 <script>
+import carousel from "./carousel/carousel.vue";
+
 export default {
   name: "stay-preview",
   props: {
     stay: Object,
+  },
+  data() {
+    return {
+      slides: this.stay.imgUrls,
+    };
   },
   created() {
     console.log(this.stay.imgUrls[0]);
@@ -48,6 +60,9 @@ export default {
       );
       return sumRates / this.stay.reviews.length;
     },
+  },
+  components: {
+    carousel,
   },
 };
 </script>
