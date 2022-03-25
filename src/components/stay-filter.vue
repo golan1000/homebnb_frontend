@@ -1,7 +1,7 @@
 <template>
   <section class="filter-container">
-    <div class="location">
-      <label for="locations input-container"
+    <div class="location input-container">
+      <label for="locations"
         >Location
         <input list="addresses" name="addresses" type="search" placeholder="Where are you going?" v-model="filterBy.address" @change="setfilter" @input="setfilter" />
         <datalist id="addresses">
@@ -9,11 +9,25 @@
         </datalist>
       </label>
     </div>
+    <div class="trip-dates">
+      <div class="check-in input-container">
+        <label>Check-in <input type="text" placeholder="Add dates" /></label>
+      </div>
+      <div class="check-out input-container">
+        <label>Check-out <input type="text" placeholder="Add dates" /></label>
+      </div>
+    </div>
     <div class="guests input-container">
-      <h4>Add guests</h4>
+      <label>
+        Add guests
+        <input
+          disabled
+          placeholder="Add guests"
+          @click="IsGuestModalOpen = !IsGuestModalOpen"
+      /></label>
     </div>
 
-    <section class="guests-modal">
+    <section class="guests-modal" v-if="IsGuestModalOpen">
       <div class="adults">
         Adults:
         <button class="btn" @click="addGuest('adult')">+</button>
@@ -30,11 +44,25 @@
       </div>
     </section>
 
+<<<<<<< HEAD
     <div class="search-btn-container input-container">
       <el-button :icon="Search" size="large" class="search-btn" @click="setfilterParams" color="#ff385c" style="color: white" circle> </el-button>
     </div>
+=======
+    <!-- <div class="search-btn-container input-container"> -->
+    <el-button
+      :icon="Search"
+      size="large"
+      class="search-btn"
+      @click="setfilterParams"
+      color="#ff385c"
+      style="color: white"
+      circle
+    >
+    </el-button>
+    <!-- </div> -->
+>>>>>>> 16a893c15e8d3144a9f4e78aa90c36a88bf43ac3
   </section>
-  <button @click="test1">test</button>
 </template>
 
 <script>
@@ -45,11 +73,11 @@ export default {
   created() {
     this.stays = this.$store.getters.getStays;
 
-    // const { address } = this.$route.query;
-    // if (address) {
-    //   console.log('the query address======', address);
-    //   this.filterBy.address = address;
-    // }
+    const { address } = this.$route.query;
+    if (address) {
+      this.filterBy.address = address;
+    }
+    this.getFilters();
   },
 
   data() {
@@ -57,12 +85,13 @@ export default {
       stays: null,
       Search,
       filterBy: {
-        address: '' || this.$route.query,
+        address: '',
         guests: {
           adults: 0,
           children: 0,
         },
       },
+      IsGuestModalOpen: false,
     };
   },
   methods: {
@@ -98,11 +127,9 @@ export default {
       this.$router.push(`/stay?address=${this.filterBy.address}`);
     },
     getFilters() {
-      //  this.filterFromStore = this.$store.getters.getFilter
-      // return null;
-    },
-    test1() {
-      console.log('this.$route.params', this.$route.query);
+      const filterFromStore = this.$store.getters.getFilter;
+      if (!filterFromStore) console.log('no filter in store....');
+      this.filterBy = JSON.parse(JSON.stringify(filterFromStore));
     },
   },
   computed: {
