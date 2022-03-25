@@ -1,13 +1,19 @@
 <template>
   <section class="app-main stay-app">
-    <stay-filter />
-    <stay-list v-if="stays" :stays="stays" />
+    <!-- <stay-filter /> -->
+    <div class="space-con">
+.
+    </div>
+    <div>
+      <stay-filter></stay-filter>
+    </div>
+      <stay-list v-if="stays" :stays="stays" />
   </section>
 </template>
 
 <script>
-import stayFilter from '../components/stay-filter.vue';
-import stayList from '../components/stay-list.vue';
+import stayFilter from "../components/stay-filter.vue";
+import stayList from "../components/stay-list.vue";
 export default {
   data() {
     return {
@@ -27,4 +33,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.space-con {
+  width:100%;
+  height:65px;
+  /* background-color: blue; */
+}
+
+</style>

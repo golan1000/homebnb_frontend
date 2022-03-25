@@ -73,6 +73,7 @@ async function _createStays() {
         type: 'House',
         imgUrls: [
           'https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large',
+          'https://i.picsum.photos/id/978/500/300.jpg?hmac=ZrkqjlzyOdlpS1QIoHdNkp3ADYrKosWBxAoNXF2v2LU',
         ],
         price: 80.0,
         summary:
@@ -119,6 +120,7 @@ async function _createStays() {
         type: 'House',
         imgUrls: [
           'https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large',
+          'https://i.picsum.photos/id/978/500/300.jpg?hmac=ZrkqjlzyOdlpS1QIoHdNkp3ADYrKosWBxAoNXF2v2LU',
         ],
         price: 80.0,
         summary: 'Fantastic duplex',

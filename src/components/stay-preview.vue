@@ -62,7 +62,7 @@ export default {
     },
   },
   components: {
-    carousel,
+    carousel, 
   },
 };
 </script>
