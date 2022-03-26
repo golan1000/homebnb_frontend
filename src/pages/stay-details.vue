@@ -1,6 +1,5 @@
 <template>
-  <h1>This is an stay detail</h1>
-  <br />
+  <div class="space-con">&nbsp;</div>
   <div class="details-main-con">
     <div class="details-stay-name">
       <span>{{ stayToEdit.name }}</span
@@ -403,19 +402,19 @@ img {
 .middle-con {
   display: flex;
   width: 100%;
-  height: 1055px;
+  height: 910px;
   /* background-color: yellow; */
 }
 .middle-con-sec1 {
   width: 654px;
-  height: 1875px;
+  /* height: 1875px; */
   /* background-color: blue; */
 }
 .middle-con-sec2 {
   display: flex;
   justify-content: flex-end;
   width: 466px;
-  height: 1875px;
+  /* height: 1875px; */
   /* background-color: red; */
 }
 .order-form-calendar {
@@ -492,5 +491,10 @@ img {
 }
 .order-form-night {
   font-size: 18px;
+}
+.space-con {
+  width: 100%;
+  height: 65px;
+  /* background-color: blue; */
 }
 </style>
