@@ -24,9 +24,9 @@ export default {
         imgUrl: '/img/img1.jpg',
         username: 'user1',
       },
-    }
+    };
   },
-}
+};
 </script>
 <style scoped>
 .user-details {
