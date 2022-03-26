@@ -1,6 +1,6 @@
 <template>
   <section class="filter-container">
-    <div class="location input-container">
+    <div class="location input-container" @click="closeAllModals">
       <label for="locations"
         >Location
         <input
@@ -21,7 +21,7 @@
         />
       </datalist>
     </div>
-    <div class="trip-dates">
+    <div class="trip-dates" @click="openModal('calendar')">
       <div class="check-in input-container">
         <label
           >Check-in <input type="text" placeholder="Add dates" disabled
@@ -33,14 +33,12 @@
         /></label>
       </div>
     </div>
+
     <div class="input-container">
       <div class="guest-flex">
-        <div
-          class="guest-flex-column"
-          @click="IsGuestModalOpen = !IsGuestModalOpen"
-        >
+        <div class="guest-flex-column" @click="openModal('guest')">
           <label>Guests</label>
-          <input placeholder="Add guests" disabled />
+          <input :placeholder="sumOfGuests" disabled />
         </div>
 
         <button class="search-btn" @click="setfilterParams">
@@ -83,6 +81,24 @@
       </div>
     </section>
 
+    <div class="modal-date-picker" v-if="IsCalanderModalOpen">
+      <div
+        class="close-modal-btn"
+        title="Close the modal"
+        @click="IsCalanderModalOpen = false"
+      >
+        X
+      </div>
+      <v-date-picker
+        v-model="filterBy.date"
+        :value="null"
+        color="red"
+        is-range
+        rows="1"
+        columns="2"
+      />
+    </div>
+
     <!-- <div class="search-btn-container input-container"> -->
     <!-- <el-button :icon="Search" size="large" class="search-btn" @click="setfilterParams" color="#ff385c" style="color: white" circle> </el-button> -->
     <!-- </div> -->
@@ -114,8 +130,13 @@ export default {
           adults: 0,
           children: 0,
         },
+        range: {
+          start: new Date(),
+          end: new Date(),
+        },
       },
       IsGuestModalOpen: false,
+      IsCalanderModalOpen: false,
     };
   },
   methods: {
@@ -155,16 +176,31 @@ export default {
       if (!filterFromStore) console.log('no filter in store....');
       this.filterBy = JSON.parse(JSON.stringify(filterFromStore));
     },
+    openModal(modalType) {
+      if (modalType === 'calendar') {
+        this.IsCalanderModalOpen = true;
+        this.IsGuestModalOpen = false;
+      } else {
+        this.IsGuestModalOpen = true;
+        this.IsCalanderModalOpen = false;
+      }
+    },
+    closeAllModals() {
+      this.IsGuestModalOpen = false;
+      this.IsCalanderModalOpen = false;
+    },
   },
   computed: {
     getAddresses() {
       if (!this.stays) return;
       return this.stays.map(stay => stay.loc.address);
     },
-    // Wanted to display the sum of the guest and it does not work.
     sumOfGuests() {
-      if (this.guests.adults + this.guests.children === 0) return 'Add guests';
-      else return `Guests:${this.guests.adults + this.guests.children}`;
+      const sum = this.filterBy.guests.adults + this.filterBy.guests.children;
+      if (!sum) return 'Add guests';
+      else {
+        return `Guests: ${sum}`;
+      }
     },
   },
 };
