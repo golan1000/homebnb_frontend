@@ -1,7 +1,5 @@
 .filter-container {
-    // margin-top: 100px;
     max-width: 53.125rem;
-    // width: 53.125rem;
     height: 4.43rem;
     border: 1px solid #dddddd;
     border-radius: 2.5em;
@@ -16,6 +14,10 @@
     // position: absolute;
     transition: all 0.2s;
 
+    button {
+        cursor: pointer;
+    }
+
     label {
         font-size: 0.75rem;
         font-weight: 800;
@@ -26,10 +28,19 @@
         border-radius: 2.5rem;
         padding: 0.78rem 0.78rem 0.78rem 1.56rem;
         display: flex;
+
         flex-direction: column;
+        > :last-child {
+            margin-inline-end: -3px;
+        }
+        // > * {
+        //     cursor: pointer;
+        // }
     }
+
     .input-container:hover {
         background-color: #ebebeb;
+        // height: 100%;
     }
     .location {
         text-indent: 15px;
@@ -42,20 +53,49 @@
         display: flex;
     }
 
+    .guest-flex {
+        display: flex;
+    }
+    .guest-flex-column {
+        display: flex;
+        flex-direction: column;
+    }
+
     .guests-modal {
         display: flex;
         flex-direction: column;
-        // position: absolute;
-        // line-height: 20px;
-        top: 123.25px;
-        right: 300px;
+        position: relative;
+        // align-items: space-between;
+        line-height: 20px;
+        top: 8.5rem;
+        right: 18.75rem;
         width: 21.87rem;
         background-color: #fff;
         border-radius: 12px;
         box-shadow: 0 2px 4px rgb(0 0 0 / 18%);
         z-index: 2;
         padding: 1.25rem;
+        gap: 20px;
 
+        .close-modal-btn {
+            justify-self: flex-end;
+            cursor: pointer;
+            margin: 0;
+            padding: 0;
+            align-self: flex-end;
+        }
+
+        .modal-txt {
+            display: flex;
+            flex-direction: column;
+        }
+        .modal-btn {
+            display: flex;
+            align-items: center;
+        }
+        span {
+            margin: 0 6px;
+        }
         .btn {
             border: 1px solid #b0b0b0;
             border-radius: 50%;
@@ -65,11 +105,43 @@
             text-align: center;
         }
     }
+    .modal-date-picker {
+        top: 500px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        // align-items: space-between;
+        // line-height: 20px;
+        top: 13rem;
+        right: 800px;
+        width: min-content;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 4px rgb(0 0 0 / 18%);
+        z-index: 2;
+        padding: 1.25rem;
+        gap: 20px;
+
+        .close-modal-btn {
+            justify-self: flex-end;
+            cursor: pointer;
+            margin: 0;
+            padding: 0;
+            align-self: flex-end;
+        }
+    }
 
     .search-btn {
         border-radius: 50%;
         border: none;
         height: 3rem;
+        width: 3rem;
+        margin: -3px;
+        background-color: $main-col;
+        img {
+            width: 1.562rem;
+            height: 1.562rem;
+        }
     }
     .search-btn:hover {
         background-image: radial-gradient(
@@ -88,6 +160,12 @@
         box-shadow: none;
         margin: 0;
         line-height: 20px;
+        outline: none;
+    }
+    .span-input {
+        line-height: 20px;
+        font-size: 14px;
+        font-family: $apple-font;
+        color: #717171;
     }
 }
-
