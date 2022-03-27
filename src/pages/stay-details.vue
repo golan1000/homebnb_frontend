@@ -13,20 +13,9 @@
 
     <div class="details-stay-short-info">
       <div>
-        <img src="../assets/star.svg" alt="" />
-        <span>{{ stayToEdit.reviews[0].rate }}</span
-        ><span class="details-stay-short-info-address"
-          >({{ stayToEdit.reviews.length }} reviews) </span
-        >•
-        <span class="details-stay-short-info-address"
-          >{{ stayToEdit.loc.address }} </span
-        >⭐<span>&nbsp;&nbsp;{{ stayToEdit.reviews[0].rate }}&nbsp;&nbsp;</span
-        ><span class="details-stay-short-info-address"
-          >({{ stayToEdit.reviews.length }} reviews)
-        </span>
-        &nbsp;•&nbsp;<span class="details-stay-short-info-address"
-          >{{ stayToEdit.loc.address }}
-        </span>
+        <div class="review-address-flex">
+          <img src="../assets/star.svg" alt="" /> <span>&nbsp;&nbsp;{{ stayToEdit.reviews[0].rate }}&nbsp;&nbsp;</span><span class="details-stay-short-info-address">({{ stayToEdit.reviews.length }} reviews) </span> &nbsp;•&nbsp;<span class="details-stay-short-info-address">{{ stayToEdit.loc.address }} </span>
+        </div>
       </div>
       <div class="details-stay-short-info-right">
         <div>
@@ -64,13 +53,9 @@
       <div class="middle-con-sec1">
         <div class="first-line">
           <div class="first-line-1">
-            <span class="first-line-title"
-              >Entire rental unit hosted by Moran</span
-            >
+            <span class="first-line-title">Entire rental unit hosted by Moran</span>
             <div class="spacer1">&nbsp;</div>
-            <div class="first-line-2">
-              3 guests · 1 bedroom · 1 bed · 1 bathroom
-            </div>
+            <div class="first-line-2">3 guests · 1 bedroom · 1 bed · 1 bathroom</div>
           </div>
           <div class="avatar1">
             <el-avatar :size="57" src="https://i.pravatar.cc/150?img=1" />
@@ -78,78 +63,30 @@
         </div>
         <hr />
         <div class="second-line">
-          <div class="second-line-con1">
-            <div class="second-line-1">
-              <img src="../assets/house.svg" alt="" />
-              Entire home
-            </div>
-            <div class="second-line-2">
-              You’ll have the apartment to yourself.
-            </div>
+          <div class="second-line-con4">
+            <div class="second-line-1"><img src="../assets/house.svg" alt="" />&nbsp;&nbsp;&nbsp;Entire home</div>
+            <div class="second-line-2">You’ll have the apartment to yourself.</div>
           </div>
 
           <div class="second-line-con2">
-            <div class="second-line-3">
-              <img src="../assets/location.svg" alt="" />
-              Great location
-            </div>
-            <div class="second-line-4">
-              Recent guests gave the location a 5-star rating.
-            </div>
+            <div class="second-line-3"><img src="../assets/location.svg" alt="" />&nbsp;&nbsp;&nbsp;Great location</div>
+            <div class="second-line-4">Recent guests gave the location a 5-star rating.</div>
           </div>
 
           <div class="second-line-con3">
-            <div class="second-line-5">
-              <img src="../assets/stars.svg" alt="" />
-              Enhanced Clean
-            </div>
-            <div class="second-line-6">
-              This host has committed to our 5-step enhanced cleaning process.
-            </div>
+            <div class="second-line-5"><img src="../assets/stars.svg" alt="" />&nbsp;&nbsp;&nbsp;Enhanced Clean</div>
+            <div class="second-line-6">This host has committed to our 5-step enhanced cleaning process.</div>
           </div>
 
           <div class="second-line-con4">
-            <div class="second-line-7">
-              <img src="../assets/calendar.svg" alt="" />
-              Free cancellation up to 24 hours before check-in
-            </div>
-            <div class="second-line-1">🏠&nbsp;&nbsp;&nbsp;Entire home</div>
-            <div class="second-line-2">
-              You’ll have the apartment to yourself.
-            </div>
-          </div>
-
-          <div class="second-line-con2">
-            <div class="second-line-3">🛰️&nbsp;&nbsp;&nbsp;Great location</div>
-            <div class="second-line-4">
-              Recent guests gave the location a 5-star rating.
-            </div>
-          </div>
-
-          <div class="second-line-con3">
-            <div class="second-line-5">💫&nbsp;&nbsp;&nbsp;Enhanced Clean</div>
-            <div class="second-line-6">
-              This host has committed to our 5-step enhanced cleaning process.
-            </div>
-          </div>
-
-          <div class="second-line-con4">
-            <div class="second-line-7">
-              📅&nbsp;&nbsp;&nbsp;Free cancellation up to 24 hours before
-              check-in
-            </div>
+            <div class="second-line-7"><img src="../assets/calendar.svg" alt="" />&nbsp;&nbsp;&nbsp;Free cancellation up to 24 hours before check-in</div>
             <div class="second-line-8">feel free to be flexible</div>
           </div>
         </div>
         <hr />
         <div class="third-line">
           <div class="stay-desc-title">Stay description</div>
-          <div class="stay-desc-info">
-            Beautiful 3 bedroom architecturally designed villa, with infinity
-            pool and floor to ceiling views in almost every room of the sea and
-            Cap de Creus national park, in beautiful working fishing village in
-            Northern USA
-          </div>
+          <div class="stay-desc-info">Beautiful 3 bedroom architecturally designed villa, with infinity pool and floor to ceiling views in almost every room of the sea and Cap de Creus national park, in beautiful working fishing village in Northern USA</div>
         </div>
         <hr />
 
@@ -226,21 +163,11 @@
                 <div class="add-dates">Add guests</div>
               </button>
               <section v-if="IsGuestModalOpen" class="guests-modal">
-                <div
-                  class="close-modal-btn"
-                  title="Close the modal"
-                  @click="displayGuestModal"
-                >
-                  X
-                </div>
+                <div class="close-modal-btn" title="Close the modal" @click="displayGuestModal">X</div>
                 <div class="adults guest-flex">
                   <div class="modal-txt">
                     Adults:
-                    <input
-                      type="text"
-                      placeholder="Ages 13 or above"
-                      disabled
-                    />
+                    <input type="text" placeholder="Ages 13 or above" disabled />
                     <!-- <span class="span-input"> </span> -->
                   </div>
                   <div class="modal-btn">
@@ -266,18 +193,8 @@
             </div>
           </div>
           <div v-if="displayCalendar" class="date-modal">
-            <div
-              class="close-modal-btn"
-              title="Close the modal"
-              @click="displayCalendar = false"
-            >
-              X
-            </div>
-            <v-date-picker
-              v-model="range"
-              is-range
-              :columns="$screens({ default: 2, lg: 2 })"
-            />
+            <div class="close-modal-btn" title="Close the modal" @click="displayCalendar = false">X</div>
+            <v-date-picker v-model="range" is-range :columns="$screens({ default: 2, lg: 2 })" />
           </div>
           <button class="order-form-submit">
             <div>Check availability</div>
@@ -288,23 +205,14 @@
 
     <hr />
     <div class="fifth-line">
-      <div class="fifth-line-1">
-        <img src="../assets/star.svg" alt="" />
-        4.5· 33 reviews
-      </div>
-      <div class="fifth-line-1">⭐4.5 · 33 reviews</div>
+      <div class="fifth-line-1"><img src="../assets/star.svg" alt="" />&nbsp; 4.5 · 33 reviews</div>
       <div class="review-rates-main-con">
         <div class="rate-sec1">
           <div class="fifth-line-2">
             <div>Cleanliness</div>
             <div class="progress-span-flex">
               <div>
-                <el-progress
-                  :percentage="50"
-                  color="black"
-                  stroke-width="4"
-                  text-inside="false"
-                />
+                <el-progress :percentage="50" color="black" stroke-width="4" text-inside="false" />
               </div>
               <div>&nbsp; 4.6</div>
             </div>
@@ -313,12 +221,7 @@
             <div>Check-in</div>
             <div class="progress-span-flex">
               <div>
-                <el-progress
-                  :percentage="50"
-                  color="black"
-                  stroke-width="4"
-                  text-inside="false"
-                />
+                <el-progress :percentage="50" color="black" stroke-width="4" text-inside="false" />
               </div>
               <div>&nbsp; 4.4</div>
             </div>
@@ -327,12 +230,7 @@
             <div>Location</div>
             <div class="progress-span-flex">
               <div>
-                <el-progress
-                  :percentage="50"
-                  color="black"
-                  stroke-width="4"
-                  text-inside="false"
-                />
+                <el-progress :percentage="50" color="black" stroke-width="4" text-inside="false" />
               </div>
               <div>&nbsp; 4.2</div>
             </div>
@@ -344,12 +242,7 @@
             <div>Communication</div>
             <div class="progress-span-flex">
               <div>
-                <el-progress
-                  :percentage="50"
-                  color="black"
-                  stroke-width="4"
-                  text-inside="false"
-                />
+                <el-progress :percentage="50" color="black" stroke-width="4" text-inside="false" />
               </div>
               <div>&nbsp; 4.5</div>
             </div>
@@ -358,12 +251,7 @@
             <div>Accuracy</div>
             <div class="progress-span-flex">
               <div>
-                <el-progress
-                  :percentage="50"
-                  color="black"
-                  stroke-width="4"
-                  text-inside="false"
-                />
+                <el-progress :percentage="50" color="black" stroke-width="4" text-inside="false" />
               </div>
               <div>&nbsp; 4.4</div>
             </div>
@@ -372,12 +260,7 @@
             <div>Accessibility</div>
             <div class="progress-span-flex">
               <div>
-                <el-progress
-                  :percentage="50"
-                  color="black"
-                  stroke-width="4"
-                  text-inside="false"
-                />
+                <el-progress :percentage="50" color="black" stroke-width="4" text-inside="false" />
               </div>
               <div>&nbsp; 4.2</div>
             </div>
@@ -397,77 +280,40 @@
                 <div class="review-name">Erik Bole</div>
                 <div>24.8.2013</div>
               </div>
-              <div class="fifth-line-6">
-                This villa is absolutely stunning with an incredible view. Check
-                in and check out was very smooth and the host/agency are very
-                well organized. Would absolutely recommend the place to anyone
-                looking to have a relaxing time in costa brava amongst a very
-                spectacular view directly from the house. The beach and town
-                near the village are also very accessible to go during the day.
-              </div>
+              <div class="fifth-line-6">This villa is absolutely stunning with an incredible view. Check in and check out was very smooth and the host/agency are very well organized. Would absolutely recommend the place to anyone looking to have a relaxing time in costa brava amongst a very spectacular view directly from the house. The beach and town near the village are also very accessible to go during the day.</div>
             </div>
             <div class="review2-con review-layout">
               <div class="review-user-details">
                 <div class="avatar1">
-                  <el-avatar
-                    :size="57"
-                    src="https://i.pravatar.cc/150?img=51"
-                  />
+                  <el-avatar :size="57" src="https://i.pravatar.cc/150?img=51" />
                 </div>
 
                 <div class="review-name">Erik Bole</div>
                 <div>24.8.2013</div>
               </div>
-              <div class="fifth-line-6">
-                This villa is absolutely stunning with an incredible view. Check
-                in and check out was very smooth and the host/agency are very
-                well organized. Would absolutely recommend the place to anyone
-                looking to have a relaxing time in costa brava amongst a very
-                spectacular view directly from the house. The beach and town
-                near the village are also very accessible to go during the day.
-              </div>
+              <div class="fifth-line-6">This villa is absolutely stunning with an incredible view. Check in and check out was very smooth and the host/agency are very well organized. Would absolutely recommend the place to anyone looking to have a relaxing time in costa brava amongst a very spectacular view directly from the house. The beach and town near the village are also very accessible to go during the day.</div>
             </div>
             <div class="review3-con review-layout">
               <div class="review-user-details">
                 <div class="avatar1">
-                  <el-avatar
-                    :size="57"
-                    src="https://i.pravatar.cc/150?img=50"
-                  />
+                  <el-avatar :size="57" src="https://i.pravatar.cc/150?img=50" />
                 </div>
 
-                <div class="review-name">Erik Bole</div>
+                <div class="review-name">Bob Mark</div>
                 <div>24.8.2013</div>
               </div>
-              <div class="fifth-line-6">
-                This villa is absolutely stunning with an incredible view. Check
-                in and check out was very smooth and the host/agency are very
-                well organized. Would absolutely recommend the place to anyone
-                looking to have a relaxing time in costa brava amongst a very
-                spectacular view directly from the house. The beach and town
-                near the village are also very accessible to go during the day.
-              </div>
+              <div class="fifth-line-6">This villa is absolutely stunning with an incredible view. Check in and check out was very smooth and the host/agency are very well organized. Would absolutely recommend the place to anyone looking to have a relaxing time in costa brava amongst a very spectacular view directly from the house. The beach and town near the village are also very accessible to go during the day.</div>
             </div>
             <div class="review4-con review-layout">
               <div class="review-user-details">
                 <div class="avatar1">
-                  <el-avatar
-                    :size="57"
-                    src="https://i.pravatar.cc/150?img=67"
-                  />
+                  <el-avatar :size="57" src="https://i.pravatar.cc/150?img=67" />
                 </div>
 
-                <div class="review-name">Erik Bole</div>
+                <div class="review-name">Ross Pago</div>
                 <div>24.8.2013</div>
               </div>
-              <div class="fifth-line-6">
-                This villa is absolutely stunning with an incredible view. Check
-                in and check out was very smooth and the host/agency are very
-                well organized. Would absolutely recommend the place to anyone
-                looking to have a relaxing time in costa brava amongst a very
-                spectacular view directly from the house. The beach and town
-                near the village are also very accessible to go during the day.
-              </div>
+              <div class="fifth-line-6">This villa is absolutely stunning with an incredible view. Check in and check out was very smooth and the host/agency are very well organized. Would absolutely recommend the place to anyone looking to have a relaxing time in costa brava amongst a very spectacular view directly from the house. The beach and town near the village are also very accessible to go during the day.</div>
             </div>
           </div>
           <div class="review-users-con-middle">&nbsp;</div>
@@ -475,86 +321,46 @@
             <div class="review1-con review-layout">
               <div class="review-user-details">
                 <div class="avatar1">
-                  <el-avatar
-                    :size="57"
-                    src="https://i.pravatar.cc/150?img=43"
-                  />
+                  <el-avatar :size="57" src="https://i.pravatar.cc/150?img=43" />
                 </div>
 
-                <div class="review-name">Erik Bole</div>
+                <div class="review-name">Mina Xhan</div>
                 <div>24.8.2013</div>
               </div>
-              <div class="fifth-line-6">
-                This villa is absolutely stunning with an incredible view. Check
-                in and check out was very smooth and the host/agency are very
-                well organized. Would absolutely recommend the place to anyone
-                looking to have a relaxing time in costa brava amongst a very
-                spectacular view directly from the house. The beach and town
-                near the village are also very accessible to go during the day.
-              </div>
+              <div class="fifth-line-6">This villa is absolutely stunning with an incredible view. Check in and check out was very smooth and the host/agency are very well organized. Would absolutely recommend the place to anyone looking to have a relaxing time in costa brava amongst a very spectacular view directly from the house. The beach and town near the village are also very accessible to go during the day.</div>
             </div>
             <div class="review2-con review-layout">
               <div class="review-user-details">
                 <div class="avatar1">
-                  <el-avatar
-                    :size="57"
-                    src="https://i.pravatar.cc/150?img=60"
-                  />
+                  <el-avatar :size="57" src="https://i.pravatar.cc/150?img=60" />
                 </div>
 
-                <div class="review-name">Erik Bole</div>
+                <div class="review-name">Avi Balili</div>
                 <div>24.8.2013</div>
               </div>
-              <div class="fifth-line-6">
-                This villa is absolutely stunning with an incredible view. Check
-                in and check out was very smooth and the host/agency are very
-                well organized. Would absolutely recommend the place to anyone
-                looking to have a relaxing time in costa brava amongst a very
-                spectacular view directly from the house. The beach and town
-                near the village are also very accessible to go during the day.
-              </div>
+              <div class="fifth-line-6">This villa is absolutely stunning with an incredible view. Check in and check out was very smooth and the host/agency are very well organized. Would absolutely recommend the place to anyone looking to have a relaxing time in costa brava amongst a very spectacular view directly from the house. The beach and town near the village are also very accessible to go during the day.</div>
             </div>
             <div class="review3-con review-layout">
               <div class="review-user-details">
                 <div class="avatar1">
-                  <el-avatar
-                    :size="57"
-                    src="https://i.pravatar.cc/150?img=43"
-                  />
+                  <el-avatar :size="57" src="https://i.pravatar.cc/150?img=43" />
                 </div>
 
-                <div class="review-name">Erik Bole</div>
+                <div class="review-name">Mor Cohen</div>
                 <div>24.8.2013</div>
               </div>
-              <div class="fifth-line-6">
-                This villa is absolutely stunning with an incredible view. Check
-                in and check out was very smooth and the host/agency are very
-                well organized. Would absolutely recommend the place to anyone
-                looking to have a relaxing time in costa brava amongst a very
-                spectacular view directly from the house. The beach and town
-                near the village are also very accessible to go during the day.
-              </div>
+              <div class="fifth-line-6">This villa is absolutely stunning with an incredible view. Check in and check out was very smooth and the host/agency are very well organized. Would absolutely recommend the place to anyone looking to have a relaxing time in costa brava amongst a very spectacular view directly from the house. The beach and town near the village are also very accessible to go during the day.</div>
             </div>
             <div class="review4-con review-layout">
               <div class="review-user-details">
                 <div class="avatar1">
-                  <el-avatar
-                    :size="57"
-                    src="https://i.pravatar.cc/150?img=52"
-                  />
+                  <el-avatar :size="57" src="https://i.pravatar.cc/150?img=52" />
                 </div>
 
-                <div class="review-name">Erik Bole</div>
+                <div class="review-name">Dan Bylies</div>
                 <div>24.8.2013</div>
               </div>
-              <div class="fifth-line-6">
-                This villa is absolutely stunning with an incredible view. Check
-                in and check out was very smooth and the host/agency are very
-                well organized. Would absolutely recommend the place to anyone
-                looking to have a relaxing time in costa brava amongst a very
-                spectacular view directly from the house. The beach and town
-                near the village are also very accessible to go during the day.
-              </div>
+              <div class="fifth-line-6">This villa is absolutely stunning with an incredible view. Check in and check out was very smooth and the host/agency are very well organized. Would absolutely recommend the place to anyone looking to have a relaxing time in costa brava amongst a very spectacular view directly from the house. The beach and town near the village are also very accessible to go during the day.</div>
             </div>
           </div>
         </div>
@@ -657,7 +463,7 @@ export default {
         end: new Date(2020, 0, 5),
       },
       filterBy: {
-        address: "",
+        address: '',
         guests: {
           adults: 0,
           children: 0,
@@ -668,7 +474,7 @@ export default {
       displayCalendar: false,
       stays: null,
       stayToEdit: null,
-      displayMsg: "Loading...",
+      displayMsg: 'Loading...',
       dialogVisible: true,
       form: {
         name: null,
@@ -678,37 +484,37 @@ export default {
   },
   methods: {
     update() {
-      console.log("stay to update=", this.stayToEdit);
-      this.$store.dispatch({ type: "update", stayToUpdate: this.stayToEdit });
+      console.log('stay to update=', this.stayToEdit);
+      this.$store.dispatch({ type: 'update', stayToUpdate: this.stayToEdit });
     },
     showCalendar() {
-      console.log("blaaa");
+      console.log('blaaa');
       this.displayCalendar = !this.displayCalendar;
     },
     displayGuestModal() {
-      console.log("blaaaa21321321");
+      console.log('blaaaa21321321');
       this.IsGuestModalOpen = !this.IsGuestModalOpen;
     },
   },
   async created() {
-    console.log("params=", this.$route.params);
+    console.log('params=', this.$route.params);
 
     const { id } = this.$route.params;
 
     if (id) {
       const foundStay = await this.$store.dispatch({
-        type: "getById",
+        type: 'getById',
         stayId: id,
       });
 
-      console.log("foundStay main=", foundStay);
+      console.log('foundStay main=', foundStay);
       if (foundStay) {
         this.stayToEdit = JSON.parse(JSON.stringify(foundStay));
 
-        console.log("found id=", this.stayToEdit);
+        console.log('found id=', this.stayToEdit);
       } else {
-        console.log("no such id");
-        this.displayMsg = "no such id";
+        console.log('no such id');
+        this.displayMsg = 'no such id';
       }
     }
   },
@@ -833,12 +639,18 @@ img {
   border: 1px solid black;
   border-radius: 8px;
 
-  font-weight: 500;
-  font-size: 15px;
+  font-weight: 600;
+  font-size: 16px;
   width: 208px;
   height: 47px;
   color: black;
   background-color: white;
+  line-height: 20px;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+  margin-top: 30px;
+}
+.amenities-btn:hover {
+  text-decoration: underline;
   /* font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif; */
 }
 .section-calendar {
@@ -998,5 +810,9 @@ span {
 
 hr {
   border: 1px solid #f2f2f2;
+}
+.review-address-flex {
+  /* background-color: red; */
+  display: flex;
 }
 </style>
