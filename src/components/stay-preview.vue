@@ -24,16 +24,16 @@
     <div class="stay-preview-content">
       <div class="stay-preview-content-reviews">
         <img class="img-star" src="../assets/star.svg" alt="" />
-        <p class="reviews-rate">{{ getAvgRate }}&nbsp;</p>
-        <p class="reviews-number">({{ stay.reviews.length }} Reviews)</p>
+        <p class="reviews-rate">{{ stay.reviewScores.rating }}&nbsp;</p>
+        <p class="reviews-number">({{ stay.numOfReviews }} Reviews)</p>
       </div>
       <div class="stay-preview-details">
-        <p>{{ stay.type }}</p>
+        <p>{{ stay.roomType }}</p>
         <span class="stay-preview-details-span">&nbsp;•&nbsp;</span>
-        <p>{{ stay.loc.address }}</p>
+        <p>{{ stay.address.city }}, {{ stay.address.country }}</p>
       </div>
       <div class="stay-preview-desc">
-        <p>{{ stay.summary }}</p>
+        <p>{{ edittextLength }}</p>
       </div>
       <div class="stay-preview-price">
         <p>
@@ -49,7 +49,7 @@
 
 <script>
 export default {
-  name: "stay-preview",
+  name: 'stay-preview',
   props: {
     stay: Object,
   },
@@ -69,17 +69,22 @@ export default {
       const imgUrl = new URL(`../assets/images/${file}`, import.meta.url);
       return imgUrl;
     },
-
   },
   computed: {
-    getAvgRate() {
-      const sumRates = this.stay.reviews.reduce(
-        (previousValue, currentValue) => previousValue + currentValue.rate,
-        0
-      );
-      return sumRates / this.stay.reviews.length;
+    // getAvgRate() {
+    //   const sumRates = this.stay.reviews.reduce(
+    //     (previousValue, currentValue) => previousValue + currentValue.rate,
+    //     0
+    //   );
+    //   return sumRates / this.stay.reviews.length;
+    // },
+    edittextLength() {
+      var editedSubject = this.stay.summary.substr(0, 45);
+      // if (this.mail.subject.length >= 16) {
+      editedSubject += '..';
+      // }
+      return editedSubject;
     },
   },
-  components: {},
 };
 </script>
