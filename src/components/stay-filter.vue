@@ -3,7 +3,8 @@
     <div class="location input-container" @click="closeAllModals">
       <label for="locations"
         >Location
-        <input class="location-input"
+        <input
+          class="location-input"
           list="addresses"
           name="addresses"
           type="search"
@@ -106,9 +107,9 @@
 </template>
 
 <script>
-import { Search } from "@element-plus/icons-vue";
-import { useRefHistory } from "@vueuse/core";
-import { shallowRef } from "vue";
+import { Search } from '@element-plus/icons-vue';
+import { useRefHistory } from '@vueuse/core';
+import { shallowRef } from 'vue';
 export default {
   props: [],
   created() {
@@ -124,7 +125,7 @@ export default {
       // stays: null,
       Search,
       filterBy: {
-        address: "",
+        address: '',
         guests: {
           adults: 0,
           children: 0,
@@ -140,8 +141,8 @@ export default {
   },
   methods: {
     addGuest(guest) {
-      console.log("val", guest);
-      if (guest === "adult") {
+      console.log('val', guest);
+      if (guest === 'adult') {
         this.filterBy.guests.adults++;
         this.setfilter();
       } else {
@@ -150,7 +151,7 @@ export default {
       }
     },
     removeGuest(guest) {
-      if (guest === "adult") {
+      if (guest === 'adult') {
         if (!this.filterBy.guests.adults) return;
         this.filterBy.guests.adults--;
         this.setfilter();
@@ -163,7 +164,7 @@ export default {
 
     setfilter() {
       this.$store.dispatch({
-        type: "filter",
+        type: 'filter',
         filterBy: JSON.parse(JSON.stringify(this.filterBy)),
       });
     },
@@ -172,11 +173,11 @@ export default {
     },
     getFilters() {
       const filterFromStore = this.$store.getters.getFilter;
-      if (!filterFromStore) console.log("no filter in store....");
+      if (!filterFromStore) console.log('no filter in store....');
       this.filterBy = JSON.parse(JSON.stringify(filterFromStore));
     },
     openModal(modalType) {
-      if (modalType === "calendar") {
+      if (modalType === 'calendar') {
         this.isCalanderModalOpen = true;
         this.isGuestModalOpen = false;
       } else {
@@ -192,16 +193,16 @@ export default {
   computed: {
     getAddresses() {
       // if (!this.stays) return;
-      console.log("run from filter ");
+      console.log('run from filter ');
       const addresses = this.$store.getters.getStays.map(
-        (stay) => stay.loc.address
+        stay => stay.address.city
       );
       return addresses;
     },
 
     sumOfGuests() {
       const sum = this.filterBy.guests.adults + this.filterBy.guests.children;
-      if (!sum) return "Add guests";
+      if (!sum) return 'Add guests';
       else {
         return `Guests: ${sum}`;
       }

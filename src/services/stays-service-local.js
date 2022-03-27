@@ -1,6 +1,7 @@
 import { storageService } from './async-storage-service.js';
 
 const KEY = 'stayDB';
+import gStays from '../../data/stay.json';
 
 _createStays();
 window.createStays = _createStays;
@@ -15,7 +16,8 @@ export const stayService = {
 // TODO: support paging and filtering and sorting
 async function query(filterBy = {}) {
   try {
-    const stays = await storageService.query(KEY);
+    const stays = JSON.parse(JSON.stringify(gStays));
+    // const stays = await storageService.query(KEY);
     console.log('stays', stays);
     return _filterStays(filterBy, stays);
   } catch (err) {
@@ -33,7 +35,7 @@ function _filterStays(filterBy, stays) {
   console.log('filterBy', filterBy);
   let filteredStays = [];
   const regex = new RegExp(filterBy.address, 'i');
-  filteredStays = stays.filter((stay) => regex.test(stay.loc.address));
+  filteredStays = stays.filter(stay => regex.test(stay.address.city));
   return filteredStays;
 }
 
@@ -76,8 +78,7 @@ async function _createStays() {
           'https://i.picsum.photos/id/978/500/300.jpg?hmac=ZrkqjlzyOdlpS1QIoHdNkp3ADYrKosWBxAoNXF2v2LU',
         ],
         price: 80.0,
-        summary:
-          'Fantastic duplex',
+        summary: 'Fantastic duplex',
         capacity: 8,
         amenities: [
           'TV',
@@ -179,8 +180,7 @@ async function _createStays() {
           'https://i.picsum.photos/id/680/500/300.jpg?hmac=EjmiHmKX6pWvWYjwlcAJFaD0RcFqbRy2jlYr0CY3SeY',
         ],
         price: 80.0,
-        summary:
-          'Fantastic duplex',
+        summary: 'Fantastic duplex',
         capacity: 8,
         amenities: [
           'TV',
@@ -226,8 +226,7 @@ async function _createStays() {
           'https://i.picsum.photos/id/37/500/300.jpg?hmac=jKTewF_MIRJax9XsRXV86HCgzQnexu4WP-nSRf-5mHo',
         ],
         price: 80.0,
-        summary:
-          'Fantastic duplex',
+        summary: 'Fantastic duplex',
         capacity: 8,
         amenities: [
           'TV',
@@ -273,8 +272,7 @@ async function _createStays() {
           'https://i.picsum.photos/id/162/500/300.jpg?hmac=5PQIOB3s_blPaD49iA9Q_PhuWLphROf1kbGQDQ1VQV0',
         ],
         price: 80.0,
-        summary:
-          'Fantastic duplex',
+        summary: 'Fantastic duplex',
         capacity: 8,
         amenities: [
           'TV',
@@ -320,8 +318,7 @@ async function _createStays() {
           'https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large',
         ],
         price: 80.0,
-        summary:
-          'Fantastic duplex',
+        summary: 'Fantastic duplex',
         capacity: 8,
         amenities: [
           'TV',
