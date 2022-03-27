@@ -768,6 +768,7 @@ img {
   justify-self: flex-end;
   cursor: pointer;
   margin: 0;
+  margin-bottom: -20px;
   padding: 0;
   align-self: flex-end;
 }
