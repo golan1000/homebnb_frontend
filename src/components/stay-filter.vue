@@ -46,11 +46,11 @@
         </button>
       </div>
     </div>
-    <section class="guests-modal" v-if="IsGuestModalOpen">
+    <section class="guests-modal" v-if="isGuestModalOpen">
       <div
         class="close-modal-btn"
         title="Close the modal"
-        @click="IsGuestModalOpen = false"
+        @click="isGuestModalOpen = false"
       >
         X
       </div>
@@ -81,11 +81,11 @@
       </div>
     </section>
 
-    <div class="modal-date-picker" v-if="IsCalanderModalOpen">
+    <div class="modal-date-picker" v-if="isCalanderModalOpen">
       <div
         class="close-modal-btn"
         title="Close the modal"
-        @click="IsCalanderModalOpen = false"
+        @click="isCalanderModalOpen = false"
       >
         X
       </div>
@@ -135,8 +135,8 @@ export default {
           end: new Date(),
         },
       },
-      IsGuestModalOpen: false,
-      IsCalanderModalOpen: false,
+      isGuestModalOpen: false,
+      isCalanderModalOpen: false,
     };
   },
   methods: {
@@ -178,16 +178,16 @@ export default {
     },
     openModal(modalType) {
       if (modalType === 'calendar') {
-        this.IsCalanderModalOpen = true;
-        this.IsGuestModalOpen = false;
+        this.isCalanderModalOpen = true;
+        this.isGuestModalOpen = false;
       } else {
-        this.IsGuestModalOpen = true;
-        this.IsCalanderModalOpen = false;
+        this.isGuestModalOpen = true;
+        this.isCalanderModalOpen = false;
       }
     },
     closeAllModals() {
-      this.IsGuestModalOpen = false;
-      this.IsCalanderModalOpen = false;
+      this.isGuestModalOpen = false;
+      this.isCalanderModalOpen = false;
     },
   },
   computed: {
