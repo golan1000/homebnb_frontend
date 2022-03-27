@@ -1,7 +1,7 @@
 <template>
   <section class="app-main stay-app">
     <!-- <stay-filter /> -->
-    <div class="space-con"></div>
+    <div class="space-con">&nbsp;</div>
     <div>
       <stay-filter></stay-filter>
     </div>

@@ -4,58 +4,58 @@
       <stay-filter></stay-filter>
     </div>
   </div>
-  <el-button type="primary">Primary</el-button>
+  <!-- <el-button type="primary">Primary</el-button> -->
   <div class="destenations">
-    <div class="item1" style="background-color: blue">1</div>
-    <div class="category-title" style="background-color: gray">Popular Destinations</div>
-    <div class="item3" style="background-color: red">3</div>
-    <div class="item4" style="background-color: purple">4</div>
-    <div class="item5" style="background-color: white">
+    <div class="item1" style="background-color: "></div>
+    <div class="category-title" style="background-color: ">Popular Destinations</div>
+    <div class="item3" style="background-color: "></div>
+    <div class="item4" style="background-color: "></div>
+    <div class="item5" style="background-color: ">
       <div class="dest-grid">
-        <div class="img-con10" style="background-color: grey">
+        <div class="img-con10" style="background-color: ">
           <img class="img1" src="../assets/img/dest/Dubai.jpg" />
           <div class="dest-title">Dubai</div>
         </div>
-        <div class="img-con10" style="background-color: lightgreen">
+        <div class="img-con10" style="background-color: ">
           <img class="img1" src="../assets/img/dest/London.jpg" />
           <div class="dest-title">London</div>
         </div>
-        <div class="img-con10" style="background-color: red">
+        <div class="img-con10" style="background-color: ">
           <img class="img1" src="../assets/img/dest/NY.jpg" />
           <div class="dest-title">New york</div>
         </div>
-        <div class="img-con10" style="background-color: yellow">
+        <div class="img-con10" style="background-color: ">
           <img class="img1" src="../assets/img/dest/Sydny.jpg" />
           <div class="dest-title">Sydney</div>
         </div>
       </div>
     </div>
-    <div class="item6" style="background-color: grey">6</div>
-    <div class="item7" style="background-color: pink">7</div>
-    <div class="category-title" style="background-color: lightcoral">Top Rated</div>
-    <div class="item5" style="background-color: lightgreen">9</div>
-    <div class="item7" style="background-color: #66f542">12</div>
-    <div class="item5" style="background-color: #79a542">
+    <div class="item6" style="background-color: "></div>
+    <div class="item7" style="background-color: "></div>
+    <div class="category-title" style="background-color: ">Categories</div>
+    <div class="item5" style="background-color: "></div>
+    <div class="item7" style="background-color: #"></div>
+    <div class="item5" style="background-color: #">
       <div class="dest-grid">
-        <div class="img-con10" style="background-color: grey">
+        <div class="img-con10" style="background-color: ">
           <img class="img1" src="../assets/img/category/butiqe.jpg" />
-          <div class="dest-title">Dubai</div>
+          <div class="dest-title">Boutique</div>
         </div>
-        <div class="img-con10" style="background-color: lightgreen">
+        <div class="img-con10" style="background-color: ">
           <img class="img1" src="../assets/img/category/flat.jpg" />
-          <div class="dest-title">London</div>
+          <div class="dest-title">Flat</div>
         </div>
-        <div class="img-con10" style="background-color: red">
+        <div class="img-con10" style="background-color: ">
           <img class="img1" src="../assets/img/category/hotel.jpg" />
-          <div class="dest-title">New york</div>
+          <div class="dest-title">Hotel</div>
         </div>
-        <div class="img-con10" style="background-color: yellow">
+        <div class="img-con10" style="background-color: ">
           <img class="img1" src="../assets/img/category/garden1.jpg" />
-          <div class="dest-title">Sydney</div>
+          <div class="dest-title">Garden</div>
         </div>
       </div>
     </div>
-    <div class="item5" style="background-color: #99aa42">40</div>
+    <div class="item5" style="background-color: #"></div>
   </div>
   <div class="host-container">
     <label class="host-title">Become a host!</label>
