@@ -13,8 +13,7 @@
 
     <div class="details-stay-short-info">
       <div>
-        ⭐<span>{{ stayToEdit.reviews[0].rate }}</span
-        ><span class="details-stay-short-info-address">({{ stayToEdit.reviews.length }} reviews) </span>• <span class="details-stay-short-info-address">{{ stayToEdit.loc.address }} </span>
+        ⭐<span>&nbsp;&nbsp;{{ stayToEdit.reviews[0].rate }}&nbsp;&nbsp;</span><span class="details-stay-short-info-address">({{ stayToEdit.reviews.length }} reviews) </span> &nbsp;•&nbsp;<span class="details-stay-short-info-address">{{ stayToEdit.loc.address }} </span>
       </div>
       <div class="details-stay-short-info-right">
         <div>✉️<button class="share-btn">Share</button></div>
@@ -40,17 +39,6 @@
         <img class="sub-pic4" src="../assets/img/staypics/5.jpg" />
       </div>
     </div>
-    <br />
-
-    <!-- <div class="gallery-grid">
-        <img class="main-pic" :src="stayToEdit.imgUrls[0]" />
-        <div class="sub-pic1-con">
-          <img class="sub-pic1" :src="stayToEdit.imgUrls[0]" />
-        </div>
-        <img class="sub-pic2" :src="stayToEdit.imgUrls[0]" />
-        <img class="sub-pic3" :src="stayToEdit.imgUrls[0]" />
-        <img class="sub-pic4" :src="stayToEdit.imgUrls[0]" />
-      </div> -->
 
     <div class="middle-con">
       <!-- section 1 -->
@@ -59,29 +47,29 @@
           <div class="first-line-1">
             <span class="first-line-title">Entire rental unit hosted by Moran</span>
             <div class="spacer1">&nbsp;</div>
-            <div class="first-line-2">3 guests1 bedroom1 bed1 bathroom</div>
+            <div class="first-line-2">3 guests · 1 bedroom · 1 bed · 1 bathroom</div>
           </div>
           <div class="avatar1"><el-avatar :size="57" src="https://i.pravatar.cc/150?img=1" /></div>
         </div>
         <hr />
         <div class="second-line">
           <div class="second-line-con1">
-            <div class="second-line-1">🏠 Entire home</div>
+            <div class="second-line-1">🏠&nbsp;&nbsp;&nbsp;Entire home</div>
             <div class="second-line-2">You’ll have the apartment to yourself.</div>
           </div>
 
           <div class="second-line-con2">
-            <div class="second-line-3">🛰️ Great location</div>
+            <div class="second-line-3">🛰️&nbsp;&nbsp;&nbsp;Great location</div>
             <div class="second-line-4">Recent guests gave the location a 5-star rating.</div>
           </div>
 
           <div class="second-line-con3">
-            <div class="second-line-5">💫 Enhanced Clean</div>
+            <div class="second-line-5">💫&nbsp;&nbsp;&nbsp;Enhanced Clean</div>
             <div class="second-line-6">This host has committed to our 5-step enhanced cleaning process.</div>
           </div>
 
           <div class="second-line-con4">
-            <div class="second-line-7">📅 Free cancellation up to 24 hours before check-in</div>
+            <div class="second-line-7">📅&nbsp;&nbsp;&nbsp;Free cancellation up to 24 hours before check-in</div>
             <div class="second-line-8">feel free to be flexible</div>
           </div>
         </div>
@@ -118,13 +106,13 @@
           <div class="order-form-top-con">
             <div>
               <label class="order-form-price">$150</label>
-              <label class="order-form-price">/</label>
+              <label class="order-form-night">&nbsp;/&nbsp;</label>
               <label class="order-form-night">night</label>
             </div>
 
             <div>
               <label class="order-form-star">⭐</label>
-              <label class="order-form-rate">4.5</label>
+              <label class="order-form-rate">4.5 &nbsp;</label>
               <label class="order-form-rate">(33)</label>
             </div>
           </div>
@@ -185,7 +173,7 @@
 
     <hr />
     <div class="fifth-line">
-      <div class="fifth-line-1">⭐4.5· 33 reviews</div>
+      <div class="fifth-line-1">⭐4.5 · 33 reviews</div>
       <div class="review-rates-main-con">
         <div class="rate-sec1">
           <div class="fifth-line-2">
@@ -492,8 +480,10 @@ img {
   /* margin 200px original */
   /* margin-left: 13vw;
   margin-right: 13vw; */
-  margin-left: 13%;
-  margin-right: 13%;
+  /* margin-left: 13%;
+  margin-right: 13%; */
+  margin-left: 390px;
+  margin-right: 390px;
 }
 @media only screen and (min-width: 1000px) and (max-width: 1200px) and (orientation: landscape) {
   .details-main-con {
@@ -521,7 +511,11 @@ img {
   width: 415px;
   height: 298px;
   border-radius: 10px;
-  border: 1px solid gray;
+  margin-top: -4px;
+  border: 1px solid #dddddd;
+}
+.order-form-price {
+  font-weight: bold;
 }
 .order-form-submit {
   position: absolute;
@@ -532,7 +526,8 @@ img {
   border-radius: 8px;
   color: white;
   font-size: 16px;
-  font-weight: 580;
+  font-weight: 600;
+  letter-spacing: 0.8px;
   font-family: airbnb-regular, sans-serif;
   line-height: normal;
   display: flex;
@@ -555,7 +550,7 @@ img {
   color: black;
   font-size: 14px;
   line-height: 20px;
-  /* font-weight: 700; */
+  font-weight: 700;
   display: flex;
   justify-content: space-between;
 }
@@ -621,6 +616,9 @@ img {
   border: 1px solid gray;
   border-bottom: none;
 }
+/* .order-form-check-in-btn > * {
+  margin: 5px;
+} */
 .order-form-check-out-btn {
   text-align: left;
   height: 63px;
@@ -654,16 +652,24 @@ img {
 }
 .add-dates {
   /* font-weight: bold; */
-  font-weight: 100;
+  /* font-weight: 100; */
   font-size: 14px;
+  color: #757575;
+}
+
+.check,
+.add-dates {
+  /* margin-left: 5px; */
+  margin: 5px;
 }
 .order-form-night {
-  font-size: 18px;
+  font-size: 17px;
 }
 .space-con {
   width: 100%;
-  height: 65px;
-  /* background-color: blue; */
+  /* height: 65px; */
+  height: 0px;
+  background-color: blue;
 }
 
 .guest-flex {
@@ -738,5 +744,13 @@ input {
   border-radius: 5px;
   padding: 10px;
   background-color: white;
+}
+
+span {
+  margin-left: 0px;
+}
+
+hr {
+  border: 1px solid #f2f2f2;
 }
 </style>
