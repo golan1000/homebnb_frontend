@@ -1,24 +1,38 @@
 <template>
   <section class="app-footer">
-    <div class="app-footer-links">
-      <p>©2022 Flat-Inn</p>
-      ·
-      <p>About</p>
-      ·
-      <p>Login</p>
-      ·
-      <p>Become a host</p>
+    <div class="app-footer-left-div">
+      <p class="app-footer-copyrights">©&nbsp;2022 Flat-Inn, Inc.</p>
+      <div class="app-footer-links">
+        <span class="app-footer-bullet bullet-first"> · </span>
+        <p>Privacy</p>
+        <span class="app-footer-bullet"> · </span>
+        <p>Terms</p>
+        <span class="app-footer-bullet"> · </span>
+        <p>Sitemap</p>
+      </div>
     </div>
     <div class="footer-right-div">
       <div class="app-footer-currency">
-        <img class="img-globe" src="../assets/language.png" alt="" />
-        <p>English(US)</p>
-        <p>$US</p>
+        <img class="img-globe" src="../assets/globe.svg" alt="" />
+        <span class="app-footer-currency-span">English(US)</span>
+        $<span class="app-footer-currency-span">US</span>
       </div>
       <div class="app-footer-socials">
-        <fa class="icon-facebook" :icon="['fab', 'facebook-f']" />
-        <fa class="icon-twitter" :icon="['fab', 'twitter']" />
-        <fa class="icon-instagram" :icon="['fab', 'instagram']" />
+        <img
+          class="app-footer-socials-svg"
+          src="../assets/facebook.svg"
+          alt=""
+        />
+        <img
+          class="app-footer-socials-svg"
+          src="../assets/twitter.svg"
+          alt=""
+        />
+        <img
+          class="app-footer-socials-svg"
+          src="../assets/instagram.svg"
+          alt=""
+        />
       </div>
     </div>
   </section>
