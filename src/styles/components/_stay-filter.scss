@@ -28,11 +28,13 @@
         border-radius: 2.5rem;
         padding: 0.78rem 0.78rem 0.78rem 1.56rem;
         display: flex;
+        min-width: 3.125rem;
 
         flex-direction: column;
         > :last-child {
             margin-inline-end: -3px;
         }
+
         // > * {
         //     cursor: pointer;
         // }
@@ -51,6 +53,10 @@
 
     .trip-dates {
         display: flex;
+        min-width: 3.125rem;
+    }
+    .guest-container {
+        position: relative;
     }
 
     .guest-flex {
@@ -118,7 +124,7 @@
         background-color: #fff;
         border-radius: 12px;
         box-shadow: 0 2px 4px rgb(0 0 0 / 18%);
-        z-index: 2;
+        z-index: 10;
         padding: 1.25rem;
         gap: 20px;
 
@@ -132,6 +138,8 @@
     }
 
     .search-btn {
+        position: absolute;
+        right: 5px;
         border-radius: 50%;
         border: none;
         height: 3rem;

@@ -3,7 +3,7 @@ import { stayService } from '../../services/stays-service-local.js';
 
 export default {
   state: {
-    stays: null,
+    stays: [], //need to be empty array important
     filterBy: {
       address: '',
       guests: {

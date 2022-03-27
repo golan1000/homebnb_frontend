@@ -632,9 +632,7 @@ img {
   /* height: 1875px; */
   /* background-color: red; */
 }
-.order-form-calendar {
-  /* display: none; */
-}
+
 .amenities-btn {
   border: 1px solid black;
   border-radius: 8px;
@@ -697,9 +695,7 @@ img {
   border-radius: 0 0 10px 10px !important;
   border: 1px solid gray;
 }
-.order-dates {
-  /* background: #000; */
-}
+
 .order-form-middle-con {
   width: 365px;
   margin-bottom: 15px;
