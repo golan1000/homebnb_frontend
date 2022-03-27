@@ -12,6 +12,7 @@
 //   padding-left: 0px;
 // }
 .stay-list {
+  min-height: 64vh;
   list-style: none;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));

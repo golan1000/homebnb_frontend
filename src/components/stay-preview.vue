@@ -25,7 +25,7 @@
       <div class="stay-preview-content-reviews">
         <img class="img-star" src="../assets/star.svg" alt="" />
         <p class="reviews-rate">{{ getAvgRate }}&nbsp;</p>
-        <p class="reviews-number">({{ stay.reviews.length }} Reviews)</p>
+        <p class="reviews-number">({{ stay.reviews.length }})</p>
       </div>
       <div class="stay-preview-details">
         <p>{{ stay.type }}</p>
@@ -40,7 +40,7 @@
           <span class="stay-preview-price-span">{{
             $filters.currencyUSD(stay.price)
           }}</span>
-          /night
+          / night
         </p>
       </div>
     </div>
@@ -69,7 +69,6 @@ export default {
       const imgUrl = new URL(`../assets/images/${file}`, import.meta.url);
       return imgUrl;
     },
-
   },
   computed: {
     getAvgRate() {

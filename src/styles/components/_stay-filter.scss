@@ -14,11 +14,6 @@
   // position: absolute;
   transition: all 0.2s;
 
-  .location-input {
-    // padding-left: 14px;
-    // width: 183px;
-  }
-
   button {
     cursor: pointer;
   }
@@ -48,14 +43,6 @@
   .input-container:hover {
     background-color: #ebebeb;
     // height: 100%;
-  }
-  .location {
-    // text-indent: 15px;
-    > :first-child input {
-      //   text-indent: 15px;
-      //   padding-left: 14px;
-      //   width: 183px;
-    }
   }
 
   .trip-dates {
