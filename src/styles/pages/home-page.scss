@@ -213,6 +213,13 @@
     // max-height: inherit;
     // object-fit: contain;
   }
+  .sub-pic2-con,
+  .sub-pic3-con,
+  .sub-pic4-con,
+  .sub-pic5-con {
+    height: 180px;
+    // max-height: 180px;
+  }
   .sub-pic1-con {
     // background-color: yellow;
 
@@ -248,11 +255,11 @@
   height: 110;
 }
 .first-line-title {
-  margin: 0;
   // background-color: purple;
-  font-size: 26px;
-  font-weight: 400;
+  font-size: 24px;
+  font-weight: 700;
   color: black;
+  margin-bottom: 5px;
 }
 
 .first-line {
@@ -265,7 +272,7 @@
   display: flex;
   align-items: center;
   // background-color: blue;
-  margin-top: -14px;
+  margin-top: -53px;
   margin-right: 28px;
 }
 .first-line-2 {
@@ -275,27 +282,28 @@
   margin-bottom: 22px;
 }
 .spacer1 {
-  min-height: 35px;
-  // height: 20px;
+  min-height: 8px;
+  height: 8px;
 }
 .second-line {
   height: 288px;
   max-height: 288px;
   // background-color: green;
 }
-.second-line-1 {
-  font-size: 17px;
+.second-line-1,
+.second-line-3,
+.second-line-5,
+.second-line-7 {
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .second-line-2,
 .second-line-4,
 .second-line-6,
 .second-line-8 {
-  margin-left: 27px;
-}
-.second-line-2 {
-  font-size: 17px;
-  font-family: airbnb-regular, sans-serif;
+  margin-left: 33px;
+  font-size: 14px;
 }
 .second-line-con {
   // background-color: aqua;
@@ -326,11 +334,14 @@
 }
 
 .stay-desc-title {
-  font-size: 26px;
+  font-weight: 700;
+  font-size: 24px;
   margin-top: 24px;
 }
 
 .stay-desc-info {
+  line-height: 24px;
+  font-weight: 400;
   font-size: 16px;
   margin-top: 30px;
 }
@@ -365,9 +376,9 @@
 }
 
 .fifth-line-1 {
-  margin-top: 43 px;
-  font-size: 23px;
-  font-weight: bold;
+  // margin-top: 52 px;
+  font-size: 22px;
+  font-weight: 600;
   margin-bottom: 28px;
 }
 // .fifth-line-1 .review-progress-bar {
@@ -420,6 +431,7 @@
 // }
 
 .fifth-line {
+  margin-top: 52px;
   // background-color: brown;
   width: 100%;
 }
