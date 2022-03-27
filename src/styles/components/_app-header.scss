@@ -1,75 +1,103 @@
-.app-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 80px;
-  position: fixed;
-  width: 89%;
+.app-header-con {
+  background-color: white;
+  position: sticky;
+  top: 0;
 
-  .logo-con {
+  .app-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    .logo-txt {
-      color: #ff385c;
-      font-size: 3rem;
-      cursor: pointer;
-      padding: 0.27rem;
-      font-family: airbnb-regular;
-      font-weight: 600;
+    height: 80px;
+    padding-left: 80px;
+    padding-right: 80px;
+    z-index: 1;
+
+    @media (max-width: 1127px) {
+      padding-left: 40px;
+      padding-right: 40px;
     }
 
-    .logo-img {
-      width: 3rem;
-      filter: invert(34%) sepia(91%) saturate(3121%) hue-rotate(328deg) brightness(100%) contrast(103%);
-    }
-  }
-
-  .main-nav {
-    display: flex;
-    align-items: center;
-
-    .bell-img {
-      padding-right: 15px;
-      cursor: pointer;
-    }
-
-    .hamburger {
-      color: #484848;
-      font-weight: bold;
-      font-size: 16px;
-    }
-
-    .menu-btn {
-      padding: 5px 5px 5px 15px;
-      border-radius: 200px;
-      background-color: #fff;
-      border: 1px solid #ddd;
+    .logo-con {
       display: flex;
       align-items: center;
-      cursor: pointer;
+      padding-left: 0px;
+      .logo-txt {
+        color: #ff385c;
+        font-size: 1.3rem;
+        cursor: pointer;
+        padding: 0.27rem;
+        font-family: airbnb-regular;
+        font-weight: 600;
+        line-height: 1px;
+
+        @media (max-width: 1127px) {
+          display: none;
+        }
+      }
+
+      .logo-img {
+        width: 1.9rem;
+        filter: invert(34%) sepia(91%) saturate(3121%) hue-rotate(328deg)
+          brightness(100%) contrast(103%);
+      }
     }
 
-    .user-img {
-      filter: invert(25%) sepia(2%) saturate(24%) hue-rotate(314deg) brightness(96%) contrast(85%);
-      width: 1.875rem;
-      margin-left: 12px;
-    }
-
-    .menu-btn-modal {
+    .main-nav {
       display: flex;
-      flex-direction: column;
-      position: absolute;
-      top: 70px;
-      right: 0px;
-      border-radius: 12px 12px;
-      width: 240px;
-      box-shadow: 0 0 3px 0 rgb(0 0 0 / 18%);
-      background-color: #fff;
-      z-index: 10;
+      align-items: center;
 
-      .menu-modal-link {
-        font-size: 0.875rem;
-        padding: 15px 20px;
+      .main-nav-links {
+        margin-right: 8px;
+        font-size: 14px;
+      }
+
+      .menu {
+        display: flex;
+        .img-globe {
+          margin-right: 19px;
+          width: 1rem;
+          filter: invert(13%) sepia(2%) saturate(18%) hue-rotate(314deg)
+            brightness(103%) contrast(101%);
+        }
+
+        .hamburger {
+          width: 16px;
+        }
+
+        .menu-btn {
+          width: 78px;
+          padding: 5px 5px 5px 12px;
+          border-radius: 200px;
+          background-color: #fff;
+          border: 1px solid #ddd;
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+        }
+
+        .user-img {
+          width: 1.875rem;
+          margin-left: 12px;
+          border-radius: 50%;
+        }
+
+        .menu-btn-modal {
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+          top: 70px;
+          right: 80px;
+          border-radius: 12px 12px;
+          width: 240px;
+          box-shadow: 0 0 3px 0 rgb(0 0 0 / 18%);
+          background-color: #fff;
+          z-index: 10;
+
+          .menu-modal-link {
+            font-size: 0.875rem;
+            padding: 15px 20px;
+          }
+        }
       }
     }
   }

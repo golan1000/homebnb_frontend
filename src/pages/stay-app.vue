@@ -1,13 +1,11 @@
 <template>
   <section class="app-main stay-app">
     <!-- <stay-filter /> -->
-    <div class="space-con">
-.
-    </div>
+    <div class="space-con"></div>
     <div>
       <stay-filter></stay-filter>
     </div>
-      <stay-list v-if="stays" :stays="stays" />
+    <stay-list v-if="stays" :stays="stays" />
   </section>
 </template>
 
@@ -35,9 +33,8 @@ export default {
 
 <style scoped>
 .space-con {
-  width:100%;
-  height:65px;
+  width: 100%;
+  height: 65px;
   /* background-color: blue; */
 }
-
 </style>
