@@ -167,21 +167,15 @@
 //   }
 // }
 
-.details-main-con {
-  margin-left: 80px;
-  margin-right: 80px;
-}
-
 .gallery-grid {
   display: grid;
   width: 100%;
   height: 368px;
   max-width: 100%;
-  // original   max-height: 372px;
   max-height: 368px;
   gap: 7px;
   // grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: max-content;
+  // grid-auto-rows: max-content;
   // grid-auto-columns: 255px;
   .main-pic {
     border-radius: 15px 0 0 15px;
@@ -254,6 +248,7 @@
   height: 110;
 }
 .first-line-title {
+  margin: 0;
   // background-color: purple;
   font-size: 26px;
   font-weight: 400;
@@ -391,21 +386,22 @@
   align-items: center;
 }
 
-.review-second-line {
-  height: 50px;
-  max-width: 200px;
-  display: flex;
-  // background-color: purple;
-  justify-content: flex-start;
+.review-name {
+  margin-top: -2px;
 }
 
-.review-name {
-  margin-top: 7px;
+.review-rates-main-con {
+  // background-color: red;
+  display: flex;
+  justify-content: flex-start;
+}
+.el-progress-bar {
+  margin-top: 20px;
 }
 
 .el-progress--line {
   margin-bottom: 15px;
-  width: 190px;
+  width: 135px;
 }
 
 .el-progress {
@@ -418,9 +414,60 @@
 
 .fifth-line {
   // background-color: brown;
-  width: 540px;
+  width: 100%;
+}
+.rate-sec1,
+.rate-sec2 {
+  width: 50%;
+}
+
+.rate-sec-middle {
+  min-width: 107px;
 }
 
 .fifth-line-6 {
   margin-left: 0px;
+}
+
+.progress-span-flex {
+  display: flex;
+  margin-right: 10px;
+}
+
+.review-users-con {
+  display: flex;
+  // background-color: yellow;
+}
+
+.review-users-con-right,
+.review-users-con-left {
+  // background-color: lightblue;
+  width: 50%;
+}
+
+.review-users-con-middle {
+  min-width: 107px;
+}
+.review1-con {
+  // background-color: lightgreen;
+}
+.review2-con {
+  // background-color: blue;
+}
+.review3-con {
+  // background-color: orange;
+}
+.review4-con {
+  // background-color: red;
+}
+
+.review-layout {
+  margin-bottom: 51px;
+}
+.review-user-details {
+  height: 50px;
+  max-width: 200px;
+  display: flex;
+  // background-color: purple;
+  justify-content: flex-start;
 }
