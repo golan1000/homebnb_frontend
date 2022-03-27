@@ -4,6 +4,7 @@
     <button class="order-form-submit"><div>Check availability</div></button>
     <div class="top-stay-menu-left"></div>
   </div> -->
+
   <div v-if="stayToEdit" class="details-main-con">
     <div class="details-stay-name">
       <span>{{ stayToEdit.name }}</span
@@ -14,7 +15,7 @@
     <div class="details-stay-short-info">
       <div>
         <div class="review-address-flex">
-          <img src="../assets/star.svg" alt="" /> <span>&nbsp;&nbsp;{{ stayToEdit.reviews[0].rate }}&nbsp;&nbsp;</span><span class="details-stay-short-info-address">({{ stayToEdit.reviews.length }} reviews) </span> &nbsp;•&nbsp;&nbsp;<span class="details-stay-short-info-address">&nbsp;{{ stayToEdit.loc.address }} </span>
+          <img src="../assets/star.svg" alt="" /> <span>&nbsp;&nbsp;{{ getAvarageRate }}&nbsp;&nbsp;</span><span class="details-stay-short-info-address">({{ stayToEdit.reviews.length }} reviews) </span> &nbsp;•&nbsp;&nbsp;<span class="details-stay-short-info-address">&nbsp;{{ stayToEdit.loc.address }} </span>
         </div>
       </div>
       <div class="details-stay-short-info-right">
@@ -32,19 +33,19 @@
 
     <div class="gallery-grid">
       <div class="sub-pic1-con">
-        <img class="main-pic" src="../assets/img/staypics/1.jpg" />
+        <img class="main-pic" :src="galleryImg1" />
       </div>
       <div class="sub-pic2-con">
-        <img class="sub-pic2" src="../assets/img/staypics/2.jpg" />
+        <img class="sub-pic2" :src="galleryImg2" />
       </div>
       <div class="sub-pic3-con">
-        <img class="sub-pic1" src="../assets/img/staypics/3.jpg" />
+        <img class="sub-pic1" :src="galleryImg1" />
       </div>
       <div class="sub-pic4-con">
-        <img class="sub-pic3" src="../assets/img/staypics/4.jpg" />
+        <img class="sub-pic3" :src="galleryImg2" />
       </div>
       <div class="sub-pic5-con">
-        <img class="sub-pic4" src="../assets/img/staypics/5.jpg" />
+        <img class="sub-pic4" :src="galleryImg1" />
       </div>
     </div>
 
@@ -53,12 +54,12 @@
       <div class="middle-con-sec1">
         <div class="first-line">
           <div class="first-line-1">
-            <span class="first-line-title">Entire rental unit hosted by Moran</span>
+            <span class="first-line-title">{{ getStayType }} hosted by {{ getHostName }}</span>
             <div class="spacer1">&nbsp;</div>
-            <div class="first-line-2">3 guests · 1 bedroom · 1 bed · 1 bathroom</div>
+            <div class="first-line-2">{{ getStayCap }} guests · {{ getBedrooms }} bedroom · {{ getBeds }} bed · {{ getBathrooms }} bathroom</div>
           </div>
           <div class="avatar1">
-            <el-avatar :size="57" src="https://i.pravatar.cc/150?img=1" />
+            <el-avatar :size="57" :src="getHostAvatar" />
           </div>
         </div>
         <hr />
@@ -86,7 +87,7 @@
         <hr />
         <div class="third-line">
           <div class="stay-desc-title">Stay description</div>
-          <div class="stay-desc-info">Beautiful 3 bedroom architecturally designed villa, with infinity pool and floor to ceiling views in almost every room of the sea and Cap de Creus national park, in beautiful working fishing village in Northern USA</div>
+          <div class="stay-desc-info">{{ getStaySummary }}</div>
         </div>
         <hr />
 
@@ -133,15 +134,15 @@
         <div class="order-dialog-main-con">
           <div class="order-form-top-con">
             <div>
-              <label class="order-form-price">$150</label>
+              <label class="order-form-price">{{ getStayPrice }}</label>
               <label class="order-form-night">&nbsp;/&nbsp;</label>
               <label class="order-form-night">night</label>
             </div>
 
             <div class="order-form-star-rate">
               <img src="../assets/star.svg" alt="" />
-              <label class="order-form-rate">4.5 &nbsp;</label>
-              <label class="order-form-rate">(33)</label>
+              <label class="order-form-rate">&nbsp;{{ getAvarageRate }} &nbsp;</label>
+              <label class="order-form-rate">({{ getReviewsNum }})</label>
             </div>
           </div>
           <div class="order-form-middle-con">
@@ -211,7 +212,7 @@
 
     <hr />
     <div class="fifth-line">
-      <div class="fifth-line-1"><img src="../assets/star.svg" alt="" />&nbsp; 4.5 · 33 reviews</div>
+      <div class="fifth-line-1"><img src="../assets/star.svg" alt="" />&nbsp; {{ getAvarageRate }} · {{ getReviewsNum }} reviews</div>
       <div class="review-rates-main-con">
         <div class="rate-sec1">
           <div class="fifth-line-2">
@@ -280,10 +281,10 @@
             <div class="review1-con review-layout">
               <div class="review-user-details">
                 <div class="avatar1">
-                  <el-avatar :size="57" src="https://i.pravatar.cc/150?img=8" />
+                  <el-avatar :size="57" src="" />
                 </div>
 
-                <div class="review-name">Erik Bole</div>
+                <div class="review-name"></div>
                 <div>24.8.2013</div>
               </div>
               <div class="fifth-line-6">This villa is absolutely stunning with an incredible view. Check in and check out was very smooth and the host/agency are very well organized. Would absolutely recommend the place to anyone looking to have a relaxing time in costa brava amongst a very spectacular view directly from the house. The beach and town near the village are also very accessible to go during the day.</div>
@@ -502,6 +503,121 @@ export default {
       this.IsGuestModalOpen = !this.IsGuestModalOpen;
     },
   },
+  computed: {
+    galleryImg1() {
+      if (this.stayToEdit.imgUrls[0]) return this.stayToEdit.imgUrls[0];
+    },
+    galleryImg2() {
+      if (this.stayToEdit.imgUrls[1]) return this.stayToEdit.imgUrls[1];
+    },
+    galleryImg3() {
+      if (this.stayToEdit.imgUrls[2]) return this.stayToEdit.imgUrls[2];
+    },
+    galleryImg4() {
+      if (this.stayToEdit.imgUrls[3]) return this.stayToEdit.imgUrls[3];
+    },
+    galleryImg5() {
+      if (this.stayToEdit.imgUrls[4]) return this.stayToEdit.imgUrls[4];
+    },
+    getStayPrice() {
+      return '$' + this.stayToEdit.price;
+    },
+    getStaySummary() {
+      return this.stayToEdit.summary;
+    },
+    getStayType() {
+      if (this.stayToEdit.propertyType) {
+        if (this.stayToEdit.roomType) return this.stayToEdit.propertyType + ' ' + this.stayToEdit.roomType;
+      }
+    },
+    getHostName() {
+      let fullname = this.stayToEdit.host.fullname;
+      let name = fullname.split(' ')[0];
+      return name;
+    },
+    getStayCap() {
+      return this.stayToEdit.capacity;
+    },
+    getHostAvatar() {
+      return this.stayToEdit.host.imgUrl;
+    },
+    getBedrooms() {
+      if (this.stayToEdit.bedrooms) return this.stayToEdit.bedrooms;
+    },
+    getBeds() {
+      if (this.stayToEdit.beds) return this.stayToEdit.bedrooms;
+    },
+    getBathrooms() {
+      if (this.stayToEdit.bathrooms) return this.stayToEdit.bathrooms;
+    },
+
+    getAvarageRate() {
+      let sum = 0;
+      for (var i = 0; i < this.stayToEdit.reviews.length; i++) {
+        sum += this.stayToEdit.reviews[0].rate;
+      }
+
+      let avg = sum / this.stayToEdit.reviews.length;
+      return avg;
+    },
+    getReviewsNum() {
+      return this.stayToEdit.reviews.length;
+    },
+
+    getReviews() {
+      let reviews = [
+        {
+          txt: 'am lacus lectus, mollis id porta eleifend, placerat at ex. Vivamus non malesuada lorem. Ut ultricies pretium urna et malesuada. Ut quis semper enim. N',
+          rate: 3,
+          by: {
+            fullname: 'Ron Man',
+            imgUrl: 'https://i.pravatar.cc/150?img=15',
+          },
+        },
+        {
+          txt: 'uctus. Morbi eget nibh cursus, luctus eros non, posuere velit. Pellentesque malesuada non erat vel aliquam. Lorem ipsum dolor sit amet, consecte',
+          rate: 3,
+          by: {
+            fullname: 'Mike Tal',
+            imgUrl: 'https://i.pravatar.cc/150?img=9',
+          },
+        },
+        {
+          txt: 'quis dictum augue. Nunc rhoncus a orci nec malesuada. Donec eleifend libero tortor, id ullamcorper sapien ullamcorper ut. Vestibulum et elit eg',
+          rate: 2,
+          by: {
+            fullname: 'Gill boam',
+            imgUrl: 'https://i.pravatar.cc/150?img=5',
+          },
+        },
+        {
+          txt: 'ellus, eget efficitur nisi dictum id. Duis eu enim sit amet purus interdum porttitor. Curabitur semper hendrerit faucibus. Quisque tempor id la',
+          rate: 5,
+          by: {
+            fullname: 'Don Samo',
+            imgUrl: 'https://i.pravatar.cc/150?img=3',
+          },
+        },
+        {
+          txt: 'us ac elit ut, mollis mollis mi. Phasellus ullamcorper lacus et leo viverra, vitae placerat est lobortis. Nullam ullamcorper commodo varius. Nunc ',
+          rate: 4,
+          by: {
+            fullname: 'Avi ran',
+            imgUrl: 'https://i.pravatar.cc/150?img=1',
+          },
+        },
+        {
+          txt: 'Very helpful hosts. Cooked traditional...',
+          rate: 3,
+          by: {
+            fullname: 'Moti Cohen',
+            imgUrl: 'https://i.pravatar.cc/150?img=2',
+          },
+        },
+      ];
+      return reviews;
+    },
+  },
   async created() {
     console.log('params=', this.$route.params);
 
@@ -561,7 +677,7 @@ img {
 }
 .order-dialog-main-con {
   position: sticky;
-  top: 0px;
+  top: 80px;
   padding: 25px;
   padding-top: 22px;
   width: 415px;
@@ -572,6 +688,7 @@ img {
 }
 .order-form-price {
   font-weight: bold;
+  font-size: 20px;
 }
 .order-form-submit {
   position: absolute;
@@ -624,6 +741,7 @@ img {
   display: flex;
   width: 100%;
   height: 910px;
+  margin-top: 10px;
   margin-top: 52px;
   /* background-color: yellow; */
 }
