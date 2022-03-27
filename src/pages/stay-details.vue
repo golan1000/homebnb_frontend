@@ -14,7 +14,7 @@
     <div class="details-stay-short-info">
       <div>
         <div class="review-address-flex">
-          <img src="../assets/star.svg" alt="" /> <span>&nbsp;&nbsp;{{ stayToEdit.reviews[0].rate }}&nbsp;&nbsp;</span><span class="details-stay-short-info-address">({{ stayToEdit.reviews.length }} reviews) </span> &nbsp;•&nbsp;<span class="details-stay-short-info-address">{{ stayToEdit.loc.address }} </span>
+          <img src="../assets/star.svg" alt="" /> <span>&nbsp;&nbsp;{{ stayToEdit.reviews[0].rate }}&nbsp;&nbsp;</span><span class="details-stay-short-info-address">({{ stayToEdit.reviews.length }} reviews) </span> &nbsp;•&nbsp;&nbsp;<span class="details-stay-short-info-address">&nbsp;{{ stayToEdit.loc.address }} </span>
         </div>
       </div>
       <div class="details-stay-short-info-right">
@@ -64,22 +64,22 @@
         <hr />
         <div class="second-line">
           <div class="second-line-con4">
-            <div class="second-line-1"><img src="../assets/house.svg" alt="" />&nbsp;&nbsp;&nbsp;Entire home</div>
+            <div class="second-line-1"><img class="services-img" src="../assets/house.svg" alt="" />&nbsp;&nbsp;&nbsp;Entire home</div>
             <div class="second-line-2">You’ll have the apartment to yourself.</div>
           </div>
 
           <div class="second-line-con2">
-            <div class="second-line-3"><img src="../assets/location.svg" alt="" />&nbsp;&nbsp;&nbsp;Great location</div>
+            <div class="second-line-3"><img class="services-img" src="../assets/location.svg" alt="" />&nbsp;&nbsp;&nbsp;Great location</div>
             <div class="second-line-4">Recent guests gave the location a 5-star rating.</div>
           </div>
 
           <div class="second-line-con3">
-            <div class="second-line-5"><img src="../assets/stars.svg" alt="" />&nbsp;&nbsp;&nbsp;Enhanced Clean</div>
+            <div class="second-line-5"><img class="services-img" src="../assets/stars.svg" alt="" />&nbsp;&nbsp;&nbsp;Enhanced Clean</div>
             <div class="second-line-6">This host has committed to our 5-step enhanced cleaning process.</div>
           </div>
 
           <div class="second-line-con4">
-            <div class="second-line-7"><img src="../assets/calendar.svg" alt="" />&nbsp;&nbsp;&nbsp;Free cancellation up to 24 hours before check-in</div>
+            <div class="second-line-7"><img class="services-img" src="../assets/calendar.svg" alt="" />&nbsp;&nbsp;&nbsp;Free cancellation up to 24 hours before check-in</div>
             <div class="second-line-8">feel free to be flexible</div>
           </div>
         </div>
@@ -95,31 +95,31 @@
 
           <div class="forth-line-2 forth-line-flex1">
             <div class="amenities-item1">
-              <img src="../assets/tv.svg" alt="" />
+              <img class="amenities-img" src="../assets/tv.svg" alt="" />
               &nbsp;&nbsp; TV
             </div>
             <div class="amenities-item2">
-              <img src="../assets/wifi.svg" alt="" />
+              <img class="amenities-img" src="../assets/wifi.svg" alt="" />
               &nbsp;&nbsp;Wifi
             </div>
           </div>
           <div class="forth-line-3 forth-line-flex2">
             <div class="amenities-item1">
-              <img src="../assets/restaurant.svg" alt="" />
+              <img class="amenities-img" src="../assets/restaurant.svg" alt="" />
               &nbsp;&nbsp;&nbsp;Kitchen
             </div>
             <div class="amenities-item2">
-              <img src="../assets/temp.svg" alt="" />
+              <img class="amenities-img" src="../assets/temp.svg" alt="" />
               &nbsp;&nbsp;Air conditioning
             </div>
           </div>
           <div class="forth-line-4 forth-line-flex3">
             <div class="amenities-item1">
-              <img src="../assets/smoking.svg" alt="" />
+              <img class="amenities-img" src="../assets/smoking.svg" alt="" />
               &nbsp;&nbsp;&nbsp;Smoking Allowed
             </div>
             <div class="amenities-item2">
-              <img src="../assets/pets.svg" alt="" />
+              <img class="amenities-img" src="../assets/pets.svg" alt="" />
               &nbsp;&nbsp;Pets Allowed
             </div>
           </div>
@@ -138,10 +138,8 @@
               <label class="order-form-night">night</label>
             </div>
 
-            <div>
-              <label class="order-form-star">
-                <img src="../assets/star.svg" alt="" />
-              </label>
+            <div class="order-form-star-rate">
+              <img src="../assets/star.svg" alt="" />
               <label class="order-form-rate">4.5 &nbsp;</label>
               <label class="order-form-rate">(33)</label>
             </div>
@@ -159,8 +157,16 @@
             </div>
             <div class="guest-modallll">
               <button class="order-form-guest-btn" @click="displayGuestModal">
-                <div class="check">GUESTS</div>
-                <div class="add-dates">Add guests</div>
+                <div class="order-form-guest-btn-sec1">
+                  <div class="check">GUESTS</div>
+                  <div class="add-dates">Add guests</div>
+                </div>
+                <div class="order-form-guest-btn-sec2">
+                  <el-icon
+                    ><svg v-if="!IsGuestModalOpen" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-ba633cb8=""><path fill="currentColor" d="M104.704 338.752a64 64 0 0 1 90.496 0l316.8 316.8 316.8-316.8a64 64 0 0 1 90.496 90.496L557.248 791.296a64 64 0 0 1-90.496 0L104.704 429.248a64 64 0 0 1 0-90.496z"></path></svg>
+                    <svg v-if="IsGuestModalOpen" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-ba633cb8=""><path fill="currentColor" d="M104.704 685.248a64 64 0 0 0 90.496 0l316.8-316.8 316.8 316.8a64 64 0 0 0 90.496-90.496L557.248 232.704a64 64 0 0 0-90.496 0L104.704 594.752a64 64 0 0 0 0 90.496z"></path></svg>
+                  </el-icon>
+                </div>
               </button>
               <section v-if="IsGuestModalOpen" class="guests-modal">
                 <div class="close-modal-btn" title="Close the modal" @click="displayGuestModal">X</div>
@@ -572,6 +578,7 @@ img {
   z-index: -10;
   width: 366px;
   height: 64px;
+  cursor: pointer;
   /* background: #e11a60; */
 
   background-image: linear-gradient(to right, #e61e4e, #d70466);
@@ -636,7 +643,7 @@ img {
 .amenities-btn {
   border: 1px solid black;
   border-radius: 8px;
-
+  cursor: pointer;
   font-weight: 600;
   font-size: 16px;
   width: 208px;
@@ -663,6 +670,7 @@ img {
 }
 
 .order-form-check-in-btn {
+  cursor: pointer;
   text-align: left;
   height: 63px;
   /* width: 50%; */
@@ -676,6 +684,7 @@ img {
   margin: 5px;
 } */
 .order-form-check-out-btn {
+  cursor: pointer;
   text-align: left;
   height: 63px;
   /* width: 50%; */
@@ -687,6 +696,7 @@ img {
   border-left: none;
 }
 .order-form-guest-btn {
+  cursor: pointer;
   text-align: left !important;
   height: 55px;
   /* width: 100%; */
@@ -694,8 +704,13 @@ img {
   width: 365px;
   border-radius: 0 0 10px 10px !important;
   border: 1px solid gray;
+  display: flex;
+  justify-content: space-between;
 }
 
+.btn {
+  cursor: pointer;
+}
 .order-form-middle-con {
   width: 365px;
   margin-bottom: 15px;
@@ -790,6 +805,7 @@ input {
   color: black;
   font-size: 16px;
   text-decoration: underline;
+  cursor: pointer;
 }
 .date-modal {
   float: left;
@@ -810,5 +826,26 @@ hr {
 .review-address-flex {
   /* background-color: red; */
   display: flex;
+}
+
+.services-img {
+  width: 20px;
+  height: auto;
+}
+
+.amenities-img {
+  width: 19px;
+  height: auto;
+}
+.order-form-guest-btn-sec1 {
+  margin-top: 5px;
+}
+
+.order-form-guest-btn-sec2 {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  /* background-color: red; */
+  height: 100%;
 }
 </style>
