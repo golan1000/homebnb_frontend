@@ -1,179 +1,185 @@
 .filter-container {
-    max-width: 53.125rem;
-    height: 4.43rem;
-    border: 1px solid #dddddd;
-    border-radius: 2.5em;
-    box-shadow: 0 1px 2px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 5%);
-    margin: 0 auto;
+  max-width: 53.125rem;
+  height: 4.43rem;
+  border: 1px solid #dddddd;
+  border-radius: 2.5em;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 5%);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffff;
+  top: 4.687rem;
+  transform-origin: top;
+  // position: absolute;
+  transition: all 0.2s;
+
+  .location-input {
+    // padding-left: 14px;
+    // width: 183px;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  label {
+    font-size: 0.75rem;
+    font-weight: 800;
+  }
+
+  .input-container {
+    height: 4rem;
+    border-radius: 2.5rem;
+    padding: 0.78rem 0.78rem 0.78rem 1.56rem;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #ffff;
-    top: 4.687rem;
-    transform-origin: top;
-    // position: absolute;
-    transition: all 0.2s;
+    min-width: 3.125rem;
 
-    button {
-        cursor: pointer;
+    flex-direction: column;
+    > :last-child {
+      margin-inline-end: -3px;
     }
 
-    label {
-        font-size: 0.75rem;
-        font-weight: 800;
+    // > * {
+    //     cursor: pointer;
+    // }
+  }
+
+  .input-container:hover {
+    background-color: #ebebeb;
+    // height: 100%;
+  }
+  .location {
+    // text-indent: 15px;
+    > :first-child input {
+      //   text-indent: 15px;
+      //   padding-left: 14px;
+      //   width: 183px;
+    }
+  }
+
+  .trip-dates {
+    display: flex;
+    min-width: 3.125rem;
+  }
+  .guest-container {
+    position: relative;
+  }
+
+  .guest-flex {
+    display: flex;
+  }
+  .guest-flex-column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .guests-modal {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    // align-items: space-between;
+    line-height: 20px;
+    top: 75px;
+    right: calc(40% - 280px);
+    width: 21.87rem;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 18%);
+    z-index: 2;
+    padding: 0.5rem 1.25rem 1.25rem 1.25rem;
+    gap: 20px;
+
+    .close-modal-btn {
+      justify-self: flex-end;
+      cursor: pointer;
+      margin: 0;
+      padding: 0;
+      align-self: flex-end;
     }
 
-    .input-container {
-        height: 4rem;
-        border-radius: 2.5rem;
-        padding: 0.78rem 0.78rem 0.78rem 1.56rem;
-        display: flex;
-        min-width: 3.125rem;
+    .modal-txt {
+      display: flex;
+      flex-direction: column;
+    }
+    .modal-btn {
+      display: flex;
+      align-items: center;
+    }
+    span {
+      margin: 0 6px;
+    }
+    .btn {
+      border: 1px solid #b0b0b0;
+      border-radius: 50%;
+      height: 2rem;
+      width: 2rem;
+      color: #717171;
+      text-align: center;
+    }
+  }
+  .modal-date-picker {
+    top: 75px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    // align-items: space-between;
+    // line-height: 20px;
+    right: calc(50% - 271px);
+    width: min-content;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 18%);
+    z-index: 10;
+    padding: 1.25rem;
+    gap: 20px;
 
-        flex-direction: column;
-        > :last-child {
-            margin-inline-end: -3px;
-        }
+    .close-modal-btn {
+      justify-self: flex-end;
+      cursor: pointer;
+      margin: 0;
+      padding: 0;
+      align-self: flex-end;
+    }
+  }
 
-        // > * {
-        //     cursor: pointer;
-        // }
+  .search-btn {
+    position: absolute;
+    right: 5px;
+    border-radius: 50%;
+    border: none;
+    height: 3rem;
+    width: 3rem;
+    margin: -3px;
+    background-color: $main-col;
+    img {
+      width: 1.562rem;
+      height: 1.562rem;
     }
-
-    .input-container:hover {
-        background-color: #ebebeb;
-        // height: 100%;
-    }
-    .location {
-        text-indent: 15px;
-        > :first-child input {
-            text-indent: 15px;
-        }
-    }
-
-    .trip-dates {
-        display: flex;
-        min-width: 3.125rem;
-    }
-    .guest-container {
-        position: relative;
-    }
-
-    .guest-flex {
-        display: flex;
-    }
-    .guest-flex-column {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .guests-modal {
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        // align-items: space-between;
-        line-height: 20px;
-        top: 8.5rem;
-        right: 18.75rem;
-        width: 21.87rem;
-        background-color: #fff;
-        border-radius: 12px;
-        box-shadow: 0 2px 4px rgb(0 0 0 / 18%);
-        z-index: 2;
-        padding: 1.25rem;
-        gap: 20px;
-
-        .close-modal-btn {
-            justify-self: flex-end;
-            cursor: pointer;
-            margin: 0;
-            padding: 0;
-            align-self: flex-end;
-        }
-
-        .modal-txt {
-            display: flex;
-            flex-direction: column;
-        }
-        .modal-btn {
-            display: flex;
-            align-items: center;
-        }
-        span {
-            margin: 0 6px;
-        }
-        .btn {
-            border: 1px solid #b0b0b0;
-            border-radius: 50%;
-            height: 2rem;
-            width: 2rem;
-            color: #717171;
-            text-align: center;
-        }
-    }
-    .modal-date-picker {
-        top: 500px;
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        // align-items: space-between;
-        // line-height: 20px;
-        top: 13.9rem;
-        right: 800px;
-        width: min-content;
-        background-color: #fff;
-        border-radius: 12px;
-        box-shadow: 0 2px 4px rgb(0 0 0 / 18%);
-        z-index: 10;
-        padding: 1.25rem;
-        gap: 20px;
-
-        .close-modal-btn {
-            justify-self: flex-end;
-            cursor: pointer;
-            margin: 0;
-            padding: 0;
-            align-self: flex-end;
-        }
-    }
-
-    .search-btn {
-        position: absolute;
-        right: 5px;
-        border-radius: 50%;
-        border: none;
-        height: 3rem;
-        width: 3rem;
-        margin: -3px;
-        background-color: $main-col;
-        img {
-            width: 1.562rem;
-            height: 1.562rem;
-        }
-    }
-    .search-btn:hover {
-        background-image: radial-gradient(
-            rgb(255, 56, 92) 0%,
-            rgb(230, 30, 77) 27.5%,
-            rgb(227, 28, 95) 40%,
-            rgb(215, 4, 102) 57.5%,
-            rgb(189, 30, 89) 75%,
-            rgb(189, 30, 89) 100%
-        );
-        // transition: background-image 2s ease 3s;
-    }
-    input {
-        background-color: transparent;
-        border: none;
-        box-shadow: none;
-        margin: 0;
-        line-height: 20px;
-        outline: none;
-    }
-    .span-input {
-        line-height: 20px;
-        font-size: 14px;
-        font-family: $apple-font;
-        color: #717171;
-    }
+  }
+  .search-btn:hover {
+    background-image: radial-gradient(
+      rgb(255, 56, 92) 0%,
+      rgb(230, 30, 77) 27.5%,
+      rgb(227, 28, 95) 40%,
+      rgb(215, 4, 102) 57.5%,
+      rgb(189, 30, 89) 75%,
+      rgb(189, 30, 89) 100%
+    );
+    // transition: background-image 2s ease 3s;
+  }
+  input {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    margin-left: -2px;
+    line-height: 20px;
+    outline: none;
+  }
+  .span-input {
+    line-height: 20px;
+    font-size: 14px;
+    font-family: $apple-font;
+    color: #717171;
+  }
 }
