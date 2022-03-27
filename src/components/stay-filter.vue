@@ -35,7 +35,7 @@
     </div>
 
     <div class="input-container">
-      <div class="guest-flex">
+      <div class="guest-flex guest-container">
         <div class="guest-flex-column" @click="openModal('guest')">
           <label>Guests</label>
           <input :placeholder="sumOfGuests" disabled />
@@ -107,22 +107,21 @@
 
 <script>
 import { Search } from '@element-plus/icons-vue';
+import { useRefHistory } from '@vueuse/core';
 import { shallowRef } from 'vue';
 export default {
-  props: {},
+  props: [],
   created() {
-    this.stays = this.$store.getters.getStays;
-
-    const { address } = this.$route.query;
-    if (address) {
-      this.filterBy.address = address;
-    }
+    // const { address } = this.$route.query;
+    // if (address) {
+    //   this.filterBy.address = address;
+    // }
     this.getFilters();
   },
 
   data() {
     return {
-      stays: null,
+      // stays: null,
       Search,
       filterBy: {
         address: '',
@@ -192,9 +191,14 @@ export default {
   },
   computed: {
     getAddresses() {
-      if (!this.stays) return;
-      return this.stays.map(stay => stay.loc.address);
+      // if (!this.stays) return;
+      console.log('run from filter ');
+      const addresses = this.$store.getters.getStays.map(
+        stay => stay.loc.address
+      );
+      return addresses;
     },
+
     sumOfGuests() {
       const sum = this.filterBy.guests.adults + this.filterBy.guests.children;
       if (!sum) return 'Add guests';
