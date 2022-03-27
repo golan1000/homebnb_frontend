@@ -23,7 +23,7 @@
     </div>
     <div class="stay-preview-content">
       <div class="stay-preview-content-reviews">
-        <img class="img-star" src="../assets/star.png" alt="" />
+        <img class="img-star" src="../assets/star.svg" alt="" />
         <p class="reviews-rate">{{ getAvgRate }}&nbsp;</p>
         <p class="reviews-number">({{ stay.reviews.length }} Reviews)</p>
       </div>

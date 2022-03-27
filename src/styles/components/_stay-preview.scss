@@ -52,9 +52,13 @@
 
       .img-star {
         margin-right: 0.25rem;
-        width: 1.125rem;
+        width: 0.9rem;
         filter: invert(34%) sepia(91%) saturate(3121%) hue-rotate(328deg)
           brightness(100%) contrast(103%);
+      }
+
+      .reviews-rate {
+        font-weight: bold;
       }
 
       .reviews-number {
@@ -67,6 +71,7 @@
       height: 25%;
       align-items: center;
       padding-top: 6px;
+      color: #717171;
 
       .stay-preview-details-span {
         font-family: Arial, Helvetica, sans-serif;
@@ -79,6 +84,7 @@
       height: 25%;
       align-items: center;
       padding-top: 2px;
+      color: #717171;
     }
 
     .stay-preview-price {
