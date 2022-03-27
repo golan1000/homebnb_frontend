@@ -528,7 +528,7 @@ img {
   z-index: -10;
   width: 366px;
   height: 64px;
-  background: #d93a72;
+  background: #e11a60;
   border-radius: 8px;
   color: white;
   font-size: 16px;
