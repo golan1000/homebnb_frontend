@@ -13,12 +13,20 @@
     <div class="item5" style="background-color: ">
       <div class="dest-grid">
         <div class="img-con10" style="background-color: ">
-          <img class="img1" src="../assets/img/dest/Dubai.jpg" />
-          <div class="dest-title">Dubai</div>
+          <img
+            @click="setfilterParams"
+            class="img1"
+            src="../assets/img/dest/Hong Kong.jpg"
+          />
+          <div class="dest-title">Hong-Kong</div>
         </div>
         <div class="img-con10" style="background-color: ">
-          <img class="img1" src="../assets/img/dest/London.jpg" />
-          <div class="dest-title">London</div>
+          <img
+            @click="setfilterParams"
+            class="img1"
+            src="../assets/img/dest/Barcelona.jpg"
+          />
+          <div class="dest-title">Barcelona</div>
         </div>
         <div class="img-con10" style="background-color: ">
           <img @click="setfilterParams" class="img1" src="../assets/img/dest/New York.jpg" />
