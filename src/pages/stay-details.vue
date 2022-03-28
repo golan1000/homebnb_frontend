@@ -21,7 +21,7 @@
             >({{ stayToEdit.reviews.length }} reviews)
           </span>
           &nbsp;•&nbsp;&nbsp;<span class="details-stay-short-info-address"
-            >&nbsp;{{ stayToEdit.address.city }}
+            >&nbsp;{{ getStayCityAdress }}
           </span>
         </div>
       </div>
@@ -46,13 +46,13 @@
         <img class="sub-pic2" :src="galleryImg2" />
       </div>
       <div class="sub-pic3-con">
-        <img class="sub-pic1" :src="galleryImg1" />
+        <img class="sub-pic1" :src="galleryImg3" />
       </div>
       <div class="sub-pic4-con">
-        <img class="sub-pic3" :src="galleryImg2" />
+        <img class="sub-pic3" :src="galleryImg4" />
       </div>
       <div class="sub-pic5-con">
-        <img class="sub-pic4" :src="galleryImg1" />
+        <img class="sub-pic4" :src="galleryImg5" />
       </div>
     </div>
 
@@ -71,7 +71,9 @@
             </div>
           </div>
           <div class="avatar1">
-            <el-avatar :size="57" :src="getHostAvatar" />
+            <el-avatar :size="57" :src="getRandProfilePic" />
+            <!-- //the real one
+            <el-avatar :size="57" :src="getHostPicture" /> -->
           </div>
         </div>
         <hr />
@@ -134,7 +136,7 @@
         </div>
         <hr />
 
-        <div class="forth-line">
+        <!-- <div class="forth-line">
           <div class="forth-line-1">Amenities</div>
 
           <div class="forth-line-2 forth-line-flex1">
@@ -173,6 +175,22 @@
           </div>
 
           <button class="amenities-btn">Show all 9 amenities</button>
+        </div> -->
+        <div class="forth-line">
+          <div class="forth-line-1">Amenities</div>
+
+          <div class="amenities-grid">
+            <div
+              v-for="(amenity, index) in getAmenities"
+              class="amenities-grid-item"
+              :key="index + Math.random()"
+            >
+              {{ amenity }}
+            </div>
+          </div>
+          <button class="amenities-btn">
+            Show all {{ getAmenitiesNum }} amenities
+          </button>
         </div>
       </div>
 
@@ -198,11 +216,11 @@
             <div class="order-dates">
               <button class="order-form-check-in-btn" @click="showCalendar">
                 <div class="check">CHECK IN</div>
-                <div class="add-dates">Add dates</div>
+                <div class="add-dates">{{ getRangeStart }}</div>
               </button>
               <button class="order-form-check-out-btn" @click="showCalendar">
                 <div class="check">CHECK OUT</div>
-                <div class="add-dates">Add dates</div>
+                <div class="add-dates">{{ getRangeEnd }}</div>
               </button>
             </div>
             <div class="guest-modallll">
@@ -288,6 +306,8 @@
             </div>
             <v-date-picker
               v-model="range"
+              update-on-input
+              @input="selectEvt"
               is-range
               :columns="$screens({ default: 2, lg: 2 })"
             />
@@ -401,16 +421,27 @@
       <div class="fifth-line-5">
         <div class="review-users-con">
           <div class="review-users-grid">
-            <div v-for="review in getReviews" class="review1-con review-layout">
+            <div
+              v-for="(review, index) in getReviews"
+              class="review1-con review-layout"
+              :key="index + Math.random()"
+            >
               <div class="review-user-details">
                 <div class="avatar1">
-                  <el-avatar :size="57" :src="review.by.imgUrl" />
+                  <el-avatar :size="57" :src="getRandProfilePic" />
+
+                  <!-- //the real one
+                  <el-avatar :size="57" :src="review.by.imgUrl" /> -->
                 </div>
 
-                <div class="review-name">{{ review.by.fullname }}</div>
-                <div class="review-date">{{ review.date }}</div>
+                <div class="review-name">
+                  {{ review.by.fullname }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="review-date">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ getDate(review.at) }}
+                </div>
               </div>
-              <div class="fifth-line-6">{{ review.txt }}</div>
+              <div class="fifth-line-6">{{ getTxt(review.txt) }}</div>
             </div>
           </div>
         </div>
@@ -423,10 +454,12 @@
 export default {
   data() {
     return {
+      isDateSelected: false,
       range: {
-        start: new Date(2020, 0, 1),
-        end: new Date(2020, 0, 5),
+        start: new Date(2022, 0, 1),
+        end: new Date(2022, 0, 5),
       },
+
       filterBy: {
         address: "",
         guests: {
@@ -460,22 +493,43 @@ export default {
       console.log("blaaaa21321321");
       this.IsGuestModalOpen = !this.IsGuestModalOpen;
     },
+    getDate(dateStr) {
+      return new Date(dateStr).toLocaleDateString();
+    },
+    getTxt(txt) {
+      let addition = "";
+      if (txt.length > 50) addition = "...";
+      return txt.substr(0, 200) + addition;
+    },
+    selectEvt() {
+      console.log("isDateSelected===", isDateSelected);
+    },
   },
   computed: {
     galleryImg1() {
-      if (this.stayToEdit.imgUrls[0]) return this.stayToEdit.imgUrls[0];
+      let baseUrl = "../../data/Images/";
+      if (this.stayToEdit.imgUrls[0])
+        return baseUrl + this.stayToEdit.imgUrls[0];
     },
     galleryImg2() {
-      if (this.stayToEdit.imgUrls[1]) return this.stayToEdit.imgUrls[1];
+      let baseUrl = "../../data/Images/";
+      if (this.stayToEdit.imgUrls[1])
+        return baseUrl + this.stayToEdit.imgUrls[1];
     },
     galleryImg3() {
-      if (this.stayToEdit.imgUrls[2]) return this.stayToEdit.imgUrls[2];
+      let baseUrl = "../../data/Images/";
+      if (this.stayToEdit.imgUrls[2])
+        return baseUrl + this.stayToEdit.imgUrls[2];
     },
     galleryImg4() {
-      if (this.stayToEdit.imgUrls[3]) return this.stayToEdit.imgUrls[3];
+      let baseUrl = "../../data/Images/";
+      if (this.stayToEdit.imgUrls[3])
+        return baseUrl + this.stayToEdit.imgUrls[3];
     },
     galleryImg5() {
-      if (this.stayToEdit.imgUrls[4]) return this.stayToEdit.imgUrls[4];
+      let baseUrl = "../../data/Images/";
+      if (this.stayToEdit.imgUrls[4])
+        return baseUrl + this.stayToEdit.imgUrls[4];
     },
     getStayPrice() {
       return "$" + this.stayToEdit.price;
@@ -510,20 +564,46 @@ export default {
       if (this.stayToEdit.bathrooms) return this.stayToEdit.bathrooms;
     },
 
-    getAvarageRate() {
-      let sum = 0;
-      for (var i = 0; i < this.stayToEdit.reviews.length; i++) {
-        sum += this.stayToEdit.reviews[0].rate;
-      }
+    getRangeStart() {
+      if (this.range.start && this.isDateSelected) {
+        return new Date(this.range.start).toLocaleDateString();
+      } else return "Add dates";
+    },
+    getRangeEnd() {
+      if (this.range.end && this.isDateSelected)
+        return new Date(this.range.end).toLocaleDateString();
+      else return "Add dates";
+    },
+    getAmenities() {
+      if (!this.stayToEdit.amenities) return;
+      console.log(this.stayToEdit.amenities);
+      var tempAmenities = JSON.parse(JSON.stringify(this.stayToEdit.amenities));
+      if (tempAmenities.length > 6) tempAmenities.length = 6;
 
-      let avg = sum / this.stayToEdit.reviews.length;
-      return avg;
+      console.log("tempAmenities=", tempAmenities);
+      return tempAmenities;
+    },
+    getAmenitiesNum() {
+      return this.stayToEdit.amenities.length;
+    },
+
+    getAvarageRate() {
+      // let sum = 0;
+      // for (var i = 0; i < this.stayToEdit.reviews.length; i++) {
+      //   sum += this.stayToEdit.reviews[0].rate;
+      // }
+
+      // let avg = sum / ;
+      // return avg;
+
+      return this.stayToEdit.reviewScores.rating;
     },
     getReviewsNum() {
-      return this.stayToEdit.reviews.length;
+      return this.stayToEdit.numOfReviews;
     },
 
     getReviews() {
+      return this.stayToEdit.reviews;
       let reviews = [
         {
           txt: "am lacus lectus, mollis id porta eleifend, placerat at ex. Vivamus non malesuada lorem. Ut ultricies pretium urna et malesuada. Ut quis semper enim. N",
@@ -585,19 +665,23 @@ export default {
     getReviewsScore() {
       var reviewScores;
 
-      var accuracy = 2;
+      console.log(
+        "this.stayToEdit.reviewScores=",
+        this.stayToEdit.reviewScores
+      );
+      var accuracy = this.stayToEdit.reviewScores.accuracy;
       var accuracyPre = (accuracy / 10) * 100;
-      var cleanliness = 3;
+      var cleanliness = this.stayToEdit.reviewScores.cleanliness;
       var cleanlinessPre = (cleanliness / 10) * 100;
-      var checkin = 4;
+      var checkin = this.stayToEdit.reviewScores.checkin;
       var checkinPre = (checkin / 10) * 100;
-      var communication = 5;
+      var communication = this.stayToEdit.reviewScores.communication;
       var communicationPre = (communication / 10) * 100;
-      var location = 6;
+      var location = this.stayToEdit.reviewScores.location;
       var locationPre = (location / 10) * 100;
-      var value = 7;
+      var value = this.stayToEdit.reviewScores.value;
       var valuePre = (value / 10) * 100;
-      var rating = 98;
+      var rating = this.stayToEdit.reviewScores.rating;
       var ratingPre = (rating / 100) * 100;
 
       reviewScores = {
@@ -617,6 +701,26 @@ export default {
         ratingPre,
       };
       return reviewScores;
+    },
+    getStayCityAdress() {
+      return (
+        this.stayToEdit.address.city + " " + this.stayToEdit.address.country
+      );
+    },
+    getHostPicture() {
+      this.stayToEdit.host.thumbnailUrl;
+    },
+    getRandProfilePic() {
+      return "https://i.pravatar.cc/200";
+    },
+  },
+  watch: {
+    range: {
+      handler: function () {
+        this.isDateSelected = true;
+        console.log(this.range);
+      },
+      deep: true,
     },
   },
   async created() {
@@ -659,22 +763,53 @@ img {
   margin-left: 390px;
   margin-right: 390px;
 }
-@media only screen and (min-width: 1000px) and (max-width: 1200px) and (orientation: landscape) {
+@media only screen and (min-width: 1600px) and (max-width: 1700px) {
   .details-main-con {
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 390px;
+    margin-right: 390px;
   }
 }
-@media only screen and (min-width: 800px) and (max-width: 1000px) and (orientation: landscape) {
+@media only screen and (min-width: 1200px) and (max-width: 1600px) {
   .details-main-con {
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: 8%;
+    margin-right: 8%;
+  }
+  .gallery-grid {
+    width: 90%;
+    background: yellow;
   }
 }
-@media only screen and (min-width: 500px) and (max-width: 800px) and (orientation: landscape) {
+@media only screen and (min-width: 1000px) and (max-width: 1200px) {
+  .details-main-con {
+    margin-left: 3%;
+    margin-right: 3%;
+  }
+  .gallery-grid {
+    width: 90%;
+    background: blue;
+  }
+}
+@media only screen and (min-width: 600px) and (max-width: 1000px) {
+  .details-main-con {
+    margin-left: 3%;
+    margin-right: 3%;
+  }
+  .gallery-grid {
+    width: 90%;
+    background: purple;
+  }
+}
+@media only screen and (min-width: 100px) and (max-width: 600px) {
   .details-main-con {
     margin-left: 0;
     margin-right: 0;
+  }
+  .gallery-grid {
+    width: 100%;
+    background: black;
+  }
+  body {
+    background-color: aqua;
   }
 }
 .order-dialog-main-con {
@@ -742,7 +877,7 @@ img {
 .middle-con {
   display: flex;
   width: 100%;
-  height: 910px;
+  height: fit-content;
   margin-top: 10px;
   margin-top: 52px;
   /* background-color: yellow; */
@@ -889,7 +1024,9 @@ img {
   justify-self: flex-end;
   cursor: pointer;
   margin: 0;
-  margin-bottom: -20px;
+  /* margin-bottom: -20px; */
+  /* background: blue; */
+  text-align: right;
   padding: 0;
   align-self: flex-end;
 }
