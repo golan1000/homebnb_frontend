@@ -2,7 +2,7 @@
   background: black;
   margin: 0 auto;
   // background: url('../assets/img/homepage/main.jpeg') no-repeat;
-  background: url("../assets/img/homepage/main2.jpg") no-repeat;
+  background: url('../assets/img/homepage/main2.jpg') no-repeat;
   background-size: 100%;
   height: 855px;
   width: 100%;
@@ -14,7 +14,7 @@
   margin-top: 111px;
   margin-left: 0;
   margin-right: 0;
-  background: url("../assets/img/homepage/host2.jpg") no-repeat;
+  background: url('../assets/img/homepage/host2.jpg') no-repeat;
   background-size: 100%;
   height: 640px;
   width: 100%;
@@ -47,7 +47,7 @@
 }
 
 .destenations {
-  margin-top: 100px;
+  margin-top: 109px;
   display: grid;
   grid-template-rows: 100px max-content 100px max-content;
   grid-template-columns: 80px 1fr 80px;
@@ -60,9 +60,11 @@
   }
   .category-title {
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
     padding-bottom: 25px;
-    font-size: 25px;
+    font-size: 42px;
+    font-weight: 400;
+    font-family: airbnb-medium;
   }
 }
 .dest-con1 {
@@ -419,6 +421,11 @@
   justify-content: space-between;
   align-items: center;
 }
+.reviews-ratings-1,
+.reviews-ratings-2 .reviews-ratings-3 .reviews-ratings-4 .reviews-ratings-5,
+.reviews-ratings-6 {
+  // background-color: red;
+}
 
 .review-name {
   margin-top: -2px;
@@ -512,5 +519,21 @@
 
 .middle-sec-spacer {
   height: 40px;
+  background-color: blue;
+}
+
+.review-users-grid {
+  display: grid;
+  width: 100%;
+  // background-color: red;
+  grid-column-gap: 50px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.reviews-ratings {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(3, 1fr);
   background-color: blue;
 }

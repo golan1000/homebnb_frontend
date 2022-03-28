@@ -1,5 +1,5 @@
 .filter-container {
-  width: 848px;
+  max-width: 850px;
   height: 66px;
   border: 1px solid #dddddd;
   border-radius: 32px;
@@ -12,6 +12,11 @@
   top: 4.687rem;
   color: #222222;
 
+  .stay-filter-border {
+    border-right: 1px solid #dddddd;
+    height: 32px;
+  }
+
   button {
     cursor: pointer;
   }
@@ -21,49 +26,85 @@
     font-weight: 800;
   }
 
-  .input-container {
+  .location-input-container {
+    width: 270px;
     height: 66px;
-    border-radius: 2.5rem;
-    padding: 14px 32px;
-    display: flex;
-    min-width: 3.125rem;
+    flex: 1.5 0 0%;
 
-    flex-direction: column;
-    > :last-child {
-      margin-inline-end: -3px;
+    .location-input-div {
+      height: 100%;
+      padding: 14px 32px;
+      display: flex;
+
+      .location-input-label {
+        width: 204px;
+      }
+
+      .location-input {
+        // padding-left: 0px;
+      }
     }
-
-    // > * {
-    //     cursor: pointer;
-    // }
   }
 
-  .input-container:hover {
-    background-color: #ebebeb;
-    // height: 100%;
-  }
-
-  .trip-dates {
+  .trip-dates-container {
+    flex: 2 0 0%;
+    height: 66px;
     display: flex;
-    min-width: 3.125rem;
-  }
-  .guest-container {
-    position: relative;
+    width: 346px;
+    align-items: center;
+
+    .check-in-input-container {
+      width: 180px;
+      height: 100%;
+      .check-in-input-div {
+        padding: 14px 24px;
+        height: 100%;
+        width: 178px;
+        display: flex;
+        .date-input-label {
+          width: 130px;
+        }
+      }
+    }
+    .check-out-input-container {
+      width: 180px;
+      height: 100%;
+      .check-out-input-div {
+        padding: 14px 24px;
+        height: 100%;
+        width: 178px;
+        display: flex;
+        .date-input-label {
+          width: 130px;
+        }
+      }
+    }
   }
 
-  .guest-flex {
+  .guest-search-container {
+    height: 66px;
     display: flex;
-  }
-  .guest-flex-column {
-    display: flex;
-    flex-direction: column;
+    align-items: center;
+    width: 223px;
+    flex: 0.95 0 auto;
+
+    .guest-container {
+      padding: 14px 24px;
+      display: flex;
+      flex-direction: column;
+      width: 172px;
+      height: 100%;
+
+      .guest-container-label {
+        width: 122px;
+      }
+    }
   }
 
   .guests-modal {
     display: flex;
     flex-direction: column;
     position: absolute;
-    // align-items: space-between;
     line-height: 20px;
     top: 75px;
     right: calc(40% - 280px);
@@ -108,8 +149,6 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    // align-items: space-between;
-    // line-height: 20px;
     right: calc(50% - 271px);
     width: min-content;
     background-color: #fff;
@@ -129,17 +168,14 @@
   }
 
   .search-btn {
-    position: absolute;
-    right: 5px;
     border-radius: 50%;
     border: none;
     height: 3rem;
     width: 3rem;
-    margin: -3px;
+    margin-left: 4px;
     background-color: $main-col;
     img {
-      width: 1.562rem;
-      height: 1.562rem;
+      width: 16px;
     }
   }
   .search-btn:hover {
@@ -151,15 +187,17 @@
       rgb(189, 30, 89) 75%,
       rgb(189, 30, 89) 100%
     );
-    // transition: background-image 2s ease 3s;
   }
   input {
     background-color: transparent;
     border: none;
     box-shadow: none;
-    margin-left: -2px;
-    line-height: 20px;
     outline: none;
+    font-size: 14px;
+    color: #717171;
+    padding-left: 0px;
+    padding-top: 3px;
+    width: 100%;
   }
   .span-input {
     line-height: 20px;

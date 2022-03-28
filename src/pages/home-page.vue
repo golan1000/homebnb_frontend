@@ -7,35 +7,33 @@
   <!-- <el-button type="primary">Primary</el-button> -->
   <div class="destenations">
     <div class="item1" style="background-color: "></div>
-    <div class="category-title" style="background-color: ">
-      Popular Destinations
-    </div>
+    <div class="category-title" style="background-color: ">Popular Destinations</div>
     <div class="item3" style="background-color: "></div>
     <div class="item4" style="background-color: "></div>
     <div class="item5" style="background-color: ">
       <div class="dest-grid">
         <div class="img-con10" style="background-color: ">
-          <img class="img1" src="../assets/img/dest/Dubai.jpg" />
-          <div class="dest-title">Dubai</div>
-        </div>
-        <div class="img-con10" style="background-color: ">
-          <img class="img1" src="../assets/img/dest/London.jpg" />
-          <div class="dest-title">London</div>
+          <img
+            @click="setfilterParams"
+            class="img1"
+            src="../assets/img/dest/Hong Kong.jpg"
+          />
+          <div class="dest-title">Hong-Kong</div>
         </div>
         <div class="img-con10" style="background-color: ">
           <img
             @click="setfilterParams"
             class="img1"
-            src="../assets/img/dest/New York.jpg"
+            src="../assets/img/dest/Barcelona.jpg"
           />
+          <div class="dest-title">Barcelona</div>
+        </div>
+        <div class="img-con10" style="background-color: ">
+          <img @click="setfilterParams" class="img1" src="../assets/img/dest/New York.jpg" />
           <div class="dest-title">New york</div>
         </div>
         <div class="img-con10" style="background-color: ">
-          <img
-            @click="setfilterParams"
-            class="img1"
-            src="../assets/img/dest/Sydney.jpg"
-          />
+          <img @click="setfilterParams" class="img1" src="../assets/img/dest/Sydney.jpg" />
           <div class="dest-title">Sydney</div>
         </div>
       </div>
@@ -48,35 +46,19 @@
     <div class="item5" style="background-color: #">
       <div class="dest-grid">
         <div class="img-con10" style="background-color: ">
-          <img
-            @click="goToExploreCategories"
-            class="img1"
-            src="../assets/img/category/butiqe.jpg"
-          />
+          <img @click="goToExploreCategories" class="img1" src="../assets/img/category/butiqe.jpg" />
           <div class="dest-title">Boutique</div>
         </div>
         <div class="img-con10" style="background-color: ">
-          <img
-            @click="goToExploreCategories"
-            class="img1"
-            src="../assets/img/category/flat.jpg"
-          />
+          <img @click="goToExploreCategories" class="img1" src="../assets/img/category/flat.jpg" />
           <div class="dest-title">Flat</div>
         </div>
         <div class="img-con10" style="background-color: ">
-          <img
-            @click="goToExploreCategories"
-            class="img1"
-            src="../assets/img/category/hotel.jpg"
-          />
+          <img @click="goToExploreCategories" class="img1" src="../assets/img/category/hotel.jpg" />
           <div class="dest-title">Hotel</div>
         </div>
         <div class="img-con10" style="background-color: ">
-          <img
-            @click="goToExploreCategories"
-            class="img1"
-            src="../assets/img/category/garden1.jpg"
-          />
+          <img @click="goToExploreCategories" class="img1" src="../assets/img/category/garden1.jpg" />
           <div class="dest-title">Garden</div>
         </div>
       </div>
