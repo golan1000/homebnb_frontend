@@ -1,49 +1,58 @@
 <template>
   <section class="filter-container">
-    <div class="location input-container" @click="closeAllModals">
-      <label for="locations"
-        >Location
-        <input
-          class="location-input"
-          list="addresses"
-          name="addresses"
-          type="search"
-          placeholder="Where are you going?"
-          v-model="filterBy.address"
-          @change="setfilter"
-          @input="setfilter"
-        />
-      </label>
-      <datalist id="addresses">
-        <option
-          v-for="(addres, idx) in getAddresses"
-          :key="idx"
-          :value="addres"
-        />
-      </datalist>
-    </div>
-    <div class="trip-dates" @click="openModal('calendar')">
-      <div class="check-in input-container">
-        <label
-          >Check-in <input type="text" placeholder="Add dates" disabled
-        /></label>
-      </div>
-      <div class="check-out input-container">
-        <label
-          >Check-out <input type="text" placeholder="Add dates" disabled
-        /></label>
+    <div class="location-input-container" @click="closeAllModals">
+      <div class="location-input-div">
+        <label for="locations" class="location-input-label"
+          >Location
+          <input
+            class="location-input"
+            list="addresses"
+            name="addresses"
+            type="search"
+            placeholder="Where are you going?"
+            v-model="filterBy.address"
+            @change="setfilter"
+            @input="setfilter"
+          />
+        </label>
+        <datalist id="addresses">
+          <option
+            v-for="(addres, idx) in getAddresses"
+            :key="idx"
+            :value="addres"
+          />
+        </datalist>
       </div>
     </div>
-
-    <div class="input-container">
-      <div class="guest-flex guest-container">
-        <div class="guest-flex-column" @click="openModal('guest')">
-          <label>Guests</label>
-          <input :placeholder="sumOfGuests" disabled />
+    <div class="stay-filter-border"></div>
+    <div class="trip-dates-container" @click="openModal('calendar')">
+      <div class="check-in-input-container">
+        <div class="check-in-input-div">
+          <label class="date-input-label"
+            >Check-in <input type="text" placeholder="Add dates" disabled
+          /></label>
         </div>
-
+      </div>
+      <div class="stay-filter-border"></div>
+      <div class="check-out-input-container">
+        <div class="check-out-input-div">
+          <label class="date-input-label"
+            >Check-out <input type="text" placeholder="Add dates" disabled
+          /></label>
+        </div>
+      </div>
+    </div>
+    <div class="stay-filter-border"></div>
+    <div class="guest-search-container">
+      <div class="guest-container" @click="openModal('guest')">
+        <label class="guest-container-label"
+          >Guests
+          <input :placeholder="sumOfGuests" disabled />
+        </label>
+      </div>
+      <div class="search-container">
         <button class="search-btn" @click="setfilterParams">
-          <img src="../assets/search_white_18dp.svg" alt="search Icon" />
+          <img src="../assets/svgexport-3.svg" alt="search Icon" />
         </button>
       </div>
     </div>
@@ -107,9 +116,9 @@
 </template>
 
 <script>
-import { Search } from '@element-plus/icons-vue';
-import { useRefHistory } from '@vueuse/core';
-import { shallowRef } from 'vue';
+import { Search } from "@element-plus/icons-vue";
+import { useRefHistory } from "@vueuse/core";
+import { shallowRef } from "vue";
 export default {
   props: [],
   created() {
@@ -126,7 +135,7 @@ export default {
       // stays: null,
       Search,
       filterBy: {
-        address: '',
+        address: "",
         guests: {
           adults: 0,
           children: 0,
@@ -142,8 +151,8 @@ export default {
   },
   methods: {
     addGuest(guest) {
-      console.log('val', guest);
-      if (guest === 'adult') {
+      console.log("val", guest);
+      if (guest === "adult") {
         this.filterBy.guests.adults++;
         this.setfilter();
       } else {
@@ -152,7 +161,7 @@ export default {
       }
     },
     removeGuest(guest) {
-      if (guest === 'adult') {
+      if (guest === "adult") {
         if (!this.filterBy.guests.adults) return;
         this.filterBy.guests.adults--;
         this.setfilter();
@@ -165,7 +174,7 @@ export default {
 
     setfilter() {
       this.$store.dispatch({
-        type: 'filter',
+        type: "filter",
         filterBy: JSON.parse(JSON.stringify(this.filterBy)),
       });
     },
@@ -178,7 +187,7 @@ export default {
         this.filterBy = JSON.parse(JSON.stringify(filterFromStore));
     },
     openModal(modalType) {
-      if (modalType === 'calendar') {
+      if (modalType === "calendar") {
         this.isCalanderModalOpen = true;
         this.isGuestModalOpen = false;
       } else {
@@ -194,7 +203,7 @@ export default {
   computed: {
     getAddresses() {
       const addresses = [];
-      this.$store.getters.getStays.map(stay => {
+      this.$store.getters.getStays.map((stay) => {
         if (!addresses.includes(stay.address.city))
           addresses.push(stay.address.city);
       });
@@ -203,7 +212,7 @@ export default {
 
     sumOfGuests() {
       const sum = this.filterBy.guests.adults + this.filterBy.guests.children;
-      if (!sum) return 'Add guests';
+      if (!sum) return "Add guests";
       else {
         return `Guests: ${sum}`;
       }

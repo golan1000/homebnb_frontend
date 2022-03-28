@@ -1,6 +1,6 @@
 <template>
-  <section class="app-header-con" :class="{ details: 'stayDetails' }">
-    <div class="app-header">
+  <section class="app-header-con">
+    <div class="app-header" :class="{ details: stayDetails }">
       <router-link to="/" class="logo-con">
         <img class="logo-img" src="../assets/logo.svg" alt="" />
         <div class="logo-txt">Flat-Inn</div>
@@ -39,6 +39,8 @@ export default {
       currPage: null,
     };
   },
+  created() {
+  },
   components: {},
   methods: {
     toggleModal() {
@@ -49,6 +51,13 @@ export default {
     stayDetails() {
       if (this.currPage === "stayDetails") return true;
       else return false;
+    },
+  },
+  watch: {
+    "$store.getters.getCurrPage": {
+      handler() {
+        this.currPage = this.$store.getters.getCurrPage;
+      },
     },
   },
 };

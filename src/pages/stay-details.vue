@@ -15,7 +15,8 @@
     <div class="details-stay-short-info">
       <div>
         <div class="review-address-flex">
-          <img src="../assets/star.svg" alt="" /> <span>&nbsp;&nbsp;{{ getAvarageRate }}&nbsp;&nbsp;</span><span class="details-stay-short-info-address">({{ stayToEdit.reviews.length }} reviews) </span> &nbsp;•&nbsp;&nbsp;<span class="details-stay-short-info-address">&nbsp;{{ getStayCityAdress }} </span>
+          <img src="../assets/star.svg" alt="" />
+          <span>&nbsp;&nbsp;{{ getAvarageRate }}&nbsp;&nbsp;</span><span class="details-stay-short-info-address">({{ stayToEdit.reviews.length }} reviews) </span> &nbsp;•&nbsp;&nbsp;<span class="details-stay-short-info-address">&nbsp;{{ getStayCityAdress }} </span>
         </div>
       </div>
       <div class="details-stay-short-info-right">
@@ -108,7 +109,11 @@
           </div>
           <div class="forth-line-3 forth-line-flex2">
             <div class="amenities-item1">
-              <img class="amenities-img" src="../assets/restaurant.svg" alt="" />
+              <img
+                class="amenities-img"
+                src="../assets/restaurant.svg"
+                alt=""
+              />
               &nbsp;&nbsp;&nbsp;Kitchen
             </div>
             <div class="amenities-item2">
@@ -133,7 +138,9 @@
           <div class="forth-line-1">Amenities</div>
 
           <div class="amenities-grid">
-            <div v-for="(amenity, index) in getAmenities" class="amenities-grid-item" :key="index + Math.random()">{{ amenity }}</div>
+            <div v-for="(amenity, index) in getAmenities" class="amenities-grid-item" :key="index + Math.random()">
+              {{ amenity }}
+            </div>
           </div>
           <button class="amenities-btn">Show all {{ getAmenitiesNum }} amenities</button>
         </div>
@@ -174,8 +181,12 @@
                 </div>
                 <div class="order-form-guest-btn-sec2">
                   <el-icon
-                    ><svg v-if="!IsGuestModalOpen" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-ba633cb8=""><path fill="currentColor" d="M104.704 338.752a64 64 0 0 1 90.496 0l316.8 316.8 316.8-316.8a64 64 0 0 1 90.496 90.496L557.248 791.296a64 64 0 0 1-90.496 0L104.704 429.248a64 64 0 0 1 0-90.496z"></path></svg>
-                    <svg v-if="IsGuestModalOpen" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-ba633cb8=""><path fill="currentColor" d="M104.704 685.248a64 64 0 0 0 90.496 0l316.8-316.8 316.8 316.8a64 64 0 0 0 90.496-90.496L557.248 232.704a64 64 0 0 0-90.496 0L104.704 594.752a64 64 0 0 0 0 90.496z"></path></svg>
+                    ><svg v-if="!IsGuestModalOpen" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-ba633cb8="">
+                      <path fill="currentColor" d="M104.704 338.752a64 64 0 0 1 90.496 0l316.8 316.8 316.8-316.8a64 64 0 0 1 90.496 90.496L557.248 791.296a64 64 0 0 1-90.496 0L104.704 429.248a64 64 0 0 1 0-90.496z"></path>
+                    </svg>
+                    <svg v-if="IsGuestModalOpen" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-ba633cb8="">
+                      <path fill="currentColor" d="M104.704 685.248a64 64 0 0 0 90.496 0l316.8-316.8 316.8 316.8a64 64 0 0 0 90.496-90.496L557.248 232.704a64 64 0 0 0-90.496 0L104.704 594.752a64 64 0 0 0 0 90.496z"></path>
+                    </svg>
                   </el-icon>
                 </div>
               </button>
