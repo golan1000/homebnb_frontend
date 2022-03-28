@@ -100,6 +100,7 @@
   .guests-modal {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     position: absolute;
     line-height: 20px;
     top: 75px;
@@ -175,14 +176,7 @@
     }
   }
   .search-btn:hover {
-    background-image: radial-gradient(
-      rgb(255, 56, 92) 0%,
-      rgb(230, 30, 77) 27.5%,
-      rgb(227, 28, 95) 40%,
-      rgb(215, 4, 102) 57.5%,
-      rgb(189, 30, 89) 75%,
-      rgb(189, 30, 89) 100%
-    );
+    background-image: radial-gradient(rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%);
   }
   input {
     background-color: transparent;
@@ -201,4 +195,58 @@
     font-family: $apple-font;
     color: #717171;
   }
+}
+
+.guests-modal-order {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  line-height: 20px;
+  // top: 70px;
+  width: 22.87rem;
+  background-color: #fff;
+  // background-color: blue;
+  border-radius: 8px;
+  border: 1px solid #dedede;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 18%);
+  z-index: 2;
+  padding: 0.5rem 1.25rem 1.25rem 1.25rem;
+  gap: 20px;
+
+  .close-modal-btn {
+    justify-self: flex-end;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    align-self: flex-end;
+  }
+
+  .modal-txt {
+    display: flex;
+    flex-direction: column;
+  }
+  .modal-btn {
+    display: flex;
+    align-items: center;
+  }
+  span {
+    margin: 0 6px;
+  }
+  .btn {
+    border: 1px solid #b0b0b0;
+    border-radius: 50%;
+    height: 2rem;
+    width: 2rem;
+    color: #717171;
+    text-align: center;
+  }
+  .guest-label {
+    width: 10px;
+    // background-color: green;
+  }
+}
+
+span {
+  margin: 0;
 }
