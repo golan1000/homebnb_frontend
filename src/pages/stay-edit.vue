@@ -55,12 +55,16 @@ export default {
     },
   },
   async created() {
+    this.$store.commit({ type: "setCurrPage", page: "stayEdit" });
     console.log("params=", this.$route.params);
 
     const { id } = this.$route.params;
 
     if (id) {
-      const foundStay = await this.$store.dispatch({ type: "getById", stayId: id });
+      const foundStay = await this.$store.dispatch({
+        type: "getById",
+        stayId: id,
+      });
 
       console.log("foundStay main=", foundStay);
       if (foundStay) {

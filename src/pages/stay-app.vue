@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import stayFilter from '../components/stay-filter.vue';
-import stayList from '../components/stay-list.vue';
+import stayFilter from "../components/stay-filter.vue";
+import stayList from "../components/stay-list.vue";
 export default {
   data() {
     return {
@@ -27,6 +27,7 @@ export default {
   components: { stayFilter, stayList },
   created() {
     this.stays = this.$store.getters.getStays;
+    this.$store.commit({ type: "setCurrPage", page: "stayApp" });
   },
 };
 </script>

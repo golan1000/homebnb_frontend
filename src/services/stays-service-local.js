@@ -5,6 +5,12 @@ import gStays from '../../data/stay.json';
 
 _createStays();
 window.createStays = _createStays;
+window.query = query;
+window.getById = getById;
+window.remove = remove;
+window.save = save;
+window.getEmptyStay = getEmptyStay;
+
 export const stayService = {
   query,
   getById,
@@ -35,7 +41,7 @@ function _filterStays(filterBy, stays) {
   console.log('filterBy', filterBy);
   let filteredStays = [];
   const regex = new RegExp(filterBy.address, 'i');
-  filteredStays = stays.filter(stay => regex.test(stay.address.city));
+  filteredStays = stays.filter((stay) => regex.test(stay.address.city));
   return filteredStays;
 }
 
@@ -68,294 +74,11 @@ async function _createStays() {
 
   console.log('result = ', stays);
   if (!stays || stays.length === 0) {
-    stays = [
-      {
-        _id: '10006546',
-        name: 'Ribeira Charming Duplex',
-        type: 'House',
-        imgUrls: [
-          'https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large',
-          'https://i.picsum.photos/id/978/500/300.jpg?hmac=ZrkqjlzyOdlpS1QIoHdNkp3ADYrKosWBxAoNXF2v2LU',
-        ],
-        price: 80.0,
-        summary: 'Fantastic duplex',
-        capacity: 8,
-        amenities: [
-          'TV',
-          'Wifi',
-          'Kitchen',
-          'Smoking allowed',
-          'Pets allowed',
-          'Cooking basics',
-        ],
-        host: {
-          _id: '51399391',
-          fullname: 'Davit Pok',
-          imgUrl:
-            'https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small',
-        },
-        loc: {
-          country: 'Portugal',
-          countryCode: 'PT',
-          address: 'Porto, Portugal',
-          lat: -8.61308,
-          lng: 41.1413,
-        },
-        reviews: [
-          {
-            id: 'madeId',
-            txt: 'Very helpful hosts. Cooked traditional...',
-            rate: 4,
-            by: {
-              _id: 'u102',
-              fullname: 'user2',
-              imgUrl: '/img/img2.jpg',
-            },
-          },
-        ],
-        likedByUsers: ['mini-user'], // for user-wishlist : use $in
-      },
-      {
-        _id: '10006542',
-        name: 'Ribeira Charming Duplex',
-        type: 'House',
-        imgUrls: [
-          'https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large',
-          'https://i.picsum.photos/id/978/500/300.jpg?hmac=ZrkqjlzyOdlpS1QIoHdNkp3ADYrKosWBxAoNXF2v2LU',
-        ],
-        price: 80.0,
-        summary: 'Fantastic duplex',
-        capacity: 8,
-        amenities: [
-          'TV',
-          'Wifi',
-          'Kitchen',
-          'Smoking allowed',
-          'Pets allowed',
-          'Cooking basics',
-        ],
-        host: {
-          _id: '51399391',
-          fullname: 'Davit Pok',
-          imgUrl:
-            'https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small',
-        },
-        loc: {
-          country: 'Israel',
-          countryCode: 'IL',
-          address: 'Tel Aviv, Israel',
-          lat: 32.109333,
-          lng: 34.855499,
-        },
-        reviews: [
-          {
-            id: 'madeId',
-            txt: 'Very helpful hosts. Cooked traditional...',
-            rate: 3,
-            by: {
-              _id: 'u102',
-              fullname: 'user2',
-              imgUrl: '/img/img2.jpg',
-            },
-          },
-          {
-            id: 'madeId',
-            txt: 'Very helpful hosts. Cooked traditional...',
-            rate: 2,
-            by: {
-              _id: 'u102',
-              fullname: 'user2',
-              imgUrl: '/img/img2.jpg',
-            },
-          },
-        ],
-        likedByUsers: ['mini-user'], // for user-wishlist : use $in
-      },
-      {
-        _id: '10006516',
-        name: 'Ribeira Charming Duplex',
-        type: 'House',
-        imgUrls: [
-          'https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large',
-          'https://i.picsum.photos/id/680/500/300.jpg?hmac=EjmiHmKX6pWvWYjwlcAJFaD0RcFqbRy2jlYr0CY3SeY',
-        ],
-        price: 80.0,
-        summary: 'Fantastic duplex',
-        capacity: 8,
-        amenities: [
-          'TV',
-          'Wifi',
-          'Kitchen',
-          'Smoking allowed',
-          'Pets allowed',
-          'Cooking basics',
-        ],
-        host: {
-          _id: '51399391',
-          fullname: 'Davit Pok',
-          imgUrl:
-            'https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small',
-        },
-        loc: {
-          country: 'Portugal',
-          countryCode: 'PT',
-          address: 'Porto, Portugal',
-          lat: -8.61308,
-          lng: 41.1413,
-        },
-        reviews: [
-          {
-            id: 'madeId',
-            txt: 'Very helpful hosts. Cooked traditional...',
-            rate: 4,
-            by: {
-              _id: 'u102',
-              fullname: 'user2',
-              imgUrl: '/img/img2.jpg',
-            },
-          },
-        ],
-        likedByUsers: ['mini-user'], // for user-wishlist : use $in
-      },
-      {
-        _id: '10006516',
-        name: 'Ribeira Charming Duplex',
-        type: 'House',
-        imgUrls: [
-          'https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large',
-          'https://i.picsum.photos/id/37/500/300.jpg?hmac=jKTewF_MIRJax9XsRXV86HCgzQnexu4WP-nSRf-5mHo',
-        ],
-        price: 80.0,
-        summary: 'Fantastic duplex',
-        capacity: 8,
-        amenities: [
-          'TV',
-          'Wifi',
-          'Kitchen',
-          'Smoking allowed',
-          'Pets allowed',
-          'Cooking basics',
-        ],
-        host: {
-          _id: '51399391',
-          fullname: 'Davit Pok',
-          imgUrl:
-            'https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small',
-        },
-        loc: {
-          country: 'Portugal',
-          countryCode: 'PT',
-          address: 'Porto, Portugal',
-          lat: -8.61308,
-          lng: 41.1413,
-        },
-        reviews: [
-          {
-            id: 'madeId',
-            txt: 'Very helpful hosts. Cooked traditional...',
-            rate: 4,
-            by: {
-              _id: 'u102',
-              fullname: 'user2',
-              imgUrl: '/img/img2.jpg',
-            },
-          },
-        ],
-        likedByUsers: ['mini-user'], // for user-wishlist : use $in
-      },
-      {
-        _id: '10006516',
-        name: 'Ribeira Charming Duplex',
-        type: 'House',
-        imgUrls: [
-          'https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large',
-          'https://i.picsum.photos/id/162/500/300.jpg?hmac=5PQIOB3s_blPaD49iA9Q_PhuWLphROf1kbGQDQ1VQV0',
-        ],
-        price: 80.0,
-        summary: 'Fantastic duplex',
-        capacity: 8,
-        amenities: [
-          'TV',
-          'Wifi',
-          'Kitchen',
-          'Smoking allowed',
-          'Pets allowed',
-          'Cooking basics',
-        ],
-        host: {
-          _id: '51399391',
-          fullname: 'Davit Pok',
-          imgUrl:
-            'https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small',
-        },
-        loc: {
-          country: 'Portugal',
-          countryCode: 'PT',
-          address: 'Porto, Portugal',
-          lat: -8.61308,
-          lng: 41.1413,
-        },
-        reviews: [
-          {
-            id: 'madeId',
-            txt: 'Very helpful hosts. Cooked traditional...',
-            rate: 4,
-            by: {
-              _id: 'u102',
-              fullname: 'user2',
-              imgUrl: '/img/img2.jpg',
-            },
-          },
-        ],
-        likedByUsers: ['mini-user'], // for user-wishlist : use $in
-      },
-      {
-        _id: '10006516',
-        name: 'Ribeira Charming Duplex',
-        type: 'House',
-        imgUrls: [
-          'https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large',
-          'https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large',
-        ],
-        price: 80.0,
-        summary: 'Fantastic duplex',
-        capacity: 8,
-        amenities: [
-          'TV',
-          'Wifi',
-          'Kitchen',
-          'Smoking allowed',
-          'Pets allowed',
-          'Cooking basics',
-        ],
-        host: {
-          _id: '51399391',
-          fullname: 'Davit Pok',
-          imgUrl:
-            'https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small',
-        },
-        loc: {
-          country: 'Portugal',
-          countryCode: 'PT',
-          address: 'Porto, Portugal',
-          lat: -8.61308,
-          lng: 41.1413,
-        },
-        reviews: [
-          {
-            id: 'madeId',
-            txt: 'Very helpful hosts. Cooked traditional...',
-            rate: 4,
-            by: {
-              _id: 'u102',
-              fullname: 'user2',
-              imgUrl: '/img/img2.jpg',
-            },
-          },
-        ],
-        likedByUsers: ['mini-user'], // for user-wishlist : use $in
-      },
-    ];
+    console.log('there are no stays!!!!');
+    stays = gStays;
+
+    console.log('new  staysss=', stays);
     storageService._save(KEY, stays);
   }
+  storageService._save(KEY, stays);
 }

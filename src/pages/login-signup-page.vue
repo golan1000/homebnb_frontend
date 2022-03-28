@@ -66,6 +66,9 @@ export default {
       this.isLogin = !this.isLogin;
     },
   },
+  created() {
+    this.$store.commit({ type: "setCurrPage", page: "loginSignup" });
+  },
 };
 </script>
 

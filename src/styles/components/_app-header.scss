@@ -5,7 +5,7 @@
   z-index: 10;
 
   .details {
-    background-color: #ff385c;
+    width: 1280px;
   }
 
   .app-header {
@@ -15,6 +15,7 @@
     height: 80px;
     padding-left: 80px;
     padding-right: 80px;
+    margin: auto;
 
     @media (max-width: 1127px) {
       padding-left: 40px;

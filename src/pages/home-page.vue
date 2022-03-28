@@ -3,29 +3,24 @@
     <div class="filter-cont">
       <stay-filter></stay-filter>
     </div>
+    <div class="con-sentence">
+      <div class="sentence">Let your curiosity do the booking</div>
+    </div>
   </div>
   <!-- <el-button type="primary">Primary</el-button> -->
   <div class="destenations">
     <div class="item1" style="background-color: "></div>
-    <div class="category-title" style="background-color: ">Popular Destinations</div>
+    <div class="popular-title" style="background-color: ">Popular Destinations</div>
     <div class="item3" style="background-color: "></div>
     <div class="item4" style="background-color: "></div>
     <div class="item5" style="background-color: ">
       <div class="dest-grid">
         <div class="img-con10" style="background-color: ">
-          <img
-            @click="setfilterParams"
-            class="img1"
-            src="../assets/img/dest/Hong Kong.jpg"
-          />
+          <img @click="setfilterParams" class="img1" src="../assets/img/dest/Hong Kong.jpg" />
           <div class="dest-title">Hong-Kong</div>
         </div>
         <div class="img-con10" style="background-color: ">
-          <img
-            @click="setfilterParams"
-            class="img1"
-            src="../assets/img/dest/Barcelona.jpg"
-          />
+          <img @click="setfilterParams" class="img1" src="../assets/img/dest/Barcelona.jpg" />
           <div class="dest-title">Barcelona</div>
         </div>
         <div class="img-con10" style="background-color: ">
@@ -75,28 +70,29 @@
 </template>
 
 <script>
-import stayFilter from '../components/stay-filter.vue';
+import stayFilter from "../components/stay-filter.vue";
 export default {
   props: [],
   emits: [],
 
   created() {
-    console.log('userrrrr=', this.$store.getters.getUser);
+    this.$store.commit({ type: "setCurrPage", page: "homePage" });
+    console.log("userrrrr=", this.$store.getters.getUser);
   },
   components: {
     stayFilter,
   },
   data() {
     return {
-      var1: 'bla',
+      var1: "bla",
     };
   },
   methods: {
     // Tal
     setfilterParams(imgSrc) {
       const regex = /[^/\\]+(?:jpg|jpeg|gif|png)/gi;
-      var filename = imgSrc.target.src.match(regex).join('');
-      const idx = filename.indexOf('.');
+      var filename = imgSrc.target.src.match(regex).join("");
+      const idx = filename.indexOf(".");
       var cityName = filename.substring(0, idx);
 
       this.$router.push(`/stay?address=${cityName.trim()}`);
@@ -109,7 +105,7 @@ export default {
   },
   computed: {
     getCom() {
-      return 'blabla';
+      return "blabla";
     },
   },
 };
