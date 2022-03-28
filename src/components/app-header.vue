@@ -8,7 +8,7 @@
       <div class="main-nav">
         <div class="main-nav-links">
           <router-link class="menu-link" to="/stay">Explore</router-link>
-          <router-link class="menu-link main-nav-host" to="/stay"
+          <router-link class="menu-link main-nav-host" to="/dashboard"
             >Become a Host</router-link
           >
         </div>
@@ -39,8 +39,7 @@ export default {
       currPage: null,
     };
   },
-  created() {
-  },
+  created() {},
   components: {},
   methods: {
     toggleModal() {

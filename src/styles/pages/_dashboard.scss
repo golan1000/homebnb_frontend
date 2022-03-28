@@ -1,0 +1,44 @@
+.dashboard-con {
+  height: 81vh;
+  margin-top: 31px;
+
+  .dashboard {
+    min-height: 84vh;
+    padding-left: 80px;
+    padding-right: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .dashboard-top-section {
+    display: flex;
+    justify-content: space-between;
+    height: 50%;
+
+    .dashboard-summary {
+      width: 40%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+
+      .dashboard-summary-stays {
+        height: 50%;
+      }
+      .dashboard-summary-orders {
+        height: 50%;
+      }
+    }
+
+    .dashboard-data-con {
+      display: flex;
+      width: 60%;
+      justify-content: space-around;
+      height: 270px;
+    }
+  }
+
+  .dashboard-bottom-section {
+    flex-grow: 1;
+  }
+}
