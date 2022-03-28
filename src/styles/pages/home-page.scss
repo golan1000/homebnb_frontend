@@ -47,7 +47,7 @@
 }
 
 .destenations {
-  margin-top: 100px;
+  margin-top: 109px;
   display: grid;
   grid-template-rows: 100px max-content 100px max-content;
   grid-template-columns: 80px 1fr 80px;
@@ -60,9 +60,11 @@
   }
   .category-title {
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
     padding-bottom: 25px;
-    font-size: 25px;
+    font-size: 42px;
+    font-weight: 400;
+    font-family: airbnb-medium;
   }
 }
 .dest-con1 {
