@@ -113,11 +113,12 @@ import { shallowRef } from 'vue';
 export default {
   props: [],
   created() {
-    // const { address } = this.$route.query;
-    // if (address) {
-    //   this.filterBy.address = address;
-    // }
-    this.getFilters();
+    const { address } = this.$route.query;
+    if (address) {
+      this.filterBy.address = address;
+    }
+    this.setfilter();
+    // this.getFilters();
   },
 
   data() {

@@ -1,6 +1,6 @@
 <template>
   <h4 v-if="stays.length" class="stay-list-title">
-    {{ stays.length }} stays in {{ stays[0]?.loc.address }}
+    {{ stays.length }} stays in {{ stays[0]?.address.city }}
   </h4>
   <h4 v-else>No match found</h4>
   <br />
@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import stayPreview from "./stay-preview.vue";
-import expoloreBtns from "./explore-btns.vue";
+import stayPreview from './stay-preview.vue';
+import expoloreBtns from './explore-btns.vue';
 
 export default {
   props: {
