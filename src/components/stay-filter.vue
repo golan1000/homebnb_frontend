@@ -25,12 +25,14 @@
     <div class="trip-dates" @click="openModal('calendar')">
       <div class="check-in input-container">
         <label
-          >Check-in <input type="text" placeholder="Add dates" disabled
+          >Check-in
+          <input type="text" :placeholder="filterBy.range.start" disabled
         /></label>
       </div>
       <div class="check-out input-container">
         <label
-          >Check-out <input type="text" placeholder="Add dates" disabled
+          >Check-out
+          <input type="text" :placeholder="filterBy.range.end" disabled
         /></label>
       </div>
     </div>
@@ -91,12 +93,13 @@
         X
       </div>
       <v-date-picker
-        v-model="filterBy.date"
-        :value="null"
+        v-model="filterBy.range"
         color="red"
         is-range
         rows="1"
         columns="2"
+        :mask="mask.data"
+        :min-date="new Date()"
       />
     </div>
 
@@ -136,6 +139,10 @@ export default {
           end: new Date(),
         },
       },
+      mask: {
+        data: ['L', 'YYYY-MM-DD', 'YYYY/MM/DD'],
+      },
+
       isGuestModalOpen: false,
       isCalanderModalOpen: false,
     };
@@ -207,6 +214,10 @@ export default {
       else {
         return `Guests: ${sum}`;
       }
+    },
+    dateForDisplay(timestamp) {
+      console.log('timestamp', timestamp);
+      return timestamp.toDateString().split(' ').slice(1, 3).join('/');
     },
   },
 };

@@ -1,26 +1,27 @@
 <template>
-  <h1>This is an login signup page</h1>
-
-  <div class="login" v-if="isLogin">
-    <pre>
+  <section class="main-login-layout">
+    <header class="login-header">Log in or sign up</header>
+    <div class="login" v-if="isLogin">
+      <h3 class="form-title">Welcome to Flat-inn</h3>
+      <pre>
         <form>
-          <span class="form-title">Login</span>
-          <label>Username:</label>
-          <input type="text" v-model="login.username" ref="username-login" /><br />
-          <label>Password:</label>
-          <input type="text" v-model="login.password" ref="password-login" /><br />
+          <!-- <span class="form-title">Login</span> -->
+          <!-- <label>Username:</label> -->
+          <input type="text" v-model="login.username" ref="username-login" placeholder="Email"/><br />
+          <!-- <label>Password:</label> -->
+          <input type="text" v-model="login.password" ref="password-login" placeholder="Password" /><br />
           <button @click.prevent="signup">Login</button>
           <span>not registered?</span><img class="login-form-img" src="../../img/signup.png"  @click="toggleMode"/>
         </form>
         </pre>
-  </div>
+    </div>
 
-  <br />
+    <br />
 
-  <div class="signup" v-if="!isLogin">
-    <pre>
+    <div class="signup" v-if="!isLogin">
+      <pre>
       <form>
-          <span class="form-title">Sign-up</span>
+          <!-- <span class="form-title">Sign-up</span> -->
           <label>Username:</label>
           <input type="text"  v-model="signup.username" ref="username-signup" /><br />
           <label>Password:</label>
@@ -33,12 +34,13 @@
           <span>already registered?</span><img class="login-form-img" src="../../img/login.png" @click="toggleMode" />
         </form>
     </pre>
-  </div>
-  {{ login }}
-  <br />
-  {{ username }}
-  <br />
-  {{ signup }}
+    </div>
+    {{ login }}
+    <br />
+    {{ username }}
+    <br />
+    {{ signup }}
+  </section>
 </template>
 
 <script>
@@ -67,14 +69,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.form-title {
-  font-size: 30px;
-  margin-bottom: 20px;
-}
-.login-form-img {
-  width: 100px;
-  height: 40px;
-  cursor: pointer;
-}
-</style>
+<style scoped></style>

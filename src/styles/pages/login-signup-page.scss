@@ -1,0 +1,40 @@
+.form-title {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+.login-form-img {
+    width: 100px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.main-login-layout {
+    width: 570px;
+    height: 684px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    border: 1px solid rgb(235, 235, 235);
+    border-radius: 10px;
+
+    .login-header {
+        font-family: airbnb-medium;
+        justify-content: center;
+        height: 64px;
+        width: inherit;
+        // background-color: blue;
+        border-bottom: 1px solid rgb(235, 235, 235);
+        display: flex;
+        align-items: center;
+    }
+    .form-title {
+        width: 90%;
+        background-color: lightgreen;
+        font-size: 22px;
+        line-height: 26px;
+        color: rgb(34, 34, 34);
+        font-weight: 600;
+        margin-top: 37px;
+        margin-bottom: 33px;
+    }
+}
