@@ -35,12 +35,14 @@ function _filterStays(filterBy, stays) {
   console.log('filterBy', filterBy);
   let filteredStays = [];
   const regex = new RegExp(filterBy.address, 'i');
-  filteredStays = stays.filter(stay => regex.test(stay.address.city));
+  filteredStays = stays.filter((stay) => regex.test(stay.address.city));
   return filteredStays;
 }
 
 function getById(id) {
-  return storageService.get(KEY, id);
+  const idx = gStays.findIndex((stay) => stay._id === id);
+  return JSON.parse(JSON.stringify(gStays[idx]));
+  // return storageService.get(KEY, id);
 }
 
 function remove(id) {

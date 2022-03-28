@@ -22,7 +22,7 @@ export default {
       return state.filterBy;
     },
     getCurrPage(state) {
-      return this.currPage;
+      return state.currPage;
     },
   },
   mutations: {
