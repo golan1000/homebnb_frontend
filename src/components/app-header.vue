@@ -1,5 +1,5 @@
 <template>
-  <section class="app-header-con">
+  <section class="app-header-con" :class="{ details: 'stayDetails' }">
     <div class="app-header">
       <router-link to="/" class="logo-con">
         <img class="logo-img" src="../assets/logo.svg" alt="" />
@@ -36,12 +36,19 @@ export default {
   data() {
     return {
       isOpen: false,
+      currPage: null,
     };
   },
   components: {},
   methods: {
     toggleModal() {
       this.isOpen = !this.isOpen;
+    },
+  },
+  computed: {
+    stayDetails() {
+      if (this.currPage === "stayDetails") return true;
+      else return false;
     },
   },
 };

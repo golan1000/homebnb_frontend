@@ -1,8 +1,5 @@
 <template>
   <li class="stay-preview" @click="goToDetails">
-    <!-- <div class="stay-preview-img-con">
-      <img class="stay-preview-img" :src="stay.imgUrls[0]" alt="" />
-    </div> -->
     <div class="block">
       <el-carousel
         :autoplay="false"
@@ -56,10 +53,7 @@ export default {
   data() {
     return {};
   },
-  created() {
-    console.log(this.stay.imgUrls[0]);
-    console.log(this.stay.imgUrls[1]);
-  },
+  created() {},
   components: {},
   methods: {
     goToDetails() {
@@ -71,18 +65,9 @@ export default {
     },
   },
   computed: {
-    // getAvgRate() {
-    //   const sumRates = this.stay.reviews.reduce(
-    //     (previousValue, currentValue) => previousValue + currentValue.rate,
-    //     0
-    //   );
-    //   return sumRates / this.stay.reviews.length;
-    // },
     edittextLength() {
       var editedSubject = this.stay.summary.substr(0, 45);
-      // if (this.mail.subject.length >= 16) {
       editedSubject += "..";
-      // }
       return editedSubject;
     },
   },

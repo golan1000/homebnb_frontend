@@ -619,6 +619,7 @@ export default {
     },
   },
   async created() {
+    this.$store.commit({type: 'setCurrPage', page: 'stayDetails'});
     console.log('params=', this.$route.params);
 
     const { id } = this.$route.params;
