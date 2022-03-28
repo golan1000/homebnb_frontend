@@ -133,7 +133,7 @@
           <div class="forth-line-1">Amenities</div>
 
           <div class="amenities-grid">
-            <div v-for="amenity in getAmenities" class="amenities-grid-item">{{ amenity }}</div>
+            <div v-for="(amenity, index) in getAmenities" class="amenities-grid-item" :key="index + Math.random()">{{ amenity }}</div>
           </div>
           <button class="amenities-btn">Show all {{ getAmenitiesNum }} amenities</button>
         </div>
@@ -289,7 +289,7 @@
       <div class="fifth-line-5">
         <div class="review-users-con">
           <div class="review-users-grid">
-            <div v-for="review in getReviews" class="review1-con review-layout">
+            <div v-for="(review, index) in getReviews" class="review1-con review-layout" :key="index + Math.random()">
               <div class="review-user-details">
                 <div class="avatar1">
                   <el-avatar :size="57" :src="getRandProfilePic" />
