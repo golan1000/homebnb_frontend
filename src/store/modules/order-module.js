@@ -2,5 +2,9 @@ export default {
   state: {},
   getters: {},
   mutations: {},
-  actions: {},
+  actions: {
+    submitOrder(context, { order }) {
+      console.log('action ---- submitOrder=', order)
+    },
+  },
 }
