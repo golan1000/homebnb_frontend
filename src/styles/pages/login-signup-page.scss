@@ -1,7 +1,7 @@
-.form-title {
-    font-size: 30px;
-    margin-bottom: 20px;
-}
+// .form-title {
+//     font-size: 30px;
+//     margin-bottom: 20px;
+// }
 .login-form-img {
     width: 100px;
     height: 40px;
@@ -9,32 +9,105 @@
 }
 
 .main-login-layout {
-    width: 570px;
-    height: 684px;
+    width: 35.625rem;
+    height: 42.75rem;
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
+    margin: 13px auto;
     border: 1px solid rgb(235, 235, 235);
     border-radius: 10px;
 
-    .login-header {
+    .details {
+        width: 35.5rem;
+        height: 38.625rem;
+        padding: 24px;
+    }
+
+    .login-signup-header {
         font-family: airbnb-medium;
         justify-content: center;
-        height: 64px;
+        height: 4rem;
         width: inherit;
         // background-color: blue;
         border-bottom: 1px solid rgb(235, 235, 235);
         display: flex;
         align-items: center;
     }
+    .form-title-container {
+        margin-top: 8px;
+        margin-bottom: 24px;
+        // background-color: lightgreen;
+    }
     .form-title {
         width: 90%;
-        background-color: lightgreen;
         font-size: 22px;
         line-height: 26px;
         color: rgb(34, 34, 34);
         font-weight: 600;
-        margin-top: 37px;
-        margin-bottom: 33px;
+    }
+    .input-container {
+        width: 100%;
+        height: 3.5rem;
+        border: 1px solid #222;
+        // border-bottom: none;
+        padding-left: 10px;
+    }
+
+    .top-input {
+        border-bottom: none;
+        border-start-start-radius: 12px;
+        border-start-end-radius: 12px;
+    }
+    .bottom-input {
+        border-bottom-right-radius: 11px;
+        border-bottom-left-radius: 11px;
+    }
+    input {
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+        outline: none;
+        font-size: 16px;
+        color: #717171;
+        padding-left: 0px;
+        padding-top: 3px;
+        width: 100%;
+        height: 100%;
+    }
+    .txt {
+        border: none;
+        p {
+            font-size: 12px;
+            margin-top: 10px;
+            span {
+                font-family: airbnb-bold;
+                text-decoration-line: underline;
+                cursor: pointer;
+                text-indent: 3px;
+            }
+        }
+    }
+    .btn-container {
+        // background-color: green;
+        padding: 0;
+        border: none;
+    }
+    button {
+        width: 100%;
+        height: 100%;
+        background-color: rgb(227, 28, 95);
+        cursor: pointer;
+        border-radius: 11px;
+        color: whitesmoke;
+        font-family: airbnb-medium;
+        font-size: 16px;
+        letter-spacing: 0.5px;
+    }
+    .no-border-top-bottom {
+        border-top: none;
+        border-bottom: none;
+    }
+    .no-border-top {
+        border-top: none;
     }
 }

@@ -19,7 +19,9 @@
             <img class="user-img" src="../assets/user.png" alt="" />
           </button>
           <div v-if="isOpen" class="menu-btn-modal">
-            <router-link class="menu-modal-link" to="/stay">Log in</router-link>
+            <router-link class="menu-modal-link" to="/signup"
+              >Log in</router-link
+            >
             <router-link class="menu-modal-link" to="/stay"
               >Host your home</router-link
             >
@@ -39,8 +41,7 @@ export default {
       currPage: null,
     };
   },
-  created() {
-  },
+  created() {},
   components: {},
   methods: {
     toggleModal() {
@@ -49,12 +50,12 @@ export default {
   },
   computed: {
     stayDetails() {
-      if (this.currPage === "stayDetails") return true;
+      if (this.currPage === 'stayDetails') return true;
       else return false;
     },
   },
   watch: {
-    "$store.getters.getCurrPage": {
+    '$store.getters.getCurrPage': {
       handler() {
         this.currPage = this.$store.getters.getCurrPage;
       },
@@ -62,4 +63,3 @@ export default {
   },
 };
 </script>
-
