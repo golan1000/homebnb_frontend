@@ -1,21 +1,12 @@
-// .form-title {
-//     font-size: 30px;
-//     margin-bottom: 20px;
-// }
-.login-form-img {
-    width: 100px;
-    height: 40px;
-    cursor: pointer;
-}
-
 .main-login-layout {
     width: 35.625rem;
     height: 42.75rem;
     display: flex;
     flex-direction: column;
-    margin: 13px auto;
+    margin: 18px auto;
     border: 1px solid rgb(235, 235, 235);
     border-radius: 10px;
+    box-shadow: rgb(0 0 0 / 8%) 0px 1px 12px;
 
     .details {
         width: 35.5rem;
