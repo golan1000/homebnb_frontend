@@ -1,73 +1,101 @@
 <template>
   <section class="main-login-layout">
-    <header class="login-header">Log in or sign up</header>
-    <div class="login" v-if="isLogin">
-      <h3 class="form-title">Welcome to Flat-inn</h3>
-      <pre>
+    <header class="login-signup-header">Log in or sign up</header>
+    <section class="details">
+      <div class="login">
+        <div class="form-title-container">
+          <h3 class="form-title">Welcome to Flat-inn</h3>
+        </div>
         <form>
-          <!-- <span class="form-title">Login</span> -->
-          <!-- <label>Username:</label> -->
-          <input type="text" v-model="login.username" ref="username-login" placeholder="Email"/><br />
-          <!-- <label>Password:</label> -->
-          <input type="text" v-model="login.password" ref="password-login" placeholder="Password" /><br />
-          <button @click.prevent="signup">Login</button>
-          <span>not registered?</span><img class="login-form-img" src="../../img/signup.png"  @click="toggleMode"/>
+          <!-- Sign-up -->
+          <div
+            v-if="!isLogin"
+            class="input-container top-input top-input"
+            :class="{ 'top-input': !isLogin }"
+          >
+            <input
+              type="text"
+              v-model="fullname"
+              ref="fullname"
+              placeholder="Fullname"
+              required
+            />
+          </div>
+          <div class="input-container" :class="{ 'top-input': isLogin }">
+            <input
+              type="text"
+              v-model="username"
+              ref="username"
+              placeholder="Username"
+              required
+            />
+          </div>
+          <div
+            class="input-container bottom-input"
+            :class="{ 'no-border-top': !isLogin }"
+          >
+            <input
+              type="password"
+              v-model="password"
+              ref="password"
+              placeholder="Password"
+              required
+            />
+          </div>
+          <div class="input-container txt">
+            <p>
+              We’ll call or text you to confirm your number. Standard message
+              and data rates apply. <span>Privacy Policy</span>
+            </p>
+            <!-- Login -->
+          </div>
+          <div v-if="isLogin" class="input-container btn-container">
+            <button @click.prevent="onLogin">Login</button>
+          </div>
+          <div v-if="isLogin" class="input-container txt">
+            <p>
+              new to Flatinn?
+              <span @click="toggleMode">Create an account </span>
+            </p>
+          </div>
+          <!-- Sign-up -->
+          <div v-if="!isLogin" class="input-container btn-container">
+            <button @click.prevent="onSignup">Signup</button>
+            <div v-if="!isLogin" class="input-container txt">
+              <p>
+                already registered?
+                <span @click="toggleMode">Sign-in</span>
+              </p>
+            </div>
+          </div>
         </form>
-        </pre>
-    </div>
-
-    <br />
-
-    <div class="signup" v-if="!isLogin">
-      <pre>
-      <form>
-          <!-- <span class="form-title">Sign-up</span> -->
-          <label>Username:</label>
-          <input type="text"  v-model="signup.username" ref="username-signup" /><br />
-          <label>Password:</label>
-          <input type="text" v-model="signup.password" ref="password-signup" /><br />
-          <label>Email:</label>
-          <input type="text"  v-model="signup.email" ref="email-signup" /><br />
-          <label>Fullname:</label>
-          <input type="text"  v-model="signup.fullname" ref="fullname-signup" /><br />
-          <button @click.prevent="signup">Signup</button>
-          <span>already registered?</span><img class="login-form-img" src="../../img/login.png" @click="toggleMode" />
-        </form>
-    </pre>
-    </div>
-    {{ login }}
-    <br />
-    {{ username }}
-    <br />
-    {{ signup }}
+      </div>
+    </section>
   </section>
 </template>
 
 <script>
 export default {
+  created() {
+    this.$store.commit({ type: 'setCurrPage', page: 'loginSignup' });
+  },
   data() {
     return {
       isLogin: true,
+      fullname: null,
       username: null,
-      login: {
-        username: null,
-        password: null,
-      },
-      signup: {
-        username: null,
-        password: null,
-        email: null,
-        fullname: null,
-      },
+      password: null,
     };
   },
   methods: {
     toggleMode() {
       this.isLogin = !this.isLogin;
     },
-  },
-  created() {
-    this.$store.commit({ type: "setCurrPage", page: "loginSignup" });
+    onSignup() {},
+    onLogin() {
+      console.log('this.username', this.username);
+      console.log('this.password', this.password);
+    },
   },
 };
 </script>
