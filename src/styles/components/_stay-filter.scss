@@ -1,18 +1,16 @@
 .filter-container {
-  max-width: 53.125rem;
-  height: 4.43rem;
+  width: 848px;
+  height: 66px;
   border: 1px solid #dddddd;
-  border-radius: 2.5em;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 5%);
+  border-radius: 32px;
+  box-shadow: rgb(0 0 0 / 8%) 0px 1px 12px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffff;
+  background-color: #ffffff;
   top: 4.687rem;
-  transform-origin: top;
-  // position: absolute;
-  transition: all 0.2s;
+  color: #222222;
 
   button {
     cursor: pointer;
@@ -24,9 +22,9 @@
   }
 
   .input-container {
-    height: 4rem;
+    height: 66px;
     border-radius: 2.5rem;
-    padding: 0.78rem 0.78rem 0.78rem 1.56rem;
+    padding: 14px 32px;
     display: flex;
     min-width: 3.125rem;
 

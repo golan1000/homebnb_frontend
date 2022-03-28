@@ -4,6 +4,10 @@
   top: 0;
   z-index: 10;
 
+  .details {
+    background-color: #ff385c;
+  }
+
   .app-header {
     display: flex;
     justify-content: space-between;

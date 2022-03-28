@@ -7,7 +7,9 @@
   <!-- <el-button type="primary">Primary</el-button> -->
   <div class="destenations">
     <div class="item1" style="background-color: "></div>
-    <div class="category-title" style="background-color: ">Popular Destinations</div>
+    <div class="category-title" style="background-color: ">
+      Popular Destinations
+    </div>
     <div class="item3" style="background-color: "></div>
     <div class="item4" style="background-color: "></div>
     <div class="item5" style="background-color: ">
@@ -21,11 +23,19 @@
           <div class="dest-title">London</div>
         </div>
         <div class="img-con10" style="background-color: ">
-          <img class="img1" src="../assets/img/dest/NY.jpg" />
+          <img
+            @click="setfilterParams"
+            class="img1"
+            src="../assets/img/dest/New York.jpg"
+          />
           <div class="dest-title">New york</div>
         </div>
         <div class="img-con10" style="background-color: ">
-          <img class="img1" src="../assets/img/dest/Sydny.jpg" />
+          <img
+            @click="setfilterParams"
+            class="img1"
+            src="../assets/img/dest/Sydney.jpg"
+          />
           <div class="dest-title">Sydney</div>
         </div>
       </div>
@@ -38,19 +48,35 @@
     <div class="item5" style="background-color: #">
       <div class="dest-grid">
         <div class="img-con10" style="background-color: ">
-          <img class="img1" src="../assets/img/category/butiqe.jpg" />
+          <img
+            @click="goToExploreCategories"
+            class="img1"
+            src="../assets/img/category/butiqe.jpg"
+          />
           <div class="dest-title">Boutique</div>
         </div>
         <div class="img-con10" style="background-color: ">
-          <img class="img1" src="../assets/img/category/flat.jpg" />
+          <img
+            @click="goToExploreCategories"
+            class="img1"
+            src="../assets/img/category/flat.jpg"
+          />
           <div class="dest-title">Flat</div>
         </div>
         <div class="img-con10" style="background-color: ">
-          <img class="img1" src="../assets/img/category/hotel.jpg" />
+          <img
+            @click="goToExploreCategories"
+            class="img1"
+            src="../assets/img/category/hotel.jpg"
+          />
           <div class="dest-title">Hotel</div>
         </div>
         <div class="img-con10" style="background-color: ">
-          <img class="img1" src="../assets/img/category/garden1.jpg" />
+          <img
+            @click="goToExploreCategories"
+            class="img1"
+            src="../assets/img/category/garden1.jpg"
+          />
           <div class="dest-title">Garden</div>
         </div>
       </div>
@@ -84,9 +110,19 @@ export default {
     };
   },
   methods: {
-    doThing() {
-      this.var1 = 'bla';
-      return 'blabla';
+    // Tal
+    setfilterParams(imgSrc) {
+      const regex = /[^/\\]+(?:jpg|jpeg|gif|png)/gi;
+      var filename = imgSrc.target.src.match(regex).join('');
+      const idx = filename.indexOf('.');
+      var cityName = filename.substring(0, idx);
+
+      this.$router.push(`/stay?address=${cityName.trim()}`);
+    },
+    // Tal
+    // When we put real room type we can change.
+    goToExploreCategories() {
+      this.$router.push(`/stay`);
     },
   },
   computed: {

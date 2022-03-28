@@ -1,8 +1,5 @@
 <template>
   <li class="stay-preview" @click="goToDetails">
-    <!-- <div class="stay-preview-img-con">
-      <img class="stay-preview-img" :src="stay.imgUrls[0]" alt="" />
-    </div> -->
     <div class="block">
       <el-carousel
         :autoplay="false"
@@ -11,10 +8,10 @@
         height="262.25px"
       >
         <el-carousel-item
-          v-for="(imgUrl, index) in stay.imgUrls"
+          v-for="(imgUrl, index) in getImgUrl()"
           :key="`img-${index}`"
         >
-          <img class="stay-preview-img" :src="imgUrl" alt="" />
+          <img class="stay-preview-img" :src="imgUrl" alt="stay-preview-img" />
         </el-carousel-item>
         <div class="like-stay">
           <img class="like-stay-img" src="../assets/like.svg" alt="" />
@@ -33,7 +30,7 @@
         <p>{{ stay.address.city }}, {{ stay.address.country }}</p>
       </div>
       <div class="stay-preview-desc">
-        <p>{{ edittextLength }}</p>
+        <p>{{ editTextLength }}</p>
       </div>
       <div class="stay-preview-price">
         <p>
@@ -56,33 +53,25 @@ export default {
   data() {
     return {};
   },
-  created() {
-    console.log(this.stay.imgUrls[0]);
-    console.log(this.stay.imgUrls[1]);
-  },
+  created() {},
   components: {},
   methods: {
     goToDetails() {
       this.$router.push(`/stay/${this.stay._id}`);
     },
-    getImgUrl(file) {
-      const imgUrl = new URL(`../assets/images/${file}`, import.meta.url);
-      return imgUrl;
+    // getImgUrl(file) {
+    //   const imgUrl = new URL(`../assets/images/${file}`, import.meta.url);
+    //   return imgUrl;
+    // },
+    getImgUrl() {
+      const imgs = this.stay.imgUrls.map((img) => `data/Images/${img}`);
+      return imgs;
     },
   },
   computed: {
-    // getAvgRate() {
-    //   const sumRates = this.stay.reviews.reduce(
-    //     (previousValue, currentValue) => previousValue + currentValue.rate,
-    //     0
-    //   );
-    //   return sumRates / this.stay.reviews.length;
-    // },
-    edittextLength() {
+    editTextLength() {
       var editedSubject = this.stay.summary.substr(0, 45);
-      // if (this.mail.subject.length >= 16) {
       editedSubject += "..";
-      // }
       return editedSubject;
     },
   },

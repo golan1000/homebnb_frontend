@@ -11,6 +11,7 @@ export default {
         children: 0,
       },
     },
+    currPage: 'homePage',
   },
   getters: {
     getStays(state) {
@@ -19,6 +20,9 @@ export default {
     //Tal
     getFilter(state) {
       return state.filterBy;
+    },
+    getCurrPage(state) {
+      return this.currPage;
     },
   },
   mutations: {
@@ -29,7 +33,7 @@ export default {
     update(state, { stayToUpdate }) {
       console.log('mutate --- stay to update=', stayToUpdate);
       var foundIdx = state.stays.findIndex(
-        stay => stay._id === stayToUpdate._id
+        (stay) => stay._id === stayToUpdate._id
       );
       console.log('foundIdx=', foundIdx);
       state.stays.splice(foundIdx, 1, stayToUpdate);
@@ -37,6 +41,9 @@ export default {
     //Tal
     setFilter(state, { filterBy }) {
       state.filterBy = filterBy;
+    },
+    setCurrPage(state, { page }) {
+      state.currPage = page;
     },
   },
   actions: {
