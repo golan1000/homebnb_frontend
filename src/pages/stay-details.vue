@@ -60,7 +60,7 @@
             <div class="first-line-2">{{ getStayCap }} guests · {{ getBedrooms }} bedroom · {{ getBeds }} bed · {{ getBathrooms }} bathroom</div>
           </div>
           <div class="avatar1">
-            <el-avatar :size="57" :src="getRandProfilePic" />
+            <el-avatar :size="57" :src="this.getRandProfilePic(index)" />
             <!-- //the real one
             <el-avatar :size="57" :src="getHostPicture" /> -->
           </div>
@@ -164,69 +164,96 @@
           </div>
           <div class="order-form-middle-con">
             <div class="order-dates">
-              <button class="order-form-check-in-btn" @click="showCalendar">
+              <button class="order-form-check-in-btn" @click="toggleDateModal">
                 <div class="check">CHECK IN</div>
                 <div class="add-dates">{{ getRangeStart }}</div>
               </button>
-              <button class="order-form-check-out-btn" @click="showCalendar">
+              <button class="order-form-check-out-btn" @click="toggleDateModal">
                 <div class="check">CHECK OUT</div>
                 <div class="add-dates">{{ getRangeEnd }}</div>
               </button>
             </div>
             <div class="guest-modallll">
-              <button class="order-form-guest-btn" @click="displayGuestModal">
+              <button class="order-form-guest-btn" @click="toggleGuestModal">
                 <div class="order-form-guest-btn-sec1">
                   <div class="check">GUESTS</div>
-                  <div class="add-dates">Add guests</div>
+                  <div class="add-dates">{{ getTotalGuests }}</div>
                 </div>
                 <div class="order-form-guest-btn-sec2">
                   <el-icon
-                    ><svg v-if="!IsGuestModalOpen" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-ba633cb8="">
+                    ><svg v-if="!isGuestModalOpen" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-ba633cb8="">
                       <path fill="currentColor" d="M104.704 338.752a64 64 0 0 1 90.496 0l316.8 316.8 316.8-316.8a64 64 0 0 1 90.496 90.496L557.248 791.296a64 64 0 0 1-90.496 0L104.704 429.248a64 64 0 0 1 0-90.496z"></path>
                     </svg>
-                    <svg v-if="IsGuestModalOpen" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-ba633cb8="">
+                    <svg v-if="isGuestModalOpen" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-ba633cb8="">
                       <path fill="currentColor" d="M104.704 685.248a64 64 0 0 0 90.496 0l316.8-316.8 316.8 316.8a64 64 0 0 0 90.496-90.496L557.248 232.704a64 64 0 0 0-90.496 0L104.704 594.752a64 64 0 0 0 0 90.496z"></path>
                     </svg>
                   </el-icon>
                 </div>
               </button>
-              <section v-if="IsGuestModalOpen" class="guests-modal">
-                <div class="close-modal-btn" title="Close the modal" @click="displayGuestModal">X</div>
+              <section v-if="isGuestModalOpen" class="guests-modal-order">
                 <div class="adults guest-flex">
                   <div class="modal-txt">
                     Adults:
-                    <input type="text" placeholder="Ages 13 or above" disabled />
-                    <!-- <span class="span-input"> </span> -->
+                    <input type="text" placeholder="Age 13+" disabled />
                   </div>
                   <div class="modal-btn">
-                    <button class="btn" @click="addGuest('adult')">+</button>
-                    <span>{{ filterBy.guests.adults }}</span>
-                    <button class="btn" @click="removeGuest('adult')">-</button>
+                    <button class="guest-btn" @click="addGuest('adult')">+</button>
+                    <span class="guest-label">{{ this.guests.adults }}</span>
+                    <button class="guest-btn" @click="removeGuest('adult')">-</button>
                   </div>
                 </div>
-
-                <div class="children guest-flex">
+                <div class="kids guest-flex">
                   <div class="modal-txt">
                     Children:
                     <input type="text" placeholder="Ages 2-12" disabled />
                     <!-- <span class="span-input">Ages 2-12</span> -->
                   </div>
                   <div class="modal-btn">
-                    <button class="btn" @click="addGuest('child')">+</button>
-                    <span>{{ filterBy.guests.children }}</span>
-                    <button class="btn" @click="removeGuest('child')">-</button>
+                    <button class="guest-btn" @click="addGuest('child')">+</button>
+                    <span>{{ this.guests.kids }}</span>
+                    <button class="guest-btn" @click="removeGuest('child')">-</button>
                   </div>
+                </div>
+                <div class="guest-modal-btn-layout">
+                  <button class="guest-close-btn" @click="toggleGuestModal">Close</button>
                 </div>
               </section>
             </div>
           </div>
-          <div v-if="displayCalendar" class="date-modal">
-            <div class="close-modal-btn" title="Close the modal" @click="displayCalendar = false">X</div>
+          <div v-if="isDateModalOpen" class="date-modal">
             <v-date-picker v-model="range" update-on-input @input="selectEvt" is-range :columns="$screens({ default: 2, lg: 2 })" />
+
+            <div class="date-modal-btn-layout">
+              <button class="date-clear-btn" @click="clearDateModal">Clear dates</button>
+              <button class="date-close-btn" @click="toggleDateModal">Close</button>
+            </div>
           </div>
-          <button class="order-form-submit">
-            <div>Check availability</div>
+          <button class="order-form-submit" @click="submitOrder">
+            <div>{{ getButtonText }}</div>
           </button>
+
+          <div v-if="isReadyToSubmit" class="pre-charge-msg">You won't be charged yet</div>
+
+          <div v-if="isReadyToSubmit">
+            <div class="cost-calc">
+              <div>{{ getTotalNightsCalc }}</div>
+              <div>
+                {{ getTotalNightCost }}
+              </div>
+            </div>
+            <div class="cleaning-fee">
+              <div>Cleaning fee</div>
+              <div></div>
+            </div>
+            <div class="service-fee">
+              <div>Service fee</div>
+              <div></div>
+            </div>
+            <div class="total-price">
+              <div>Total</div>
+              <div></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -303,7 +330,7 @@
             <div v-for="(review, index) in getReviews" class="review1-con review-layout" :key="index + Math.random()">
               <div class="review-user-details">
                 <div class="avatar1">
-                  <el-avatar :size="57" :src="getRandProfilePic" />
+                  <el-avatar :size="57" :src="this.getRandProfilePic(index)" />
 
                   <!-- //the real one
                   <el-avatar :size="57" :src="review.by.imgUrl" /> -->
@@ -325,7 +352,12 @@
 export default {
   data() {
     return {
+      isReadyToSubmit: true,
       isDateSelected: false,
+      guests: {
+        adults: 0,
+        kids: 0,
+      },
       range: {
         start: new Date(2022, 0, 1),
         end: new Date(2022, 0, 5),
@@ -335,12 +367,12 @@ export default {
         address: '',
         guests: {
           adults: 0,
-          children: 0,
+          kids: 0,
         },
       },
-      IsGuestModalOpen: false,
-      IsCalanderModalOpen: false,
-      displayCalendar: false,
+      isGuestModalOpen: false,
+      isCalanderModalOpen: false,
+      isDateModalOpen: false,
       stays: null,
       stayToEdit: null,
       displayMsg: 'Loading...',
@@ -356,13 +388,13 @@ export default {
       console.log('stay to update=', this.stayToEdit);
       this.$store.dispatch({ type: 'update', stayToUpdate: this.stayToEdit });
     },
-    showCalendar() {
-      console.log('blaaa');
-      this.displayCalendar = !this.displayCalendar;
+    toggleDateModal() {
+      this.isGuestModalOpen = false;
+      this.isDateModalOpen = !this.isDateModalOpen;
     },
-    displayGuestModal() {
-      console.log('blaaaa21321321');
-      this.IsGuestModalOpen = !this.IsGuestModalOpen;
+    toggleGuestModal() {
+      this.isDateModalOpen = false;
+      this.isGuestModalOpen = !this.isGuestModalOpen;
     },
     getDate(dateStr) {
       return new Date(dateStr).toLocaleDateString();
@@ -374,6 +406,97 @@ export default {
     },
     selectEvt() {
       console.log('isDateSelected===', isDateSelected);
+    },
+    getRandomIntInclusive(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+    },
+    getRandProfilePic(num) {
+      let rand = this.getRandomIntInclusive(1, 40);
+      // console.log('rand=', rand);
+      return 'https://i.pravatar.cc/200?img=' + rand;
+    },
+    addGuest(type) {
+      if (type === 'adult') {
+        this.guests.adults++;
+      }
+      if (type === 'child') {
+        this.guests.kids++;
+      }
+    },
+    removeGuest(type) {
+      if (type === 'adult') {
+        if (this.guests.adults <= 0) return;
+        this.guests.adults--;
+      }
+      if (type === 'child') {
+        if (this.guests.kids <= 0) return;
+        this.guests.kids--;
+      }
+    },
+
+    closeDateModal() {
+      this.isCalanderModalOpen = false;
+    },
+    clearDateModal() {
+      this.range.start = null;
+      this.range.end = null;
+    },
+    closeGuestModal() {
+      this.isCalanderModalOpen = false;
+    },
+
+    submitOrder() {
+      if (!this.range.start || !this.range.end) {
+        console.log('choose dates');
+        return;
+      }
+      let totalGuests = this.guests.adults + this.guests.kids;
+      if (!totalGuests) {
+        console.log('you need to add atleast guest!');
+        return;
+      }
+
+      let buyerDetails = {
+        _id: 'sdklj3',
+        id: 'iweur903249sdkfjes3984', //mongoId
+        fullname: 'bob bob',
+      };
+
+      let stayDetails = {
+        _id: this.stayToEdit._id,
+        name: this.stayToEdit.name,
+        price: this.stayToEdit.price,
+      };
+
+      let order = {
+        // _id: 'dsjfsdiuiowe3243io2uioeuroeiw'
+        createdAt: Date.now(),
+
+        hostId: this.stayToEdit.id,
+        // hostId: this.stayToEdit._id //mongoId
+
+        totalPrice: this.totalPrice,
+        buyerDetails,
+        stayDetails,
+        startDate: this.getDate(this.range.start),
+        endDate: this.getDate(this.range.end),
+        guests: [this.guests.adults, this.guests.kids],
+        status: 'pending',
+      };
+      this.getTotalNights();
+    },
+
+    getTotalNights() {
+      if (!this.range.start && !this.range.end) return;
+      let totalDayMS = 1000 * 60 * 60 * 24;
+      let dayStart = Date.parse(this.range.start);
+      let dayEnd = Date.parse(this.range.end);
+      let diffMS = dayEnd - dayStart;
+      let totalNights = diffMS / totalDayMS;
+      return totalNights;
+      console.log('totalNights=', totalNights);
     },
   },
   computed: {
@@ -526,6 +649,7 @@ export default {
       ];
       return reviews;
     },
+
     getReviewsScore() {
       var reviewScores;
 
@@ -569,14 +693,36 @@ export default {
     getHostPicture() {
       this.stayToEdit.host.thumbnailUrl;
     },
-    getRandProfilePic() {
-      return 'https://i.pravatar.cc/200';
+    getButtonText() {
+      let totalGuests = this.guests.adults + this.guests.kids;
+      if (!this.isDateSelected || totalGuests === 0) return 'Check availability';
+      else return 'Reserved';
+    },
+    getTotalGuests() {
+      let totalGuests = this.guests.adults + this.guests.kids;
+
+      if (totalGuests === 0) return 'Add guests';
+      if (totalGuests === 1) return '1 guest';
+      return this.guests.adults + this.guests.kids + ' guests';
+    },
+    getTotalNightCost() {
+      if (!this.getTotalNights()) return;
+      return this.stayToEdit.price * this.getTotalNights();
+    },
+    getTotalNightsCalc() {
+      let str = '';
+      str += '$' + this.stayToEdit.price + ' x ' + this.getTotalNights() + ' nights';
+      console.log('last calc ====', str);
+      return str;
     },
   },
   watch: {
     range: {
       handler: function () {
         this.isDateSelected = true;
+
+        if (!this.range.start && !this.range.end) return;
+        this.toggleDateModal();
         console.log(this.range);
       },
       deep: true,
@@ -635,7 +781,7 @@ img {
   }
   .gallery-grid {
     width: 90%;
-    background: yellow;
+    /* background: yellow; */
   }
 }
 @media only screen and (min-width: 1000px) and (max-width: 1200px) {
@@ -645,7 +791,7 @@ img {
   }
   .gallery-grid {
     width: 90%;
-    background: blue;
+    /* background: blue; */
   }
 }
 @media only screen and (min-width: 600px) and (max-width: 1000px) {
@@ -655,7 +801,7 @@ img {
   }
   .gallery-grid {
     width: 90%;
-    background: purple;
+    /* background: purple; */
   }
 }
 @media only screen and (min-width: 100px) and (max-width: 600px) {
@@ -665,7 +811,7 @@ img {
   }
   .gallery-grid {
     width: 100%;
-    background: black;
+    /* background: black; */
   }
   body {
     background-color: aqua;
@@ -677,7 +823,8 @@ img {
   padding: 25px;
   padding-top: 22px;
   width: 415px;
-  height: 298px;
+  height: fit-content;
+  min-height: 298px;
   border-radius: 10px;
   margin-top: -4px;
   border: 1px solid #dddddd;
@@ -687,8 +834,8 @@ img {
   font-size: 20px;
 }
 .order-form-submit {
-  position: absolute;
-  z-index: -10;
+  /* position: absolute; */
+  /* z-index: -10; */
   width: 366px;
   height: 64px;
   cursor: pointer;
@@ -857,6 +1004,7 @@ img {
 
 .guest-flex {
   display: flex;
+  justify-content: space-between;
 }
 .guest-flex-column {
   display: flex;
@@ -864,7 +1012,8 @@ img {
 }
 
 .guests-modal {
-  float: left;
+  /* float: left; */
+  position: absolute;
   display: flex;
   flex-direction: column;
   line-height: 20px;
@@ -925,7 +1074,8 @@ input {
   cursor: pointer;
 }
 .date-modal {
-  float: left;
+  /* float: left; */
+  position: absolute;
 
   border: 1px solid black;
   border-radius: 5px;
@@ -964,5 +1114,83 @@ hr {
   align-items: center;
   /* background-color: red; */
   height: 100%;
+}
+
+.guest-btn {
+  border: 1px solid #b0b0b0;
+  border-radius: 50%;
+  height: 2rem;
+  width: 2rem;
+  color: #717171;
+  text-align: center;
+  cursor: pointer;
+  /* background: green; */
+}
+
+.date-modal-btn-layout {
+  margin-top: 10px;
+  /* background-color: green; */
+  text-align: center;
+
+  /* //     <button class="date-close-btn" @click="closeDateModal">Close</button>
+    // <button class="date-clear-btn" @click="clearDateModal">Clear</button> */
+}
+.date-clear-btn {
+  background-color: white;
+  color: black;
+  font-size: 14px;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+  line-height: 18px;
+  font-weight: 600;
+  letter-spacing: 0.7;
+  color: rgb(0, 0, 0);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.guest-close-btn,
+.date-close-btn {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+  line-height: 18px;
+  font-weight: 600;
+  height: 34px;
+  width: 70px;
+  cursor: pointer;
+}
+.guest-modal-btn-layout {
+  width: 100%;
+  text-align: center;
+}
+
+/* <div v-if="isReadyToSubmit" class="pre-charge-msg">You won't be charged yet</div>
+
+          <div v-if="isReadyToSubmit">
+            <div class="cost-calc">400$ * 3 nights</div>
+            <div class="cleaning-fee">20$</div>
+            <div class="service-fee">2$</div>
+            <div class="total-price">1000</div> */
+
+.pre-charge-msg {
+  margin-top: 16px;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  color: rgb(34, 34, 34);
+  text-align: center;
+}
+
+.total-price,
+.service-fee,
+.cleaning-fee,
+.cost-calc {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
 }
 </style>
