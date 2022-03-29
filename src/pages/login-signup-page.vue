@@ -15,7 +15,7 @@
           >
             <input
               type="text"
-              v-model="fullname"
+              v-model.trim="fullname"
               ref="fullname"
               placeholder="Fullname"
               required
@@ -24,7 +24,7 @@
           <div class="input-container" :class="{ 'top-input': isLogin }">
             <input
               type="text"
-              v-model="username"
+              v-model.trim="username"
               ref="username"
               placeholder="Username"
               required
@@ -36,7 +36,7 @@
           >
             <input
               type="password"
-              v-model="password"
+              v-model.trim="password"
               ref="password"
               placeholder="Password"
               required
@@ -91,10 +91,36 @@ export default {
     toggleMode() {
       this.isLogin = !this.isLogin;
     },
-    onSignup() {},
-    onLogin() {
-      console.log('this.username', this.username);
-      console.log('this.password', this.password);
+    async onSignup() {
+      try {
+        const user = await this.$store.dispatch({
+          type: 'signup',
+          userCred: {
+            fullname: this.fullname,
+            username: this.username,
+            password: this.password,
+          },
+        });
+      } catch (err) {
+        console.log('err', err);
+      } finally {
+        this.fullname = null;
+        this.username = null;
+        this.password = null;
+      }
+    },
+    async onLogin() {
+      try {
+        const user = await this.$store.dispatch({
+          type: 'login',
+          userCred: { username: this.username, password: this.password },
+        });
+      } catch (err) {
+        console.log('err', err);
+      } finally {
+        this.username = null;
+        this.password = null;
+      }
     },
   },
 };

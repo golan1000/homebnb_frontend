@@ -30,7 +30,7 @@
           .user-profile-picture-update {
             text-align: center;
             margin-top: 8px;
-            font-family: 'Times New Roman', Times, serif;
+            font-family: airbnb-regular, Times, serif;
             font-size: 0.875rem;
             color: #222222;
             text-decoration: underline;
@@ -44,8 +44,7 @@
 
         .user-profile-svg-identification {
           width: 1.4rem;
-          filter: invert(8%) sepia(99%) saturate(0%) hue-rotate(239deg)
-            brightness(81%) contrast(87%);
+          filter: invert(8%) sepia(99%) saturate(0%) hue-rotate(239deg) brightness(81%) contrast(87%);
           margin-bottom: 16px;
         }
 
@@ -120,7 +119,7 @@
           margin-bottom: 48px;
 
           .user-details-name {
-            font-family: 'Times New Roman', Times, serif;
+            font-family: airbnb-regular, Times, serif;
             color: #222222;
             line-height: 36px;
             margin-bottom: 8px;
@@ -128,14 +127,14 @@
           }
 
           .user-details-date {
-            font-family: 'Times New Roman', Times, serif;
+            font-family: airbnb-regular, Times, serif;
             color: #717171;
             font-size: 0.875rem;
             font-weight: 100;
             margin-bottom: 16px;
           }
           .user-details-edit {
-            font-family: 'Times New Roman', Times, serif;
+            font-family: airbnb-regular, Times, serif;
             color: #222222;
             font-size: 0.875rem;
             font-weight: 600;
@@ -145,7 +144,7 @@
 
         .user-details-reviews {
           display: flex;
-          font-family: 'Times New Roman', Times, serif;
+          font-family: airbnb-regular, Times, serif;
           font-size: 1.375rem;
           align-items: center;
 
@@ -166,7 +165,7 @@
           height: 85px;
 
           .user-details-reviews-details-title {
-            font-family: 'Times New Roman', Times, serif;
+            font-family: airbnb-regular, Times, serif;
             font-size: 0.875rem;
             text-decoration: underline;
           }

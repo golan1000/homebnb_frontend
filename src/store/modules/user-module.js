@@ -1,7 +1,7 @@
 import { userService } from '../../services/user-service-local.js';
 export default {
   state: {
-    loggedInUse: {},
+    loggedInUser: {},
   },
   getters: {
     // Tal

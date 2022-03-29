@@ -2,13 +2,14 @@ import {
   createRouter,
   createWebHistory,
   createWebHashHistory,
-} from 'vue-router'
-import stayApp from '../pages/stay-app.vue'
-import stayDetails from '../pages/stay-details.vue'
-import stayEdit from '../pages/stay-edit.vue'
-import userDetails from '../pages/user-details.vue'
-import loginSignupPage from '../pages/login-signup-page.vue'
-import homePage from '../pages/home-page.vue'
+} from 'vue-router';
+import stayApp from '../pages/stay-app.vue';
+import stayDetails from '../pages/stay-details.vue';
+import stayEdit from '../pages/stay-edit.vue';
+import userDetails from '../pages/user-details.vue';
+import loginSignupPage from '../pages/login-signup-page.vue';
+import homePage from '../pages/home-page.vue';
+import dashboard from '../pages/dashboard.vue';
 const router = createRouter({
   // history: createWebHashHistory(import.meta.env.BASE_URL),
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -44,7 +45,12 @@ const router = createRouter({
       name: 'loginSignupPage',
       component: loginSignupPage,
     },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: dashboard,
+    },
   ],
-})
+});
 
-export default router
+export default router;

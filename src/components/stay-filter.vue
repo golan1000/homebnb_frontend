@@ -101,7 +101,7 @@
       </div>
       <v-date-picker
         v-model="filterBy.range"
-        color="red"
+        color="green"
         is-range
         rows="1"
         columns="2"

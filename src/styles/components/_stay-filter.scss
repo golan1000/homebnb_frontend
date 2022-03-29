@@ -24,9 +24,11 @@
   label {
     font-size: 0.75rem;
     font-weight: 800;
+    cursor: pointer;
   }
 
   .location-input-container {
+    cursor: pointer;
     width: 270px;
     height: 66px;
     flex: 1.5 0 0%;
@@ -35,10 +37,15 @@
       height: 100%;
       padding: 14px 32px;
       display: flex;
-
+      cursor: pointer;
       .location-input-label {
         width: 204px;
       }
+    }
+
+    .location-input-div:hover {
+      background-color: #ebebeb;
+      border-radius: 32px;
     }
   }
 
@@ -57,9 +64,15 @@
         height: 100%;
         width: 178px;
         display: flex;
+        cursor: pointer;
         .date-input-label {
           width: 130px;
         }
+      }
+
+      .check-in-input-div:hover {
+        background-color: #ebebeb;
+        border-radius: 32px;
       }
     }
     .check-out-input-container {
@@ -68,12 +81,17 @@
       .check-out-input-div {
         padding: 14px 24px;
         height: 100%;
-        width: 178px;
+        width: 167px;
         display: flex;
+        cursor: pointer;
         .date-input-label {
           width: 130px;
         }
       }
+    }
+    .check-out-input-div:hover {
+      background-color: #ebebeb;
+      border-radius: 32px;
     }
   }
 
@@ -83,6 +101,7 @@
     align-items: center;
     width: 223px;
     flex: 0.95 0 auto;
+    cursor: pointer;
 
     .guest-container {
       padding: 14px 24px;
@@ -93,8 +112,14 @@
 
       .guest-container-label {
         width: 122px;
+        cursor: pointer;
       }
     }
+  }
+
+  .guest-search-container:hover {
+    background-color: #ebebeb;
+    border-radius: 32px;
   }
 
   .guests-modal {
@@ -176,7 +201,14 @@
     }
   }
   .search-btn:hover {
-    background-image: radial-gradient(rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%);
+    background-image: radial-gradient(
+      rgb(255, 56, 92) 0%,
+      rgb(230, 30, 77) 27.5%,
+      rgb(227, 28, 95) 40%,
+      rgb(215, 4, 102) 57.5%,
+      rgb(189, 30, 89) 75%,
+      rgb(189, 30, 89) 100%
+    );
   }
   input {
     background-color: transparent;
@@ -188,6 +220,7 @@
     padding-left: 0px;
     padding-top: 3px;
     width: 100%;
+    cursor: pointer;
   }
   .span-input {
     line-height: 20px;
