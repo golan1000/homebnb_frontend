@@ -232,26 +232,25 @@
             <div>{{ getButtonText }}</div>
           </button>
 
-          <div v-if="isReadyToSubmit" class="pre-charge-msg">You won't be charged yet</div>
-
-          <div v-if="isReadyToSubmit">
+          <div v-if="costsSectionShown">
+            <div class="pre-charge-msg">You won't be charged yet</div>
             <div class="cost-calc">
-              <div>{{ getTotalNightsCalc }}</div>
-              <div>
+              <div class="cost-calc-title">{{ getTotalNightsCalc }}</div>
+              <div class="cost-elem">
                 {{ getTotalNightCost }}
               </div>
             </div>
             <div class="cleaning-fee">
-              <div>Cleaning fee</div>
-              <div></div>
+              <div class="cleaning-fee-title">Cleaning fee</div>
+              <div class="cost-elem">{{ getCleaningFee }}</div>
             </div>
             <div class="service-fee">
-              <div>Service fee</div>
-              <div></div>
+              <div class="service-fee-title">Service fee</div>
+              <div class="cost-elem">{{ getServiceFee }}</div>
             </div>
             <div class="total-price">
               <div>Total</div>
-              <div></div>
+              <div>{{ getTotalCosts }}</div>
             </div>
           </div>
         </div>
@@ -380,7 +379,10 @@ export default {
       form: {
         name: null,
       },
+      costsSectionShown: false,
       modal: true,
+      serviceFee: '5',
+      totalPrice: null,
     };
   },
   methods: {
@@ -424,6 +426,7 @@ export default {
       if (type === 'child') {
         this.guests.kids++;
       }
+      this.checkReadyToOrder();
     },
     removeGuest(type) {
       if (type === 'adult') {
@@ -434,6 +437,7 @@ export default {
         if (this.guests.kids <= 0) return;
         this.guests.kids--;
       }
+      this.checkReadyToOrder();
     },
 
     closeDateModal() {
@@ -442,11 +446,25 @@ export default {
     clearDateModal() {
       this.range.start = null;
       this.range.end = null;
+      this.checkReadyToOrder();
     },
     closeGuestModal() {
       this.isCalanderModalOpen = false;
     },
-
+    checkReadyToOrder() {
+      console.log('toal nights ======', this.getTotalNights());
+      if (!this.getTotalNights() || this.getTotalNights() < 1) {
+        this.costsSectionShown = false;
+        return;
+      }
+      let totalGuests = this.guests.adults + this.guests.kids;
+      if (!totalGuests) {
+        this.costsSectionShown = false;
+        return;
+      }
+      this.costsSectionShown = true;
+      return true;
+    },
     submitOrder() {
       if (!this.range.start || !this.range.end) {
         console.log('choose dates');
@@ -456,6 +474,10 @@ export default {
       if (!totalGuests) {
         console.log('you need to add atleast guest!');
         return;
+      }
+
+      if (this.checkReadyToOrder() === true) {
+        console.log('Ready to order!!!');
       }
 
       let buyerDetails = {
@@ -478,14 +500,20 @@ export default {
         // hostId: this.stayToEdit._id //mongoId
 
         totalPrice: this.totalPrice,
-        buyerDetails,
-        stayDetails,
+        buyer: buyerDetails,
+        stay: stayDetails,
         startDate: this.getDate(this.range.start),
         endDate: this.getDate(this.range.end),
-        guests: [this.guests.adults, this.guests.kids],
+        guests: {
+          adults: this.guests.adults,
+          kids: this.guests.kids,
+        },
         status: 'pending',
       };
-      this.getTotalNights();
+
+      console.log('order=', order);
+
+      this.$store.dispatch({type:'submitOrder', order})
     },
 
     getTotalNights() {
@@ -495,8 +523,8 @@ export default {
       let dayEnd = Date.parse(this.range.end);
       let diffMS = dayEnd - dayStart;
       let totalNights = diffMS / totalDayMS;
+      // console.log('totalNights=', totalNights);
       return totalNights;
-      console.log('totalNights=', totalNights);
     },
   },
   computed: {
@@ -707,7 +735,7 @@ export default {
     },
     getTotalNightCost() {
       if (!this.getTotalNights()) return;
-      return this.stayToEdit.price * this.getTotalNights();
+      return '$' + this.stayToEdit.price * this.getTotalNights();
     },
     getTotalNightsCalc() {
       let str = '';
@@ -715,15 +743,34 @@ export default {
       console.log('last calc ====', str);
       return str;
     },
+    getCleaningFee() {
+      let cleaningFee = this.stayToEdit.cleaningFee;
+      if (!cleaningFee) cleaningFee = 0;
+      return '$' + cleaningFee;
+    },
+    getServiceFee() {
+      return '$' + this.serviceFee;
+    },
+
+    getTotalCosts() {
+      if (!this.getTotalNights()) return;
+      let totalNightCost = this.stayToEdit.price * this.getTotalNights();
+      let cleaningFee = this.stayToEdit.cleaningFee;
+      if (!cleaningFee) cleaningFee = 0;
+      let serviceFee = parseInt(this.serviceFee);
+
+      let totalCalc = totalNightCost + cleaningFee + serviceFee;
+      this.totalPrice = totalCalc;
+      return '$' + totalCalc;
+    },
   },
   watch: {
     range: {
       handler: function () {
-        this.isDateSelected = true;
-
         if (!this.range.start && !this.range.end) return;
+        this.isDateSelected = true;
         this.toggleDateModal();
-        console.log(this.range);
+        this.checkReadyToOrder();
       },
       deep: true,
     },
@@ -836,8 +883,9 @@ img {
 .order-form-submit {
   /* position: absolute; */
   /* z-index: -10; */
-  width: 366px;
-  height: 64px;
+  margin: 0 auto;
+  width: 322px;
+  height: 50px;
   cursor: pointer;
   /* background: #e11a60; */
 
@@ -1176,6 +1224,7 @@ hr {
             <div class="total-price">1000</div> */
 
 .pre-charge-msg {
+  margin-bottom: 20px;
   margin-top: 16px;
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
   font-size: 14px;
@@ -1188,9 +1237,30 @@ hr {
 .service-fee,
 .cleaning-fee,
 .cost-calc {
+  margin-bottom: 7px;
+  height: 25px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid black;
+  /* border: 1px solid black; */
+}
+
+.service-fee-title,
+.cleaning-fee-title,
+.cost-calc-title {
+  text-decoration: underline;
+}
+
+.service-fee {
+  margin-bottom: 28px;
+}
+
+.total-price {
+  letter-spacing: 0.4px;
+  font-weight: bold;
+}
+.cost-elem {
+  /* text-decoration: none; */
+  letter-spacing: 0.5px;
 }
 </style>
