@@ -4,11 +4,20 @@ export const storageService = {
   post,
   put,
   remove,
+  postMany,
+  _save,
 }
 
-function query(entityType) {
+async function query(entityType, delay = 300) {
   var entities = JSON.parse(localStorage.getItem(entityType)) || []
-  return Promise.resolve(entities)
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(entities)
+    }, delay)
+  })
+
+  // return Promise.resolve(entities);
 }
 
 function get(entityType, entityId) {
@@ -16,6 +25,7 @@ function get(entityType, entityId) {
     entities.find((entity) => entity._id === entityId),
   )
 }
+
 function post(entityType, newEntity) {
   newEntity._id = _makeId()
   return query(entityType).then((entities) => {
@@ -24,9 +34,9 @@ function post(entityType, newEntity) {
     return newEntity
   })
 }
+
 function postMany(entityType, newEntities) {
   return query(entityType).then((entities) => {
-    newEntities = newEntities.map((entity) => ({ ...entity, _id: _makeId() }))
     entities.push(...newEntities)
     _save(entityType, entities)
     return entities
@@ -45,12 +55,15 @@ function put(entityType, updatedEntity) {
 function remove(entityType, entityId) {
   return query(entityType).then((entities) => {
     const idx = entities.findIndex((entity) => entity._id === entityId)
+    if (idx === -1)
+      return Promise.reject(`Unknown Entity ${entityType} with Id: ${entityId}`)
     entities.splice(idx, 1)
     _save(entityType, entities)
   })
 }
 
 function _save(entityType, entities) {
+  console.log('entityType=', entityType, 'entitie=', entities)
   localStorage.setItem(entityType, JSON.stringify(entities))
 }
 
