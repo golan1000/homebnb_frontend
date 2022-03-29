@@ -45,7 +45,7 @@
           <div class="input-container txt">
             <p>
               We’ll call or text you to confirm your number. Standard message
-              and data rates apply. <span>Privacy Policy</span>
+              and data rates apply. <span>Privacy Policy.</span>
             </p>
             <!-- Login -->
           </div>

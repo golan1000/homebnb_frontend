@@ -49,10 +49,10 @@
           <h5 class="user-details-reviews">
             <img
               class="user-details-reviews-star"
-              src="../assets/star.png"
+              src="../assets/star.svg"
               alt=""
             />
-            0 Reviews
+            4 Reviews
           </h5>
           <div class="user-details-reviews-details">
             <h5 class="user-details-reviews-details-title">Reviews by you</h5>
