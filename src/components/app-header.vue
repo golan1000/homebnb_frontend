@@ -13,10 +13,12 @@
           >
         </div>
         <div class="menu">
-          <img class="img-globe" src="../assets/globe.svg" alt="" />
+          <div class="img-globe-div">
+            <img class="img-globe" src="../assets/globe.svg" alt="" />
+          </div>
           <button class="menu-btn" @click="toggleModal">
             <img src="../assets/hamburger.svg" class="hamburger" />
-            <img class="user-img" src="../assets/user.png" alt="" />
+            <img class="user-img" src="../assets/user-home.svg" alt="" />
           </button>
           <div v-if="isOpen" class="menu-btn-modal">
             <router-link class="menu-modal-link" to="/signup"
@@ -50,12 +52,13 @@ export default {
   },
   computed: {
     stayDetails() {
-      if (this.currPage === 'stayDetails') return true;
+      if (this.currPage === "stayDetails" || this.currPage === "userDetails")
+        return true;
       else return false;
     },
   },
   watch: {
-    '$store.getters.getCurrPage': {
+    "$store.getters.getCurrPage": {
       handler() {
         this.currPage = this.$store.getters.getCurrPage;
       },

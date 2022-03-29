@@ -74,5 +74,8 @@ export default {
       },
     };
   },
+  created() {
+    this.$store.commit({ type: "setCurrPage", page: "userDetails" });
+  },
 };
 </script>
