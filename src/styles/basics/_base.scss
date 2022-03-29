@@ -24,6 +24,11 @@ button {
   border: none;
 }
 
+button:hover {
+  background-color: #f7f7f7;
+  border-radius: 22px;
+}
+
 a {
   color: #222;
   text-decoration: none;

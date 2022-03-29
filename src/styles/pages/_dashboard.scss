@@ -15,30 +15,148 @@
     display: flex;
     justify-content: space-between;
     height: 50%;
+    border-radius: 10px;
+    border: 1px solid #dddddd;
 
-    .dashboard-summary {
-      width: 40%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
-
-      .dashboard-summary-stays {
-        height: 50%;
-      }
-      .dashboard-summary-orders {
-        height: 50%;
-      }
+    .dashboard-data-con > *:not(:last-child) {
+      border-right: 1px solid #dddddd;
     }
 
     .dashboard-data-con {
       display: flex;
-      width: 60%;
+      width: 100%;
       justify-content: space-around;
       height: 270px;
+
+      .dashboard-data {
+        width: 25%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .data-rate {
+        .dashboard-data-rate-content {
+          height: 80%;
+          display: flex;
+
+          .dashboard-data-rate-average {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            width: 50%;
+            .dashboard-data-rate-average-content {
+              display: flex;
+              justify-content: center;
+
+              .dashboard-data-rate-img {
+                width: 1rem;
+              }
+            }
+          }
+
+          .dashboard-data-rate-count {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+          }
+        }
+      }
+
+      .data-revenues {
+        .dashboard-data-revenues-period-con {
+          display: flex;
+          justify-content: space-evenly;
+          height: 80%;
+
+          .dashboard-data-revenues-period {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+          }
+        }
+      }
+
+      .data-orders {
+        .dashboard-data-orders-status-con {
+          display: flex;
+          height: 80%;
+          flex-direction: column;
+
+          .dashboard-data-orders-status-con-top {
+            display: flex;
+            justify-content: space-evenly;
+            height: 50%;
+          }
+          .dashboard-data-orders-status-con-bottom {
+            display: flex;
+            justify-content: space-evenly;
+            height: 50%;
+          }
+          .dashboard-data-orders-status {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+          }
+        }
+      }
+
+      .data-guests {
+        .dashboard-data-guests-status-con {
+          height: 80%;
+          justify-content: space-evenly;
+          display: flex;
+
+          .dashboard-data-guests-status {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+          }
+        }
+      }
     }
   }
 
   .dashboard-bottom-section {
     flex-grow: 1;
+    .dashboard-summary {
+      width: 100%;
+      display: flex;
+      margin: auto;
+      justify-content: space-evenly;
+      align-items: center;
+
+      .backoffice-img {
+        width: 1rem;
+        margin-right: 5px;
+      }
+
+      .dashboard-summary-stays {
+        height: 50%;
+        display: flex;
+        width: 75px;
+        height: 33px;
+        padding: 8px;
+        cursor: pointer;
+      }
+      .dashboard-summary-orders {
+        height: 50%;
+        display: flex;
+        width: 80px;
+        height: 33px;
+        padding: 8px;
+        cursor: pointer;
+      }
+    }
+
+    .dashboard-details {
+      table {
+        margin: auto;
+        width: 100%;
+      }
+    }
   }
 }
