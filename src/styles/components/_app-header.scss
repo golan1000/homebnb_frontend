@@ -16,6 +16,7 @@
     padding-left: 80px;
     padding-right: 80px;
     margin: auto;
+    max-width: 1760px;
 
     @media (max-width: 1127px) {
       padding-left: 40px;
@@ -47,19 +48,34 @@
       }
     }
 
+    .logo-con:hover {
+      background-color: white;
+      border-radius: 0px;
+    }
+
     .main-nav {
       display: flex;
       align-items: center;
 
       .main-nav-links {
-        margin-right: 8px;
         font-size: 14px;
       }
 
       .menu {
         display: flex;
+
+        .img-globe-div {
+          cursor: pointer;
+          width: 46px;
+          padding-top: 13px;
+          padding-left: 15px;
+          margin-right: 5px;
+        }
+        .img-globe-div:hover {
+          background-color: #f7f7f7;
+          border-radius: 22px;
+        }
         .img-globe {
-          margin-right: 19px;
           width: 1rem;
           filter: invert(13%) sepia(2%) saturate(18%) hue-rotate(314deg)
             brightness(103%) contrast(101%);
@@ -71,7 +87,7 @@
 
         .menu-btn {
           width: 78px;
-          padding: 5px 5px 5px 12px;
+          padding: 5px 5px 5px 13px;
           border-radius: 200px;
           background-color: #fff;
           border: 1px solid #ddd;

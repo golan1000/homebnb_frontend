@@ -28,5 +28,12 @@ a {
   color: #222;
   text-decoration: none;
   padding: 12px;
+  padding-right: 10px;
   cursor: pointer;
+  font-weight: 600;
+}
+
+a:hover {
+  background-color: #f7f7f7;
+  border-radius: 22px;
 }
