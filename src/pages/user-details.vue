@@ -43,7 +43,7 @@
         <div class="user-details">
           <div class="user-details-top-con">
             <h1 class="user-details-name">Hi, I'm {{ user.fullname }}</h1>
-            <h5 class="user-details-date">Joined in 2022</h5>
+            <h5 class="user-details-date">Joined on 2022</h5>
             <h5 class="user-details-edit">Edit profile</h5>
           </div>
           <h5 class="user-details-reviews">
@@ -64,15 +64,32 @@
 </template>
 <script>
 export default {
+  created() {
+    this.loggedInUser();
+  },
+
   data() {
     return {
       user: {
-        _id: "u101",
-        fullname: "User 1",
-        imgUrl: "/img/img1.jpg",
-        username: "user1",
+        _id: 'u101',
+        fullname: 'User 1',
+        imgUrl: '/img/img1.jpg',
+        username: 'user1',
       },
     };
+  },
+  methods: {
+    loggedInUser() {
+      const loggedUser = this.$store.getters.loggedinUser;
+      console.log('loggedUser', loggedUser);
+      if (!loggedUser) return;
+      else {
+        this.user._id = loggedUser._id;
+        this.user.fullname = loggedUser.fullname;
+        this.user.imgUrl = loggedUser.imgUrl;
+        this.user.username = loggedUser.username;
+      }
+    },
   },
 };
 </script>
