@@ -190,7 +190,7 @@ const db = {
       password: 'secret',
     },
   ],
-}
+};
 
 // Homepage: TOP categories: Best Rate / Houses / Kitchen
 // Renders a <StayList> with <StayPreview> with Link to <StayDetails>   url: /stay/123
@@ -199,7 +199,7 @@ const db = {
 // See More => /explore?amenities=Kitchen
 // stayService.query({type: 'House'})
 
-const stays = [{}, {}]
+const stays = [{}, {}];
 // HomePage
 //  list of stays with link to stay-details
 //  CSS Infra, Master CSS

@@ -12,6 +12,7 @@ export default {
       },
     },
     currPage: 'homePage',
+    staysForBackOffice: [],
   },
   getters: {
     getStays(state) {
@@ -23,6 +24,9 @@ export default {
     },
     getCurrPage(state) {
       return state.currPage;
+    },
+    getStaysForBackOffice(state) {
+      return state.staysForBackOffice;
     },
   },
   mutations: {
@@ -44,6 +48,14 @@ export default {
     },
     setCurrPage(state, { page }) {
       state.currPage = page;
+    },
+    setStaysForBackOffice(state, { user }) {
+      console.log(state.stays);
+      console.log(user);
+      state.staysForBackOffice = state.stays.filter(
+        (stay) => user._id === stay.host._id
+      );
+      console.log(state.staysForBackOffice);
     },
   },
   actions: {
@@ -88,6 +100,15 @@ export default {
     filter({ commit, dispatch }, { filterBy }) {
       commit({ type: 'setFilter', filterBy }); //check
       dispatch({ type: 'loadStays' });
+    },
+    async loadStaysForBackOffice({ commit, state }, { user }) {
+      // console.log(state.stays);
+      // console.log(user);
+      try {
+        commit({ type: 'setStaysForBackOffice', user });
+      } catch (err) {
+        console.log('err in stay-module loadStaysForBackOffice:', err);
+      }
     },
   },
 };

@@ -16,7 +16,7 @@ export const userService = {
 // Debug technique
 // window.userService = userService
 
-// _createUsers();
+_createUsers();
 
 async function getById(userId) {
   const user = await storageService.get(STORAGE_KEY_USER, userId);
@@ -42,7 +42,7 @@ async function update(user) {
 async function login(userCred) {
   const users = await storageService.query(STORAGE_KEY_USER);
   const user = users.find(
-    user =>
+    (user) =>
       user.username === userCred.username && user.password === userCred.password
   );
   if (!user) return console.error('No such user');
