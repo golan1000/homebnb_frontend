@@ -1,7 +1,7 @@
 <template>
   <section class="main-login-layout">
     <header class="login-signup-header">Log in or sign up</header>
-    <section class="details">
+    <section class="login-option">
       <div class="login">
         <div class="form-title-container">
           <h3 class="form-title">Welcome to Flat-inn</h3>
@@ -50,7 +50,7 @@
             <!-- Login -->
           </div>
           <div v-if="isLogin" class="input-container btn-container">
-            <button @click.prevent="onLogin">Login</button>
+            <button class="login-btn" @click.prevent="onLogin">Login</button>
           </div>
           <div v-if="isLogin" class="input-container txt">
             <p>
@@ -71,6 +71,23 @@
         </form>
       </div>
     </section>
+    <!-- SSO buttons -->
+    <!-- <section class="login-option">
+      <div class="sso-login">
+        <div class="input-container top-input bottom-input">
+          <button>Continue with Facbook</button>
+        </div>
+        <div class="input-container top-input bottom-input">
+          <button>Continue with Google</button>
+        </div>
+        <div class="input-container top-input bottom-input">
+          <button>Continue with Apple</button>
+        </div>
+        <div class="input-container top-input bottom-input">
+          <button>Continue with Mail</button>
+        </div>
+      </div>
+    </section> -->
   </section>
 </template>
 
