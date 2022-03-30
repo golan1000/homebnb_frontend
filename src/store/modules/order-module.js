@@ -1,4 +1,4 @@
-import { orderService } from '../../services/order-service'
+import { orderService } from '../../services/order.service.mongo'
 export default {
   state: {
     orders: [],

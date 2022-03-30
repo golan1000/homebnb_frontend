@@ -3,8 +3,9 @@ import Axios from 'axios'
 //connect to the mongoDB
 //work with session
 const BASE_URL =
-  process.env.NODE_ENV === 'production' ? '/api/' : '//localhost:3000/api/'
+  process.env.NODE_ENV === 'production' ? '/api/' : '//localhost:3030/api/'
 
+// const BASE_URL = '//localhost:3030/api/'
 var axios = Axios.create({ withCredentials: true })
 
 export const httpService = {
@@ -22,8 +23,16 @@ export const httpService = {
   },
 }
 
-async function workAxios(path, type, data) {
+async function workAxios(path, type = 'GET', data = null) {
   try {
+    const checkObj = {
+      url: BASE_URL + path,
+      method: type,
+      data,
+      params: type === 'GET' ? data : null,
+    }
+
+    console.log({ checkObj })
     const res = await axios({
       url: BASE_URL + path,
       method: type,
