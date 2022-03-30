@@ -4,12 +4,26 @@ export default {
   state: {
     orders: [],
   },
-  getters: {},
+  getters: {
+    //Barak
+    getOrders(state) {
+      console.log(state.orders);
+      return state.orders;
+    },
+  },
   mutations: {
     submitOrder(state, { order }) {
       console.log('mutate ---- submitOrder=', order)
 
       state.orders.push(order)
+    },
+    //Barak
+    setOrders(state, { orders, user }) {
+      console.log(user);
+      console.log(state.orders);
+      console.log(orders);
+      state.orders = orders.filter((order) => user._id === order.hostId);
+      console.log(state.orders);
     },
   },
   actions: {
@@ -30,6 +44,16 @@ export default {
     },
     showMsg(msg) {
       console.log(msg)
+    },
+    //Barak
+    async loadOrders(context, { user }) {
+      try {
+        const orders = await orderService.query();
+        console.log(orders);
+        context.commit('setOrders', { orders, user });
+      } catch (err) {
+        console.log('err in order-module in loadOrders:', err);
+      }
     },
   },
 }

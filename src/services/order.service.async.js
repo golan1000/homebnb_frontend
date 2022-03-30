@@ -2,7 +2,7 @@ import { storageService } from './async-storage-service'
 
 const KEY = 'orderDB'
 
-_createOrders()
+// _createOrders();
 // window.createOrders = _createOrders
 window.query1 = query
 // window.getById = getById
@@ -12,15 +12,15 @@ window.query1 = query
 var gOrders = [
   {
     _id: 'o1225',
-    hostId: 'u101',
+    hostId: '622f3401e36c59e6164fab4d',
     createdAt: 9894989,
     buyer: {
       _id: 'u100',
       fullname: 'Bobi Brown',
     },
     totalPrice: 160,
-    startDate: '2025/10/24',
-    endDate: '2025/10/29',
+    startDate: 1648385244,
+    endDate: 1649076444,
     guests: {
       adults: 2,
       kids: 1,
@@ -30,19 +30,19 @@ var gOrders = [
       name: 'House Of Uncle My',
       price: 80.0,
     },
-    status: 'pending',
+    status: 'Approved',
   },
   {
     _id: 'o1225',
-    hostId: 'u101',
+    hostId: '622f3401e36c59e6164fab4d',
     createdAt: 9898989,
     buyer: {
       _id: 'u101',
       fullname: 'User 1',
     },
-    totalPrice: 160,
-    startDate: '2025/01/15',
-    endDate: '2025/01/17',
+    totalPrice: 120,
+    startDate: 1680612444,
+    endDate: 1683204444,
     guests: {
       adults: 2,
       kids: 1,
@@ -52,19 +52,19 @@ var gOrders = [
       name: 'House Of Uncle My',
       price: 80.0,
     },
-    status: 'pending',
+    status: 'Declined',
   },
   {
     _id: 'o1225',
-    hostId: 'u102',
+    hostId: '622f3401e36c59e6164fab4d',
     createdAt: 9898989,
     buyer: {
       _id: 'u101',
       fullname: 'User 1',
     },
-    totalPrice: 160,
-    startDate: '2025/02/15',
-    endDate: '2025/02/17',
+    totalPrice: 140,
+    startDate: 1585134619,
+    endDate: 1585393819,
     guests: {
       adults: 2,
       kids: 1,
@@ -74,7 +74,7 @@ var gOrders = [
       name: 'House Of Uncle My',
       price: 80.0,
     },
-    status: 'pending',
+    status: 'Pending',
   },
   {
     _id: 'o1225',
@@ -84,9 +84,9 @@ var gOrders = [
       _id: 'u101',
       fullname: 'User 1',
     },
-    totalPrice: 160,
-    startDate: '2025/03/15',
-    endDate: '2025/03/17',
+    totalPrice: 260,
+    startDate: 1679742619,
+    endDate: 1680001819,
     guests: {
       adults: 2,
       kids: 1,
@@ -96,7 +96,7 @@ var gOrders = [
       name: 'House Of Uncle My',
       price: 80.0,
     },
-    status: 'pending',
+    status: 'Declined',
   },
   {
     _id: 'o1225',
@@ -106,9 +106,9 @@ var gOrders = [
       _id: 'u101',
       fullname: 'User 1',
     },
-    totalPrice: 160,
-    startDate: '2025/05/15',
-    endDate: '2025/05/17',
+    totalPrice: 60,
+    startDate: 1711365019,
+    endDate: 1711624219,
     guests: {
       adults: 2,
       kids: 1,
@@ -118,7 +118,7 @@ var gOrders = [
       name: 'House Of Uncle My',
       price: 80.0,
     },
-    status: 'pending',
+    status: 'Approved',
   },
 ]
 export const orderService = {
@@ -135,7 +135,7 @@ async function query(filterBy = {}) {
     // const orders = JSON.parse(JSON.stringify(gOrders))
     const orders = await storageService.query(KEY)
     // const orders = gOrders
-    // console.log('orders=-=-==-=-=-=-=', orders)
+    console.log('orders=-=-==-=-=-=-=', orders)
     return _filterOrders(filterBy, orders)
   } catch (err) {
     console.log('err', err)
