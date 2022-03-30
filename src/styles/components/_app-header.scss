@@ -107,12 +107,16 @@
           flex-direction: column;
           position: absolute;
           top: 70px;
-          right: 80px;
+          right: 152px;
           border-radius: 12px 12px;
           width: 240px;
           box-shadow: 0 0 3px 0 rgb(0 0 0 / 18%);
           background-color: #fff;
           z-index: 10;
+
+          @media (max-width: 1760px) {
+            right: 80px;
+          }
 
           .menu-modal-link {
             font-size: 0.875rem;

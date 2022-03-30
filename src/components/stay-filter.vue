@@ -4,7 +4,7 @@
       <div class="location-input-div">
         <label for="locations" class="location-input-label"
           >Location
-          <input class="location-input" list="addresses" name="addresses" type="search" placeholder="Where are you going?" v-model="filterBy.address" @change="setfilter" />
+          <input class="location-input" list="addresses" name="addresses" type="text" placeholder="Where are you going?" v-model="filterBy.address" />
         </label>
         <datalist id="addresses">
           <option v-for="(addres, idx) in getAddresses" :key="idx" :value="addres" />
@@ -86,6 +86,7 @@ import { shallowRef } from 'vue';
 export default {
   props: [],
   created() {
+    console.log('created filter');
     const { address } = this.$route.query;
     if (address) {
       this.filterBy.address = address;
@@ -147,6 +148,7 @@ export default {
       });
     },
     setfilterParams() {
+      this.setfilter();
       this.$router.push(`/stay?address=${this.filterBy.address}`);
     },
     getFilters() {
