@@ -131,6 +131,7 @@ export const userService = {
   getEmptyStay,
   login,
   signup,
+  logout,
 }
 
 async function query(filterBy = {}) {
@@ -210,7 +211,7 @@ async function signup(userCred) {
 
 async function logout() {
   try {
-    const result = await httpService.post('auth/logout', userCred)
+    const result = await httpService.post('auth/logout')
     console.log('logout user=', result)
     return result
   } catch (err) {

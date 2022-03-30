@@ -7,6 +7,7 @@
       <div class="sentence">Let your curiosity do the booking</div>
     </div>
   </div>
+
   <!-- <el-button type="primary">Primary</el-button> -->
   <div class="destenations">
     <div class="item1" style="background-color: "></div>
@@ -79,7 +80,6 @@ export default {
 
   created() {
     this.$store.commit({ type: 'setCurrPage', page: 'homePage' });
-    console.log('userrrrr=', this.$store.getters.getUser);
   },
   components: {
     stayFilter,
@@ -88,6 +88,18 @@ export default {
     return {
       var1: 'bla',
     };
+  },
+
+  loggedInUser() {
+    let loggedUser = this.$store.getters.getLoggedUser;
+
+    console.log('logged in user11111 ======', loggedUser);
+    if (!loggedUser) {
+      console.log('no logged in user !!!!!!');
+      return false;
+    }
+    console.log('logged in user22222 ======', loggedUser);
+    return loggedUser;
   },
   methods: {
     // Tal
@@ -104,10 +116,16 @@ export default {
     goToExploreCategories() {
       this.$router.push(`/stay`);
     },
+    checkUser() {
+      console.log('check user =====', this.$store.getters.getLoggedUser);
+    },
   },
   computed: {
     getCom() {
       return 'blabla';
+    },
+    getLoggedUser() {
+      return this.$store.getters.getLoggedUser;
     },
   },
 };

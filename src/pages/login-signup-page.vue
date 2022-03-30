@@ -6,47 +6,19 @@
         <div class="form-title-container">
           <h3 class="form-title">Welcome to Flat-inn</h3>
         </div>
-        <form>
+        <form v-if="!getLoggedUser">
           <!-- Sign-up -->
-          <div
-            v-if="!isLogin"
-            class="input-container top-input top-input"
-            :class="{ 'top-input': !isLogin }"
-          >
-            <input
-              type="text"
-              v-model.trim="fullname"
-              ref="fullname"
-              placeholder="Fullname"
-              required
-            />
+          <div v-if="!isLogin" class="input-container top-input top-input" :class="{ 'top-input': !isLogin }">
+            <input type="text" v-model.trim="fullname" ref="fullname" placeholder="Fullname" required />
           </div>
           <div class="input-container" :class="{ 'top-input': isLogin }">
-            <input
-              type="text"
-              v-model.trim="username"
-              ref="username"
-              placeholder="Username"
-              required
-            />
+            <input type="text" v-model.trim="username" ref="username" placeholder="Username" required />
           </div>
-          <div
-            class="input-container bottom-input"
-            :class="{ 'no-border-top': !isLogin }"
-          >
-            <input
-              type="password"
-              v-model.trim="password"
-              ref="password"
-              placeholder="Password"
-              required
-            />
+          <div class="input-container bottom-input" :class="{ 'no-border-top': !isLogin }">
+            <input type="password" v-model.trim="password" ref="password" placeholder="Password" required />
           </div>
           <div class="input-container txt">
-            <p>
-              We’ll call or text you to confirm your number. Standard message
-              and data rates apply. <span>Privacy Policy.</span>
-            </p>
+            <p>We’ll call or text you to confirm your number. Standard message and data rates apply. <span>Privacy Policy.</span></p>
             <!-- Login -->
           </div>
           <div v-if="isLogin" class="input-container btn-container">
@@ -69,6 +41,10 @@
             </div>
           </div>
         </form>
+        <div v-if="getLoggedUser">
+          You have already logged in: {{ getLoggedUser.fullname }}
+          <button class="logout-btn" @click="onLogout">Log-out</button>
+        </div>
       </div>
     </section>
     <!-- SSO buttons -->
@@ -100,9 +76,19 @@ export default {
     return {
       isLogin: true,
       fullname: null,
-      username: null,
-      password: null,
+      username: 'Aurelie',
+      password: '73412968',
     };
+  },
+  computed: {
+    getLoggedUser() {
+      // let loggedUser = this.$store.getters.getLoggedUser;
+      // if (!loggedUser) {
+      //   return false;
+      // }
+      // return loggedUser.fullname;
+      return this.$store.getters.getLoggedUser;
+    },
   },
   methods: {
     toggleMode() {
@@ -139,8 +125,20 @@ export default {
         this.password = null;
       }
     },
+    async onLogout() {
+      try {
+        const result = await this.$store.dispatch({ type: 'logout' });
+      } catch (err) {
+        console.log('error in logout=', err);
+      }
+    },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.logout-btn {
+  background-color: blue;
+  color: white;
+}
+</style>
