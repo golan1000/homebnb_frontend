@@ -50,8 +50,9 @@
               <div class="dashboard-data-orders-status-con-top">
                 <div class="dashboard-data-orders-status">
                   <span class="dashboard-data-orders-status-title">Total</span>
-                  <span class="dashboard-data-orders-status-number status-total"
-                    >0</span
+                  <span
+                    class="dashboard-data-orders-status-number status-total"
+                    >{{ ordersForDisplay.length }}</span
                   >
                 </div>
                 <div class="dashboard-data-orders-status">
@@ -60,7 +61,7 @@
                   >
                   <span
                     class="dashboard-data-orders-status-number status-pending"
-                    >0</span
+                    >{{ ordersPending }}</span
                   >
                 </div>
               </div>
@@ -71,7 +72,7 @@
                   >
                   <span
                     class="dashboard-data-orders-status-number status-approved"
-                    >0</span
+                    >{{ ordersApproved }}</span
                   >
                 </div>
                 <div class="dashboard-data-orders-status">
@@ -80,7 +81,7 @@
                   >
                   <span
                     class="dashboard-data-orders-status-number status-declined"
-                    >0</span
+                    >{{ ordersDeclined }}</span
                   >
                 </div>
               </div>
@@ -91,20 +92,23 @@
             <div class="dashboard-data-guests-status-con">
               <div class="dashboard-data-guests-status">
                 <span class="dashboard-data-guests-status-title">Active</span>
-                <span class="dashboard-data-guests-status-number status-total"
-                  >0</span
+                <span
+                  class="dashboard-data-guests-status-number status-total"
+                  >{{ guestsActive }}</span
                 >
               </div>
               <div class="dashboard-data-guests-status">
                 <span class="dashboard-data-guests-status-title">Past</span>
-                <span class="dashboard-data-guests-status-number status-total"
-                  >0</span
+                <span
+                  class="dashboard-data-guests-status-number status-total"
+                  >{{ guestsPast }}</span
                 >
               </div>
               <div class="dashboard-data-guests-status">
                 <span class="dashboard-data-guests-status-title">Planned</span>
-                <span class="dashboard-data-guests-status-number status-total"
-                  >0</span
+                <span
+                  class="dashboard-data-guests-status-number status-total"
+                  >{{ guestsPlanned }}</span
                 >
               </div>
             </div>
@@ -161,18 +165,22 @@
               </th>
               <tr class="dashboard-details-orders-tr"></tr>
               <tr
-                v-for="stay in staysForDisplay"
-                :key="stay._id"
+                v-for="order in ordersForDisplay"
+                :key="order._id"
                 class="dashboard-details-tr orders-table-content"
               >
                 <td class="orders-table-content-pic">:)</td>
-                <td class="orders-table-content-guest">Ariel</td>
-                <td class="orders-table-content-name">{{ stay.name }}</td>
-                <td class="orders-table-content-check">
-                  01/01/2022-06/01/2022
+                <td class="orders-table-content-guest">
+                  {{ order.buyer.fullname }}
                 </td>
-                <td class="orders-table-content-status">Approved</td>
-                <td class="orders-table-content-revenue">${{ stay.price }}</td>
+                <td class="orders-table-content-name">{{ order.stay.name }}</td>
+                <td class="orders-table-content-check">
+                  {{ order.startDate }} - {{ order.endDate }}
+                </td>
+                <td class="orders-table-content-status">{{ order.status }}</td>
+                <td class="orders-table-content-revenue">
+                  ${{ order.totalPrice }}
+                </td>
                 <td class="orders-table-content-actions">Accept</td>
               </tr>
             </table>
@@ -196,7 +204,8 @@
                 class="dashboard-details-tr stays-table-content"
               >
                 <td class="stays-table-content-pic">
-                  <img class="backoffice-stay-img"
+                  <img
+                    class="backoffice-stay-img"
                     :src="`data/Images/${stay.imgUrls[0]}`"
                     alt="backoffice-stay-pic"
                   />
@@ -233,6 +242,18 @@ export default {
       staysForDisplay: [],
       ordersForDisplay: [],
       currTable: "orders",
+      currMonth: null,
+      currYear: null,
+      currDay: null,
+      guestsActive: 0,
+      guestsPlanned: 0,
+      guestsPast: 0,
+      ordersApproved: 0,
+      ordersDeclined: 0,
+      ordersPending: 0,
+      revenueMonth: 0,
+      revenueYear: 0,
+      revenueTotal: 0,
     };
   },
   methods: {
@@ -241,15 +262,29 @@ export default {
       else this.currTable = "orders";
     },
   },
-  created() {
-    this.loggedInUser = this.$store.getters.loggedinUser;
-    console.log(this.loggedInUser);
-    this.$store.dispatch({
-      type: "loadStaysForBackOffice",
-      user: this.loggedInUser,
-    });
-    this.staysForDisplay = this.$store.getters.getStaysForBackOffice;
-    console.log(this.staysForDisplay);
+  async created() {
+    try {
+      this.loggedInUser = await this.$store.getters.loggedinUser;
+      console.log(this.loggedInUser);
+      await this.$store.dispatch({
+        type: "loadStaysForBackOffice",
+        user: this.loggedInUser,
+      });
+      this.staysForDisplay = await this.$store.getters.getStaysForBackOffice;
+      console.log(this.staysForDisplay);
+      await this.$store.dispatch({
+        type: "loadOrders",
+        user: this.loggedInUser,
+      });
+      this.ordersForDisplay = await this.$store.getters.getOrders;
+      console.log(this.ordersForDisplay);
+      this.setCurrDates;
+      this.setCurrGuests;
+      this.setCurrOrdersData;
+      this.setCurrRevenues;
+    } catch (err) {
+      console.log("err", err);
+    }
   },
   computed: {
     setAvgRating() {
@@ -276,6 +311,99 @@ export default {
       } else if (this.staysForDisplay.length === 1)
         return this.staysForDisplay[0].reviews.length;
       else return "N/A";
+    },
+    setCurrDates() {
+      let date = new Date();
+      this.currMonth = date.getMonth() + 1;
+      this.currYear = date.getFullYear();
+      this.currDay = date.getDate();
+      console.log(this.currMonth);
+      console.log(this.currYear);
+    },
+    setCurrGuests() {
+      if (!this.ordersForDisplay.length) return;
+      console.log(this.ordersForDisplay.length);
+      for (var i = 0; i < this.ordersForDisplay.length; i++) {
+        const startDate = new Date(this.ordersForDisplay[i].startDate * 1000);
+        console.log(startDate);
+        const startMonth = startDate.getMonth() + 1;
+        console.log(startMonth);
+        const startYear = startDate.getFullYear();
+        console.log(startYear);
+        const startDay = startDate.getDate();
+        console.log(startDay);
+        const endDate = new Date(this.ordersForDisplay[i].endDate * 1000);
+        console.log(endDate);
+        const endMonth = endDate.getMonth() + 1;
+        console.log(endMonth);
+        const endYear = endDate.getFullYear();
+        console.log(endYear);
+        const endDay = endDate.getDate();
+        console.log(endDay);
+        if (endYear < this.currYear) {
+          this.guestsPast++;
+          continue;
+        }
+        if (startYear > this.currYear) {
+          this.guestsPlanned++;
+          continue;
+        }
+        if (endMonth < this.currMonth) {
+          this.guestsPast++;
+          continue;
+        }
+        if (startMonth > this.currMonth) {
+          this.guestsPlanned++;
+          continue;
+        }
+        if (endDay < this.currDay) {
+          this.guestsPast++;
+          continue;
+        }
+        if (startDay > this.currDay) {
+          this.guestsPlanned++;
+          continue;
+        }
+        if (
+          startDay === this.currDay ||
+          endDay === this.currDay ||
+          (startDay < this.currDay && endDay > this.currDay)
+        ) {
+          this.guestsActive++;
+          continue;
+        }
+      }
+    },
+    setCurrOrdersData() {
+      if (!this.ordersForDisplay.length) return;
+      for (var i = 0; i < this.ordersForDisplay.length; i++) {
+        if (this.ordersForDisplay[i].status === "Pending") this.ordersPending++;
+        if (this.ordersForDisplay[i].status === "Declined")
+          this.ordersDeclined++;
+        if (this.ordersForDisplay[i].status === "Approved")
+          this.ordersApproved++;
+      }
+    },
+    setCurrRevenues() {
+      if (!this.ordersForDisplay.length) return;
+      for (var i = 0; i < this.ordersForDisplay.length; i++) {
+        const startDate = new Date(this.ordersForDisplay[i].startDate * 1000);
+        console.log(startDate);
+        const startMonth = startDate.getMonth() + 1;
+        console.log(startMonth);
+        const startYear = startDate.getFullYear();
+        console.log(startYear);
+        const startDay = startDate.getDate();
+        console.log(startDay);
+        const endDate = new Date(this.ordersForDisplay[i].endDate * 1000);
+        console.log(endDate);
+        const endMonth = endDate.getMonth() + 1;
+        console.log(endMonth);
+        const endYear = endDate.getFullYear();
+        console.log(endYear);
+        const endDay = endDate.getDate();
+        console.log(endDay);
+      }
     },
   },
 };
