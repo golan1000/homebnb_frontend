@@ -8,7 +8,7 @@ var axios = Axios.create({
   withCredentials: true,
 })
 
-export const httpService = {
+export const httpService11111 = {
   get(endpoint, data) {
     return ajax(endpoint, 'GET', data)
   },
@@ -35,7 +35,7 @@ async function ajax(endpoint, method = 'GET', data = null) {
   } catch (err) {
     console.log(
       `Had Issues ${method}ing to the backend, endpoint: ${endpoint}, with data:`,
-      data
+      data,
     )
     console.dir(err)
     if (err.response && err.response.status === 401) {

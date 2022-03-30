@@ -1,14 +1,11 @@
 import { storageService } from './async-storage-service'
 
-const KEY = 'orderDB'
+import { httpService } from './httpService'
 
-_createOrders()
-// window.createOrders = _createOrders
-window.query1 = query
-// window.getById = getById
-// window.remove = remove
-// window.save = save
-// window.getEmptyStay = getEmptyStay
+const API_URL = 'stay'
+
+window.stayQuery123 = query
+// _createOrders()
 var gOrders = [
   {
     _id: 'o1225',
@@ -121,7 +118,7 @@ var gOrders = [
     status: 'pending',
   },
 ]
-export const orderService = {
+export const stayService = {
   query,
   getById,
   remove,
@@ -132,14 +129,13 @@ export const orderService = {
 // TODO: support paging and filtering and sorting
 async function query(filterBy = {}) {
   try {
-    // const orders = JSON.parse(JSON.stringify(gOrders))
-    const orders = await storageService.query(KEY)
-    // const orders = gOrders
-    console.log('orders=-=-==-=-=-=-=', orders)
-    return _filterOrders(filterBy, orders)
+    console.log('check query!!!!')
+    const stays = await httpService.get(API_URL)
+    console.log('orders from async mongo=', stays)
+    return stays
   } catch (err) {
     console.log('err', err)
-    throw new Error('could not get orders')
+    throw new Error('could not get stays')
   }
 }
 //Tal
