@@ -26,15 +26,14 @@ export const httpService = {
 async function workAxios(path, type = 'GET', data = null) {
   try {
     const checkObj = {
-      url: BASE_URL + path,
+      url: `${BASE_URL}${path}`,
       method: type,
       data,
       params: type === 'GET' ? data : null,
     }
 
-    console.log({ checkObj })
     const res = await axios({
-      url: BASE_URL + path,
+      url: `${BASE_URL}${path}`,
       method: type,
       data,
       params: type === 'GET' ? data : null,

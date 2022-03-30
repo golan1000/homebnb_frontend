@@ -228,7 +228,7 @@
               <button class="date-close-btn" @click="toggleDateModal">Close</button>
             </div>
           </div>
-          <button class="order-form-submit" @click="submitOrder">
+          <button class="order-form-submit" @click="submitOrder" style="submitOrderStyle">
             <div>{{ getButtonText }}</div>
           </button>
 
@@ -353,6 +353,7 @@ export default {
     return {
       isReadyToSubmit: true,
       isDateSelected: false,
+      submitBtnState: true,
       guests: {
         adults: 0,
         kids: 0,
@@ -477,6 +478,7 @@ export default {
       }
 
       if (this.checkReadyToOrder() === true) {
+        this.submitBtnState = false;
         console.log('Ready to order!!!');
       }
 
@@ -513,7 +515,7 @@ export default {
 
       console.log('order=', order);
 
-      this.$store.dispatch({type:'submitOrder', order})
+      this.$store.dispatch({ type: 'submitOrder', order });
     },
 
     getTotalNights() {
@@ -762,6 +764,10 @@ export default {
       let totalCalc = totalNightCost + cleaningFee + serviceFee;
       this.totalPrice = totalCalc;
       return '$' + totalCalc;
+    },
+    submitOrderStyle() {
+      if (this.submitBtnState) return '';
+      else return 'disabled:true;background-color:gray;';
     },
   },
   watch: {

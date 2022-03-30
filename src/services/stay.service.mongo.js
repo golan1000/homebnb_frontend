@@ -4,9 +4,11 @@ import { httpService } from './httpService'
 
 const API_URL = 'stay'
 
-window.stayQuery123 = query
-// _createOrders()
-var gOrders = [
+window.stayQuery = query
+window.stayGetById = getById
+window.staySave = save
+// _createStays()
+var gStays = [
   {
     _id: 'o1225',
     hostId: 'u101',
@@ -121,50 +123,36 @@ var gOrders = [
 export const stayService = {
   query,
   getById,
-  remove,
   save,
   getEmptyStay,
 }
 
-// TODO: support paging and filtering and sorting
 async function query(filterBy = {}) {
   try {
-    console.log('check query!!!!')
-    const stays = await httpService.get(API_URL)
-    console.log('orders from async mongo=', stays)
+    const stays = await httpService.get(API_URL, filterBy)
+    // console.log('stays from async mongo=', stays)
     return stays
   } catch (err) {
     console.log('err', err)
     throw new Error('could not get stays')
   }
 }
-//Tal
-function _filterOrders(filterBy, orders) {
-  console.log('order filter======================')
-  if (!filterBy.address) {
-    return orders
+
+async function getById(id) {
+  try {
+    const foundStay = await httpService.get(`${API_URL}/${id}`)
+    return foundStay
+  } catch (err) {
+    console.log('err', err)
+    throw new Error('could not get stay by id')
   }
-  console.log('orders', orders)
-  console.log('filterBy', filterBy)
-  let filteredOrders = []
-  const regex = new RegExp(filterBy.address, 'i')
-  filteredOrders = orders.filter((order) => regex.test(order.address.city))
-  return filteredOrders
 }
 
-function getById(id) {
-  return storageService.get(KEY, id)
-}
-
-function remove(id) {
-  return storageService.remove(KEY, id)
-}
-
-function save(order) {
-  const prm = order._id
-    ? storageService.put(KEY, order)
-    : storageService.post(KEY, order)
-  return prm
+async function save(stay) {
+  const result = stay._id
+    ? await httpService.put(`${API_URL}/${stay._id}`, stay)
+    : await httpService.post(API_URL, stay)
+  return result
 }
 
 function getEmptyStay() {
@@ -173,20 +161,20 @@ function getEmptyStay() {
   }
 }
 
-function _save(orders) {
-  storageService._save(KEY, orders)
+function _save(stays) {
+  storageService._save(KEY, stays)
 }
 
-async function _createOrders() {
-  console.log('create orders runnnnn')
-  var orders = (await query()) || []
+async function _createStays() {
+  console.log('create stays runnnnn')
+  var stays = (await query()) || []
 
-  console.log('result = ', orders)
-  if (!orders || orders.length === 0) {
-    console.log('there are no orders!!!!')
-    orders = gOrders
+  console.log('result = ', stays)
+  if (!stays || stays.length === 0) {
+    console.log('there are no stays!!!!')
+    stays = gStays
 
-    console.log('new  ordersss=', orders)
-    storageService._save(KEY, orders)
+    console.log('new  staysss=', stays)
+    storageService._save(KEY, stays)
   }
 }
