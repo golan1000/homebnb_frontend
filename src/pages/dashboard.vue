@@ -4,7 +4,7 @@
       <div class="dashboard-top-section">
         <div class="dashboard-data-con">
           <div class="dashboard-data data-rate">
-            <h4 class="dashboard-data-rate-title">Rate</h4>
+            <h4 class="dashboard-data-rate-title data-title">Rate</h4>
             <div class="dashboard-data-rate-content">
               <div class="dashboard-data-rate-average">
                 <span class="dashboard-data-rate-average-title">Average</span>
@@ -21,12 +21,14 @@
               </div>
               <div class="dashboard-data-rate-count">
                 <span class="dashboard-data-rate-count-title">Reviews</span>
-                <span class="dashboard-data-rate-count-number">0</span>
+                <span class="dashboard-data-rate-count-number">{{
+                  setReviewsCount
+                }}</span>
               </div>
             </div>
           </div>
           <div class="dashboard-data data-revenues">
-            <h4 class="dashboard-data-revenues-title">Revenues</h4>
+            <h4 class="dashboard-data-revenues-title data-title">Revenues</h4>
             <div class="dashboard-data-revenues-period-con">
               <div class="dashboard-data-revenues-period period-month">
                 <span class="dashboard-data-revenues-period-month">Month</span>
@@ -43,7 +45,7 @@
             </div>
           </div>
           <div class="dashboard-data data-orders">
-            <h4 class="dashboard-data-orders-title">Orders</h4>
+            <h4 class="dashboard-data-orders-title data-title">Orders</h4>
             <div class="dashboard-data-orders-status-con">
               <div class="dashboard-data-orders-status-con-top">
                 <div class="dashboard-data-orders-status">
@@ -85,7 +87,7 @@
             </div>
           </div>
           <div class="dashboard-data data-guests">
-            <h4 class="dashboard-data-guests-title">Guests</h4>
+            <h4 class="dashboard-data-guests-title data-title">Guests</h4>
             <div class="dashboard-data-guests-status-con">
               <div class="dashboard-data-guests-status">
                 <span class="dashboard-data-guests-status-title">Active</span>
@@ -138,24 +140,37 @@
             class="dashboard-details-table orders-table"
           >
             <table>
-              <th class="dashboard-details-th stays-table-avatar"></th>
-              <th class="dashboard-details-th stays-table-guest">Guest Name</th>
-              <th class="dashboard-details-th stays-table-stay">Stay Name</th>
-              <th class="dashboard-details-th stays-table-check">
+              <th class="dashboard-details-orders-th orders-table-pic"></th>
+              <th class="dashboard-details-orders-th orders-table-guest">
+                Guest Name
+              </th>
+              <th class="dashboard-details-orders-th orders-table-stay">
+                Stay Name
+              </th>
+              <th class="dashboard-details-orders-th orders-table-check">
                 Check In - Check Out
               </th>
-              <th class="dashboard-details-th stays-table-status">Status</th>
-              <th class="dashboard-details-th stays-table-revenue">Revenue</th>
-              <th class="dashboard-details-th stays-table-actions">Actions</th>
-              <tr class="dashboard-details-tr"></tr>
+              <th class="dashboard-details-orders-th orders-table-status">
+                Status
+              </th>
+              <th class="dashboard-details-orders-th orders-table-revenue">
+                Revenue
+              </th>
+              <th class="dashboard-details-orders-th orders-table-actions">
+                Actions
+              </th>
+              <tr class="dashboard-details-orders-tr"></tr>
               <tr
                 v-for="stay in staysForDisplay"
                 :key="stay._id"
                 class="dashboard-details-tr orders-table-content"
               >
+                <td class="orders-table-content-pic">:)</td>
                 <td class="orders-table-content-guest">Ariel</td>
                 <td class="orders-table-content-name">{{ stay.name }}</td>
-                <td class="orders-table-content-date">01/01/2022-06/01/2022</td>
+                <td class="orders-table-content-check">
+                  01/01/2022-06/01/2022
+                </td>
                 <td class="orders-table-content-status">Approved</td>
                 <td class="orders-table-content-revenue">${{ stay.price }}</td>
                 <td class="orders-table-content-actions">Accept</td>
@@ -164,22 +179,43 @@
           </div>
           <div v-else class="dashboard-details-table stays-table">
             <table>
-              <th class="dashboard-details-th orders-table-avatar"></th>
-              <th class="dashboard-details-th orders-table-name">Name</th>
-              <th class="dashboard-details-th orders-table-price">Price</th>
-              <th class="dashboard-details-th orders-table-address">Address</th>
-              <th class="dashboard-details-th orders-table-actions">Actions</th>
+              <th class="dashboard-details-stays-th stays-table-pic"></th>
+              <th class="dashboard-details-stays-th stays-table-name">Name</th>
+              <th class="dashboard-details-stays-th stays-table-price">
+                Price
+              </th>
+              <th class="dashboard-details-stays-th stays-table-address">
+                Address
+              </th>
+              <th class="dashboard-details-stays-th stays-table-actions">
+                Actions
+              </th>
               <tr
                 v-for="stay in staysForDisplay"
                 :key="stay._id"
-                class="dashboard-details-tr orders-table-content"
+                class="dashboard-details-tr stays-table-content"
               >
-                <td class="orders-table-content-name">{{ stay.name }}</td>
-                <td class="orders-table-content-guest">{{ stay.price }}</td>
-                <td class="orders-table-content-date">
+                <td class="stays-table-content-pic">
+                  <img class="backoffice-stay-img"
+                    :src="`data/Images/${stay.imgUrls[0]}`"
+                    alt="backoffice-stay-pic"
+                  />
+                </td>
+                <td class="stays-table-content-name">{{ stay.name }}</td>
+                <td class="stays-table-content-price">{{ stay.price }}</td>
+                <td class="stays-table-content-address">
                   {{ stay.address.street }}
                 </td>
-                <td class="orders-table-content-status">Edit</td>
+                <td class="stays-table-content-actions">
+                  <div class="stays-table-content-actions-inner">
+                    <img
+                      class="img-edit"
+                      src="../assets/edit.svg"
+                      alt="img-edit"
+                    />
+                    Edit
+                  </div>
+                </td>
               </tr>
             </table>
           </div>
@@ -229,17 +265,18 @@ export default {
         return this.staysForDisplay[0].reviewScores.rating;
       else return "N/A";
     },
-    //     const array1 = [1, 2, 3, 4];
-
-    // // 0 + 1 + 2 + 3 + 4
-    // const initialValue = 0;
-    // const sumWithInitial = array1.reduce(
-    //   (previousValue, currentValue) => previousValue + currentValue,
-    //   initialValue
-    // );
-
-    // console.log(sumWithInitial);
-    // // expected output: 10
+    setReviewsCount() {
+      if (this.staysForDisplay.length > 1) {
+        let count = this.staysForDisplay.reduce(
+          (previousValue, currentValue) =>
+            previousValue + currentValue.reviews.length,
+          0
+        );
+        return count;
+      } else if (this.staysForDisplay.length === 1)
+        return this.staysForDisplay[0].reviews.length;
+      else return "N/A";
+    },
   },
 };
 </script>
