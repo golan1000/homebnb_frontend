@@ -26,7 +26,7 @@
       display: flex;
       width: 100%;
       justify-content: space-around;
-      height: 270px;
+      height: 185px;
 
       .dashboard-data {
         width: 25%;
@@ -34,6 +34,10 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+
+        .data-title {
+          margin-top: 6px;
+        }
       }
 
       .data-rate {
@@ -52,6 +56,10 @@
 
               .dashboard-data-rate-img {
                 width: 1rem;
+                margin-right: 2px;
+              }
+              .dashboard-data-rate-average-number {
+                margin-left: 2px;
               }
             }
           }
@@ -109,6 +117,7 @@
           height: 80%;
           justify-content: space-evenly;
           display: flex;
+          margin-top: 8px;
 
           .dashboard-data-guests-status {
             display: flex;
@@ -121,6 +130,7 @@
   }
 
   .dashboard-bottom-section {
+    margin-top: 30px;
     flex-grow: 1;
     .dashboard-summary {
       width: 100%;
@@ -128,10 +138,12 @@
       margin: auto;
       justify-content: space-evenly;
       align-items: center;
+      margin-bottom: 23px;
 
       .backoffice-img {
         width: 1rem;
         margin-right: 5px;
+        padding-bottom: 4px;
       }
 
       .dashboard-summary-stays {
@@ -141,7 +153,12 @@
         height: 33px;
         padding: 8px;
         cursor: pointer;
+
+        .dashboard-summary-stays-title {
+          padding-top: 2px;
+        }
       }
+      align-items: center;
       .dashboard-summary-orders {
         height: 50%;
         display: flex;
@@ -149,6 +166,14 @@
         height: 33px;
         padding: 8px;
         cursor: pointer;
+        align-items: center;
+      }
+
+      .dashboard-summary-stays:hover {
+        background-color: #eeeeee;
+      }
+      .dashboard-summary-orders:hover {
+        background-color: #eeeeee;
       }
     }
 
@@ -156,6 +181,105 @@
       table {
         margin: auto;
         width: 100%;
+        text-align: center;
+      }
+
+      .stays-table-pic {
+        width: 10%;
+      }
+      .stays-table-name {
+        width: 35%;
+      }
+      .stays-table-price {
+        width: 10%;
+      }
+      .stays-table-address {
+        width: 35%;
+      }
+      .stays-table-actions {
+        width: 10%;
+      }
+
+      .stays-table-content-pic {
+        width: 10%;
+        .backoffice-stay-img {
+          width: 45px;
+          height: 45px;
+          border-radius: 50%;
+        }
+      }
+      .stays-table-content-name {
+        width: 35%;
+      }
+      .stays-table-content-price {
+        width: 10%;
+      }
+      .stays-table-content-address {
+        width: 35%;
+      }
+      .stays-table-content-actions {
+        width: 10%;
+        .stays-table-content-actions-inner {
+          padding-left: 13px;
+          padding-right: 13px;
+          cursor: pointer;
+          text-decoration: underline;
+
+          .img-edit {
+            width: 1rem;
+          }
+        }
+      }
+
+      .orders-table-pic {
+        width: 5%;
+      }
+      .orders-table-guest {
+        width: 14%;
+      }
+      .orders-table-stay {
+        width: 14%;
+      }
+      .orders-table-check {
+        width: 25%;
+      }
+      .orders-table-status {
+        width: 14%;
+      }
+      .orders-table-revenues {
+        width: 14%;
+      }
+      .orders-table-actions {
+        width: 14%;
+      }
+
+      .orders-table-content-pic {
+        width: 5%;
+      }
+      .orders-table-content-guest {
+        width: 14%;
+      }
+      .orders-table-content-stay {
+        width: 14%;
+      }
+      .orders-table-content-check {
+        width: 25%;
+      }
+      .orders-table-content-status {
+        width: 14%;
+      }
+      .orders-table-content-revenues {
+        width: 14%;
+      }
+      .orders-table-content-actions {
+        width: 14%;
+      }
+
+      .orders-table-content {
+        height: 60px;
+      }
+      .stays-table-content {
+        height: 40px;
       }
     }
   }
