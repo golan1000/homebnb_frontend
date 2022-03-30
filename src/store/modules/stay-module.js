@@ -1,6 +1,6 @@
 // import { ssrContextKey } from 'vue'
 // import { stayService } from '../../services/stays-service-local.js';
-import { stayService } from '../../services/stay.service.mongo'
+import { stayService } from '../../services/stay.service.mongo';
 export default {
   state: {
     stays: [], //need to be empty array important
@@ -67,6 +67,7 @@ export default {
       try {
         const stays = await stayService.query(state.filterBy);
         commit({ type: 'setStays', stays });
+        return stays;
       } catch (err) {
         console.log('err in stay-module in loadToys:', err);
       }

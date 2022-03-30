@@ -6,14 +6,16 @@ export default {
   },
   getters: {
     // Tal
-    loggedinUser({ loggedinUser }) {
-      return loggedinUser;
+    getLoggedUser(state) {
+      // console.log('logged in user from store=', state.loggedInUser)
+      if (!state.loggedInUser._id) return false;
+      return state.loggedInUser;
     },
   },
   mutations: {
     // Tal
     setLoggedinUser(state, { user }) {
-      state.loggedinUser = user;
+      state.loggedInUser = user;
     },
   },
   actions: {

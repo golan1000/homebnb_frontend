@@ -24,7 +24,7 @@ async function query(filterBy = {}) {
   try {
     const stays = JSON.parse(JSON.stringify(gStays))
     // const stays = await storageService.query(KEY);
-    console.log('stays', stays)
+    // console.log('stays', stays)
     return _filterStays(filterBy, stays)
   } catch (err) {
     console.log('err', err)
@@ -72,12 +72,12 @@ async function _createStays() {
   console.log('create stays runnnnn')
   var stays = (await query()) || []
 
-  console.log('result = ', stays)
+  // console.log('result = ', stays)
   if (!stays || stays.length === 0) {
     console.log('there are no stays!!!!')
     stays = gStays
 
-    console.log('new  staysss=', stays)
+    // console.log('new  staysss=', stays)
     storageService._save(KEY, stays)
   }
   storageService._save(KEY, stays)

@@ -7,18 +7,20 @@
 </template>
 
 <script>
-import appHeader from "./components/app-header.vue";
-import appFooter from "./components/app-footer.vue";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import appHeader from './components/app-header.vue';
+import appFooter from './components/app-footer.vue';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 export default {
-  name: "App",
+  name: 'App',
   data() {
-    return {
-    };
+    return {};
   },
-  created() {
-    this.$store.dispatch({ type: "loadStays" });
+  async created() {
+    // this.$store.dispatch({ type: 'loadStays' });
+    const loadedStays = await this.$store.dispatch({ type: 'loadStays' });
+
+    console.log('loaded stays=', loadedStays);
   },
   components: {
     appHeader,

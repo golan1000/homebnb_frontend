@@ -351,6 +351,7 @@
 export default {
   data() {
     return {
+      baseUrl: '../../data/Images/',
       isReadyToSubmit: true,
       isDateSelected: false,
       submitBtnState: true,
@@ -531,24 +532,19 @@ export default {
   },
   computed: {
     galleryImg1() {
-      let baseUrl = '../../data/Images/';
-      if (this.stayToEdit.imgUrls[0]) return baseUrl + this.stayToEdit.imgUrls[0];
+      if (this.stayToEdit.imgUrls[0]) return this.baseUrl + this.stayToEdit.imgUrls[0];
     },
     galleryImg2() {
-      let baseUrl = '../../data/Images/';
-      if (this.stayToEdit.imgUrls[1]) return baseUrl + this.stayToEdit.imgUrls[1];
+      if (this.stayToEdit.imgUrls[1]) return this.baseUrl + this.stayToEdit.imgUrls[1];
     },
     galleryImg3() {
-      let baseUrl = '../../data/Images/';
-      if (this.stayToEdit.imgUrls[2]) return baseUrl + this.stayToEdit.imgUrls[2];
+      if (this.stayToEdit.imgUrls[2]) return this.baseUrl + this.stayToEdit.imgUrls[2];
     },
     galleryImg4() {
-      let baseUrl = '../../data/Images/';
-      if (this.stayToEdit.imgUrls[3]) return baseUrl + this.stayToEdit.imgUrls[3];
+      if (this.stayToEdit.imgUrls[3]) return this.baseUrl + this.stayToEdit.imgUrls[3];
     },
     galleryImg5() {
-      let baseUrl = '../../data/Images/';
-      if (this.stayToEdit.imgUrls[4]) return baseUrl + this.stayToEdit.imgUrls[4];
+      if (this.stayToEdit.imgUrls[4]) return this.baseUrl + this.stayToEdit.imgUrls[4];
     },
     getStayPrice() {
       return '$' + this.stayToEdit.price;
@@ -767,7 +763,7 @@ export default {
     },
     submitOrderStyle() {
       if (this.submitBtnState) return '';
-      else return 'disabled:true;background-color:gray;';
+      else return 'disabled:true;linear-gradient(to right, #919191 , #b0b0b0);';
     },
   },
   watch: {
