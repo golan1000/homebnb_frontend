@@ -8,11 +8,9 @@
             class="location-input"
             list="addresses"
             name="addresses"
-            type="search"
+            type="text"
             placeholder="Where are you going?"
             v-model="filterBy.address"
-            @change="setfilter"
-            @input="setfilter"
           />
         </label>
         <datalist id="addresses">
@@ -123,6 +121,7 @@ import { shallowRef } from 'vue';
 export default {
   props: [],
   created() {
+    console.log('created filter');
     const { address } = this.$route.query;
     if (address) {
       this.filterBy.address = address;
@@ -184,6 +183,7 @@ export default {
       });
     },
     setfilterParams() {
+      this.setfilter();
       this.$router.push(`/stay?address=${this.filterBy.address}`);
     },
     getFilters() {

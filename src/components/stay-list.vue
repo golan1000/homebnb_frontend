@@ -1,12 +1,12 @@
 <template>
-  <h4 v-if="$route.query.address" class="stay-list-title">
+  <h4 v-if="stays.length" class="stay-list-title">
     {{
-      stays.length
+      $route.query.address
         ? `${stays.length} stays in ${$route.query.address}`
-        : "No match found"
+        : 'Explore the world!'
     }}
   </h4>
-  <h4 v-else>Explore the world!</h4>
+  <h4 v-else>No match found</h4>
   <!-- <h4 v-if="$route.query.address" class="stay-list-title">
     {{ stays.length }} stays in
     {{ stays[0].address.city }} 
@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import stayPreview from "./stay-preview.vue";
-import expoloreBtns from "./explore-btns.vue";
+import stayPreview from './stay-preview.vue';
+import expoloreBtns from './explore-btns.vue';
 
 export default {
   props: {
