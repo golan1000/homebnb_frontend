@@ -135,7 +135,7 @@ async function query(filterBy = {}) {
     // const orders = JSON.parse(JSON.stringify(gOrders))
     const orders = await storageService.query(KEY)
     // const orders = gOrders
-    console.log('orders=-=-==-=-=-=-=', orders)
+    // console.log('orders=-=-==-=-=-=-=', orders)
     return _filterOrders(filterBy, orders)
   } catch (err) {
     console.log('err', err)
