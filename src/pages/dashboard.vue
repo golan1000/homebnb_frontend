@@ -32,15 +32,21 @@
             <div class="dashboard-data-revenues-period-con">
               <div class="dashboard-data-revenues-period period-month">
                 <span class="dashboard-data-revenues-period-month">Month</span>
-                <span class="dashboard-data-revenues-period-month">$0</span>
+                <span class="dashboard-data-revenues-period-month">{{
+                  revenueMonth
+                }}</span>
               </div>
               <div class="dashboard-data-revenues-period period-year">
                 <span class="dashboard-data-revenues-period-year-">Year</span>
-                <span class="dashboard-data-revenues-period-year">$0</span>
+                <span class="dashboard-data-revenues-period-year">{{
+                  revenueYear
+                }}</span>
               </div>
               <div class="dashboard-data-revenues-period period-total">
                 <span class="dashboard-data-revenues-period-total">Total</span>
-                <span class="dashboard-data-revenues-period-total">$0</span>
+                <span class="dashboard-data-revenues-period-total">{{
+                  revenueTotal
+                }}</span>
               </div>
             </div>
           </div>
@@ -319,6 +325,7 @@ export default {
       this.currDay = date.getDate();
       console.log(this.currMonth);
       console.log(this.currYear);
+      console.log(this.currDay);
     },
     setCurrGuests() {
       if (!this.ordersForDisplay.length) return;
@@ -388,21 +395,15 @@ export default {
       if (!this.ordersForDisplay.length) return;
       for (var i = 0; i < this.ordersForDisplay.length; i++) {
         const startDate = new Date(this.ordersForDisplay[i].startDate * 1000);
-        console.log(startDate);
         const startMonth = startDate.getMonth() + 1;
-        console.log(startMonth);
         const startYear = startDate.getFullYear();
-        console.log(startYear);
-        const startDay = startDate.getDate();
-        console.log(startDay);
-        const endDate = new Date(this.ordersForDisplay[i].endDate * 1000);
-        console.log(endDate);
-        const endMonth = endDate.getMonth() + 1;
-        console.log(endMonth);
-        const endYear = endDate.getFullYear();
-        console.log(endYear);
-        const endDay = endDate.getDate();
-        console.log(endDay);
+        if (startYear === this.currYear) {
+          this.revenueYear += this.ordersForDisplay[i].totalPrice;
+          if (startMonth === this.currMonth) {
+            this.revenueMonth += this.ordersForDisplay[i].totalPrice;
+          }
+        }
+        this.revenueTotal += this.ordersForDisplay[i].totalPrice;
       }
     },
   },
