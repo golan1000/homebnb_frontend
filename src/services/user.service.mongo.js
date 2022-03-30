@@ -1,12 +1,18 @@
+import router from '../router'
 import { storageService } from './async-storage-service'
 
 import { httpService } from './httpService'
 
 const API_URL = 'user'
 
-window.userQuery123 = query
-// _createOrders()
-var gOrders = [
+window.userQuery = query
+window.userGetById = getById
+window.userSave = save
+window.userLogin = login
+window.userSignup = signup
+login
+// _createUsers()
+var gUsers = [
   {
     _id: 'o1225',
     hostId: 'u101',
@@ -121,50 +127,38 @@ var gOrders = [
 export const userService = {
   query,
   getById,
-  remove,
   save,
   getEmptyStay,
+  login,
+  signup,
 }
 
-// TODO: support paging and filtering and sorting
 async function query(filterBy = {}) {
   try {
-    console.log('check query!!!!')
-    const users = await httpService.get(API_URL)
-    console.log('orders from async mongo=', users)
+    const users = await httpService.get(API_URL, filterBy)
+    // console.log('users from async mongo=', users)
     return users
   } catch (err) {
     console.log('err', err)
     throw new Error('could not get users')
   }
 }
-//Tal
-function _filterOrders(filterBy, orders) {
-  console.log('order filter======================')
-  if (!filterBy.address) {
-    return orders
+
+async function getById(id) {
+  try {
+    const foundUser = await httpService.get(`${API_URL}/${id}`)
+    return foundUser
+  } catch (err) {
+    console.log('err', err)
+    throw new Error('could not get user by id')
   }
-  console.log('orders', orders)
-  console.log('filterBy', filterBy)
-  let filteredOrders = []
-  const regex = new RegExp(filterBy.address, 'i')
-  filteredOrders = orders.filter((order) => regex.test(order.address.city))
-  return filteredOrders
 }
 
-function getById(id) {
-  return storageService.get(KEY, id)
-}
-
-function remove(id) {
-  return storageService.remove(KEY, id)
-}
-
-function save(order) {
-  const prm = order._id
-    ? storageService.put(KEY, order)
-    : storageService.post(KEY, order)
-  return prm
+async function save(user) {
+  const result = user._id
+    ? await httpService.put(`${API_URL}/${user._id}`, user)
+    : await httpService.post(API_URL, user)
+  return result
 }
 
 function getEmptyStay() {
@@ -173,20 +167,54 @@ function getEmptyStay() {
   }
 }
 
-function _save(orders) {
-  storageService._save(KEY, orders)
+function _save(users) {
+  storageService._save(KEY, users)
 }
 
-async function _createOrders() {
-  console.log('create orders runnnnn')
-  var orders = (await query()) || []
+async function _createUsers() {
+  console.log('create users runnnnn')
+  var users = (await query()) || []
 
-  console.log('result = ', orders)
-  if (!orders || orders.length === 0) {
-    console.log('there are no orders!!!!')
-    orders = gOrders
+  console.log('result = ', users)
+  if (!users || users.length === 0) {
+    console.log('there are no users!!!!')
+    users = gUsers
 
-    console.log('new  ordersss=', orders)
-    storageService._save(KEY, orders)
+    console.log('new  usersss=', users)
+    storageService._save(KEY, users)
+  }
+}
+
+async function login(userCred) {
+  try {
+    const result = await httpService.post('auth/login', userCred)
+    console.log('loggedInUser=', result)
+    router.push('/')
+    return result
+  } catch (err) {
+    console.log('err', err)
+    throw new Error('could not login')
+  }
+}
+async function signup(userCred) {
+  try {
+    const result = await httpService.post('auth/signup', userCred)
+    console.log('signup user=', result)
+    router.push('/')
+    return result
+  } catch (err) {
+    console.log('err', err)
+    throw new Error('could not signup')
+  }
+}
+
+async function logout() {
+  try {
+    const result = await httpService.post('auth/logout', userCred)
+    console.log('logout user=', result)
+    return result
+  } catch (err) {
+    console.log('err', err)
+    throw new Error('could not logout')
   }
 }

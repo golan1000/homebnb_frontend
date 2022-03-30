@@ -4,7 +4,9 @@ import { httpService } from './httpService'
 
 const API_URL = 'order'
 
-window.orderQuery123 = query
+window.orderQuery = query
+window.orderGetById = getById
+window.orderSave = save
 // _createOrders()
 var gOrders = [
   {
@@ -121,50 +123,36 @@ var gOrders = [
 export const orderService = {
   query,
   getById,
-  remove,
   save,
   getEmptyStay,
 }
 
-// TODO: support paging and filtering and sorting
 async function query(filterBy = {}) {
   try {
-    console.log('check query!!!!')
-    const orders = await httpService.get(API_URL)
-    console.log('orders from async mongo=', orders)
+    const orders = await httpService.get(API_URL, filterBy)
+    // console.log('orders from async mongo=', orders)
     return orders
   } catch (err) {
     console.log('err', err)
     throw new Error('could not get orders')
   }
 }
-//Tal
-function _filterOrders(filterBy, orders) {
-  console.log('order filter======================')
-  if (!filterBy.address) {
-    return orders
+
+async function getById(id) {
+  try {
+    const foundOrder = await httpService.get(`${API_URL}/${id}`)
+    return foundOrder
+  } catch (err) {
+    console.log('err', err)
+    throw new Error('could not get order by id')
   }
-  console.log('orders', orders)
-  console.log('filterBy', filterBy)
-  let filteredOrders = []
-  const regex = new RegExp(filterBy.address, 'i')
-  filteredOrders = orders.filter((order) => regex.test(order.address.city))
-  return filteredOrders
 }
 
-function getById(id) {
-  return storageService.get(KEY, id)
-}
-
-function remove(id) {
-  return storageService.remove(KEY, id)
-}
-
-function save(order) {
-  const prm = order._id
-    ? storageService.put(KEY, order)
-    : storageService.post(KEY, order)
-  return prm
+async function save(order) {
+  const result = order._id
+    ? await httpService.put(`${API_URL}/${order._id}`, order)
+    : await httpService.post(API_URL, order)
+  return result
 }
 
 function getEmptyStay() {

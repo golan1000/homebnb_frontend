@@ -1,6 +1,5 @@
-// import { orderService } from '../../services/order-service'
-import { orderService } from '../../services/order.service.async.js';
-
+// import { orderService } from '../../services/order.service.async'
+import { orderService } from '../../services/order.service.mongo'
 export default {
   state: {
     orders: [],
@@ -14,9 +13,9 @@ export default {
   },
   mutations: {
     submitOrder(state, { order }) {
-      console.log('mutate ---- submitOrder=', order);
+      console.log('mutate ---- submitOrder=', order)
 
-      this.orders.push(order);
+      state.orders.push(order)
     },
     //Barak
     setOrders(state, { orders, user }) {
@@ -30,19 +29,21 @@ export default {
   actions: {
     // Tal converted to async
     async submitOrder(context, { order }) {
-      console.log('action ---- submitOrder=', order);
+      console.log('action ---- submitOrder=', order)
       try {
-        let orderId = await orderService.save(order);
-        context.showMsg('Your order is pending...thank you');
-        context.commit({ type: 'submitOrder', order });
+        let orderId = await orderService.save(order)
+        console.log('orderId=', orderId)
+        // context.showMsg('Your order is pending...thank you')
+        context.commit({ type: 'submitOrder', order })
       } catch (err) {
-        context.showMsg(
-          'We had an error while submitting your order, try again later'
-        );
+        console.log('error=', err)
+        // context.showMsg(
+        //   'We had an error while submitting your order, try again later',
+        // )
       }
     },
     showMsg(msg) {
-      console.log(msg);
+      console.log(msg)
     },
     //Barak
     async loadOrders(context, { user }) {
@@ -55,7 +56,7 @@ export default {
       }
     },
   },
-};
+}
 
 // Golan original
 // submitOrder(context, { order }) {
