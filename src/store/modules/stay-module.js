@@ -67,6 +67,7 @@ export default {
       try {
         const stays = await stayService.query(state.filterBy)
         commit({ type: 'setStays', stays })
+        return stays
       } catch (err) {
         console.log('err in stay-module in loadToys:', err)
       }
