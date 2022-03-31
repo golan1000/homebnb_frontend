@@ -104,8 +104,8 @@ export default {
     return {
       isLogin: true,
       fullname: null,
-      username: 'Aurelie',
-      password: '73412968',
+      username: 'Barak',
+      password: '123456',
     };
   },
   computed: {

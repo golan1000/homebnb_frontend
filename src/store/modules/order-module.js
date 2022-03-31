@@ -19,11 +19,14 @@ export default {
     },
     //Barak
     setOrders(state, { orders, user }) {
-      console.log(user);
+      console.log('from backoofice user', user);
       console.log(state.orders);
       console.log(orders);
-      state.orders = orders.filter((order) => user._id === order.hostId);
-      console.log(state.orders);
+      // Barak original
+      state.orders = orders.filter(order => user._id === order.hostId);
+      // Tal temporary fix
+      // state.orders = orders;
+      console.log('order from backoffice', state.orders);
     },
   },
   actions: {
