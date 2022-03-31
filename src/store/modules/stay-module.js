@@ -1,6 +1,6 @@
 // import { ssrContextKey } from 'vue'
 // import { stayService } from '../../services/stays-service-local.js';
-import { stayService } from '../../services/stay.service.mongo';
+import { stayService } from '../../services/stay.service.mongo'
 export default {
   state: {
     stays: [], //need to be empty array important
@@ -17,128 +17,128 @@ export default {
   },
   getters: {
     getStaysAll(state) {
-      return state.stays;
+      return state.stays
     },
     getStays(state) {
-      return state.stays;
+      return state.stays
     },
 
     //Tal
     getFilter(state) {
-      return state.filterBy;
+      return state.filterBy
     },
     getCurrPage(state) {
-      return state.currPage;
+      return state.currPage
     },
     getStaysForBackOffice(state) {
-      return state.staysForBackOffice;
+      return state.staysForBackOffice
     },
   },
   mutations: {
     updateFilteredStays(state) {
       if (state.filterBy.address === '')
-        state.filteredStays = JSON.parse(JSON.stringify(state.stays));
+        state.filteredStays = JSON.parse(JSON.stringify(state.stays))
 
-      let regTest = new RegExp(state.filterBy.address, 'i');
+      let regTest = new RegExp(state.filterBy.address, 'i')
 
-      console.log('trying to filterrrr');
+      console.log('trying to filterrrr')
       let currFilteredStays = state.stays.filter((currStay) => {
         if (currStay.address && currStay.address.city) {
           if (regTest.test(currStay.address.city) === true)
-            console.log('found city=', currStay.address);
+            console.log('found city=', currStay.address)
 
-          return regTest.test(currStay.address.city);
+          return regTest.test(currStay.address.city)
         } else {
-          console.log('stay with no address=', currStay);
-          return false;
+          console.log('stay with no address=', currStay)
+          return false
         }
-      });
+      })
     },
 
     setStays(state, { stays }) {
-      state.stays = stays;
+      state.stays = stays
     },
     //golan
     update(state, { stayToUpdate }) {
-      console.log('mutate --- stay to update=', stayToUpdate);
+      console.log('mutate --- stay to update=', stayToUpdate)
       var foundIdx = state.stays.findIndex(
-        (stay) => stay._id === stayToUpdate._id
-      );
-      console.log('foundIdx=', foundIdx);
-      state.stays.splice(foundIdx, 1, stayToUpdate);
+        (stay) => stay._id === stayToUpdate._id,
+      )
+      console.log('foundIdx=', foundIdx)
+      state.stays.splice(foundIdx, 1, stayToUpdate)
     },
     //Tal
     setFilter(state, { filterBy }) {
-      state.filterBy = filterBy;
+      state.filterBy = filterBy
     },
     setCurrPage(state, { page }) {
-      state.currPage = page;
+      state.currPage = page
     },
     setStaysForBackOffice(state, { user }) {
-      console.log(state.stays);
-      console.log(user);
+      console.log(state.stays)
+      console.log(user)
       // Barak original
       state.staysForBackOffice = state.stays.filter(
-        (stay) => user._id === stay.host._id
-      );
+        (stay) => user._id === stay.host._id,
+      )
 
       // Tal fixed temp
       // state.staysForBackOffice = state.stays.slice(0, 4);
-      console.log(state.staysForBackOffice);
+      console.log(state.staysForBackOffice)
     },
   },
   actions: {
     async loadStays({ commit, state }) {
       try {
         // commit({ type: 'setStays', stays: [] });
-        const stays = await stayService.query(state.filterBy);
-        commit({ type: 'setStays', stays });
+        const stays = await stayService.query(state.filterBy)
+        commit({ type: 'setStays', stays })
         // commit({ type: 'updateFilteredStays' })
-        console.log('stays from loadstays=', stays);
-        return stays;
+        console.log('stays from loadstays=', stays)
+        return stays
       } catch (err) {
-        console.log('err in stay-module in loadToys:', err);
+        console.log('err in stay-module in loadToys:', err)
       }
     },
 
     //golan
     async getById(context, { stayId }) {
       try {
-        console.log('trying to find stayId=', stayId);
-        var foundStay = await stayService.getById(stayId);
+        console.log('trying to find stayId=', stayId)
+        var foundStay = await stayService.getById(stayId)
 
-        console.log('foundStay action=', foundStay);
+        // console.log('foundStay action=', foundStay);
 
-        return foundStay;
+        return foundStay
       } catch (err) {
-        console.log('error getById = ', err);
+        console.log('error getById = ', err)
       }
     },
 
     //golan
     async update(context, { stayToUpdate }) {
-      console.log('action ---- stay to update=', stayToUpdate);
+      console.log('action ---- stay to update=', stayToUpdate)
       try {
-        const updatedStay = await stayService.save(stayToUpdate);
-        console.log('updated stay =', updatedStay);
-        this.commit({ type: 'update', stayToUpdate });
+        const updatedStay = await stayService.save(stayToUpdate)
+        console.log('updated stay =', updatedStay)
+        this.commit({ type: 'update', stayToUpdate })
       } catch (err) {
-        console.log('err in update stay:', err);
+        console.log('err in update stay:', err)
       }
     },
     filter({ commit, dispatch }, { filterBy }) {
-      commit({ type: 'setFilter', filterBy }); //check
-      dispatch({ type: 'loadStays' });
+      commit({ type: 'setFilter', filterBy }) //check
+      dispatch({ type: 'loadStays' })
       // commit({ type: 'updateFilteredStays' })
     },
     async loadStaysForBackOffice({ commit, state }, { user }) {
       // console.log(state.stays);
       // console.log(user);
       try {
-        commit({ type: 'setStaysForBackOffice', user });
+        commit({ type: 'setStaysForBackOffice', user })
       } catch (err) {
-        console.log('err in stay-module loadStaysForBackOffice:', err);
+        console.log('err in stay-module loadStaysForBackOffice:', err)
       }
     },
   },
-};
+}
