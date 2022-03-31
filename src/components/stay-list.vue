@@ -19,7 +19,8 @@
   <h4 v-else-if="!stays.length">Explore the world!</h4>
   <h4 v-else>No match found</h4> -->
   <br />
-  <expolore-btns class="explore-btns" />
+  <!-- Buttons for additional filtters -->
+  <!-- <expolore-btns class="explore-btns" /> -->
   <ul class="stay-list">
     <stay-preview v-for="stay in stays" :stay="stay" :key="stay._id" />
   </ul>
