@@ -1,65 +1,87 @@
 // import { orderService } from '../../services/order.service.async';
-import { orderService } from '../../services/order.service.mongo';
+import { orderService } from '../../services/order.service.mongo'
 export default {
   state: {
     orders: [],
+    isOrderModalShown: false,
+    currOrder: null,
   },
   getters: {
     //Barak
     getOrders(state) {
-      console.log(state.orders);
-      return state.orders;
+      console.log(state.orders)
+      return state.orders
+    },
+    getModalState(state) {
+      if (state.isOrderModalShown) return state.isOrderModalShown
+    },
+    getCurrOrder(state) {
+      if (state.currOrder) return state.currOrder
     },
   },
   mutations: {
     submitOrder(state, { order }) {
-      console.log('mutate ---- submitOrder=', order);
+      console.log('mutate ---- submitOrder=', order)
 
-      state.orders.push(order);
+      state.orders.push(order)
     },
     //Barak
     setOrders(state, { orders, user }) {
-      console.log('from backoofice user', user);
-      console.log(state.orders);
-      console.log(orders);
+      console.log(user)
+      console.log(state.orders)
+      console.log(orders)
       // Barak original
-      state.orders = orders.filter(order => user._id === order.hostId);
+      state.orders = orders.filter((order) => user._id === order.hostId)
       // Tal temporary fix
-      // state.orders = orders;
-      console.log('order from backoffice', state.orders);
+      state.orders = orders
+      console.log(state.orders)
+    },
+    setCurrOrder(state, { order }) {
+      state.currOrder = order
+    },
+    orderModalShow(state) {
+      state.isOrderModalShown = true
+    },
+    orderModalClose(state) {
+      state.isOrderModalShown = false
     },
   },
   actions: {
     // Tal converted to async
     async submitOrder(context, { order }) {
-      console.log('action ---- submitOrder=', order);
+      console.log('action ---- submitOrder=', order)
       try {
-        let orderId = await orderService.save(order);
-        console.log('orderId=', orderId);
+        let orderId = await orderService.save(order)
+        console.log('orderId=', orderId)
         // context.showMsg('Your order is pending...thank you')
-        context.commit({ type: 'submitOrder', order });
+        context.commit({ type: 'submitOrder', order })
+        context.commit({ type: 'setCurrOrder', order })
+        // alert('your order accepted!')
+        context.commit({ type: 'orderModalShow', order })
+        return order
       } catch (err) {
-        console.log('error=', err);
+        console.log('error=', err)
+        return null
         // context.showMsg(
         //   'We had an error while submitting your order, try again later',
         // )
       }
     },
     showMsg(msg) {
-      console.log(msg);
+      console.log(msg)
     },
     //Barak
     async loadOrders(context, { user }) {
       try {
-        const orders = await orderService.query();
-        console.log(orders);
-        context.commit('setOrders', { orders, user });
+        const orders = await orderService.query()
+        console.log(orders)
+        context.commit('setOrders', { orders, user })
       } catch (err) {
-        console.log('err in order-module in loadOrders:', err);
+        console.log('err in order-module in loadOrders:', err)
       }
     },
   },
-};
+}
 
 // Golan original
 // submitOrder(context, { order }) {
