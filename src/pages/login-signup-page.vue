@@ -164,9 +164,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.logout-btn {
-  background-color: blue;
-  color: white;
-}
-</style>
+<style scoped></style>
