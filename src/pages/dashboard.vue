@@ -4,7 +4,7 @@
       <div class="dashboard-top-section">
         <div class="dashboard-data-con">
           <div class="dashboard-data data-rate">
-            <h4 class="dashboard-data-rate-title data-title">Rate</h4>
+            <h4 class="dashboard-data-rate-title data-title">Rating</h4>
             <div class="dashboard-data-rate-content">
               <div class="dashboard-data-rate-average">
                 <span class="dashboard-data-rate-average-title">Average</span>
@@ -27,82 +27,46 @@
               </div>
             </div>
           </div>
-          <div class="dashboard-data data-revenues">
-            <h4 class="dashboard-data-revenues-title data-title">Revenues</h4>
-            <div class="dashboard-data-revenues-period-con">
-              <div class="dashboard-data-revenues-period period-month">
-                <span class="dashboard-data-revenues-period-month">Month</span>
-                <span class="dashboard-data-revenues-period-month">{{
-                  revenueMonth
-                }}</span>
-              </div>
-              <div class="dashboard-data-revenues-period period-year">
-                <span class="dashboard-data-revenues-period-year-">Year</span>
-                <span class="dashboard-data-revenues-period-year">{{
-                  revenueYear
-                }}</span>
-              </div>
-              <div class="dashboard-data-revenues-period period-total">
-                <span class="dashboard-data-revenues-period-total">Total</span>
-                <span class="dashboard-data-revenues-period-total">{{
-                  revenueTotal
-                }}</span>
-              </div>
-            </div>
-          </div>
           <div class="dashboard-data data-orders">
             <h4 class="dashboard-data-orders-title data-title">Orders</h4>
             <div class="dashboard-data-orders-status-con">
-              <div class="dashboard-data-orders-status-con-top">
-                <div class="dashboard-data-orders-status">
+              <!-- <div class="dashboard-data-orders-status-con-top"> -->
+              <!-- <div class="dashboard-data-orders-status">
                   <span class="dashboard-data-orders-status-title">Total</span>
                   <span
                     class="dashboard-data-orders-status-number status-total"
                     >{{ ordersForDisplay.length }}</span
                   >
-                </div>
-                <div class="dashboard-data-orders-status">
-                  <span class="dashboard-data-orders-status-title"
-                    >Pending</span
-                  >
-                  <span
-                    class="dashboard-data-orders-status-number status-pending"
-                    >{{ ordersPending }}</span
-                  >
-                </div>
+                </div> -->
+              <!-- </div> -->
+              <!-- <div class="dashboard-data-orders-status-con-bottom"> -->
+              <div class="dashboard-data-orders-status">
+                <span class="dashboard-data-orders-status-title">Approved</span>
+                <span
+                  class="dashboard-data-orders-status-number status-approved"
+                  >{{ ordersApproved }}</span
+                >
               </div>
-              <div class="dashboard-data-orders-status-con-bottom">
-                <div class="dashboard-data-orders-status">
-                  <span class="dashboard-data-orders-status-title"
-                    >Approved</span
-                  >
-                  <span
-                    class="dashboard-data-orders-status-number status-approved"
-                    >{{ ordersApproved }}</span
-                  >
-                </div>
-                <div class="dashboard-data-orders-status">
-                  <span class="dashboard-data-orders-status-title"
-                    >Declined</span
-                  >
-                  <span
-                    class="dashboard-data-orders-status-number status-declined"
-                    >{{ ordersDeclined }}</span
-                  >
-                </div>
+              <div class="dashboard-data-orders-status">
+                <span class="dashboard-data-orders-status-title">Pending</span>
+                <span
+                  class="dashboard-data-orders-status-number status-pending"
+                  >{{ ordersPending }}</span
+                >
+              </div>
+              <div class="dashboard-data-orders-status">
+                <span class="dashboard-data-orders-status-title">Declined</span>
+                <span
+                  class="dashboard-data-orders-status-number status-declined"
+                  >{{ ordersDeclined }}</span
+                >
               </div>
             </div>
+            <!-- </div> -->
           </div>
           <div class="dashboard-data data-guests">
             <h4 class="dashboard-data-guests-title data-title">Guests</h4>
             <div class="dashboard-data-guests-status-con">
-              <div class="dashboard-data-guests-status">
-                <span class="dashboard-data-guests-status-title">Active</span>
-                <span
-                  class="dashboard-data-guests-status-number status-total"
-                  >{{ guestsActive }}</span
-                >
-              </div>
               <div class="dashboard-data-guests-status">
                 <span class="dashboard-data-guests-status-title">Past</span>
                 <span
@@ -111,29 +75,56 @@
                 >
               </div>
               <div class="dashboard-data-guests-status">
-                <span class="dashboard-data-guests-status-title">Planned</span>
+                <span class="dashboard-data-guests-status-title">Present</span>
                 <span
                   class="dashboard-data-guests-status-number status-total"
-                  >{{ guestsPlanned }}</span
+                  >{{ guestsPresent }}</span
+                >
+              </div>
+              <div class="dashboard-data-guests-status">
+                <span class="dashboard-data-guests-status-title">Future</span>
+                <span
+                  class="dashboard-data-guests-status-number status-total"
+                  >{{ guestsFuture }}</span
                 >
               </div>
             </div>
             <h4 class="dashboard-data-guests-count"></h4>
           </div>
+          <div class="dashboard-data data-revenues">
+            <h4 class="dashboard-data-revenues-title data-title">Revenues</h4>
+            <div class="dashboard-data-revenues-period-con">
+              <div class="dashboard-data-revenues-period period-month">
+                <span class="dashboard-data-revenues-period-month-title"
+                  ><span class="span-this">this</span>Month</span
+                >
+                <span class="dashboard-data-revenues-period-month-num">{{
+                  revenueMonth
+                }}</span>
+              </div>
+              <div class="dashboard-data-revenues-period period-year">
+                <span class="dashboard-data-revenues-period-year-title"
+                  ><span class="span-this">this</span>Year</span
+                >
+                <span class="dashboard-data-revenues-period-year-num">{{
+                  revenueYear
+                }}</span>
+              </div>
+              <!-- <div class="dashboard-data-revenues-period period-total">
+                <span class="dashboard-data-revenues-period-total">Total</span>
+                <span class="dashboard-data-revenues-period-total">{{
+                  revenueTotal
+                }}</span>
+              </div> -->
+            </div>
+          </div>
         </div>
       </div>
       <div class="dashboard-bottom-section">
         <div class="dashboard-summary">
-          <button class="dashboard-summary-stays" @click="switchTable('stays')">
-            <img
-              src="../assets/backoffice-house.svg"
-              alt="stays-img"
-              class="dashboard-summary-stays-img backoffice-img"
-            />
-            <h4 class="dashboard-summary-stays-title">Stays</h4>
-          </button>
           <button
             class="dashboard-summary-orders"
+            :class="{ focused: currTable === 'orders' }"
             @click="switchTable('orders')"
           >
             <img
@@ -142,6 +133,18 @@
               class="dashboard-summary-orders-img backoffice-img"
             />
             <h4 class="dashboard-summary-orders-title">Orders</h4>
+          </button>
+          <button
+            class="dashboard-summary-stays"
+            :class="{ focused: currTable === 'stays' }"
+            @click="switchTable('stays')"
+          >
+            <img
+              src="../assets/backoffice-house.svg"
+              alt="stays-img"
+              class="dashboard-summary-stays-img backoffice-img"
+            />
+            <h4 class="dashboard-summary-stays-title">Stays</h4>
           </button>
         </div>
         <div class="dashboard-details">
@@ -160,11 +163,14 @@
               <th class="dashboard-details-orders-th orders-table-check">
                 Check In - Check Out
               </th>
-              <th class="dashboard-details-orders-th orders-table-status">
-                Status
+              <th class="dashboard-details-orders-th orders-table-created">
+                Created At
               </th>
               <th class="dashboard-details-orders-th orders-table-revenue">
                 Revenue
+              </th>
+              <th class="dashboard-details-orders-th orders-table-status">
+                Status
               </th>
               <th class="dashboard-details-orders-th orders-table-actions">
                 Actions
@@ -179,29 +185,44 @@
                 <td class="orders-table-content-guest">
                   {{ order.buyer.fullname }}
                 </td>
-                <td class="orders-table-content-name">{{ order.stay.name }}</td>
+                <td class="orders-table-content-stay">{{ order.stay.name }}</td>
                 <td class="orders-table-content-check">
                   {{ order.startDate }} - {{ order.endDate }}
                 </td>
-                <td class="orders-table-content-status">{{ order.status }}</td>
+                <!-- <td class="orders-table-content-created">
+                  ${{ order.createdAt }}
+                </td> -->
                 <td class="orders-table-content-revenue">
                   ${{ order.totalPrice }}
+                </td>
+                <td
+                  class="orders-table-content-status"
+                  :style="{
+                    color:
+                      order.status === 'Pending'
+                        ? 'rgb(215 176 64)'
+                        : order.status === 'Approved'
+                        ? 'green'
+                        : 'red',
+                  }"
+                >
+                  {{ order.status }}
                 </td>
                 <td class="orders-table-content-actions">
                   <div
                     v-if="order.status === 'Declined'"
-                    class="orders-table-content-actions-inner"
+                    class="orders-table-content-actions-approve"
                   >
                     Approve
                   </div>
                   <div
                     v-if="order.status === 'Approved'"
-                    class="orders-table-content-actions-inner"
+                    class="orders-table-content-actions-decline"
                   >
                     Decline
                   </div>
                   <div
-                    v-if="order.status === 'pending'"
+                    v-if="order.status === 'Pending'"
                     class="orders-table-content-actions-inner"
                   >
                     <div class="orders-table-content-actions-approve">
@@ -219,11 +240,11 @@
             <table>
               <th class="dashboard-details-stays-th stays-table-pic"></th>
               <th class="dashboard-details-stays-th stays-table-name">Name</th>
-              <th class="dashboard-details-stays-th stays-table-price">
-                Price
-              </th>
               <th class="dashboard-details-stays-th stays-table-address">
                 Address
+              </th>
+              <th class="dashboard-details-stays-th stays-table-price">
+                Price
               </th>
               <th class="dashboard-details-stays-th stays-table-actions">
                 Actions
@@ -241,11 +262,11 @@
                   />
                 </td>
                 <td class="stays-table-content-name">{{ stay.name }}</td>
-                <td class="stays-table-content-price">{{ stay.price }}</td>
                 <td class="stays-table-content-address">
                   {{ stay.address.street }}
                 </td>
-                <td class="stays-table-content-actions">
+                <td class="stays-table-content-price">{{ stay.price }}</td>
+                 <td class="stays-table-content-actions">
                   <div class="stays-table-content-actions-inner">
                     <img
                       class="img-edit"
@@ -275,9 +296,9 @@ export default {
       currMonth: null,
       currYear: null,
       currDay: null,
-      guestsActive: 0,
-      guestsPlanned: 0,
       guestsPast: 0,
+      guestsPresent: 0,
+      guestsFuture: 0,
       ordersApproved: 0,
       ordersDeclined: 0,
       ordersPending: 0,
@@ -385,7 +406,7 @@ export default {
           continue;
         }
         if (startYear > this.currYear) {
-          this.guestsPlanned++;
+          this.guestsFuture++;
           continue;
         }
         if (endMonth < this.currMonth) {
@@ -393,7 +414,7 @@ export default {
           continue;
         }
         if (startMonth > this.currMonth) {
-          this.guestsPlanned++;
+          this.guestsFuture++;
           continue;
         }
         if (endDay < this.currDay) {
@@ -401,7 +422,7 @@ export default {
           continue;
         }
         if (startDay > this.currDay) {
-          this.guestsPlanned++;
+          this.guestsFuture++;
           continue;
         }
         if (
@@ -409,7 +430,7 @@ export default {
           endDay === this.currDay ||
           (startDay < this.currDay && endDay > this.currDay)
         ) {
-          this.guestsActive++;
+          this.guestsPresent++;
           continue;
         }
       }
@@ -437,6 +458,10 @@ export default {
           }
         }
         this.revenueTotal += this.ordersForDisplay[i].totalPrice;
+      }
+    },
+    setStatus(status) {
+      if (status === 'Decline') {
       }
     },
   },
