@@ -5,11 +5,25 @@
         <img class="logo-img" src="../assets/logo.svg" alt="img-logo" />
         <div class="logo-txt">Flat-Inn</div>
       </router-link>
+      <div class="small-filter-div">
+        <button class="small-filter-button">
+          <div class="small-filter-button-txt-div">
+            <h4 class="small-filter-button-txt">Start your search</h4>
+          </div>
+          <div class="small-filter-button-div">
+            <img
+              class="small-filter-button-img"
+              src="../assets/magnifying.svg"
+              alt="small-filter-button-img"
+            />
+          </div>
+        </button>
+      </div>
       <div class="main-nav">
         <div class="main-nav-links">
           <router-link class="menu-link" to="/stay">Explore</router-link>
           <router-link class="menu-link main-nav-host" to="/dashboard"
-            >Become a Host</router-link
+            >Become a host</router-link
           >
         </div>
         <div class="menu">
@@ -45,10 +59,13 @@
         </div>
       </div>
     </div>
+    <stay-filter />
   </section>
 </template>
 
 <script>
+import stayFilter from "../components/stay-filter.vue";
+
 export default {
   data() {
     return {
@@ -57,7 +74,9 @@ export default {
     };
   },
   created() {},
-  components: {},
+  components: {
+    stayFilter,
+  },
   methods: {
     toggleModal() {
       this.isOpen = !this.isOpen;

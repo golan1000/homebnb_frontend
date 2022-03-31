@@ -3,6 +3,7 @@
   position: sticky;
   top: 0;
   z-index: 10;
+  height: 180px;
 
   .details {
     width: 1280px;
@@ -21,6 +22,48 @@
     @media (max-width: 1127px) {
       padding-left: 40px;
       padding-right: 40px;
+    }
+
+    .small-filter-div {
+      width: 348px;
+      height: 48px;
+      padding: 0px 24px;
+      margin-left: 197px;
+
+      .small-filter-button {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        flex: 1 1 auto;
+        justify-content: space-between;
+        background-color: #ffffff;
+        border: 1px solid #dddddd;
+        border-radius: 40px;
+        box-shadow: 0 1px 2px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 5%);
+        color: #464545;
+
+        .small-filter-button-txt {
+          padding-left: 18px;
+          font-size: 14px;
+          font-family: airbnb-regular;
+          filter: contrast(4);
+          font-weight: 500;
+        }
+
+        .small-filter-button-div {
+          background-color: #ff385c;
+          border-radius: 50%;
+          width: 32px;
+          height: 32px;
+          margin: 7px 1px 7px 0;
+          padding: 10px;
+
+          .small-filter-button-img {
+            width: 0.75rem;
+          }
+        }
+      }
     }
 
     .logo-con {

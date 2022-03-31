@@ -35,7 +35,7 @@
       </div>
       <div class="search-container">
         <button class="search-btn" @click="setfilterParams">
-          <img src="../assets/svgexport-3.svg" alt="search Icon" />
+          <img src="../assets/magnifying.svg" alt="search Icon" />
         </button>
       </div>
     </div>
