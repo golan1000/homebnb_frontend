@@ -98,7 +98,9 @@
     font-family: airbnb-medium;
     font-size: 14px;
     letter-spacing: 0.5px;
-    &.login-btn {
+    &.login-btn,
+    &.signin-btn,
+    &.logout-btn {
       background-color: rgb(227, 28, 95);
       color: whitesmoke;
       font-size: 16px;
