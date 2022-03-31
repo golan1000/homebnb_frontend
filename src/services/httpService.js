@@ -25,6 +25,7 @@ export const httpService = {
 
 async function workAxios(path, type = 'GET', data = null) {
   try {
+    console.log('im here')
     const checkObj = {
       url: `${BASE_URL}${path}`,
       method: type,
