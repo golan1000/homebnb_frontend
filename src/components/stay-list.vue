@@ -21,6 +21,64 @@
   <br />
   <!-- Buttons for additional filtters -->
   <!-- <expolore-btns class="explore-btns" /> -->
+  <section class="explore-btns">
+    <button
+      @click="TogglePrice"
+      class="explore-btn"
+      :class="{ clicked: priceActive }"
+    >
+      Price
+    </button>
+    <button
+      @click="ToggleType"
+      class="explore-btn"
+      :class="{ clicked: typeActive }"
+    >
+      Type of place
+    </button>
+    <button
+      @click="ToggleWifi"
+      class="explore-btn"
+      :class="{ clicked: wifiActive }"
+    >
+      Wifi
+    </button>
+    <button
+      @click="ToggleTv"
+      class="explore-btn"
+      :class="{ clicked: tvActive }"
+    >
+      TV
+    </button>
+    <button
+      @click="ToggleKitchen"
+      class="explore-btn"
+      :class="{ clicked: kitchenActive }"
+    >
+      Kitchen
+    </button>
+    <button
+      @click="ToggleAc"
+      class="explore-btn"
+      :class="{ clicked: acActive }"
+    >
+      AC
+    </button>
+    <button
+      @click="ToggleSmoking"
+      class="explore-btn"
+      :class="{ clicked: smokingActive }"
+    >
+      Smoking Allowed
+    </button>
+    <button
+      @click="TogglePets"
+      class="explore-btn"
+      :class="{ clicked: petsActive }"
+    >
+      Pets Allowed
+    </button>
+  </section>
   <ul class="stay-list">
     <stay-preview v-for="stay in stays" :stay="stay" :key="stay._id" />
   </ul>
@@ -38,7 +96,16 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      priceActive: false,
+      typeActive: false,
+      wifiActive: false,
+      tvActive: false,
+      kitchenActive: false,
+      acActive: false,
+      smokingActive: false,
+      petsActive: false,
+    };
   },
   created() {
     console.log(this.$route.query);
@@ -47,7 +114,32 @@ export default {
     stayPreview,
     expoloreBtns,
   },
-  methods: {},
+  methods: {
+    TogglePrice() {
+      this.priceActive = !this.priceActive;
+    },
+    ToggleType() {
+      this.typeActive = !this.typeActive;
+    },
+    ToggleWifi() {
+      this.wifiActive = !this.wifiActive;
+    },
+    ToggleTv() {
+      this.tvActive = !this.tvActive;
+    },
+    ToggleKitchen() {
+      this.kitchenActive = !this.kitchenActive;
+    },
+    ToggleAc() {
+      this.acActive = !this.acActive;
+    },
+    ToggleSmoking() {
+      this.smokingActive = !this.smokingActive;
+    },
+    TogglePets() {
+      this.petsActive = !this.petsActive;
+    },
+  },
   computed: {
     // bla() {
     //   const { address } = this.$route.query;
