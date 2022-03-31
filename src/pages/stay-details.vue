@@ -301,7 +301,7 @@
               v-model="range"
               update-on-input
               @input="selectEvt"
-              color="green"
+              color="gray"
               is-range
               :columns="$screens({ default: 2, lg: 2 })"
             />

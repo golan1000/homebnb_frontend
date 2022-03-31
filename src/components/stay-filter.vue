@@ -99,7 +99,7 @@
       </div>
       <v-date-picker
         v-model="filterBy.range"
-        color="green"
+        color="gray"
         is-range
         rows="1"
         columns="2"
