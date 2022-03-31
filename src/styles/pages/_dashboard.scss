@@ -273,6 +273,11 @@
       }
       .orders-table-content-actions {
         width: 14%;
+        .orders-table-content-actions-inner {
+          width: 80px;
+          margin: 0 auto;
+          cursor: pointer;
+        }
       }
 
       .orders-table-content {

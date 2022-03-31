@@ -187,7 +187,31 @@
                 <td class="orders-table-content-revenue">
                   ${{ order.totalPrice }}
                 </td>
-                <td class="orders-table-content-actions">Accept</td>
+                <td class="orders-table-content-actions">
+                  <div
+                    v-if="order.status === 'Declined'"
+                    class="orders-table-content-actions-inner"
+                  >
+                    Approve
+                  </div>
+                  <div
+                    v-if="order.status === 'Approved'"
+                    class="orders-table-content-actions-inner"
+                  >
+                    Decline
+                  </div>
+                  <div
+                    v-if="order.status === 'pending'"
+                    class="orders-table-content-actions-inner"
+                  >
+                    <div class="orders-table-content-actions-approve">
+                      Approve
+                    </div>
+                    <div class="orders-table-content-actions-decline">
+                      Decline
+                    </div>
+                  </div>
+                </td>
               </tr>
             </table>
           </div>
@@ -288,11 +312,17 @@ export default {
       this.setCurrGuests;
       this.setCurrOrdersData;
       this.setCurrRevenues;
+      this.date;
     } catch (err) {
       console.log('err', err);
     }
   },
   computed: {
+    // firstCapitalLetter(str) {
+    //     var firstLetter = str.slice(0, 1).toUpperCase()
+    //     var newStr = firstLetter + str.substring(1)
+    //     return newStr
+    // },
     setAvgRating() {
       if (this.staysForDisplay.length > 1) {
         let avg = this.staysForDisplay.reduce(
@@ -326,6 +356,9 @@ export default {
       console.log(this.currMonth);
       console.log(this.currYear);
       console.log(this.currDay);
+    },
+    date() {
+      console.log(date.Parse(this.ordersForDisplay[2].startDate));
     },
     setCurrGuests() {
       if (!this.ordersForDisplay.length) return;
