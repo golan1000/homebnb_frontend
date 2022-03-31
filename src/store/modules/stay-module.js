@@ -52,9 +52,10 @@ export default {
     setStaysForBackOffice(state, { user }) {
       console.log(state.stays);
       console.log(user);
-      state.staysForBackOffice = state.stays.filter(
-        (stay) => user._id === stay.host._id
-      );
+      state.staysForBackOffice = state.stays.filter((stay) => {
+        user._id === stay.host._id;
+        console.log(stay.host._id);
+      });
       console.log(state.staysForBackOffice);
     },
   },

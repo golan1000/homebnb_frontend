@@ -247,7 +247,7 @@ export default {
       loggedInUser: {},
       staysForDisplay: [],
       ordersForDisplay: [],
-      currTable: "orders",
+      currTable: 'orders',
       currMonth: null,
       currYear: null,
       currDay: null,
@@ -264,22 +264,22 @@ export default {
   },
   methods: {
     switchTable(val) {
-      if (val === "stays") this.currTable = "stays";
-      else this.currTable = "orders";
+      if (val === 'stays') this.currTable = 'stays';
+      else this.currTable = 'orders';
     },
   },
   async created() {
     try {
-      this.loggedInUser = await this.$store.getters.loggedinUser;
+      this.loggedInUser = await this.$store.getters.getLoggedUser;
       console.log(this.loggedInUser);
       await this.$store.dispatch({
-        type: "loadStaysForBackOffice",
+        type: 'loadStaysForBackOffice',
         user: this.loggedInUser,
       });
       this.staysForDisplay = await this.$store.getters.getStaysForBackOffice;
       console.log(this.staysForDisplay);
       await this.$store.dispatch({
-        type: "loadOrders",
+        type: 'loadOrders',
         user: this.loggedInUser,
       });
       this.ordersForDisplay = await this.$store.getters.getOrders;
@@ -289,7 +289,7 @@ export default {
       this.setCurrOrdersData;
       this.setCurrRevenues;
     } catch (err) {
-      console.log("err", err);
+      console.log('err', err);
     }
   },
   computed: {
@@ -304,7 +304,7 @@ export default {
         return avg;
       } else if (this.staysForDisplay.length === 1)
         return this.staysForDisplay[0].reviewScores.rating;
-      else return "N/A";
+      else return 'N/A';
     },
     setReviewsCount() {
       if (this.staysForDisplay.length > 1) {
@@ -316,7 +316,7 @@ export default {
         return count;
       } else if (this.staysForDisplay.length === 1)
         return this.staysForDisplay[0].reviews.length;
-      else return "N/A";
+      else return 'N/A';
     },
     setCurrDates() {
       let date = new Date();
@@ -384,10 +384,10 @@ export default {
     setCurrOrdersData() {
       if (!this.ordersForDisplay.length) return;
       for (var i = 0; i < this.ordersForDisplay.length; i++) {
-        if (this.ordersForDisplay[i].status === "Pending") this.ordersPending++;
-        if (this.ordersForDisplay[i].status === "Declined")
+        if (this.ordersForDisplay[i].status === 'Pending') this.ordersPending++;
+        if (this.ordersForDisplay[i].status === 'Declined')
           this.ordersDeclined++;
-        if (this.ordersForDisplay[i].status === "Approved")
+        if (this.ordersForDisplay[i].status === 'Approved')
           this.ordersApproved++;
       }
     },
