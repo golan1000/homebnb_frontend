@@ -8,17 +8,45 @@
         </div>
         <form v-if="!getLoggedUser">
           <!-- Sign-up -->
-          <div v-if="!isLogin" class="input-container top-input top-input" :class="{ 'top-input': !isLogin }">
-            <input type="text" v-model.trim="fullname" ref="fullname" placeholder="Fullname" required />
+          <div
+            v-if="!isLogin"
+            class="input-container top-input top-input"
+            :class="{ 'top-input': !isLogin }"
+          >
+            <input
+              type="text"
+              v-model.trim="fullname"
+              ref="fullname"
+              placeholder="Fullname"
+              required
+            />
           </div>
           <div class="input-container" :class="{ 'top-input': isLogin }">
-            <input type="text" v-model.trim="username" ref="username" placeholder="Username" required />
+            <input
+              type="text"
+              v-model.trim="username"
+              ref="username"
+              placeholder="Username"
+              required
+            />
           </div>
-          <div class="input-container bottom-input" :class="{ 'no-border-top': !isLogin }">
-            <input type="password" v-model.trim="password" ref="password" placeholder="Password" required />
+          <div
+            class="input-container bottom-input"
+            :class="{ 'no-border-top': !isLogin }"
+          >
+            <input
+              type="password"
+              v-model.trim="password"
+              ref="password"
+              placeholder="Password"
+              required
+            />
           </div>
           <div class="input-container txt">
-            <p>We’ll call or text you to confirm your number. Standard message and data rates apply. <span>Privacy Policy.</span></p>
+            <p>
+              We’ll call or text you to confirm your number. Standard message
+              and data rates apply. <span>Privacy Policy.</span>
+            </p>
             <!-- Login -->
           </div>
           <div v-if="isLogin" class="input-container btn-container">
@@ -36,12 +64,12 @@
             <div v-if="!isLogin" class="input-container txt">
               <p>
                 already registered?
-                <span @click="toggleMode">Sign-in</span>
+                <span class="signin-btn" @click="toggleMode">Sign-in</span>
               </p>
             </div>
           </div>
         </form>
-        <div v-if="getLoggedUser">
+        <div class="input-container btn-container" v-if="getLoggedUser">
           You have already logged in: {{ getLoggedUser.fullname }}
           <button class="logout-btn" @click="onLogout">Log-out</button>
         </div>

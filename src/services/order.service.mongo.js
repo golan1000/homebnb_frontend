@@ -1,12 +1,12 @@
-import { storageService } from './async-storage-service'
+import { storageService } from './async-storage-service';
 
-import { httpService } from './httpService'
+import { httpService } from './httpService';
 
-const API_URL = 'order'
+const API_URL = 'order';
 
-window.orderQuery = query
-window.orderGetById = getById
-window.orderSave = save
+window.orderQuery = query;
+window.orderGetById = getById;
+window.orderSave = save;
 // _createOrders()
 var gOrders = [
   {
@@ -119,62 +119,62 @@ var gOrders = [
     },
     status: 'pending',
   },
-]
+];
 export const orderService = {
   query,
   getById,
   save,
   getEmptyStay,
-}
+};
 
 async function query(filterBy = {}) {
   try {
-    const orders = await httpService.get(API_URL, filterBy)
-    // console.log('orders from async mongo=', orders)
-    return orders
+    const orders = await httpService.get(API_URL, filterBy);
+    console.log('orders from async mongo=', orders);
+    return orders;
   } catch (err) {
-    console.log('err', err)
-    throw new Error('could not get orders')
+    console.log('err', err);
+    throw new Error('could not get orders');
   }
 }
 
 async function getById(id) {
   try {
-    const foundOrder = await httpService.get(`${API_URL}/${id}`)
-    return foundOrder
+    const foundOrder = await httpService.get(`${API_URL}/${id}`);
+    return foundOrder;
   } catch (err) {
-    console.log('err', err)
-    throw new Error('could not get order by id')
+    console.log('err', err);
+    throw new Error('could not get order by id');
   }
 }
 
 async function save(order) {
   const result = order._id
     ? await httpService.put(`${API_URL}/${order._id}`, order)
-    : await httpService.post(API_URL, order)
-  return result
+    : await httpService.post(API_URL, order);
+  return result;
 }
 
 function getEmptyStay() {
   return {
     _id: '',
-  }
+  };
 }
 
 function _save(orders) {
-  storageService._save(KEY, orders)
+  storageService._save(KEY, orders);
 }
 
 async function _createOrders() {
-  console.log('create orders runnnnn')
-  var orders = (await query()) || []
+  console.log('create orders runnnnn');
+  var orders = (await query()) || [];
 
-  console.log('result = ', orders)
+  console.log('result = ', orders);
   if (!orders || orders.length === 0) {
-    console.log('there are no orders!!!!')
-    orders = gOrders
+    console.log('there are no orders!!!!');
+    orders = gOrders;
 
-    console.log('new  ordersss=', orders)
-    storageService._save(KEY, orders)
+    console.log('new  ordersss=', orders);
+    storageService._save(KEY, orders);
   }
 }
