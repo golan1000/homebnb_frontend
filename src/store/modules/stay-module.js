@@ -77,9 +77,13 @@ export default {
     setStaysForBackOffice(state, { user }) {
       console.log(state.stays);
       console.log(user);
+      // Barak original
       state.staysForBackOffice = state.stays.filter(
         stay => user._id === stay.host._id
       );
+
+      // Tal fixed temp
+      // state.staysForBackOffice = state.stays.slice(0, 4);
       console.log(state.staysForBackOffice);
     },
   },
