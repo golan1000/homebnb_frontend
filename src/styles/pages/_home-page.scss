@@ -2,7 +2,7 @@
   background: black;
   margin: 0 auto;
   // background: url('../assets/img/homepage/main.jpeg') no-repeat;
-  background: url("../assets/img/homepage/main2.jpg") no-repeat;
+  background: url('../assets/img/homepage/main2.jpg') no-repeat;
   background-size: 100%;
   height: 855px;
   width: 100%;
@@ -28,7 +28,7 @@
   margin-top: 111px;
   margin-left: 0;
   margin-right: 0;
-  background: url("../assets/img/homepage/host2.jpg") no-repeat;
+  background: url('../assets/img/homepage/host2.jpg') no-repeat;
   background-size: 100%;
   height: 640px;
   width: 100%;
@@ -235,15 +235,14 @@
   .main-pic,
   .sub-pic1,
   .sub-pic2 {
-    width: 100%;
     height: 100%;
     width: 100%;
     object-fit: cover;
   }
   .sub-pic1,
   .sub-pic2 {
-    height: 239px;
-    max-height: 239px;
+    // height: 239px;
+    // max-height: 239px;
     width: 100%;
     object-fit: cover;
   }
@@ -255,7 +254,7 @@
     object-fit: cover;
   }
   .sub-pic1-con {
-    max-height: 495px;
+    // max-height: 495px;
   }
 
   .sub-pic2-con,
@@ -332,7 +331,7 @@
   align-items: center;
   // background-color: blue;
   margin-top: -18px;
-  margin-right: 28px;
+  margin-right: 18px;
 }
 .first-line-2 {
   font-size: 16px;
@@ -468,9 +467,11 @@
   justify-content: space-between;
   align-items: center;
 }
-
-.review-name {
-  margin-top: -2px;
+.review-name,
+.review-date {
+  margin-top: 10px;
+  margin-right: 5px;
+  width: fit-content;
 }
 
 .review-rates-main-con {
@@ -578,4 +579,51 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: repeat(3, 1fr);
   background-color: blue;
+}
+.order-modal {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 15px;
+  width: 400px;
+  height: 100px;
+  bottom: 0px;
+  right: 0px;
+  position: fixed;
+  background-image: linear-gradient(to right, #e61e4e, #d70466);
+  // transition: display;
+  color: white;
+}
+
+.slide-fade-enter-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateY(30px);
+  opacity: 0;
+}
+
+.order-modal-btn-flex {
+  display: flex;
+  // background-color: green;
+  width: 100%;
+  flex-direction: row-reverse;
+}
+
+.order-modal-btn {
+  cursor: pointer;
+  background-color: white;
+  border-radius: 0px;
+}
+.order-modal-btn:hover {
+  background-color: white;
+
+  font-weight: bold;
+  outline: 3px solid black;
+  border-radius: 0px;
 }

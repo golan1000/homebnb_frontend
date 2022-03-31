@@ -60,7 +60,7 @@
             <div class="first-line-2">{{ getStayCap }} guests · {{ getBedrooms }} bedroom · {{ getBeds }} bed · {{ getBathrooms }} bathroom</div>
           </div>
           <div class="avatar1">
-            <el-avatar :size="57" :src="this.getRandProfilePic(index)" />
+            <el-avatar :size="57" :src="mainPic" />
             <!-- //the real one
             <el-avatar :size="57" :src="getHostPicture" /> -->
           </div>
@@ -138,9 +138,7 @@
           <div class="forth-line-1">Amenities</div>
 
           <div class="amenities-grid">
-            <div v-for="(amenity, index) in getAmenities" class="amenities-grid-item" :key="index + Math.random()">
-              {{ amenity }}
-            </div>
+            <div v-for="(amenity, index) in getAmenities" class="amenities-grid-item" :key="index + Math.random()"><img :src="getAmenitiesImg(index)" /> &nbsp;{{ amenity }}</div>
           </div>
           <button class="amenities-btn">Show all {{ getAmenitiesNum }} amenities</button>
         </div>
@@ -228,7 +226,10 @@
               <button class="date-close-btn" @click="toggleDateModal">Close</button>
             </div>
           </div>
-          <button class="order-form-submit" @click="submitOrder" style="submitOrderStyle">
+          <button v-if="submitBtnState" class="order-form-submit" @click="submitOrder">
+            <div>{{ getButtonText }}</div>
+          </button>
+          <button v-if="!submitBtnState" class="order-form-submit-disabled" @click="submitOrder">
             <div>{{ getButtonText }}</div>
           </button>
 
@@ -345,12 +346,22 @@
       </div>
     </div>
   </div>
+  <Transition name="slide-fade">
+    <div v-if="getModalState" class="order-modal">
+      <div>
+        <div class="order-modal-btn-flex"><button @click="closeOrderModal" class="order-modal-btn">X</button></div>
+
+        <div>Thank you for your order, We will let you know when the host owner will process it.</div>
+      </div>
+    </div>
+  </Transition>
 </template>
 
 <script>
 export default {
   data() {
     return {
+      mainPic: null,
       baseUrl: '../../data/Images/',
       isReadyToSubmit: true,
       isDateSelected: false,
@@ -459,7 +470,7 @@ export default {
         this.costsSectionShown = false;
         return;
       }
-      let totalGuests = this.guests.adults + this.guests.kids;
+      let totalGuests = this.guests.adults;
       if (!totalGuests) {
         this.costsSectionShown = false;
         return;
@@ -472,9 +483,9 @@ export default {
         console.log('choose dates');
         return;
       }
-      let totalGuests = this.guests.adults + this.guests.kids;
+      let totalGuests = this.guests.adults;
       if (!totalGuests) {
-        console.log('you need to add atleast guest!');
+        console.log('You need to add atleast one adult guest!');
         return;
       }
 
@@ -528,6 +539,16 @@ export default {
       let totalNights = diffMS / totalDayMS;
       // console.log('totalNights=', totalNights);
       return totalNights;
+    },
+    getAmenitiesImg(index) {
+      let amenitiesImgs = ['../../src/assets/img/amenities/ac.svg', '../../src/assets/img/amenities/dog.svg', '../../src/assets/img/amenities/jacuzzi.svg', '../../src/assets/img/amenities/kitchen.svg', '../../src/assets/img/amenities/tv.svg', '../../src/assets/img/amenities/wifi.svg'];
+      console.log('curr amenity img=', amenitiesImgs[index]);
+      return amenitiesImgs[index];
+    },
+    closeOrderModal() {
+      this.$store.commit({
+        type: 'orderModalClose',
+      });
     },
   },
   computed: {
@@ -586,15 +607,6 @@ export default {
     getRangeEnd() {
       if (this.range.end && this.isDateSelected) return new Date(this.range.end).toLocaleDateString();
       else return 'Add dates';
-    },
-    getAmenities() {
-      if (!this.stayToEdit.amenities) return;
-      console.log(this.stayToEdit.amenities);
-      var tempAmenities = JSON.parse(JSON.stringify(this.stayToEdit.amenities));
-      if (tempAmenities.length > 6) tempAmenities.length = 6;
-
-      console.log('tempAmenities=', tempAmenities);
-      return tempAmenities;
     },
     getAmenitiesNum() {
       return this.stayToEdit.amenities.length;
@@ -762,8 +774,25 @@ export default {
       return '$' + totalCalc;
     },
     submitOrderStyle() {
-      if (this.submitBtnState) return '';
-      else return 'disabled:true;linear-gradient(to right, #919191 , #b0b0b0);';
+      if (this.submitBtnState) {
+        console.log('button style empty');
+        return '';
+      } else {
+        console.log('button style NOT empty');
+        return 'disabled:true;linear-gradient(to right, #919191 , #b0b0b0) !important';
+      }
+    },
+
+    getAmenities() {
+      let stayAmenities = ['Air conditioning', 'Pets allowed', 'Jacuzzi', 'Kitchen', 'TV', 'WiFi'];
+      return stayAmenities;
+    },
+    getCurrOrder() {
+      if (this.$store.getters.getCurrOrder) return this.$store.getters.getCurrOrder;
+    },
+    getModalState() {
+      console.log('this.$store.getters.getModalState', this.$store.getters.getModalState);
+      if (this.$store.getters.getModalState) return this.$store.getters.getModalState;
     },
   },
   watch: {
@@ -778,6 +807,9 @@ export default {
     },
   },
   async created() {
+    let mainPicNum = this.getRandomIntInclusive(1, 50);
+
+    this.mainPic = 'https://i.pravatar.cc/200?img=' + mainPicNum;
     this.$store.commit({ type: 'setCurrPage', page: 'stayDetails' });
     console.log('params=', this.$route.params);
 
@@ -789,11 +821,11 @@ export default {
         stayId: id,
       });
 
-      console.log('foundStay main=', foundStay);
+      // console.log('foundStay main=', foundStay);
       if (foundStay) {
         this.stayToEdit = JSON.parse(JSON.stringify(foundStay));
 
-        console.log('found id=', this.stayToEdit);
+        // console.log('found id=', this.stayToEdit);
       } else {
         console.log('no such id');
         this.displayMsg = 'no such id';
@@ -896,6 +928,28 @@ img {
   color: white;
   font-size: 16px;
   font-weight: 600;
+  letter-spacing: 0.8px;
+  font-family: airbnb-regular, sans-serif;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.order-form-submit-disabled {
+  /* position: absolute; */
+  /* z-index: -10; */
+  margin: 0 auto;
+  width: 322px;
+  height: 50px;
+  cursor: pointer;
+  /* background: #e11a60; */
+
+  background-image: linear-gradient(to right, #919191, #b0b0b0) !important;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  pointer-events: none;
   letter-spacing: 0.8px;
   font-family: airbnb-regular, sans-serif;
   line-height: normal;
