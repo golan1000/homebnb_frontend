@@ -4,6 +4,7 @@ import { stayService } from '../../services/stay.service.mongo';
 export default {
   state: {
     stays: [], //need to be empty array important
+    filteredStays: [],
     filterBy: {
       address: '',
       guests: {
@@ -15,9 +16,13 @@ export default {
     staysForBackOffice: [],
   },
   getters: {
-    getStays(state) {
+    getStaysAll(state) {
       return state.stays;
     },
+    getStays(state) {
+      return state.filteredStays;
+    },
+
     //Tal
     getFilter(state) {
       return state.filterBy;
@@ -30,6 +35,26 @@ export default {
     },
   },
   mutations: {
+    updateFilteredStays(state) {
+      if (state.filterBy.address === '')
+        state.filteredStays = JSON.parse(JSON.stringify(state.stays));
+
+      let regTest = new RegExp(state.filterBy.address, 'i');
+
+      console.log('trying to filterrrr');
+      let currFilteredStays = state.stays.filter(currStay => {
+        if (currStay.address && currStay.address.city) {
+          if (regTest.test(currStay.address.city) === true)
+            console.log('found city=', currStay.address);
+
+          return regTest.test(currStay.address.city);
+        } else {
+          console.log('stay with no address=', currStay);
+          return false;
+        }
+      });
+    },
+
     setStays(state, { stays }) {
       state.stays = stays;
     },
@@ -37,7 +62,7 @@ export default {
     update(state, { stayToUpdate }) {
       console.log('mutate --- stay to update=', stayToUpdate);
       var foundIdx = state.stays.findIndex(
-        (stay) => stay._id === stayToUpdate._id
+        stay => stay._id === stayToUpdate._id
       );
       console.log('foundIdx=', foundIdx);
       state.stays.splice(foundIdx, 1, stayToUpdate);
@@ -53,20 +78,18 @@ export default {
       console.log(state.stays);
       console.log(user);
       state.staysForBackOffice = state.stays.filter(
-        (stay) => user._id === stay.host._id
+        stay => user._id === stay.host._id
       );
       console.log(state.staysForBackOffice);
     },
   },
   actions: {
     async loadStays({ commit, state }) {
-      console.log(
-        'filterBy.address----------------------------------------',
-        state.filterBy.address
-      );
       try {
         const stays = await stayService.query(state.filterBy);
         commit({ type: 'setStays', stays });
+        commit({ type: 'updateFilteredStays' });
+
         return stays;
       } catch (err) {
         console.log('err in stay-module in loadToys:', err);
@@ -101,6 +124,7 @@ export default {
     filter({ commit, dispatch }, { filterBy }) {
       commit({ type: 'setFilter', filterBy }); //check
       dispatch({ type: 'loadStays' });
+      // commit({ type: 'updateFilteredStays' })
     },
     async loadStaysForBackOffice({ commit, state }, { user }) {
       // console.log(state.stays);

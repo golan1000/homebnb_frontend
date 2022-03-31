@@ -5,7 +5,7 @@
         <img class="logo-img" src="../assets/logo.svg" alt="img-logo" />
         <div class="logo-txt">Flat-Inn</div>
       </router-link>
-      <div class="small-filter-div">
+      <!-- <div class="small-filter-div">
         <button class="small-filter-button">
           <div class="small-filter-button-txt-div">
             <h4 class="small-filter-button-txt">Start your search</h4>
@@ -18,7 +18,7 @@
             />
           </div>
         </button>
-      </div>
+      </div> -->
       <div class="main-nav">
         <div class="main-nav-links">
           <router-link class="menu-link" to="/stay">Explore</router-link>
@@ -59,12 +59,12 @@
         </div>
       </div>
     </div>
-    <stay-filter />
+    <!-- <stay-filter /> -->
   </section>
 </template>
 
 <script>
-import stayFilter from "../components/stay-filter.vue";
+import stayFilter from '../components/stay-filter.vue';
 
 export default {
   data() {
@@ -84,13 +84,13 @@ export default {
   },
   computed: {
     stayDetails() {
-      if (this.currPage === "stayDetails" || this.currPage === "userDetails")
+      if (this.currPage === 'stayDetails' || this.currPage === 'userDetails')
         return true;
       else return false;
     },
   },
   watch: {
-    "$store.getters.getCurrPage": {
+    '$store.getters.getCurrPage': {
       handler() {
         this.currPage = this.$store.getters.getCurrPage;
       },

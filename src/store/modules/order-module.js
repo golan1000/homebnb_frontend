@@ -22,7 +22,10 @@ export default {
       console.log(user);
       console.log(state.orders);
       console.log(orders);
-      state.orders = orders.filter((order) => user._id === order.hostId);
+      // Barak original
+      // state.orders = orders.filter((order) => user._id === order.hostId);
+      // Tal temporary fix
+      state.orders = orders;
       console.log(state.orders);
     },
   },
