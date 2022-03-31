@@ -7,6 +7,11 @@
     }}
   </h4>
   <h4 v-else>No match found</h4>
+  <div v-if="!stays">
+    <div>Loading</div>
+    <div><img src="../assets/img/loading.gif" alt="Loading" /></div>
+  </div>
+
   <!-- <h4 v-if="$route.query.address" class="stay-list-title">
     {{ stays.length }} stays in
     {{ stays[0].address.city }} 
