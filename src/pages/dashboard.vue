@@ -187,7 +187,31 @@
                 <td class="orders-table-content-revenue">
                   ${{ order.totalPrice }}
                 </td>
-                <td class="orders-table-content-actions">Accept</td>
+                <td class="orders-table-content-actions">
+                  <div
+                    v-if="order.status === 'Declined'"
+                    class="orders-table-content-actions-inner"
+                  >
+                    Approve
+                  </div>
+                  <div
+                    v-if="order.status === 'Approved'"
+                    class="orders-table-content-actions-inner"
+                  >
+                    Decline
+                  </div>
+                  <div
+                    v-if="order.status === 'pending'"
+                    class="orders-table-content-actions-inner"
+                  >
+                    <div class="orders-table-content-actions-approve">
+                      Approve
+                    </div>
+                    <div class="orders-table-content-actions-decline">
+                      Decline
+                    </div>
+                  </div>
+                </td>
               </tr>
             </table>
           </div>
@@ -247,7 +271,7 @@ export default {
       loggedInUser: {},
       staysForDisplay: [],
       ordersForDisplay: [],
-      currTable: "orders",
+      currTable: 'orders',
       currMonth: null,
       currYear: null,
       currDay: null,
@@ -264,22 +288,22 @@ export default {
   },
   methods: {
     switchTable(val) {
-      if (val === "stays") this.currTable = "stays";
-      else this.currTable = "orders";
+      if (val === 'stays') this.currTable = 'stays';
+      else this.currTable = 'orders';
     },
   },
   async created() {
     try {
-      this.loggedInUser = await this.$store.getters.loggedinUser;
+      this.loggedInUser = await this.$store.getters.getLoggedUser;
       console.log(this.loggedInUser);
       await this.$store.dispatch({
-        type: "loadStaysForBackOffice",
+        type: 'loadStaysForBackOffice',
         user: this.loggedInUser,
       });
       this.staysForDisplay = await this.$store.getters.getStaysForBackOffice;
       console.log(this.staysForDisplay);
       await this.$store.dispatch({
-        type: "loadOrders",
+        type: 'loadOrders',
         user: this.loggedInUser,
       });
       this.ordersForDisplay = await this.$store.getters.getOrders;
@@ -288,11 +312,17 @@ export default {
       this.setCurrGuests;
       this.setCurrOrdersData;
       this.setCurrRevenues;
+      this.date;
     } catch (err) {
-      console.log("err", err);
+      console.log('err', err);
     }
   },
   computed: {
+    // firstCapitalLetter(str) {
+    //     var firstLetter = str.slice(0, 1).toUpperCase()
+    //     var newStr = firstLetter + str.substring(1)
+    //     return newStr
+    // },
     setAvgRating() {
       if (this.staysForDisplay.length > 1) {
         let avg = this.staysForDisplay.reduce(
@@ -304,7 +334,7 @@ export default {
         return avg;
       } else if (this.staysForDisplay.length === 1)
         return this.staysForDisplay[0].reviewScores.rating;
-      else return "N/A";
+      else return 'N/A';
     },
     setReviewsCount() {
       if (this.staysForDisplay.length > 1) {
@@ -316,7 +346,7 @@ export default {
         return count;
       } else if (this.staysForDisplay.length === 1)
         return this.staysForDisplay[0].reviews.length;
-      else return "N/A";
+      else return 'N/A';
     },
     setCurrDates() {
       let date = new Date();
@@ -326,6 +356,9 @@ export default {
       console.log(this.currMonth);
       console.log(this.currYear);
       console.log(this.currDay);
+    },
+    date() {
+      console.log(date.Parse(this.ordersForDisplay[2].startDate));
     },
     setCurrGuests() {
       if (!this.ordersForDisplay.length) return;
@@ -384,10 +417,10 @@ export default {
     setCurrOrdersData() {
       if (!this.ordersForDisplay.length) return;
       for (var i = 0; i < this.ordersForDisplay.length; i++) {
-        if (this.ordersForDisplay[i].status === "Pending") this.ordersPending++;
-        if (this.ordersForDisplay[i].status === "Declined")
+        if (this.ordersForDisplay[i].status === 'Pending') this.ordersPending++;
+        if (this.ordersForDisplay[i].status === 'Declined')
           this.ordersDeclined++;
-        if (this.ordersForDisplay[i].status === "Approved")
+        if (this.ordersForDisplay[i].status === 'Approved')
           this.ordersApproved++;
       }
     },

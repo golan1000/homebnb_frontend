@@ -510,7 +510,8 @@ export default {
         // _id: 'dsjfsdiuiowe3243io2uioeuroeiw'
         createdAt: Date.now(),
 
-        hostId: this.stayToEdit.id,
+        // hostId: this.stayToEdit.id, // original
+        hostId: '6244a257b33357644ca3d12e',
         // hostId: this.stayToEdit._id //mongoId
 
         totalPrice: this.totalPrice,

@@ -20,4 +20,15 @@
   margin-right: 8px !important;
   margin-top: 4px !important;
   margin-bottom: 4px !important;
+  transition: border-color 0.15s;
+}
+
+.explore-btn:hover {
+  color: rgb(0, 0, 0) !important;
+  border-color: rgb(0, 0, 0) !important;
+}
+
+.clicked {
+  background-color: rgb(247, 247, 247) !important;
+  border: 2px solid rgb(0, 0, 0) !important;
 }

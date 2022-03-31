@@ -3,7 +3,7 @@
   position: sticky;
   top: 0;
   z-index: 10;
-  height: 180px;
+  height: 80px;
 
   .details {
     width: 1280px;
@@ -146,6 +146,8 @@
         }
 
         .menu-btn-modal {
+          padding-top: 7px;
+          padding-bottom: 7px;
           display: flex;
           flex-direction: column;
           position: absolute;
@@ -164,6 +166,10 @@
           .menu-modal-link {
             font-size: 0.875rem;
             padding: 15px 20px;
+          }
+
+          .menu-modal-link:hover {
+            border-radius: 0%;
           }
         }
       }
