@@ -82,12 +82,32 @@
     <div v-if="isPriceActive" class="price-modal">
       <h3>Price</h3>
       <div class="range-nput">
-        <label>
-          <input type="range" :min="priceRange.min" :max="priceRange.max" />
-        </label>
+        <input
+          type="number"
+          placeholder="minimum price"
+          v-model="priceRange.min"
+        />
+        <input
+          type="number"
+          placeholder="maximum price"
+          v-model="priceRange.max"
+        />
       </div>
       <div class="range-buttons">
         <button @click="setPrice">Save</button>
+        <button @click="getPriceRange">Clear</button>
+      </div>
+    </div>
+    <div v-if="isTypeActive" class="type-room-modal">
+      <h3>Room type</h3>
+      <div class="room-options">
+        <select v-model="roomType">
+          <option value="ENITRE PLACE">entire place</option>
+          <option value="PRIVATE ROOM">privare room</option>
+        </select>
+      </div>
+      <div class="room-type-buttons">
+        <button @click="setRoom">Save</button>
         <button @click="getPriceRange">Clear</button>
       </div>
     </div>
@@ -196,6 +216,10 @@ export default {
       this.ExploreBtnsFilter.priceRange.max = this.priceRange.max;
       this.ExploreBtnsFilter.priceRange.min = this.priceRange.min;
       console.log('example', this.ExploreBtnsFilter.priceRange);
+    },
+    setRoom() {
+      this.ExploreBtnsFilter.roomType[0];
+      this.$emit('btnsFilter', this.ExploreBtnsFilter);
     },
   },
 };
