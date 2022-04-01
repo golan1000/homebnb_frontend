@@ -21,28 +21,34 @@
   row-gap: 40px;
   padding-left: 0px;
 
-  .explore-btns {
-    margin-left: -2px;
+  @media (max-width: 1568px) {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   }
+  @media (max-width: 1064px) {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+.explore-btns {
+  margin-left: -2px;
 
   .explore-btn {
     height: 38px;
-    cursor: pointer !important;
-    border: 1px solid #ddd !important;
-    background-color: #fff !important;
-    outline: none !important;
-    margin: 0 !important;
-    border-radius: 30px !important;
-    color: #222 !important;
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
-      Helvetica Neue, sans-serif !important;
-    padding: 10px 16px !important;
-    font-size: 14px !important;
-    font-weight: 400 !important;
-    line-height: 18px !important;
-    margin-right: 8px !important;
-    margin-top: 4px !important;
-    margin-bottom: 4px !important;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    outline: none;
+    margin: 0;
+    border-radius: 30px;
+    color: #222;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    margin-right: 8px;
+    margin-top: 4px;
+    margin-bottom: 4px;
     transition: border-color 0.15s;
   }
 
@@ -55,11 +61,22 @@
     background-color: rgb(247, 247, 247) !important;
     border: 2px solid rgb(0, 0, 0) !important;
   }
+}
 
-  @media (max-width: 1568px) {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  }
-  @media (max-width: 1064px) {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+.price-modal {
+  height: 328px;
+  width: 442px;
+  margin-top: 4px;
+  z-index: 10;
+  position: absolute;
+  background-color: whitesmoke;
+  border: 0.5px solid rgba(118, 118, 118, 0.28);
+  border-radius: 12px;
+  box-shadow: rgb(0 0 0 / 15%) 0px 10px 37px;
+
+  .range-buttons {
+    height: 80px;
+    width: 100px;
+    background-color: lightcoral;
   }
 }
