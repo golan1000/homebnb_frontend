@@ -21,6 +21,7 @@
   <br />
   <!-- Buttons for additional filtters -->
   <!-- <expolore-btns class="explore-btns" /> -->
+  {{ ExploreBtnsFilter }}
   <section class="explore-btns">
     <button
       @click="togglePrice"
@@ -101,8 +102,7 @@
     <div v-if="isTypeActive" class="type-room-modal">
       <h3>Room type</h3>
       <div class="room-options">
-        <select v-model="roomType">
-          <option value="">entire place</option>
+        <select v-model="ExploreBtnsFilter.roomType">
           <option value="ENITRE PLACE">entire place</option>
           <option value="PRIVATE ROOM">privare room</option>
         </select>
@@ -217,9 +217,9 @@ export default {
       this.ExploreBtnsFilter.priceRange.max = this.priceRange.max;
       this.ExploreBtnsFilter.priceRange.min = this.priceRange.min;
       console.log('example', this.ExploreBtnsFilter.priceRange);
+      this.$emit('btnsFilter', this.ExploreBtnsFilter);
     },
     setRoom() {
-      this.ExploreBtnsFilter.roomType[0];
       this.$emit('btnsFilter', this.ExploreBtnsFilter);
     },
   },
