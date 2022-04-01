@@ -99,7 +99,7 @@
     height: 66px;
     display: flex;
     align-items: center;
-    width: 223px;
+    width: 240px;
     flex: 0.95 0 auto;
     cursor: pointer;
 
@@ -210,12 +210,7 @@
     //   rgb(189, 30, 89) 75%,
     //   rgb(189, 30, 89) 100%
     // );
-    background-image: linear-gradient(
-      to right,
-      #e61e4d 0%,
-      #e31c5f 50%,
-      #d70466 100%
-    );
+    background-image: linear-gradient(to right, #e61e4d 0%, #e31c5f 50%, #d70466 100%);
   }
   input {
     background-color: transparent;

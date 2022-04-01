@@ -22,6 +22,8 @@ export default {
 
     console.log('loaded stays=', loadedStays);
   },
+  computed: {},
+  methods: {},
   components: {
     appHeader,
     appFooter,
