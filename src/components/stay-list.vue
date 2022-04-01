@@ -65,18 +65,18 @@
       AC
     </button>
     <button
-      @click="toggleHeating"
+      @click="toggleSmoking"
       class="explore-btn"
-      :class="{ clicked: isHeatingActive }"
+      :class="{ clicked: isSmokingAllowedActive }"
     >
-      Heating
+      Smoking allowed
     </button>
     <button
-      @click="toggleElevator"
+      @click="togglePets"
       class="explore-btn"
-      :class="{ clicked: isElevatorActive }"
+      :class="{ clicked: isPetsAllowedActive }"
     >
-      Elevator
+      Pets allowed
     </button>
 
     <div v-if="isPriceActive" class="price-modal">
@@ -115,14 +115,13 @@ export default {
 
       isPriceActive: false,
       isTypeActive: false,
-
+      // Amenities
       isWifiActive: false,
       isTvActive: false,
-
       isKitchenActive: false,
       isAcActive: false,
-      isElevatorActive: false,
-      isHeatingActive: false,
+      isPetsAllowedActive: false,
+      isSmokingAllowedActive: false,
       ExploreBtnsFilter: {
         amenities: [],
         roomType: [],
@@ -164,13 +163,13 @@ export default {
       this.isAcActive = !this.isAcActive;
       this.setAmenities('Air conditioning', this.isAcActive);
     },
-    toggleHeating() {
-      this.isHeatingActive = !this.isHeatingActive;
-      this.setAmenities('Heating', this.isHeatingActive);
+    toggleSmoking() {
+      this.isSmokingAllowedActive = !this.isSmokingAllowedActive;
+      this.setAmenities('Smoking allowed', this.isSmokingAllowedActive);
     },
-    toggleElevator() {
-      this.isElevatorActive = !this.isElevatorActive;
-      this.setAmenities('Elevator', this.isElevatorActive);
+    togglePets() {
+      this.isPetsAllowedActive = !this.isPetsAllowedActive;
+      this.setAmenities('Pets allowed', this.isPetsAllowedActive);
     },
 
     setAmenities(name, btnStatus) {

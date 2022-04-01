@@ -164,13 +164,19 @@
           }
 
           .menu-modal-link {
-            font-size: 0.875rem;
+            font-size: 14px;
             padding: 15px 20px;
           }
 
           .menu-modal-link:hover {
             border-radius: 0%;
           }
+        }
+        .menu-modal-link:last-child:hover {
+          border-radius: 0px 0px 4px 4px;
+        }
+        .menu-modal-link:first-child:hover {
+          border-radius: 4px 4px 0px 0px;
         }
       }
     }

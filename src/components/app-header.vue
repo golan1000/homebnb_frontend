@@ -37,7 +37,7 @@
           </button>
           <div v-if="isOpen" class="menu-btn-modal">
             <router-link @click="toggleModal" class="menu-modal-link" to="/signup">Log in</router-link>
-            <router-link @click="toggleModal" class="menu-modal-link" to="/stay">Host your home</router-link>
+            <router-link @click="toggleModal" class="menu-modal-link" to="/dashboard">Host your home</router-link>
             <router-link @click="toggleModal" class="menu-modal-link" to="/stay">About</router-link>
           </div>
         </div>
