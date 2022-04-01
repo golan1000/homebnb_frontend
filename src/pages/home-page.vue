@@ -1,8 +1,8 @@
 <template>
   <div class="main-container">
-    <div class="filter-cont">
-      <stay-filter></stay-filter>
-    </div>
+    <!-- <div class="filter-cont">
+      <stay-filter v-if="getFilterShown"></stay-filter>
+    </div> -->
     <div class="con-sentence">
       <div class="sentence">Let your curiosity do the booking</div>
     </div>
