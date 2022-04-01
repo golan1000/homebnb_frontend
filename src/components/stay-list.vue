@@ -21,7 +21,6 @@
   <br />
   <!-- Buttons for additional filtters -->
   <!-- <expolore-btns class="explore-btns" /> -->
-  {{ ExploreBtnsFilter }}
   <section class="explore-btns">
     <button
       @click="togglePrice"
