@@ -23,61 +23,74 @@
   <!-- <expolore-btns class="explore-btns" /> -->
   <section class="explore-btns">
     <button
-      @click="TogglePrice"
+      @click="togglePrice"
       class="explore-btn"
-      :class="{ clicked: priceActive }"
+      :class="{ clicked: isPriceActive }"
     >
       Price
     </button>
     <button
-      @click="ToggleType"
+      @click="toggleType"
       class="explore-btn"
-      :class="{ clicked: typeActive }"
+      :class="{ clicked: isTypeActive }"
     >
       Type of place
     </button>
     <button
-      @click="ToggleWifi"
+      @click="toggleWifi"
       class="explore-btn"
-      :class="{ clicked: wifiActive }"
+      :class="{ clicked: isWifiActive }"
     >
       Wifi
     </button>
     <button
-      @click="ToggleTv"
+      @click="toggleTv"
       class="explore-btn"
-      :class="{ clicked: tvActive }"
+      :class="{ clicked: isTvActive }"
     >
       TV
     </button>
     <button
-      @click="ToggleKitchen"
+      @click="toggleKitchen"
       class="explore-btn"
-      :class="{ clicked: kitchenActive }"
+      :class="{ clicked: isKitchenActive }"
     >
       Kitchen
     </button>
     <button
-      @click="ToggleAc"
+      @click="toggleAc"
       class="explore-btn"
-      :class="{ clicked: acActive }"
+      :class="{ clicked: isAcActive }"
     >
       AC
     </button>
     <button
-      @click="ToggleSmoking"
+      @click="toggleHeating"
       class="explore-btn"
-      :class="{ clicked: smokingActive }"
+      :class="{ clicked: isHeatingActive }"
     >
-      Smoking Allowed
+      Heating
     </button>
     <button
-      @click="TogglePets"
+      @click="toggleElevator"
       class="explore-btn"
-      :class="{ clicked: petsActive }"
+      :class="{ clicked: isElevatorActive }"
     >
-      Pets Allowed
+      Elevator
     </button>
+
+    <div v-if="isPriceActive" class="price-modal">
+      <h3>Price</h3>
+      <div class="range-nput">
+        <label>
+          <input type="range" :min="priceRange.min" :max="priceRange.max" />
+        </label>
+      </div>
+      <div class="range-buttons">
+        <button @click="setPrice">Save</button>
+        <button @click="getPriceRange">Clear</button>
+      </div>
+    </div>
   </section>
   <ul class="stay-list">
     <stay-preview v-for="stay in stays" :stay="stay" :key="stay._id" />
@@ -95,61 +108,108 @@ export default {
       required: true,
     },
   },
+  emits: ['btnsFilter'],
   data() {
     return {
-      priceActive: false,
-      typeActive: false,
-      wifiActive: false,
-      tvActive: false,
-      kitchenActive: false,
-      acActive: false,
-      smokingActive: false,
-      petsActive: false,
+      priceRange: { min: 0, max: 100000 },
+
+      isPriceActive: false,
+      isTypeActive: false,
+
+      isWifiActive: false,
+      isTvActive: false,
+
+      isKitchenActive: false,
+      isAcActive: false,
+      isElevatorActive: false,
+      isHeatingActive: false,
+      ExploreBtnsFilter: {
+        amenities: [],
+        roomType: [],
+        priceRange: {},
+      },
     };
   },
   created() {
     console.log(this.$route.query);
+    this.getPriceRange();
   },
   components: {
     stayPreview,
     expoloreBtns,
   },
   methods: {
-    TogglePrice() {
-      this.priceActive = !this.priceActive;
+    togglePrice() {
+      this.isPriceActive = !this.isPriceActive;
+      this.isTypeActive = false;
     },
-    ToggleType() {
-      this.typeActive = !this.typeActive;
+    toggleType() {
+      this.isTypeActive = !this.isTypeActive;
+      this.isPriceActive = false;
     },
-    ToggleWifi() {
-      this.wifiActive = !this.wifiActive;
+
+    toggleWifi() {
+      this.isWifiActive = !this.isWifiActive;
+      this.setAmenities('Wifi', this.isWifiActive);
     },
-    ToggleTv() {
-      this.tvActive = !this.tvActive;
+    toggleTv() {
+      this.isTvActive = !this.isTvActive;
+      this.setAmenities('TV', this.isTvActive);
     },
-    ToggleKitchen() {
-      this.kitchenActive = !this.kitchenActive;
+    toggleKitchen() {
+      this.isKitchenActive = !this.isKitchenActive;
+      this.setAmenities('Kitchen', this.isKitchenActive);
     },
-    ToggleAc() {
-      this.acActive = !this.acActive;
+    toggleAc() {
+      this.isAcActive = !this.isAcActive;
+      this.setAmenities('Air conditioning', this.isAcActive);
     },
-    ToggleSmoking() {
-      this.smokingActive = !this.smokingActive;
+    toggleHeating() {
+      this.isHeatingActive = !this.isHeatingActive;
+      this.setAmenities('Heating', this.isHeatingActive);
     },
-    TogglePets() {
-      this.petsActive = !this.petsActive;
+    toggleElevator() {
+      this.isElevatorActive = !this.isElevatorActive;
+      this.setAmenities('Elevator', this.isElevatorActive);
     },
-  },
-  computed: {
-    // bla() {
-    //   const { address } = this.$route.query;
-    //   console.log(this.stays);
-    //   if (address) {
-    //     return `${this.stays.length} stays in ${address}`;
-    //   } else {
-    //     return "Explore the world!";
-    //   }
-    // },
+
+    setAmenities(name, btnStatus) {
+      if (btnStatus) {
+        if (this.ExploreBtnsFilter.amenities.includes(name)) return;
+        this.ExploreBtnsFilter.amenities.push(name);
+      } else {
+        const idx = this.ExploreBtnsFilter.amenities.findIndex(
+          amenity => amenity === name
+        );
+        this.ExploreBtnsFilter.amenities.splice(idx, 1);
+      }
+      this.$emit('btnsFilter', this.ExploreBtnsFilter);
+    },
+
+    getPriceRange() {
+      const prices = this.stays.map(stay => stay.price);
+      this.priceRange.min = Math.min(...prices);
+      console.log(' priceRange.min', this.priceRange.min);
+      this.priceRange.max = Math.max(...prices);
+      console.log(' priceRange.max', this.priceRange.max);
+    },
+    setPrice() {
+      this.ExploreBtnsFilter.priceRange.max = this.priceRange.max;
+      this.ExploreBtnsFilter.priceRange.min = this.priceRange.min;
+      console.log('example', this.ExploreBtnsFilter.priceRange);
+    },
   },
 };
+
+// computed: {
+// bla() {
+//   const { address } = this.$route.query;
+//   console.log(this.stays);
+//   if (address) {
+//     return `${this.stays.length} stays in ${address}`;
+//   } else {
+//     return "Explore the world!";
+//   }
+// },
+// },
 </script>

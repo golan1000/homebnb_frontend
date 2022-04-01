@@ -5,20 +5,25 @@
     <!-- <div> -->
     <stay-filter></stay-filter>
     <!-- </div> -->
-    <stay-list v-if="stays" :stays="stays" />
+    <stay-list v-if="stays" :stays="stays" @btnsFilter="onBtnFilter" />
   </section>
 </template>
 
 <script>
-import stayFilter from "../components/stay-filter.vue";
-import stayList from "../components/stay-list.vue";
+import stayFilter from '../components/stay-filter.vue';
+import stayList from '../components/stay-list.vue';
 export default {
   data() {
     return {
       stays: null,
     };
   },
-  methods: {},
+  methods: {
+    onBtnFilter(filter) {
+      console.log('filter', filter);
+      this.$store.commit({ type: 'setExploreFilter', filter });
+    },
+  },
   computed: {
     stays() {
       return this.$store.getters.getStays;
@@ -27,7 +32,7 @@ export default {
   components: { stayFilter, stayList },
   created() {
     this.stays = this.$store.getters.getStays;
-    this.$store.commit({ type: "setCurrPage", page: "stayApp" });
+    this.$store.commit({ type: 'setCurrPage', page: 'stayApp' });
   },
 };
 </script>
