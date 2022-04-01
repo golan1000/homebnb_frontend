@@ -16,13 +16,7 @@
       <div>
         <div class="review-address-flex">
           <img src="../assets/star.svg" alt="" />
-          <span>&nbsp;&nbsp;{{ getAvarageRate }}&nbsp;&nbsp;</span
-          ><span class="details-stay-short-info-address"
-            >({{ stayToEdit.reviews.length }} reviews)
-          </span>
-          &nbsp;•&nbsp;&nbsp;<span class="details-stay-short-info-address"
-            >&nbsp;{{ getStayCityAdress }}
-          </span>
+          <span>&nbsp;&nbsp;{{ getAvarageRate }}&nbsp;&nbsp;</span><span class="details-stay-short-info-address">{{ getReviewsNum }} reviews </span> &nbsp;•&nbsp;&nbsp;<span class="details-stay-short-info-address">&nbsp;{{ getStayCityAdress }} </span>
         </div>
       </div>
       <div class="details-stay-short-info-right">
@@ -61,14 +55,9 @@
       <div class="middle-con-sec1">
         <div class="first-line">
           <div class="first-line-1">
-            <span class="first-line-title"
-              >{{ getStayType }} hosted by {{ getHostName }}</span
-            >
+            <span class="first-line-title">{{ getStayType }} hosted by {{ getHostName }}</span>
             <div class="spacer1">&nbsp;</div>
-            <div class="first-line-2">
-              {{ getStayCap }} guests · {{ getBedrooms }} bedroom ·
-              {{ getBeds }} bed · {{ getBathrooms }} bathroom
-            </div>
+            <div class="first-line-2">{{ getStayCap }} guests · {{ getBedrooms }} bedroom · {{ getBeds }} bed · {{ getBathrooms }} bathroom</div>
           </div>
           <div class="avatar1">
             <el-avatar :size="57" :src="mainPic" />
@@ -79,53 +68,22 @@
         <hr />
         <div class="second-line">
           <div class="second-line-con4">
-            <div class="second-line-1">
-              <img
-                class="services-img"
-                src="../assets/house.svg"
-                alt=""
-              />&nbsp;&nbsp;&nbsp;Entire home
-            </div>
-            <div class="second-line-2">
-              You’ll have the apartment to yourself.
-            </div>
+            <div class="second-line-1"><img class="services-img" src="../assets/house.svg" alt="" />&nbsp;&nbsp;&nbsp;Entire home</div>
+            <div class="second-line-2">You’ll have the apartment to yourself.</div>
           </div>
 
           <div class="second-line-con2">
-            <div class="second-line-3">
-              <img
-                class="services-img"
-                src="../assets/location.svg"
-                alt=""
-              />&nbsp;&nbsp;&nbsp;Great location
-            </div>
-            <div class="second-line-4">
-              Recent guests gave the location a 5-star rating.
-            </div>
+            <div class="second-line-3"><img class="services-img" src="../assets/location.svg" alt="" />&nbsp;&nbsp;&nbsp;Great location</div>
+            <div class="second-line-4">Recent guests gave the location a 5-star rating.</div>
           </div>
 
           <div class="second-line-con3">
-            <div class="second-line-5">
-              <img
-                class="services-img"
-                src="../assets/stars.svg"
-                alt=""
-              />&nbsp;&nbsp;&nbsp;Enhanced Clean
-            </div>
-            <div class="second-line-6">
-              This host has committed to our 5-step enhanced cleaning process.
-            </div>
+            <div class="second-line-5"><img class="services-img" src="../assets/stars.svg" alt="" />&nbsp;&nbsp;&nbsp;Enhanced Clean</div>
+            <div class="second-line-6">This host has committed to our 5-step enhanced cleaning process.</div>
           </div>
 
           <div class="second-line-con4">
-            <div class="second-line-7">
-              <img
-                class="services-img"
-                src="../assets/calendar.svg"
-                alt=""
-              />&nbsp;&nbsp;&nbsp;Free cancellation up to 24 hours before
-              check-in
-            </div>
+            <div class="second-line-7"><img class="services-img" src="../assets/calendar.svg" alt="" />&nbsp;&nbsp;&nbsp;Free cancellation up to 24 hours before check-in</div>
             <div class="second-line-8">feel free to be flexible</div>
           </div>
         </div>
@@ -180,17 +138,9 @@
           <div class="forth-line-1">Amenities</div>
 
           <div class="amenities-grid">
-            <div
-              v-for="(amenity, index) in getAmenities"
-              class="amenities-grid-item"
-              :key="index + Math.random()"
-            >
-              <img :src="getAmenitiesImg(index)" /> &nbsp;{{ amenity }}
-            </div>
+            <div v-for="(amenity, index) in getAmenities" class="amenities-grid-item" :key="index + Math.random()"><img :src="getAmenitiesImg(index)" /> &nbsp;{{ amenity }}</div>
           </div>
-          <button class="amenities-btn">
-            Show all {{ getAmenitiesNum }} amenities
-          </button>
+          <button class="amenities-btn">Show all {{ getAmenitiesNum }} amenities</button>
         </div>
       </div>
 
@@ -206,20 +156,18 @@
 
             <div class="order-form-star-rate">
               <img src="../assets/star.svg" alt="" />
-              <label class="order-form-rate"
-                >&nbsp;{{ getAvarageRate }} &nbsp;</label
-              >
-              <label class="order-form-rate">({{ getReviewsNum }})</label>
+              <label class="order-form-rate">&nbsp;{{ getAvarageRate }} ·&nbsp;</label>
+              <label class="order-form-rate-reviews">{{ getReviewsNum }} reviews</label>
             </div>
           </div>
           <div class="order-form-middle-con">
             <div class="order-dates">
               <button class="order-form-check-in-btn" @click="toggleDateModal">
-                <div class="check">CHECK IN</div>
+                <div class="check">CHECK-IN</div>
                 <div class="add-dates">{{ getRangeStart }}</div>
               </button>
               <button class="order-form-check-out-btn" @click="toggleDateModal">
-                <div class="check">CHECK OUT</div>
+                <div class="check">CHECKOUT</div>
                 <div class="add-dates">{{ getRangeEnd }}</div>
               </button>
             </div>
@@ -231,27 +179,11 @@
                 </div>
                 <div class="order-form-guest-btn-sec2">
                   <el-icon
-                    ><svg
-                      v-if="!isGuestModalOpen"
-                      viewBox="0 0 1024 1024"
-                      xmlns="http://www.w3.org/2000/svg"
-                      data-v-ba633cb8=""
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M104.704 338.752a64 64 0 0 1 90.496 0l316.8 316.8 316.8-316.8a64 64 0 0 1 90.496 90.496L557.248 791.296a64 64 0 0 1-90.496 0L104.704 429.248a64 64 0 0 1 0-90.496z"
-                      ></path>
+                    ><svg v-if="!isGuestModalOpen" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-ba633cb8="">
+                      <path fill="currentColor" d="M104.704 338.752a64 64 0 0 1 90.496 0l316.8 316.8 316.8-316.8a64 64 0 0 1 90.496 90.496L557.248 791.296a64 64 0 0 1-90.496 0L104.704 429.248a64 64 0 0 1 0-90.496z"></path>
                     </svg>
-                    <svg
-                      v-if="isGuestModalOpen"
-                      viewBox="0 0 1024 1024"
-                      xmlns="http://www.w3.org/2000/svg"
-                      data-v-ba633cb8=""
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M104.704 685.248a64 64 0 0 0 90.496 0l316.8-316.8 316.8 316.8a64 64 0 0 0 90.496-90.496L557.248 232.704a64 64 0 0 0-90.496 0L104.704 594.752a64 64 0 0 0 0 90.496z"
-                      ></path>
+                    <svg v-if="isGuestModalOpen" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-ba633cb8="">
+                      <path fill="currentColor" d="M104.704 685.248a64 64 0 0 0 90.496 0l316.8-316.8 316.8 316.8a64 64 0 0 0 90.496-90.496L557.248 232.704a64 64 0 0 0-90.496 0L104.704 594.752a64 64 0 0 0 0 90.496z"></path>
                     </svg>
                   </el-icon>
                 </div>
@@ -263,13 +195,9 @@
                     <input type="text" placeholder="Age 13+" disabled />
                   </div>
                   <div class="modal-btn">
-                    <button class="guest-btn" @click="addGuest('adult')">
-                      +
-                    </button>
+                    <button class="guest-btn" @click="removeGuest('adult')">-</button>
                     <span class="guest-label">{{ this.guests.adults }}</span>
-                    <button class="guest-btn" @click="removeGuest('adult')">
-                      -
-                    </button>
+                    <button class="guest-btn" @click="addGuest('adult')">+</button>
                   </div>
                 </div>
                 <div class="kids guest-flex">
@@ -279,54 +207,29 @@
                     <!-- <span class="span-input">Ages 2-12</span> -->
                   </div>
                   <div class="modal-btn">
-                    <button class="guest-btn" @click="addGuest('child')">
-                      +
-                    </button>
+                    <button class="guest-btn" @click="removeGuest('child')">-</button>
                     <span>{{ this.guests.kids }}</span>
-                    <button class="guest-btn" @click="removeGuest('child')">
-                      -
-                    </button>
+                    <button class="guest-btn" @click="addGuest('child')">+</button>
                   </div>
                 </div>
                 <div class="guest-modal-btn-layout">
-                  <button class="guest-close-btn" @click="toggleGuestModal">
-                    Close
-                  </button>
+                  <button class="guest-close-btn" @click="toggleGuestModal">Close</button>
                 </div>
               </section>
             </div>
           </div>
           <div v-if="isDateModalOpen" class="date-modal">
-            <v-date-picker
-              v-model="range"
-              update-on-input
-              @input="selectEvt"
-              color="gray"
-              is-range
-              :columns="$screens({ default: 2, lg: 2 })"
-            />
+            <v-date-picker v-model="range" :min-date="new Date()" update-on-input @input="selectEvt" color="green" is-range :columns="$screens({ default: 2, lg: 2 })" />
 
             <div class="date-modal-btn-layout">
-              <button class="date-clear-btn" @click="clearDateModal">
-                Clear dates
-              </button>
-              <button class="date-close-btn" @click="toggleDateModal">
-                Close
-              </button>
+              <button class="date-clear-btn" @click="clearDateModal">Clear dates</button>
+              <button class="date-close-btn" @click="toggleDateModal">Close</button>
             </div>
           </div>
-          <button
-            v-if="submitBtnState"
-            class="order-form-submit"
-            @click="submitOrder"
-          >
+          <button v-if="submitBtnState" class="order-form-submit" @click="submitOrder">
             <div>{{ getButtonText }}</div>
           </button>
-          <button
-            v-if="!submitBtnState"
-            class="order-form-submit-disabled"
-            @click="submitOrder"
-          >
+          <button v-if="!submitBtnState" class="order-form-submit-disabled" @click="submitOrder">
             <div>{{ getButtonText }}</div>
           </button>
 
@@ -357,22 +260,14 @@
 
     <hr />
     <div class="fifth-line">
-      <div class="fifth-line-1">
-        <img src="../assets/star.svg" alt="" />&nbsp; {{ getAvarageRate }} ·
-        {{ getReviewsNum }} reviews
-      </div>
+      <div class="fifth-line-1"><img src="../assets/star.svg" alt="" />&nbsp; {{ getAvarageRate }} · {{ getReviewsNum }} reviews</div>
       <div class="review-rates-main-con">
         <div class="rate-sec1">
           <div class="fifth-line-2">
             <div>Cleanliness</div>
             <div class="progress-span-flex">
               <div>
-                <el-progress
-                  :percentage="getReviewsScore.cleanlinessPre"
-                  color="black"
-                  stroke-width="4"
-                  text-inside="false"
-                />
+                <el-progress :percentage="getReviewsScore.cleanlinessPre" color="black" stroke-width="4" text-inside="false" />
                 {{ getReviewsScore[2] }}
               </div>
               <div>&nbsp; {{ getReviewsScore.cleanliness }}</div>
@@ -382,12 +277,7 @@
             <div>Check-in</div>
             <div class="progress-span-flex">
               <div>
-                <el-progress
-                  :percentage="getReviewsScore.checkinPre"
-                  color="black"
-                  stroke-width="4"
-                  text-inside="false"
-                />
+                <el-progress :percentage="getReviewsScore.checkinPre" color="black" stroke-width="4" text-inside="false" />
               </div>
               <div>&nbsp; {{ getReviewsScore.checkin }}</div>
             </div>
@@ -396,12 +286,7 @@
             <div>Location</div>
             <div class="progress-span-flex">
               <div>
-                <el-progress
-                  :percentage="getReviewsScore.locationPre"
-                  color="black"
-                  stroke-width="4"
-                  text-inside="false"
-                />
+                <el-progress :percentage="getReviewsScore.locationPre" color="black" stroke-width="4" text-inside="false" />
               </div>
               <div>&nbsp; {{ getReviewsScore.location }}</div>
             </div>
@@ -413,12 +298,7 @@
             <div>Communication</div>
             <div class="progress-span-flex">
               <div>
-                <el-progress
-                  :percentage="getReviewsScore.communicationPre"
-                  color="black"
-                  stroke-width="4"
-                  text-inside="false"
-                />
+                <el-progress :percentage="getReviewsScore.communicationPre" color="black" stroke-width="4" text-inside="false" />
               </div>
               <div>&nbsp; {{ getReviewsScore.communication }}</div>
             </div>
@@ -427,12 +307,7 @@
             <div>Accuracy</div>
             <div class="progress-span-flex">
               <div>
-                <el-progress
-                  :percentage="getReviewsScore.accuracyPre"
-                  color="black"
-                  stroke-width="4"
-                  text-inside="false"
-                />
+                <el-progress :percentage="getReviewsScore.accuracyPre" color="black" stroke-width="4" text-inside="false" />
               </div>
               <div>&nbsp; {{ getReviewsScore.accuracy }}</div>
             </div>
@@ -441,12 +316,7 @@
             <div>Value</div>
             <div class="progress-span-flex">
               <div>
-                <el-progress
-                  :percentage="getReviewsScore.valuePre"
-                  color="black"
-                  stroke-width="4"
-                  text-inside="false"
-                />
+                <el-progress :percentage="getReviewsScore.valuePre" color="black" stroke-width="4" text-inside="false" />
               </div>
               <div>&nbsp; {{ getReviewsScore.value }}</div>
             </div>
@@ -457,11 +327,7 @@
       <div class="fifth-line-5">
         <div class="review-users-con">
           <div class="review-users-grid">
-            <div
-              v-for="(review, index) in getReviews"
-              class="review1-con review-layout"
-              :key="index + Math.random()"
-            >
+            <div v-for="(review, index) in getReviews" class="review1-con review-layout" :key="index + Math.random()">
               <div class="review-user-details">
                 <div class="avatar1">
                   <el-avatar :size="57" :src="this.getRandProfilePic(index)" />
@@ -470,12 +336,8 @@
                   <el-avatar :size="57" :src="review.by.imgUrl" /> -->
                 </div>
 
-                <div class="review-name">
-                  {{ review.by.fullname }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </div>
-                <div class="review-date">
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ getDate(review.at) }}
-                </div>
+                <div class="review-name">{{ review.by.fullname }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                <div class="review-date">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ getDate(review.at) }}</div>
               </div>
               <div class="fifth-line-6">{{ getTxt(review.txt) }}</div>
             </div>
@@ -491,10 +353,7 @@
           <button @click="closeOrderModal" class="order-modal-btn">X</button>
         </div>
 
-        <div>
-          Thank you for your order, We will let you know when the host owner
-          will process it.
-        </div>
+        <div>Thank you for your order, We will let you know when the host owner will process it.</div>
       </div>
     </div>
   </Transition>
@@ -514,8 +373,8 @@ export default {
         kids: 0,
       },
       range: {
-        start: new Date(2022, 0, 1),
-        end: new Date(2022, 0, 5),
+        start: Date.now(),
+        end: Date.now(),
       },
 
       filterBy: {
@@ -622,6 +481,7 @@ export default {
       return true;
     },
     submitOrder() {
+      if (!this.$store.getters.getLoggedUser) alert('Please login');
       if (!this.range.start || !this.range.end) {
         console.log('choose dates');
         return;
@@ -651,7 +511,7 @@ export default {
 
       let order = {
         // _id: 'dsjfsdiuiowe3243io2uioeuroeiw'
-        createdAt: Date.now(),
+        // createdAt: Date.now(),
 
         // hostId: this.stayToEdit.id, // original
         hostId: '6244a257b33357644ca3d12e',
@@ -660,13 +520,13 @@ export default {
         totalPrice: this.totalPrice,
         buyer: buyerDetails,
         stay: stayDetails,
-        startDate: this.getDate(this.range.start),
-        endDate: this.getDate(this.range.end),
+        startDate: this.range.start,
+        endDate: this.range.end,
         guests: {
           adults: this.guests.adults,
           kids: this.guests.kids,
         },
-        status: 'pending',
+        status: 'Pending',
       };
 
       console.log('order=', order);
@@ -685,14 +545,7 @@ export default {
       return totalNights;
     },
     getAmenitiesImg(index) {
-      let amenitiesImgs = [
-        '../../src/assets/img/amenities/ac.svg',
-        '../../src/assets/img/amenities/dog.svg',
-        '../../src/assets/img/amenities/jacuzzi.svg',
-        '../../src/assets/img/amenities/kitchen.svg',
-        '../../src/assets/img/amenities/tv.svg',
-        '../../src/assets/img/amenities/wifi.svg',
-      ];
+      let amenitiesImgs = ['../../src/assets/img/amenities/ac.svg', '../../src/assets/img/amenities/dog.svg', '../../src/assets/img/amenities/jacuzzi.svg', '../../src/assets/img/amenities/kitchen.svg', '../../src/assets/img/amenities/tv.svg', '../../src/assets/img/amenities/wifi.svg'];
       console.log('curr amenity img=', amenitiesImgs[index]);
       return amenitiesImgs[index];
     },
@@ -704,24 +557,19 @@ export default {
   },
   computed: {
     galleryImg1() {
-      if (this.stayToEdit.imgUrls[0])
-        return this.baseUrl + this.stayToEdit.imgUrls[0];
+      if (this.stayToEdit.imgUrls[0]) return this.baseUrl + this.stayToEdit.imgUrls[0];
     },
     galleryImg2() {
-      if (this.stayToEdit.imgUrls[1])
-        return this.baseUrl + this.stayToEdit.imgUrls[1];
+      if (this.stayToEdit.imgUrls[1]) return this.baseUrl + this.stayToEdit.imgUrls[1];
     },
     galleryImg3() {
-      if (this.stayToEdit.imgUrls[2])
-        return this.baseUrl + this.stayToEdit.imgUrls[2];
+      if (this.stayToEdit.imgUrls[2]) return this.baseUrl + this.stayToEdit.imgUrls[2];
     },
     galleryImg4() {
-      if (this.stayToEdit.imgUrls[3])
-        return this.baseUrl + this.stayToEdit.imgUrls[3];
+      if (this.stayToEdit.imgUrls[3]) return this.baseUrl + this.stayToEdit.imgUrls[3];
     },
     galleryImg5() {
-      if (this.stayToEdit.imgUrls[4])
-        return this.baseUrl + this.stayToEdit.imgUrls[4];
+      if (this.stayToEdit.imgUrls[4]) return this.baseUrl + this.stayToEdit.imgUrls[4];
     },
     getStayPrice() {
       return '$' + this.stayToEdit.price;
@@ -731,8 +579,7 @@ export default {
     },
     getStayType() {
       if (this.stayToEdit.propertyType) {
-        if (this.stayToEdit.roomType)
-          return this.stayToEdit.propertyType + ' ' + this.stayToEdit.roomType;
+        if (this.stayToEdit.roomType) return this.stayToEdit.propertyType + ' ' + this.stayToEdit.roomType;
       }
     },
     getHostName() {
@@ -762,8 +609,7 @@ export default {
       } else return 'Add dates';
     },
     getRangeEnd() {
-      if (this.range.end && this.isDateSelected)
-        return new Date(this.range.end).toLocaleDateString();
+      if (this.range.end && this.isDateSelected) return new Date(this.range.end).toLocaleDateString();
       else return 'Add dates';
     },
     getAmenitiesNum() {
@@ -849,10 +695,7 @@ export default {
     getReviewsScore() {
       var reviewScores;
 
-      console.log(
-        'this.stayToEdit.reviewScores=',
-        this.stayToEdit.reviewScores
-      );
+      console.log('this.stayToEdit.reviewScores=', this.stayToEdit.reviewScores);
       var accuracy = this.stayToEdit.reviewScores.accuracy;
       var accuracyPre = (accuracy / 10) * 100;
       var cleanliness = this.stayToEdit.reviewScores.cleanliness;
@@ -887,18 +730,15 @@ export default {
       return reviewScores;
     },
     getStayCityAdress() {
-      return (
-        this.stayToEdit.address.city + ' ' + this.stayToEdit.address.country
-      );
+      return this.stayToEdit.address.city + ' ' + this.stayToEdit.address.country;
     },
     getHostPicture() {
       this.stayToEdit.host.thumbnailUrl;
     },
     getButtonText() {
       let totalGuests = this.guests.adults + this.guests.kids;
-      if (!this.isDateSelected || totalGuests === 0)
-        return 'Check availability';
-      else return 'Reserved';
+      if (!this.isDateSelected || totalGuests === 0) return 'Check availability';
+      else return 'Reserve';
     },
     getTotalGuests() {
       let totalGuests = this.guests.adults + this.guests.kids;
@@ -913,8 +753,7 @@ export default {
     },
     getTotalNightsCalc() {
       let str = '';
-      str +=
-        '$' + this.stayToEdit.price + ' x ' + this.getTotalNights() + ' nights';
+      str += '$' + this.stayToEdit.price + ' x ' + this.getTotalNights() + ' nights';
       console.log('last calc ====', str);
       return str;
     },
@@ -949,27 +788,15 @@ export default {
     },
 
     getAmenities() {
-      let stayAmenities = [
-        'Air conditioning',
-        'Pets allowed',
-        'Jacuzzi',
-        'Kitchen',
-        'TV',
-        'WiFi',
-      ];
+      let stayAmenities = ['Air conditioning', 'Pets allowed', 'Jacuzzi', 'Kitchen', 'TV', 'WiFi'];
       return stayAmenities;
     },
     getCurrOrder() {
-      if (this.$store.getters.getCurrOrder)
-        return this.$store.getters.getCurrOrder;
+      if (this.$store.getters.getCurrOrder) return this.$store.getters.getCurrOrder;
     },
     getModalState() {
-      console.log(
-        'this.$store.getters.getModalState',
-        this.$store.getters.getModalState
-      );
-      if (this.$store.getters.getModalState)
-        return this.$store.getters.getModalState;
+      console.log('this.$store.getters.getModalState', this.$store.getters.getModalState);
+      if (this.$store.getters.getModalState) return this.$store.getters.getModalState;
     },
   },
   watch: {
@@ -1078,25 +905,25 @@ img {
 .order-dialog-main-con {
   position: sticky;
   top: 80px;
-  padding: 25px;
+  /* padding: 25px; */
   padding-top: 22px;
-  width: 415px;
+  width: 372px;
   height: fit-content;
   min-height: 298px;
-  border-radius: 10px;
+  border-radius: 12px;
   margin-top: -4px;
   border: 1px solid #dddddd;
 }
 .order-form-price {
   font-weight: bold;
-  font-size: 20px;
+  font-size: 21px;
 }
 .order-form-submit {
   /* position: absolute; */
   /* z-index: -10; */
   margin: 0 auto;
   width: 322px;
-  height: 50px;
+  height: 48px;
   cursor: pointer;
   /* background: #e11a60; */
 
@@ -1136,9 +963,10 @@ img {
 }
 .order-form-top-con {
   /* background-color: blue; */
+  align-items: flex-end;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 .details-stay-name {
   font-size: 23.5px;
@@ -1193,8 +1021,7 @@ img {
   color: black;
   background-color: white;
   line-height: 20px;
-  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
-    'Helvetica Neue', sans-serif;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
   margin-top: 30px;
 }
 .amenities-btn:hover {
@@ -1215,11 +1042,11 @@ img {
 .order-form-check-in-btn {
   cursor: pointer;
   text-align: left;
-  height: 63px;
+  height: 56px;
   /* width: 50%; */
-  width: 179px;
+  width: 162px;
   margin: 0px !important;
-  border-radius: 10px 0 0 0 !important;
+  border-radius: 8px 0 0 0 !important;
   border: 1px solid gray;
   border-bottom: none;
 }
@@ -1229,11 +1056,11 @@ img {
 .order-form-check-out-btn {
   cursor: pointer;
   text-align: left;
-  height: 63px;
+  height: 56px;
   /* width: 50%; */
-  width: 186px;
+  width: 160px;
   margin: 0px !important;
-  border-radius: 0 10px 0 0 !important;
+  border-radius: 0 8px 0 0 !important;
   border: 1px solid gray;
   border-bottom: none;
   border-left: none;
@@ -1241,11 +1068,11 @@ img {
 .order-form-guest-btn {
   cursor: pointer;
   text-align: left !important;
-  height: 55px;
+  height: 57px;
   /* width: 100%; */
   /* background: purple; */
-  width: 365px;
-  border-radius: 0 0 10px 10px !important;
+  width: 322px;
+  border-radius: 0 0 8px 8px !important;
   border: 1px solid gray;
   display: flex;
   justify-content: space-between;
@@ -1412,17 +1239,17 @@ hr {
 .date-modal-btn-layout {
   margin-top: 10px;
   /* background-color: green; */
-  text-align: center;
+  text-align: right;
 
   /* //     <button class="date-close-btn" @click="closeDateModal">Close</button>
     // <button class="date-clear-btn" @click="clearDateModal">Clear</button> */
 }
+.guest-close-btn,
 .date-clear-btn {
   background-color: white;
   color: black;
   font-size: 14px;
-  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
-    'Helvetica Neue', sans-serif;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
   line-height: 18px;
   font-weight: 600;
   letter-spacing: 0.7;
@@ -1431,15 +1258,13 @@ hr {
   cursor: pointer;
 }
 
-.guest-close-btn,
 .date-close-btn {
   background-color: black;
   color: white;
   font-weight: bold;
   border-radius: 8px;
   font-size: 14px;
-  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
-    'Helvetica Neue', sans-serif;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
   line-height: 18px;
   font-weight: 600;
   height: 34px;
@@ -1448,7 +1273,7 @@ hr {
 }
 .guest-modal-btn-layout {
   width: 100%;
-  text-align: center;
+  text-align: right;
 }
 
 /* <div v-if="isReadyToSubmit" class="pre-charge-msg">You won't be charged yet</div>
@@ -1462,8 +1287,7 @@ hr {
 .pre-charge-msg {
   margin-bottom: 20px;
   margin-top: 16px;
-  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
-    'Helvetica Neue', sans-serif;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
   font-size: 14px;
   line-height: 18px;
   color: rgb(34, 34, 34);
