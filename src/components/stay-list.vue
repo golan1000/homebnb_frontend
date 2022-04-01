@@ -102,13 +102,14 @@
       <h3>Room type</h3>
       <div class="room-options">
         <select v-model="roomType">
+          <option value="">entire place</option>
           <option value="ENITRE PLACE">entire place</option>
           <option value="PRIVATE ROOM">privare room</option>
         </select>
       </div>
       <div class="room-type-buttons">
         <button @click="setRoom">Save</button>
-        <button @click="getPriceRange">Clear</button>
+        <button @click="ExploreBtnsFilter.roomType = []">Clear</button>
       </div>
     </div>
   </section>
