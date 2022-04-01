@@ -21,7 +21,7 @@ export default {
   methods: {
     onBtnFilter(filter) {
       console.log('filter', filter);
-      this.$store.commit({ type: 'setExploreFilter', filter });
+      // this.$store.commit({ type: 'setExploreFilter', filter });
     },
   },
   computed: {
