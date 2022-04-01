@@ -23,7 +23,7 @@ export default {
     submitOrder(state, { order }) {
       console.log('mutate ---- submitOrder=', order);
 
-      state.orders.push(order);
+      state.orders.unshift(order);
     },
     //Barak
     setOrders(state, { orders, user }) {
@@ -31,7 +31,7 @@ export default {
       console.log(state.orders);
       console.log(orders);
       // Barak original
-      state.orders = orders.filter(order => user._id === order.hostId);
+      state.orders = orders.filter((order) => user._id === order.hostId);
       // Tal temporary fix
       state.orders = orders;
       console.log(state.orders);
@@ -44,6 +44,14 @@ export default {
     },
     orderModalClose(state) {
       state.isOrderModalShown = false;
+    }, //Barak+Tal
+    updateOrder(state, { order }) {
+      console.log(order);
+      const idx = state.orders.findIndex(
+        (currOrder) => currOrder._id === order._id
+      );
+      state.orders.splice(idx, 1, order);
+      console.log(state.orders[idx]);
     },
   },
   actions: {
@@ -70,9 +78,11 @@ export default {
     // Tal
     async updateOrder(context, { order, user }) {
       try {
+        console.log(order);
         let updatedOrder = await orderService.save(order);
         console.log('orderId=', updatedOrder);
-        context.dispatch({ type: 'loadOrders', user });
+        context.commit({ type: 'updateOrder', order });
+        // context.dispatch({ type: 'loadOrders', user });
         return updatedOrder;
       } catch (err) {
         console.log('error=', err);

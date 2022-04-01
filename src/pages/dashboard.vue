@@ -189,9 +189,9 @@
                 <td class="orders-table-content-check">
                   {{ order.startDate }} - {{ order.endDate }}
                 </td>
-                <!-- <td class="orders-table-content-created">
+                <td class="orders-table-content-created">
                   ${{ order.createdAt }}
-                </td> -->
+                </td>
                 <td class="orders-table-content-revenue">
                   ${{ order.totalPrice }}
                 </td>
@@ -199,11 +199,11 @@
                   class="orders-table-content-status"
                   :style="{
                     color:
-                      order.status === 'Pending'
+                      order.status === 'pending'
                         ? 'rgb(215 176 64)'
                         : order.status === 'Approved'
-                        ? 'green'
-                        : 'red',
+                        ? '#1ab11a'
+                        : '#df1616',
                   }"
                 >
                   {{ order.status }}
@@ -212,23 +212,31 @@
                   <div
                     v-if="order.status === 'Declined'"
                     class="orders-table-content-actions-approve"
+                    @click="onUpadeOrderStatus(order._id, 'Approved')"
                   >
                     Approve
                   </div>
                   <div
                     v-if="order.status === 'Approved'"
                     class="orders-table-content-actions-decline"
+                    @click="onUpadeOrderStatus(order._id, 'Declined')"
                   >
                     Decline
                   </div>
                   <div
-                    v-if="order.status === 'Pending'"
+                    v-if="order.status === 'pending'"
                     class="orders-table-content-actions-inner"
                   >
-                    <div class="orders-table-content-actions-approve">
+                    <div
+                      class="orders-table-content-actions-approve"
+                      @click="onUpadeOrderStatus(order._id, 'Approved')"
+                    >
                       Approve
                     </div>
-                    <div class="orders-table-content-actions-decline">
+                    <div
+                      class="orders-table-content-actions-decline"
+                      @click="onUpadeOrderStatus(order._id, 'Declined')"
+                    >
                       Decline
                     </div>
                   </div>
@@ -265,8 +273,8 @@
                 <td class="stays-table-content-address">
                   {{ stay.address.street }}
                 </td>
-                <td class="stays-table-content-price">{{ stay.price }}</td>
-                 <td class="stays-table-content-actions">
+                <td class="stays-table-content-price">${{ stay.price }}</td>
+                <td class="stays-table-content-actions">
                   <div class="stays-table-content-actions-inner">
                     <img
                       class="img-edit"
@@ -311,6 +319,26 @@ export default {
     switchTable(val) {
       if (val === 'stays') this.currTable = 'stays';
       else this.currTable = 'orders';
+    },
+    async onUpadeOrderStatus(orderId, status) {
+      console.log(orderId, status);
+      try {
+        const order = this.ordersForDisplay.find(
+          (order) => order._id === orderId
+        );
+        console.log(order);
+        order.status = status;
+        const updatedOrder = await this.$store.dispatch({
+          type: 'updateOrder',
+          order,
+          user: this.loggedInUser,
+        });
+        this.ordersForDisplay = this.$store.getters.getOrders;
+        console.log(this.ordersForDisplay);
+        console.log('order updated', updatedOrder);
+      } catch (err) {
+        console.log('cold not change order status');
+      }
     },
   },
   async created() {
@@ -438,7 +466,7 @@ export default {
     setCurrOrdersData() {
       if (!this.ordersForDisplay.length) return;
       for (var i = 0; i < this.ordersForDisplay.length; i++) {
-        if (this.ordersForDisplay[i].status === 'Pending') this.ordersPending++;
+        if (this.ordersForDisplay[i].status === 'pending') this.ordersPending++;
         if (this.ordersForDisplay[i].status === 'Declined')
           this.ordersDeclined++;
         if (this.ordersForDisplay[i].status === 'Approved')
@@ -465,7 +493,21 @@ export default {
       }
     },
   },
+  watch: {
+    ordersForDisplay: {
+      handler() {
+        this.$store.dispatch({
+          type: 'loadOrders',
+          user: this.loggedInUser,
+        });
+      },
+    },
+  },
 };
 </script>
 
 <style></style>
+
+watch: { // whenever question changes, this function will run
+question(newQuestion, oldQuestion) { if (newQuestion.indexOf('?') > -1) {
+this.getAnswer() } } },

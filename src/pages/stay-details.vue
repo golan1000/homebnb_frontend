@@ -666,7 +666,7 @@ export default {
           adults: this.guests.adults,
           kids: this.guests.kids,
         },
-        status: 'pending',
+        status: 'Pending',
       };
 
       console.log('order=', order);

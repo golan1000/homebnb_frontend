@@ -49,7 +49,7 @@
               to="/signup"
               >Log in</router-link
             >
-            <router-link @click="toggleModal" class="menu-modal-link" to="/stay"
+            <router-link @click="toggleModal" class="menu-modal-link" to="/dashboard"
               >Host your home</router-link
             >
             <router-link @click="toggleModal" class="menu-modal-link" to="/stay"

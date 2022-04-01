@@ -1,9 +1,10 @@
 .dashboard-con {
-  height: 200vh;
+  min-height: 81vh;
   margin-top: 31px;
+  margin-bottom: 12px;
 
   .dashboard {
-    min-height: 200vh;
+    min-height: 81vh;
     padding-left: 80px;
     padding-right: 80px;
     display: flex;
@@ -84,12 +85,11 @@
             flex-direction: column;
             justify-content: space-evenly;
 
-
-            .dashboard-data-revenues-period-month-num{
+            .dashboard-data-revenues-period-month-num {
               color: #1ab11a;
             }
 
-            .dashboard-data-revenues-period-year-num{
+            .dashboard-data-revenues-period-year-num {
               color: #1ab11a;
             }
 
@@ -241,6 +241,7 @@
       }
       .stays-table-content-name {
         width: 35%;
+        text-align: left;
       }
       .stays-table-content-price {
         width: 10%;
@@ -255,6 +256,7 @@
           padding-right: 13px;
           cursor: pointer;
           text-decoration: underline;
+          color: #0808d7c7;
 
           .img-edit {
             width: 1rem;
@@ -330,6 +332,16 @@
             color: #df1616;
             text-decoration: underline;
           }
+        }
+        .orders-table-content-actions-approve {
+          color: #1ab11a;
+          text-decoration: underline;
+          cursor: pointer;
+        }
+        .orders-table-content-actions-decline {
+          color: #df1616;
+          text-decoration: underline;
+          cursor: pointer;
         }
       }
 
