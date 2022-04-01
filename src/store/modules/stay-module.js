@@ -93,7 +93,7 @@ export default {
     },
     // Tal
     setExploreFilter(state, { exploreFilter }) {
-      state.exploreFilter = JSON.parse(JSON.stringify(exploreFilter));
+      state.exploreFilter = exploreFilter;
     },
   },
   actions: {
