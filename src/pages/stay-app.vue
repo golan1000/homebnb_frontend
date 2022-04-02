@@ -3,7 +3,6 @@
     <!-- <stay-filter /> -->
     <!-- <div class="space-con">&nbsp;</div> -->
     <!-- <div> -->
-    <stay-filter></stay-filter>
     <!-- </div> -->
     <stay-list v-if="stays" :stays="stays" @btnsFilter="onBtnFilter" />
   </section>
@@ -21,7 +20,8 @@ export default {
   methods: {
     onBtnFilter(exploreFilter) {
       console.log('staapp', exploreFilter);
-      this.$store.commit({ type: 'setExploreFilter', exploreFilter });
+      // this.$store.commit({ type: 'setExploreFilter', exploreFilter });
+      this.$store.dispatch({ type: 'setExploreFilter', exploreFilter });
     },
   },
   computed: {

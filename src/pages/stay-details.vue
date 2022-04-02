@@ -7,30 +7,35 @@
 
   <div v-if="stayToEdit" class="details-main-con">
     <div class="details-stay-name">
-      <span>{{ stayToEdit.name }}</span
-      ><br />
+      <span>{{ stayToEdit.name }}</span>
     </div>
-    <br />
 
     <div class="details-stay-short-info">
       <div>
         <div class="review-address-flex">
-          <img src="../assets/star.svg" alt="" />
-          <span>&nbsp;&nbsp;{{ getAvarageRate }}&nbsp;&nbsp;</span><span class="details-stay-short-info-address">{{ getReviewsNum }} reviews </span> &nbsp;•&nbsp;&nbsp;<span class="details-stay-short-info-address">&nbsp;{{ getStayCityAdress }} </span>
+          <img class="review-address-flex-star" src="../assets/star.svg" alt="" />
+          <span>&nbsp;&nbsp;{{ getAvarageRate }}&nbsp;&nbsp;</span><span class="details-stay-short-info-address-reviews">{{ getReviewsNum }} reviews </span> &nbsp;•&nbsp;&nbsp;<span class="details-stay-short-info-address">&nbsp;{{ getStayCityAdress }} </span>
         </div>
       </div>
       <div class="details-stay-short-info-right">
-        <div>
-          <img src="../assets/share.svg" alt="" />
-          <button class="share-btn">Share</button>
+        <div class="details-stay-short-info-right-flex1">
+          <div>
+            <img class="details-stay-short-info-right-imgs" src="../assets/share.svg" alt="" />
+          </div>
+          <div>
+            <button class="share-btn">Share</button>
+          </div>
         </div>
-        <div>
-          <img src="../assets/stay-details-like.svg" alt="" />
-          <button class="save-btn">Save</button>
+        <div class="details-stay-short-info-right-flex2">
+          <div>
+            <img class="details-stay-short-info-right-imgs" src="../assets/stay-details-like.svg" alt="" />
+          </div>
+          <div>
+            <button class="save-btn">Save</button>
+          </div>
         </div>
       </div>
     </div>
-    <br />
 
     <div class="gallery-grid">
       <div class="sub-pic1-con">
@@ -138,7 +143,7 @@
           <div class="forth-line-1">Amenities</div>
 
           <div class="amenities-grid">
-            <div v-for="(amenity, index) in getAmenities" class="amenities-grid-item" :key="index + Math.random()"><img :src="getAmenitiesImg(index)" /> &nbsp;{{ amenity }}</div>
+            <div v-for="(amenity, index) in getAmenities" class="amenities-grid-item" :key="index + Math.random()"><img class="amenities-imgs" :src="getAmenitiesImg(index)" /> &nbsp;&nbsp;&nbsp;&nbsp;{{ amenity }}</div>
           </div>
           <button class="amenities-btn">Show all {{ getAmenitiesNum }} amenities</button>
         </div>
@@ -270,7 +275,7 @@
                 <el-progress :percentage="getReviewsScore.cleanlinessPre" color="black" stroke-width="4" text-inside="false" />
                 {{ getReviewsScore[2] }}
               </div>
-              <div>&nbsp; {{ getReviewsScore.cleanliness }}</div>
+              <div class="review-score-rating">&nbsp; {{ getReviewsScore.cleanliness }}</div>
             </div>
           </div>
           <div class="fifth-line-3">
@@ -279,7 +284,7 @@
               <div>
                 <el-progress :percentage="getReviewsScore.checkinPre" color="black" stroke-width="4" text-inside="false" />
               </div>
-              <div>&nbsp; {{ getReviewsScore.checkin }}</div>
+              <div class="review-score-rating">&nbsp; {{ getReviewsScore.checkin }}</div>
             </div>
           </div>
           <div class="fifth-line-4">
@@ -288,11 +293,11 @@
               <div>
                 <el-progress :percentage="getReviewsScore.locationPre" color="black" stroke-width="4" text-inside="false" />
               </div>
-              <div>&nbsp; {{ getReviewsScore.location }}</div>
+              <div class="review-score-rating">&nbsp; {{ getReviewsScore.location }}</div>
             </div>
           </div>
         </div>
-        <div class="rate-sec-middle">&nbsp;</div>
+        <!-- <div class="rate-sec-middle">&nbsp;</div> -->
         <div class="rate-sec2">
           <div class="fifth-line-2">
             <div>Communication</div>
@@ -300,7 +305,7 @@
               <div>
                 <el-progress :percentage="getReviewsScore.communicationPre" color="black" stroke-width="4" text-inside="false" />
               </div>
-              <div>&nbsp; {{ getReviewsScore.communication }}</div>
+              <div class="review-score-rating">&nbsp; {{ getReviewsScore.communication }}</div>
             </div>
           </div>
           <div class="fifth-line-3">
@@ -309,7 +314,7 @@
               <div>
                 <el-progress :percentage="getReviewsScore.accuracyPre" color="black" stroke-width="4" text-inside="false" />
               </div>
-              <div>&nbsp; {{ getReviewsScore.accuracy }}</div>
+              <div class="review-score-rating">&nbsp; {{ getReviewsScore.accuracy }}</div>
             </div>
           </div>
           <div class="fifth-line-4">
@@ -318,7 +323,7 @@
               <div>
                 <el-progress :percentage="getReviewsScore.valuePre" color="black" stroke-width="4" text-inside="false" />
               </div>
-              <div>&nbsp; {{ getReviewsScore.value }}</div>
+              <div class="review-score-rating">&nbsp; {{ getReviewsScore.value }}</div>
             </div>
           </div>
         </div>
@@ -327,7 +332,7 @@
       <div class="fifth-line-5">
         <div class="review-users-con">
           <div class="review-users-grid">
-            <div v-for="(review, index) in getReviews" class="review1-con review-layout" :key="index + Math.random()">
+            <div v-for="(review, index) in getReviews" class="review1-con" :key="index + Math.random()">
               <div class="review-user-details">
                 <div class="avatar1">
                   <el-avatar :size="57" :src="this.getRandProfilePic(index)" />
@@ -545,8 +550,8 @@ export default {
       return totalNights;
     },
     getAmenitiesImg(index) {
-      let amenitiesImgs = ['../../src/assets/img/amenities/ac.svg', '../../src/assets/img/amenities/dog.svg', '../../src/assets/img/amenities/jacuzzi.svg', '../../src/assets/img/amenities/kitchen.svg', '../../src/assets/img/amenities/tv.svg', '../../src/assets/img/amenities/wifi.svg'];
-      console.log('curr amenity img=', amenitiesImgs[index]);
+      let amenitiesImgs = ['../../src/assets/img/amenities/tv.svg', '../../src/assets/img/amenities/dog.svg', '../../src/assets/img/amenities/jacuzzi.svg', '../../src/assets/img/amenities/kitchen.svg', '../../src/assets/img/amenities/ac.svg', '../../src/assets/img/amenities/wifi.svg', '../../src/assets/img/amenities/refrigerator.svg', '../../src/assets/img/amenities/hair-dryer.svg'];
+      // console.log('curr amenity img=', amenitiesImgs[index]);
       return amenitiesImgs[index];
     },
     closeOrderModal() {
@@ -625,7 +630,13 @@ export default {
       // let avg = sum / ;
       // return avg;
 
-      return this.stayToEdit.reviewScores.rating;
+      let rate = this.stayToEdit.reviewScores.rating;
+
+      let rateDec = rate / 100;
+
+      let finalRate = rateDec * 5;
+
+      return finalRate.toFixed(2);
     },
     getReviewsNum() {
       return this.stayToEdit.numOfReviews;
@@ -694,20 +705,30 @@ export default {
 
     getReviewsScore() {
       var reviewScores;
+      console.log('testtttt reviewScores=', this.stayToEdit.reviewScores);
 
-      console.log('this.stayToEdit.reviewScores=', this.stayToEdit.reviewScores);
+      //it's 10 scale
       var accuracy = this.stayToEdit.reviewScores.accuracy;
       var accuracyPre = (accuracy / 10) * 100;
+      accuracy = accuracy.toFixed(2);
       var cleanliness = this.stayToEdit.reviewScores.cleanliness;
       var cleanlinessPre = (cleanliness / 10) * 100;
+      cleanliness = cleanliness.toFixed(2);
+
       var checkin = this.stayToEdit.reviewScores.checkin;
       var checkinPre = (checkin / 10) * 100;
+      checkin = checkin.toFixed(2);
       var communication = this.stayToEdit.reviewScores.communication;
       var communicationPre = (communication / 10) * 100;
+      communication = communication.toFixed(2);
       var location = this.stayToEdit.reviewScores.location;
       var locationPre = (location / 10) * 100;
+      location = location.toFixed(2);
       var value = this.stayToEdit.reviewScores.value;
       var valuePre = (value / 10) * 100;
+      value = value.toFixed(2);
+
+      //it's 100 scale (the data, not the output for the website)
       var rating = this.stayToEdit.reviewScores.rating;
       var ratingPre = (rating / 100) * 100;
 
@@ -727,6 +748,7 @@ export default {
         valuePre,
         ratingPre,
       };
+      console.log('reviewScores final=', reviewScores);
       return reviewScores;
     },
     getStayCityAdress() {
@@ -788,7 +810,7 @@ export default {
     },
 
     getAmenities() {
-      let stayAmenities = ['Air conditioning', 'Pets allowed', 'Jacuzzi', 'Kitchen', 'TV', 'WiFi'];
+      let stayAmenities = ['TV', 'Pets allowed', 'Jacuzzi', 'Kitchen', 'Air conditioning', 'WiFi', 'Refrigerator', 'Hair-dryer'];
       return stayAmenities;
     },
     getCurrOrder() {
@@ -815,7 +837,7 @@ export default {
 
     this.mainPic = 'https://i.pravatar.cc/200?img=' + mainPicNum;
     this.$store.commit({ type: 'setCurrPage', page: 'stayDetails' });
-    console.log('params=', this.$route.params);
+    // console.log('params=', this.$route.params);
 
     const { id } = this.$route.params;
 
@@ -905,11 +927,14 @@ img {
 .order-dialog-main-con {
   position: sticky;
   top: 80px;
-  /* padding: 25px; */
-  padding-top: 22px;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-bottom: 25px;
+  padding-top: 23px;
   width: 372px;
   height: fit-content;
-  min-height: 298px;
+  /* min-height: 298px; */
+  height: 278px;
   border-radius: 12px;
   margin-top: -4px;
   border: 1px solid #dddddd;
@@ -966,19 +991,22 @@ img {
   align-items: flex-end;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 24px;
+  margin-bottom: 25px;
 }
 .details-stay-name {
+  margin-bottom: 12px;
   font-size: 23.5px;
   line-height: 27px;
   color: black;
   font-weight: 700;
 }
 .details-stay-short-info {
+  margin-bottom: 23px;
   color: black;
   font-size: 14px;
   line-height: 20px;
-  font-weight: 700;
+  font-weight: 600;
+  letter-spacing: 0.4px;
   display: flex;
   justify-content: space-between;
 }
@@ -986,7 +1014,15 @@ img {
   color: gray;
   text-decoration: underline;
 }
+.details-stay-short-info-address-reviews {
+  color: black;
+  text-decoration: underline;
+}
 .details-stay-short-info-right {
+  /* background-color: aqua; */
+  /* height: 15px; */
+  /* padding: 0px; */
+  align-items: center;
   display: flex;
 }
 .middle-con {
@@ -1023,6 +1059,7 @@ img {
   line-height: 20px;
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
   margin-top: 30px;
+  margin-bottom: 40px;
 }
 .amenities-btn:hover {
   text-decoration: underline;
@@ -1178,7 +1215,7 @@ input {
 .save-btn,
 .share-btn {
   color: black;
-  font-size: 16px;
+  font-size: 14px;
   text-decoration: underline;
   cursor: pointer;
 }
@@ -1197,7 +1234,11 @@ span {
 }
 
 hr {
-  border: 1px solid #f2f2f2;
+  /* border: 0.1px solid #dddddd; */
+  /* border: 1px solid #dddddd; */
+  background-color: #dddddd;
+  height: 1px;
+  border: none;
 }
 .review-address-flex {
   /* background-color: red; */

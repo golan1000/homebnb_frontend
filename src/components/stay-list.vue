@@ -1,10 +1,6 @@
 <template>
   <h4 v-if="stays.length" class="stay-list-title">
-    {{
-      $route.query.address
-        ? `${stays.length} stays in ${$route.query.address}`
-        : 'Explore the world!'
-    }}
+    {{ $route.query.address ? `${stays.length} stays in ${$route.query.address}` : 'Explore the world!' }}
   </h4>
   <h4 v-else>No match found</h4>
   <div v-if="!stays">
@@ -22,76 +18,20 @@
   <!-- Buttons for additional filtters -->
   <!-- <expolore-btns class="explore-btns" /> -->
   <section class="explore-btns">
-    <button
-      @click="togglePrice"
-      class="explore-btn"
-      :class="{ clicked: isPriceActive }"
-    >
-      Price
-    </button>
-    <button
-      @click="toggleType"
-      class="explore-btn"
-      :class="{ clicked: isTypeActive }"
-    >
-      Type of place
-    </button>
-    <button
-      @click="toggleWifi"
-      class="explore-btn"
-      :class="{ clicked: isWifiActive }"
-    >
-      Wifi
-    </button>
-    <button
-      @click="toggleTv"
-      class="explore-btn"
-      :class="{ clicked: isTvActive }"
-    >
-      TV
-    </button>
-    <button
-      @click="toggleKitchen"
-      class="explore-btn"
-      :class="{ clicked: isKitchenActive }"
-    >
-      Kitchen
-    </button>
-    <button
-      @click="toggleAc"
-      class="explore-btn"
-      :class="{ clicked: isAcActive }"
-    >
-      AC
-    </button>
-    <button
-      @click="toggleSmoking"
-      class="explore-btn"
-      :class="{ clicked: isSmokingAllowedActive }"
-    >
-      Smoking allowed
-    </button>
-    <button
-      @click="togglePets"
-      class="explore-btn"
-      :class="{ clicked: isPetsAllowedActive }"
-    >
-      Pets allowed
-    </button>
+    <button @click="togglePrice" class="explore-btn" :class="{ clicked: isPriceActive }">Price</button>
+    <button @click="toggleType" class="explore-btn" :class="{ clicked: isTypeActive }">Type of place</button>
+    <button @click="toggleWifi" class="explore-btn" :class="{ clicked: isWifiActive }">Wifi</button>
+    <button @click="toggleTv" class="explore-btn" :class="{ clicked: isTvActive }">TV</button>
+    <button @click="toggleKitchen" class="explore-btn" :class="{ clicked: isKitchenActive }">Kitchen</button>
+    <button @click="toggleAc" class="explore-btn" :class="{ clicked: isAcActive }">AC</button>
+    <button @click="toggleSmoking" class="explore-btn" :class="{ clicked: isSmokingAllowedActive }">Smoking allowed</button>
+    <button @click="togglePets" class="explore-btn" :class="{ clicked: isPetsAllowedActive }">Pets allowed</button>
 
     <div v-if="isPriceActive" class="price-modal">
       <h3>Price</h3>
       <div class="range-nput">
-        <input
-          type="number"
-          placeholder="minimum price"
-          v-model="priceRange.min"
-        />
-        <input
-          type="number"
-          placeholder="maximum price"
-          v-model="priceRange.max"
-        />
+        <input type="number" placeholder="minimum price" v-model="priceRange.min" />
+        <input type="number" placeholder="maximum price" v-model="priceRange.max" />
       </div>
       <div class="range-buttons">
         <button @click="setPrice">Save</button>
@@ -102,8 +42,8 @@
       <h3>Room type</h3>
       <div class="room-options">
         <select v-model="ExploreBtnsFilter.roomType">
-          <option value="ENITRE PLACE">entire place</option>
-          <option value="PRIVATE ROOM">privare room</option>
+          <option value="entire home">Entire Home</option>
+          <option value="private room">Privare Room</option>
         </select>
       </div>
       <div class="room-type-buttons">
@@ -145,12 +85,15 @@ export default {
       ExploreBtnsFilter: {
         amenities: [],
         roomType: [],
-        priceRange: {},
+        priceRange: {
+          min: -Infinity,
+          max: Infinity,
+        },
       },
     };
   },
   created() {
-    console.log(this.$route.query);
+    // console.log(this.$route.query);
     this.getPriceRange();
   },
   components: {
@@ -197,16 +140,14 @@ export default {
         if (this.ExploreBtnsFilter.amenities.includes(name)) return;
         this.ExploreBtnsFilter.amenities.push(name);
       } else {
-        const idx = this.ExploreBtnsFilter.amenities.findIndex(
-          amenity => amenity === name
-        );
+        const idx = this.ExploreBtnsFilter.amenities.findIndex((amenity) => amenity === name);
         this.ExploreBtnsFilter.amenities.splice(idx, 1);
       }
       this.$emit('btnsFilter', this.ExploreBtnsFilter);
     },
 
     getPriceRange() {
-      const prices = this.stays.map(stay => stay.price);
+      const prices = this.stays.map((stay) => stay.price);
       this.priceRange.min = Math.min(...prices);
       console.log(' priceRange.min', this.priceRange.min);
       this.priceRange.max = Math.max(...prices);
