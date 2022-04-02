@@ -1,6 +1,10 @@
 <template>
   <h4 v-if="stays.length" class="stay-list-title">
-    {{ $route.query.address ? `${stays.length} stays in ${$route.query.address}` : 'Explore the world!' }}
+    {{
+      $route.query.address
+        ? `${stays.length} stays in ${$route.query.address}`
+        : 'Explore the world!'
+    }}
   </h4>
   <h4 v-else>No match found</h4>
   <div v-if="!stays">
@@ -18,37 +22,105 @@
   <!-- Buttons for additional filtters -->
   <!-- <expolore-btns class="explore-btns" /> -->
   <section class="explore-btns">
-    <button @click="togglePrice" class="explore-btn" :class="{ clicked: isPriceActive }">Price</button>
-    <button @click="toggleType" class="explore-btn" :class="{ clicked: isTypeActive }">Type of place</button>
-    <button @click="toggleWifi" class="explore-btn" :class="{ clicked: isWifiActive }">Wifi</button>
-    <button @click="toggleTv" class="explore-btn" :class="{ clicked: isTvActive }">TV</button>
-    <button @click="toggleKitchen" class="explore-btn" :class="{ clicked: isKitchenActive }">Kitchen</button>
-    <button @click="toggleAc" class="explore-btn" :class="{ clicked: isAcActive }">AC</button>
-    <button @click="toggleSmoking" class="explore-btn" :class="{ clicked: isSmokingAllowedActive }">Smoking allowed</button>
-    <button @click="togglePets" class="explore-btn" :class="{ clicked: isPetsAllowedActive }">Pets allowed</button>
+    <button
+      @click="togglePrice"
+      class="explore-btn"
+      :class="{ clicked: isPriceActive }"
+    >
+      Price
+    </button>
+    <button
+      @click="toggleType"
+      class="explore-btn"
+      :class="{ clicked: isTypeActive }"
+    >
+      Type of place
+    </button>
+    <button
+      @click="toggleWifi"
+      class="explore-btn"
+      :class="{ clicked: isWifiActive }"
+    >
+      Wifi
+    </button>
+    <button
+      @click="toggleTv"
+      class="explore-btn"
+      :class="{ clicked: isTvActive }"
+    >
+      TV
+    </button>
+    <button
+      @click="toggleKitchen"
+      class="explore-btn"
+      :class="{ clicked: isKitchenActive }"
+    >
+      Kitchen
+    </button>
+    <button
+      @click="toggleAc"
+      class="explore-btn"
+      :class="{ clicked: isAcActive }"
+    >
+      AC
+    </button>
+    <button
+      @click="toggleSmoking"
+      class="explore-btn"
+      :class="{ clicked: isSmokingAllowedActive }"
+    >
+      Smoking allowed
+    </button>
+    <button
+      @click="togglePets"
+      class="explore-btn"
+      :class="{ clicked: isPetsAllowedActive }"
+    >
+      Pets allowed
+    </button>
 
     <div v-if="isPriceActive" class="price-modal">
       <h3>Price</h3>
       <div class="range-nput">
-        <input type="number" placeholder="minimum price" v-model="priceRange.min" />
-        <input type="number" placeholder="maximum price" v-model="priceRange.max" />
+        <input
+          type="number"
+          placeholder="minimum price"
+          v-model="priceRange.min"
+        />
+        <input
+          type="number"
+          placeholder="maximum price"
+          v-model="priceRange.max"
+        />
       </div>
-      <div class="range-buttons">
-        <button @click="setPrice">Save</button>
-        <button @click="getPriceRange">Clear</button>
+      <div class="action-buttons">
+        <button class="save-btn" @click="setPrice">Save</button>
+        <button class="clear-btn" @click="clearPrice">Clear</button>
       </div>
     </div>
     <div v-if="isTypeActive" class="type-room-modal">
       <h3>Room type</h3>
       <div class="room-options">
-        <select v-model="ExploreBtnsFilter.roomType">
-          <option value="entire home">Entire Home</option>
-          <option value="private room">Privare Room</option>
-        </select>
+        <label
+          ><input
+            type="checkbox"
+            value="entire home"
+            v-model="exploreBtnsFilter.roomType"
+          />
+          Entire Home</label
+        >
+        <label
+          ><input
+            type="checkbox"
+            value="private room"
+            v-model="exploreBtnsFilter.roomType"
+          />
+          Privare Room</label
+        >
       </div>
-      <div class="room-type-buttons">
-        <button @click="setRoom">Save</button>
-        <button @click="ExploreBtnsFilter.roomType = []">Clear</button>
+      <div class="action-buttons">
+        <button class="save-btn" @click="setRoom">Save</button>
+        <button class="clear-btn" @click="clearRoomType">Clear</button>
       </div>
     </div>
   </section>
@@ -82,7 +154,7 @@ export default {
       isAcActive: false,
       isPetsAllowedActive: false,
       isSmokingAllowedActive: false,
-      ExploreBtnsFilter: {
+      exploreBtnsFilter: {
         amenities: [],
         roomType: [],
         priceRange: {
@@ -137,30 +209,57 @@ export default {
 
     setAmenities(name, btnStatus) {
       if (btnStatus) {
-        if (this.ExploreBtnsFilter.amenities.includes(name)) return;
-        this.ExploreBtnsFilter.amenities.push(name);
+        if (this.exploreBtnsFilter.amenities.includes(name)) return;
+        this.exploreBtnsFilter.amenities.push(name);
       } else {
-        const idx = this.ExploreBtnsFilter.amenities.findIndex((amenity) => amenity === name);
-        this.ExploreBtnsFilter.amenities.splice(idx, 1);
+        const idx = this.exploreBtnsFilter.amenities.findIndex(
+          amenity => amenity === name
+        );
+        this.exploreBtnsFilter.amenities.splice(idx, 1);
       }
-      this.$emit('btnsFilter', this.ExploreBtnsFilter);
+      this.$emit('btnsFilter', this.exploreBtnsFilter);
     },
 
     getPriceRange() {
-      const prices = this.stays.map((stay) => stay.price);
+      let allStays = this.$store.getters.getStaysAll;
+      const prices = allStays.map(stay => stay.price);
       this.priceRange.min = Math.min(...prices);
       console.log(' priceRange.min', this.priceRange.min);
       this.priceRange.max = Math.max(...prices);
       console.log(' priceRange.max', this.priceRange.max);
     },
     setPrice() {
-      this.ExploreBtnsFilter.priceRange.max = this.priceRange.max;
-      this.ExploreBtnsFilter.priceRange.min = this.priceRange.min;
-      console.log('example', this.ExploreBtnsFilter.priceRange);
-      this.$emit('btnsFilter', this.ExploreBtnsFilter);
+      this.exploreBtnsFilter.priceRange.max = this.priceRange.max;
+      this.exploreBtnsFilter.priceRange.min = this.priceRange.min;
+      this.$emit('btnsFilter', this.exploreBtnsFilter);
     },
+    clearPrice() {
+      this.exploreBtnsFilter.priceRange.min = -Infinity;
+      this.exploreBtnsFilter.priceRange.max = Infinity;
+      this.$emit('btnsFilter', this.exploreBtnsFilter);
+      this.getPriceRange();
+    },
+
     setRoom() {
-      this.$emit('btnsFilter', this.ExploreBtnsFilter);
+      this.$emit('btnsFilter', this.exploreBtnsFilter);
+    },
+    clearRoomType() {
+      this.exploreBtnsFilter.roomType = [];
+      this.$emit('btnsFilter', this.exploreBtnsFilter);
+    },
+  },
+  watch: {
+    // whenever question changes, this function will run
+    stays: function (oldProp, newProp) {
+      //    this.exploreBtnsFilter.priceRange.max = this.priceRange.max;
+      // this.exploreBtnsFilter.priceRange.min = this.priceRange.min;
+      if (
+        this.exploreBtnsFilter.priceRange.max === Infinity &&
+        this.exploreBtnsFilter.priceRange.min === -Infinity
+      ) {
+        console.log('update get price range.........');
+        this.getPriceRange();
+      }
     },
   },
 };
