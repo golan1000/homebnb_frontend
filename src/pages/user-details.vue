@@ -81,7 +81,7 @@ export default {
   },
   methods: {
     loggedInUser() {
-      const loggedUser = this.$store.getters.loggedinUser;
+      const loggedUser = this.$store.getters.getLoggedUser;
       console.log('loggedUser', loggedUser);
       if (!loggedUser) return;
       else {

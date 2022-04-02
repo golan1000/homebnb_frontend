@@ -82,7 +82,7 @@
                 >
               </div>
               <div class="dashboard-data-guests-status">
-                <span class="dashboard-data-guests-status-title">Future</span>
+                <span class="dashboard-data-guests-status-title">Possible</span>
                 <span
                   class="dashboard-data-guests-status-number status-total"
                   >{{ guestsFuture }}</span
@@ -98,17 +98,17 @@
                 <span class="dashboard-data-revenues-period-month-title"
                   ><span class="span-this">this</span>Month</span
                 >
-                <span class="dashboard-data-revenues-period-month-num">{{
-                  revenueMonth
-                }}</span>
+                <span class="dashboard-data-revenues-period-month-num"
+                  >${{ revenueMonth }}</span
+                >
               </div>
               <div class="dashboard-data-revenues-period period-year">
                 <span class="dashboard-data-revenues-period-year-title"
                   ><span class="span-this">this</span>Year</span
                 >
-                <span class="dashboard-data-revenues-period-year-num">{{
-                  revenueYear
-                }}</span>
+                <span class="dashboard-data-revenues-period-year-num"
+                  >${{ revenueYear }}</span
+                >
               </div>
               <!-- <div class="dashboard-data-revenues-period period-total">
                 <span class="dashboard-data-revenues-period-total">Total</span>
@@ -190,7 +190,7 @@
                   {{ order.startDate }} - {{ order.endDate }}
                 </td>
                 <td class="orders-table-content-created">
-                  ${{ order.createdAt }}
+                  {{ order.createdAt }}
                 </td>
                 <td class="orders-table-content-revenue">
                   ${{ order.totalPrice }}
@@ -199,7 +199,7 @@
                   class="orders-table-content-status"
                   :style="{
                     color:
-                      order.status === 'pending'
+                      order.status === 'Pending'
                         ? 'rgb(215 176 64)'
                         : order.status === 'Approved'
                         ? '#1ab11a'
@@ -224,7 +224,7 @@
                     Decline
                   </div>
                   <div
-                    v-if="order.status === 'pending'"
+                    v-if="order.status === 'Pending'"
                     class="orders-table-content-actions-inner"
                   >
                     <div
@@ -300,6 +300,7 @@ export default {
       loggedInUser: {},
       staysForDisplay: [],
       ordersForDisplay: [],
+      orders: [],
       currTable: 'orders',
       currMonth: null,
       currYear: null,
@@ -343,25 +344,27 @@ export default {
   },
   async created() {
     try {
+      this.$store.commit('loadLoggedInUser');
       this.loggedInUser = await this.$store.getters.getLoggedUser;
       console.log(this.loggedInUser);
-      await this.$store.dispatch({
-        type: 'loadStaysForBackOffice',
-        user: this.loggedInUser,
-      });
-      this.staysForDisplay = await this.$store.getters.getStaysForBackOffice;
       console.log(this.staysForDisplay);
       await this.$store.dispatch({
         type: 'loadOrders',
         user: this.loggedInUser,
       });
       this.ordersForDisplay = await this.$store.getters.getOrders;
-      console.log(this.ordersForDisplay);
+      this.sortOrders;
+      this.modifyDates;
       this.setCurrDates;
       this.setCurrGuests;
       this.setCurrOrdersData;
       this.setCurrRevenues;
-      this.date;
+      await this.$store.dispatch({
+        type: 'loadStays',
+        user: this.loggedInUser,
+      });
+      this.staysForDisplay = await this.$store.getters.getStaysForBackOffice;
+      console.log(this.ordersForDisplay);
     } catch (err) {
       console.log('err', err);
     }
@@ -372,6 +375,31 @@ export default {
     //     var newStr = firstLetter + str.substring(1)
     //     return newStr
     // },
+    sortOrders() {
+      this.ordersForDisplay.forEach((order, index) => {
+        console.log(typeof order.createdAt);
+        order.createdAt = new Date(order.createdAt);
+        console.log(order.createdAt);
+        // this.ordersForDisplay[index].createdAt = order.createdAt;
+        console.log(typeof this.ordersForDisplay[index].createdAt);
+      });
+      console.log(this.ordersForDisplay, 'bdika');
+      this.ordersForDisplay.sort((a, b) => a.createdAt - b.createdAt);
+      console.log(this.ordersForDisplay, 'bdika2');
+      // this.ordersForDisplay.sort((a, b) =>
+      //   a.createdAt > b.createdAt ? 1 : -1
+      // );
+    },
+    modifyDates() {
+      console.log(this.ordersForDisplay);
+      this.ordersForDisplay.forEach((order) => {
+        order.startDate = new Date(order.startDate).toLocaleDateString();
+        order.endDate = new Date(order.endDate).toLocaleDateString();
+        order.createdAt = new Date(order.endDate).toLocaleDateString();
+        order.createdAt = order.createdAt.substring(0);
+      });
+      console.log(this.ordersForDisplay);
+    },
     setAvgRating() {
       if (this.staysForDisplay.length > 1) {
         let avg = this.staysForDisplay.reduce(
@@ -406,51 +434,51 @@ export default {
       console.log(this.currYear);
       console.log(this.currDay);
     },
-    date() {
-      console.log(date.Parse(this.ordersForDisplay[2].startDate));
-    },
     setCurrGuests() {
       if (!this.ordersForDisplay.length) return;
-      console.log(this.ordersForDisplay.length);
       for (var i = 0; i < this.ordersForDisplay.length; i++) {
-        const startDate = new Date(this.ordersForDisplay[i].startDate * 1000);
-        console.log(startDate);
+        const startDate = new Date(this.ordersForDisplay[i].startDate);
         const startMonth = startDate.getMonth() + 1;
-        console.log(startMonth);
         const startYear = startDate.getFullYear();
-        console.log(startYear);
         const startDay = startDate.getDate();
-        console.log(startDay);
-        const endDate = new Date(this.ordersForDisplay[i].endDate * 1000);
-        console.log(endDate);
+        const endDate = new Date(this.ordersForDisplay[i].endDate);
         const endMonth = endDate.getMonth() + 1;
-        console.log(endMonth);
         const endYear = endDate.getFullYear();
-        console.log(endYear);
         const endDay = endDate.getDate();
-        console.log(endDay);
         if (endYear < this.currYear) {
-          this.guestsPast++;
+          this.guestsPast +=
+            this.ordersForDisplay[i].guests.adults +
+            this.ordersForDisplay[i].guests.kids;
           continue;
         }
         if (startYear > this.currYear) {
-          this.guestsFuture++;
+          this.guestsFuture +=
+            this.ordersForDisplay[i].guests.adults +
+            this.ordersForDisplay[i].guests.kids;
           continue;
         }
         if (endMonth < this.currMonth) {
-          this.guestsPast++;
+          this.guestsPast +=
+            this.ordersForDisplay[i].guests.adults +
+            this.ordersForDisplay[i].guests.kids;
           continue;
         }
         if (startMonth > this.currMonth) {
-          this.guestsFuture++;
+          this.guestsFuture +=
+            this.ordersForDisplay[i].guests.adults +
+            this.ordersForDisplay[i].guests.kids;
           continue;
         }
         if (endDay < this.currDay) {
-          this.guestsPast++;
+          this.guestsPast +=
+            this.ordersForDisplay[i].guests.adults +
+            this.ordersForDisplay[i].guests.kids;
           continue;
         }
         if (startDay > this.currDay) {
-          this.guestsFuture++;
+          this.guestsFuture +=
+            this.ordersForDisplay[i].guests.adults +
+            this.ordersForDisplay[i].guests.kids;
           continue;
         }
         if (
@@ -458,7 +486,9 @@ export default {
           endDay === this.currDay ||
           (startDay < this.currDay && endDay > this.currDay)
         ) {
-          this.guestsPresent++;
+          this.guestsPresent +=
+            this.ordersForDisplay[i].guests.adults +
+            this.ordersForDisplay[i].guests.kids;
           continue;
         }
       }
@@ -466,7 +496,7 @@ export default {
     setCurrOrdersData() {
       if (!this.ordersForDisplay.length) return;
       for (var i = 0; i < this.ordersForDisplay.length; i++) {
-        if (this.ordersForDisplay[i].status === 'pending') this.ordersPending++;
+        if (this.ordersForDisplay[i].status === 'Pending') this.ordersPending++;
         if (this.ordersForDisplay[i].status === 'Declined')
           this.ordersDeclined++;
         if (this.ordersForDisplay[i].status === 'Approved')
@@ -476,7 +506,12 @@ export default {
     setCurrRevenues() {
       if (!this.ordersForDisplay.length) return;
       for (var i = 0; i < this.ordersForDisplay.length; i++) {
-        const startDate = new Date(this.ordersForDisplay[i].startDate * 1000);
+        const startDate = new Date(this.ordersForDisplay[i].startDate);
+        console.log(startDate);
+        // let startDate = Date.parse(startDate);
+        // console.log(startDate);
+        // const date = new Date(startDate)
+        // console.log(date);
         const startMonth = startDate.getMonth() + 1;
         const startYear = startDate.getFullYear();
         if (startYear === this.currYear) {
@@ -486,10 +521,6 @@ export default {
           }
         }
         this.revenueTotal += this.ordersForDisplay[i].totalPrice;
-      }
-    },
-    setStatus(status) {
-      if (status === 'Decline') {
       }
     },
   },
@@ -507,7 +538,3 @@ export default {
 </script>
 
 <style></style>
-
-watch: { // whenever question changes, this function will run
-question(newQuestion, oldQuestion) { if (newQuestion.indexOf('?') > -1) {
-this.getAnswer() } } },

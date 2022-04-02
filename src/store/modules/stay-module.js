@@ -54,6 +54,7 @@ export default {
 
       let regTest = new RegExp(state.filterBy.address, 'i')
 
+      console.log('trying to filterrrr')
       let currFilteredStays = state.stays.filter((currStay) => {
         if (currStay.address && currStay.address.city) {
           if (regTest.test(currStay.address.city) === true)
@@ -153,11 +154,13 @@ export default {
     },
   },
   actions: {
-    async loadStays({ commit, state }) {
+    async loadStays({ commit, dispatch, state }, { user }) {
+      console.log(user)
       try {
         // commit({ type: 'setStays', stays: [] });
         const stays = await stayService.query(state.filterBy)
-        commit({ type: 'setStays', stays })
+        await commit({ type: 'setStays', stays })
+        await dispatch({ type: 'loadStaysForBackOffice', user })
         // commit({ type: 'updateFilteredStays' })
         console.log('stays from loadstays=', stays)
         commit({ type: 'updateFilteredStaysLocal' })
@@ -200,10 +203,10 @@ export default {
       // commit({ type: 'updateFilteredStays' })
     },
     async loadStaysForBackOffice({ commit, state }, { user }) {
-      // console.log(state.stays);
-      // console.log(user);
+      console.log(state.stays)
+      console.log(user)
       try {
-        commit({ type: 'setStaysForBackOffice', user })
+        await commit({ type: 'setStaysForBackOffice', user })
       } catch (err) {
         console.log('err in stay-module loadStaysForBackOffice:', err)
       }

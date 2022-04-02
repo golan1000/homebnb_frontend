@@ -1,6 +1,6 @@
 .dashboard-con {
   min-height: 81vh;
-  margin-top: 31px;
+  margin-top: 20px;
   margin-bottom: 12px;
 
   .dashboard {
@@ -16,6 +16,8 @@
     display: flex;
     justify-content: space-between;
     height: 50%;
+    width: 80%;
+    margin-left: 10%;
     border-radius: 10px;
     border: 1px solid #dddddd;
 
@@ -84,6 +86,8 @@
             display: flex;
             flex-direction: column;
             justify-content: space-evenly;
+
+            width: 50%;
 
             .dashboard-data-revenues-period-month-num {
               color: #1ab11a;
@@ -163,6 +167,7 @@
       margin: auto;
       align-items: center;
       margin-bottom: 23px;
+      margin-left: 66px;
 
       .backoffice-img {
         width: 1rem;
@@ -252,8 +257,6 @@
       .stays-table-content-actions {
         width: 10%;
         .stays-table-content-actions-inner {
-          padding-left: 13px;
-          padding-right: 13px;
           cursor: pointer;
           text-decoration: underline;
           color: #0808d7c7;

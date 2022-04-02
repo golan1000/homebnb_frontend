@@ -8,7 +8,7 @@ export default {
     // Tal
     getLoggedUser(state) {
       // console.log('logged in user from store=', state.loggedInUser)
-      if (!state.loggedInUser._id) return false;
+      if (!state.loggedInUser) return false;
       return state.loggedInUser;
     },
   },
@@ -16,6 +16,9 @@ export default {
     // Tal
     setLoggedinUser(state, { user }) {
       state.loggedInUser = user;
+    },
+    loadLoggedInUser(state) {
+      state.loggedInUser = userService.getLoggedInUser();
     },
   },
   actions: {

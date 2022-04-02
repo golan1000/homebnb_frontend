@@ -160,7 +160,7 @@
           z-index: 10;
 
           @media (max-width: 1760px) {
-            right: 80px;
+            right: 81px;
           }
 
           .menu-modal-link {
@@ -177,6 +177,10 @@
         }
         .menu-modal-link:first-child:hover {
           border-radius: 4px 4px 0px 0px;
+        }
+
+        .modal {
+          right: 391px;
         }
       }
     }
