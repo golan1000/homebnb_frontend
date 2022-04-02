@@ -47,7 +47,7 @@ export default {
       let regTest = new RegExp(state.filterBy.address, 'i');
 
       console.log('trying to filterrrr');
-      let currFilteredStays = state.stays.filter(currStay => {
+      let currFilteredStays = state.stays.filter((currStay) => {
         if (currStay.address && currStay.address.city) {
           if (regTest.test(currStay.address.city) === true)
             console.log('found city=', currStay.address);
@@ -67,7 +67,7 @@ export default {
     update(state, { stayToUpdate }) {
       console.log('mutate --- stay to update=', stayToUpdate);
       var foundIdx = state.stays.findIndex(
-        stay => stay._id === stayToUpdate._id
+        (stay) => stay._id === stayToUpdate._id
       );
       console.log('foundIdx=', foundIdx);
       state.stays.splice(foundIdx, 1, stayToUpdate);
@@ -84,7 +84,7 @@ export default {
       console.log(user);
       // Barak original
       state.staysForBackOffice = state.stays.filter(
-        stay => user._id === stay.host._id
+        (stay) => user._id === stay.host._id
       );
 
       // Tal fixed temp
@@ -97,11 +97,13 @@ export default {
     },
   },
   actions: {
-    async loadStays({ commit, state }) {
+    async loadStays({ commit, dispatch, state }, { user }) {
+      console.log(user);
       try {
         // commit({ type: 'setStays', stays: [] });
         const stays = await stayService.query(state.filterBy);
-        commit({ type: 'setStays', stays });
+        await commit({ type: 'setStays', stays });
+        await dispatch({ type: 'loadStaysForBackOffice', user });
         // commit({ type: 'updateFilteredStays' })
         console.log('stays from loadstays=', stays);
         return stays;
@@ -141,10 +143,10 @@ export default {
       // commit({ type: 'updateFilteredStays' })
     },
     async loadStaysForBackOffice({ commit, state }, { user }) {
-      // console.log(state.stays);
-      // console.log(user);
+      console.log(state.stays);
+      console.log(user);
       try {
-        commit({ type: 'setStaysForBackOffice', user });
+        await commit({ type: 'setStaysForBackOffice', user });
       } catch (err) {
         console.log('err in stay-module loadStaysForBackOffice:', err);
       }

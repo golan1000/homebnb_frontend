@@ -54,17 +54,17 @@
           </div>
           <div v-if="isLogin" class="input-container txt">
             <p>
-              new to Flatinn?
+              new to Flat-inn?
               <span @click="toggleMode">Create an account </span>
             </p>
           </div>
           <!-- Sign-up -->
           <div v-if="!isLogin" class="input-container btn-container">
-            <button @click.prevent="onSignup">Signup</button>
+            <button @click.prevent="onSignup" class="signin-btn">Signup</button>
             <div v-if="!isLogin" class="input-container txt">
               <p>
                 already registered?
-                <span class="signin-btn" @click="toggleMode">Sign-in</span>
+                <span @click="toggleMode">Sign-in</span>
               </p>
             </div>
           </div>
@@ -115,6 +115,7 @@ export default {
       //   return false;
       // }
       // return loggedUser.fullname;
+      this.$store.commit('loadLoggedInUser');
       return this.$store.getters.getLoggedUser;
     },
   },

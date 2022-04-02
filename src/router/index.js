@@ -1,8 +1,4 @@
-import {
-  createRouter,
-  createWebHistory,
-  createWebHashHistory,
-} from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import stayApp from '../pages/stay-app.vue';
 import stayDetails from '../pages/stay-details.vue';
 import stayEdit from '../pages/stay-edit.vue';

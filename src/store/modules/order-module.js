@@ -28,13 +28,13 @@ export default {
     //Barak
     setOrders(state, { orders, user }) {
       console.log(user);
-      console.log(state.orders);
       console.log(orders);
       // Barak original
       state.orders = orders.filter((order) => user._id === order.hostId);
-      // Tal temporary fix
-      state.orders = orders;
       console.log(state.orders);
+      // Tal temporary fix
+      // state.orders = orders;
+      // console.log(state.orders);
     },
     setCurrOrder(state, { order }) {
       state.currOrder = order;
@@ -97,7 +97,7 @@ export default {
       try {
         const orders = await orderService.query();
         console.log(orders);
-        context.commit('setOrders', { orders, user });
+        await context.commit('setOrders', { orders, user });
       } catch (err) {
         console.log('err in order-module in loadOrders:', err);
       }

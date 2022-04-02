@@ -1,6 +1,6 @@
 <template>
   <section class="app-header-con">
-    <div class="app-header" :class="{ details: stayDetails }">
+    <div class="app-header" :class="{ details: headerShort }">
       <router-link to="/" class="logo-con">
         <img class="logo-img" src="../assets/logo.svg" alt="img-logo" />
         <div class="logo-txt">Flat-Inn</div>
@@ -42,18 +42,28 @@
               alt="img-user-home"
             />
           </button>
-          <div v-if="isOpen" class="menu-btn-modal">
+          <div
+            v-if="isOpen"
+            class="menu-btn-modal"
+            :class="{ modal: modalShort }"
+          >
             <router-link
               @click="toggleModal"
               class="menu-modal-link"
               to="/signup"
               >Log in</router-link
             >
-            <router-link @click="toggleModal" class="menu-modal-link" to="/dashboard"
+            <router-link
+              @click="toggleModal"
+              class="menu-modal-link"
+              to="/dashboard"
               >Host your home</router-link
             >
-            <router-link @click="toggleModal" class="menu-modal-link" to="/stay"
-              >About</router-link
+            <router-link
+              @click="toggleModal"
+              class="menu-modal-link"
+              :to="`/user/${loggedInUser._id}`"
+              >Account</router-link
             >
           </div>
         </div>
@@ -71,6 +81,7 @@ export default {
     return {
       isOpen: false,
       currPage: null,
+      loggedInUser: this.$store.getters.getLoggedUser,
     };
   },
   created() {},
@@ -83,7 +94,12 @@ export default {
     },
   },
   computed: {
-    stayDetails() {
+    headerShort() {
+      if (this.currPage === 'stayDetails' || this.currPage === 'userDetails')
+        return true;
+      else return false;
+    },
+    modalShort() {
       if (this.currPage === 'stayDetails' || this.currPage === 'userDetails')
         return true;
       else return false;
