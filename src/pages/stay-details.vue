@@ -474,7 +474,7 @@ export default {
     checkReadyToOrder() {
       if (!this.$store.getters.getLoggedUser) {
         console.log('user not logged!!!');
-        return;
+        return false;
       }
       console.log('toal nights ======', this.getTotalNights());
       if (!this.getTotalNights() || this.getTotalNights() < 1) {
@@ -490,7 +490,10 @@ export default {
       return true;
     },
     submitOrder() {
-      if (!this.$store.getters.getLoggedUser) alert('Please login');
+      if (!this.$store.getters.getLoggedUser) {
+        alert('Please login');
+        return;
+      }
       if (!this.range.start || !this.range.end) {
         console.log('choose dates');
         return;
