@@ -472,6 +472,10 @@ export default {
       this.isCalanderModalOpen = false;
     },
     checkReadyToOrder() {
+      if (!this.$store.getters.getLoggedUser) {
+        console.log('user not logged!!!');
+        return;
+      }
       console.log('toal nights ======', this.getTotalNights());
       if (!this.getTotalNights() || this.getTotalNights() < 1) {
         this.costsSectionShown = false;
