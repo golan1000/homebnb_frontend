@@ -19,9 +19,9 @@ export default {
     };
   },
   methods: {
-    onBtnFilter(filter) {
-      console.log('filter', filter);
-      // this.$store.commit({ type: 'setExploreFilter', filter });
+    onBtnFilter(exploreFilter) {
+      console.log('staapp', exploreFilter);
+      this.$store.commit({ type: 'setExploreFilter', exploreFilter });
     },
   },
   computed: {

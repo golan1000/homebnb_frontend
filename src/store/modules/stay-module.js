@@ -94,6 +94,8 @@ export default {
     // Tal
     setExploreFilter(state, { exploreFilter }) {
       state.exploreFilter = JSON.parse(JSON.stringify(exploreFilter));
+      // console.log('example from store1 ', exploreFilter);
+      // console.log('example from store2', state.exploreFilter);
     },
   },
   actions: {

@@ -5,20 +5,27 @@
         <img class="logo-img" src="../assets/logo.svg" alt="img-logo" />
         <div class="logo-txt">Flat-Inn</div>
       </router-link>
-      <!-- <div class="small-filter-div">
-        <button class="small-filter-button">
-          <div class="small-filter-button-txt-div">
-            <h4 class="small-filter-button-txt">Start your search</h4>
+      <div v-if="!isStayDetails">
+        <div v-if="!isFilterUp">
+          <div class="small-filter-div">
+            <button class="small-filter-button" @click="openFilter">
+              <div class="small-filter-button-txt-div">
+                <h4 class="small-filter-button-txt">Start your search</h4>
+              </div>
+              <div class="small-filter-button-div">
+                <img
+                  class="small-filter-button-img"
+                  src="../assets/magnifying.svg"
+                  alt="small-filter-button-img"
+                />
+              </div>
+            </button>
           </div>
-          <div class="small-filter-button-div">
-            <img
-              class="small-filter-button-img"
-              src="../assets/magnifying.svg"
-              alt="small-filter-button-img"
-            />
-          </div>
-        </button>
-      </div> -->
+        </div>
+        <div v-show="isFilterUp">
+          <stay-filter></stay-filter>
+        </div>
+      </div>
       <div class="main-nav">
         <div class="main-nav-links">
           <router-link class="menu-link" to="/stay">Explore</router-link>
@@ -84,13 +91,29 @@ export default {
       loggedInUser: this.$store.getters.getLoggedUser,
     };
   },
-  created() {},
+  created() {
+    window.addEventListener('scroll', this.checkScroll);
+  },
   components: {
     stayFilter,
   },
   methods: {
     toggleModal() {
       this.isOpen = !this.isOpen;
+    },
+    openFilter() {
+      this.$store.commit({ type: 'setFilterUp', isFilterUp: true });
+    },
+    checkScroll() {
+      let scrolled = window.pageYOffset;
+      // console.log('testttt');
+      // console.log('window size=', scrolled);
+      if (scrolled > 10) {
+        this.$store.commit({ type: 'setFilterUp', isFilterUp: false });
+      }
+      if (scrolled < 10) {
+        this.$store.commit({ type: 'setFilterUp', isFilterUp: true });
+      }
     },
   },
   computed: {
@@ -103,6 +126,23 @@ export default {
       if (this.currPage === 'stayDetails' || this.currPage === 'userDetails')
         return true;
       else return false;
+    },
+    headerStyle() {
+      let answer = this.$store.getters.isFilterUp;
+      if (!answer) return 'background-color:#222';
+      if (answer) return 'background-color:white';
+      // else return 'opacity:0.1;';
+      // else return 'background-color:blue;';
+      // background-color: rgba(255, 255, 255, 0.5);
+      else return 'background-color: rgba(255, 255, 255, 0.5);';
+    },
+    isFilterUp() {
+      return this.$store.getters.isFilterUp;
+    },
+    isStayDetails() {
+      let loc = window.location.href;
+      let strToSearch = '/stay/';
+      console.log('str=', strToSearch.split('/'));
     },
   },
   watch: {

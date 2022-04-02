@@ -22,6 +22,8 @@ export default {
     // this.$store.commit('loadLoggedInUser');
     console.log('loaded stays=', loadedStays);
   },
+  computed: {},
+  methods: {},
   components: {
     appHeader,
     appFooter,
