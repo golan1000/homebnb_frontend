@@ -70,7 +70,7 @@ export default {
   },
   computed: {
     editTextLength() {
-      var editedSubject = this.stay.summary.substr(0, 45);
+      var editedSubject = this.stay.summary.substr(0, 25);
       editedSubject += "..";
       return editedSubject;
     },

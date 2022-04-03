@@ -148,7 +148,7 @@ export default {
       mask: {
         data: ['L', 'YYYY-MM-DD', 'YYYY/MM/DD'],
       },
-
+      currPage: null,
       isGuestModalOpen: false,
       isCalanderModalOpen: false,
     };
@@ -208,7 +208,7 @@ export default {
   computed: {
     getAddresses() {
       const addresses = [];
-      this.$store.getters.getStaysAll.map(stay => {
+      this.$store.getters.getStaysAll.map((stay) => {
         if (!addresses.includes(stay.address.city))
           addresses.push(stay.address.city);
       });
@@ -225,6 +225,13 @@ export default {
     dateForDisplay(timestamp) {
       console.log('timestamp', timestamp);
       return timestamp.toDateString().split(' ').slice(1, 3).join('/');
+    },
+  },
+  watch: {
+    '$store.getters.getCurrPage': {
+      handler() {
+        this.currPage = this.$store.getters.getCurrPage;
+      },
     },
   },
 };

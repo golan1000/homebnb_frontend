@@ -23,13 +23,18 @@
           </div>
         </div>
         <div v-show="isFilterUp">
-          <stay-filter></stay-filter>
+          <stay-filter :class="{ hideFilter: hideFilter }"></stay-filter>
         </div>
       </div>
       <div class="main-nav">
         <div class="main-nav-links">
-          <router-link class="menu-link" to="/stay">Explore</router-link>
-          <router-link class="menu-link main-nav-host" to="/dashboard"
+          <router-link class="menu-link" to="/stay" @click="close">
+            Explore</router-link
+          >
+          <router-link
+            class="menu-link main-nav-host"
+            to="/dashboard"
+            @click="close"
             >Become a host</router-link
           >
         </div>
@@ -98,6 +103,11 @@ export default {
     stayFilter,
   },
   methods: {
+    close() {
+      console.log('lalalalala', this.isOpen);
+      if (this.isOpen) this.isOpen = false;
+      else return;
+    },
     toggleModal() {
       this.isOpen = !this.isOpen;
     },
@@ -125,6 +135,10 @@ export default {
     modalShort() {
       if (this.currPage === 'stayDetails' || this.currPage === 'userDetails')
         return true;
+      else return false;
+    },
+    hideFilter() {
+      if (this.currPage === 'dashboard') return true;
       else return false;
     },
     headerStyle() {

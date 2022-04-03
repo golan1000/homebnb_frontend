@@ -10,7 +10,7 @@ export default {
     //Barak
     getOrders(state) {
       console.log(state.orders);
-      return state.orders;
+      return JSON.parse(JSON.stringify(state.orders));
     },
     getModalState(state) {
       if (state.isOrderModalShown) return state.isOrderModalShown;

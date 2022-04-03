@@ -4,7 +4,9 @@
       <div class="dashboard-top-section">
         <div class="dashboard-data-con">
           <div class="dashboard-data data-rate">
-            <h4 class="dashboard-data-rate-title data-title">Rating</h4>
+            <h4 class="dashboard-data-rate-title data-title">
+              Your stays rating
+            </h4>
             <div class="dashboard-data-rate-content">
               <div class="dashboard-data-rate-average">
                 <span class="dashboard-data-rate-average-title">Average</span>
@@ -14,21 +16,17 @@
                     alt="star image"
                     class="dashboard-data-rate-img"
                   />
-                  <span class="dashboard-data-rate-average-number">{{
-                    setAvgRating
-                  }}</span>
+                  <span class="dashboard-data-rate-average-number">4.9</span>
                 </div>
               </div>
               <div class="dashboard-data-rate-count">
                 <span class="dashboard-data-rate-count-title">Reviews</span>
-                <span class="dashboard-data-rate-count-number">{{
-                  setReviewsCount
-                }}</span>
+                <span class="dashboard-data-rate-count-number">15</span>
               </div>
             </div>
           </div>
           <div class="dashboard-data data-orders">
-            <h4 class="dashboard-data-orders-title data-title">Orders</h4>
+            <h4 class="dashboard-data-orders-title data-title">Total Orders</h4>
             <div class="dashboard-data-orders-status-con">
               <!-- <div class="dashboard-data-orders-status-con-top"> -->
               <!-- <div class="dashboard-data-orders-status">
@@ -65,7 +63,7 @@
             <!-- </div> -->
           </div>
           <div class="dashboard-data data-guests">
-            <h4 class="dashboard-data-guests-title data-title">Guests</h4>
+            <h4 class="dashboard-data-guests-title data-title">Total Guests</h4>
             <div class="dashboard-data-guests-status-con">
               <div class="dashboard-data-guests-status">
                 <span class="dashboard-data-guests-status-title">Past</span>
@@ -92,14 +90,16 @@
             <h4 class="dashboard-data-guests-count"></h4>
           </div>
           <div class="dashboard-data data-revenues">
-            <h4 class="dashboard-data-revenues-title data-title">Revenues</h4>
+            <h4 class="dashboard-data-revenues-title data-title">
+              Guaranteed Revenues
+            </h4>
             <div class="dashboard-data-revenues-period-con">
               <div class="dashboard-data-revenues-period period-month">
                 <span class="dashboard-data-revenues-period-month-title"
                   ><span class="span-this">this</span>Month</span
                 >
                 <span class="dashboard-data-revenues-period-month-num"
-                  >${{ revenueMonth }}</span
+                  >${{ revenueMonth.toLocaleString() }}</span
                 >
               </div>
               <div class="dashboard-data-revenues-period period-year">
@@ -107,7 +107,7 @@
                   ><span class="span-this">this</span>Year</span
                 >
                 <span class="dashboard-data-revenues-period-year-num"
-                  >${{ revenueYear }}</span
+                  >${{ revenueYear.toLocaleString() }}</span
                 >
               </div>
               <!-- <div class="dashboard-data-revenues-period period-total">
@@ -164,7 +164,7 @@
                 Check In - Check Out
               </th>
               <th class="dashboard-details-orders-th orders-table-created">
-                Created At
+                Ordered at
               </th>
               <th class="dashboard-details-orders-th orders-table-revenue">
                 Revenue
@@ -181,7 +181,9 @@
                 :key="order._id"
                 class="dashboard-details-tr orders-table-content"
               >
-                <td class="orders-table-content-pic">:)</td>
+                <td class="orders-table-content-pic">
+                  <img :src="order.userImg" alt="order-img" class="order-img" />
+                </td>
                 <td class="orders-table-content-guest">
                   {{ order.buyer.fullname }}
                 </td>
@@ -313,7 +315,6 @@ export default {
       ordersPending: 0,
       revenueMonth: 0,
       revenueYear: 0,
-      revenueTotal: 0,
     };
   },
   methods: {
@@ -341,8 +342,14 @@ export default {
         console.log('cold not change order status');
       }
     },
+    getRandomIntInclusive(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+    },
   },
   async created() {
+    this.$store.commit({ type: 'setCurrPage', page: 'dashboard' });
     try {
       this.$store.commit('loadLoggedInUser');
       this.loggedInUser = await this.$store.getters.getLoggedUser;
@@ -353,14 +360,17 @@ export default {
         user: this.loggedInUser,
       });
       this.ordersForDisplay = await this.$store.getters.getOrders;
-      this.sortOrders;
+      // this.sortOrders;
+      this.createAvatars;
+      this.modifyNames;
       this.modifyDates;
       this.setCurrDates;
       this.setCurrGuests;
       this.setCurrOrdersData;
       this.setCurrRevenues;
+      this.setLocaleString;
       await this.$store.dispatch({
-        type: 'loadStays',
+        type: 'loadStaysForBackOffice',
         user: this.loggedInUser,
       });
       this.staysForDisplay = await this.$store.getters.getStaysForBackOffice;
@@ -375,20 +385,37 @@ export default {
     //     var newStr = firstLetter + str.substring(1)
     //     return newStr
     // },
-    sortOrders() {
-      this.ordersForDisplay.forEach((order, index) => {
-        console.log(typeof order.createdAt);
-        order.createdAt = new Date(order.createdAt);
-        console.log(order.createdAt);
-        // this.ordersForDisplay[index].createdAt = order.createdAt;
-        console.log(typeof this.ordersForDisplay[index].createdAt);
+    // sortOrders() {
+    //   this.ordersForDisplay.forEach((order, index) => {
+    //     console.log(typeof order.createdAt);
+    //     order.createdAt = new Date(order.createdAt);
+    //     console.log(order.createdAt);
+    //     // this.ordersForDisplay[index].createdAt = order.createdAt;
+    //     console.log(typeof this.ordersForDisplay[index].createdAt);
+    //   });
+    //   console.log(this.ordersForDisplay, 'bdika');
+    //   this.ordersForDisplay.sort((a, b) => a.createdAt - b.createdAt);
+    //   console.log(this.ordersForDisplay, 'bdika2');
+    //   // this.ordersForDisplay.sort((a, b) =>
+    //   //   a.createdAt > b.createdAt ? 1 : -1
+    //   // );
+    // },
+    createAvatars() {
+      this.ordersForDisplay.map((order) => {
+        let mainPicNum = this.getRandomIntInclusive(1, 50);
+        order.userImg = 'https://i.pravatar.cc/200?img=' + mainPicNum;
       });
-      console.log(this.ordersForDisplay, 'bdika');
-      this.ordersForDisplay.sort((a, b) => a.createdAt - b.createdAt);
-      console.log(this.ordersForDisplay, 'bdika2');
-      // this.ordersForDisplay.sort((a, b) =>
-      //   a.createdAt > b.createdAt ? 1 : -1
-      // );
+    },
+    modifyNames() {
+      this.ordersForDisplay.map((order) => {
+        var a = ['Johnny', 'Matt', 'Tom'];
+        var b = ['Levy', 'Malone', 'Stark'];
+        var rA = Math.floor(Math.random() * a.length);
+        var rB = Math.floor(Math.random() * b.length);
+        var name = `${a[rA]} ${b[rB]}`;
+        order.buyer.fullname = name;
+        console.log(order.buyer.fullname);
+      });
     },
     modifyDates() {
       console.log(this.ordersForDisplay);
@@ -515,23 +542,54 @@ export default {
         const startMonth = startDate.getMonth() + 1;
         const startYear = startDate.getFullYear();
         if (startYear === this.currYear) {
-          this.revenueYear += this.ordersForDisplay[i].totalPrice;
+          console.log(this.revenueYear);
+          console.log(this.ordersForDisplay[i].totalPrice);
+          if (this.ordersForDisplay[i].totalPrice.length > 3)
+            this.revenueYear += +this.ordersForDisplay[i].totalPrice.replace(
+              /,/g,
+              ''
+            );
+          else this.revenueYear += +this.ordersForDisplay[i].totalPrice;
           if (startMonth === this.currMonth) {
-            this.revenueMonth += this.ordersForDisplay[i].totalPrice;
+            console.log(this.revenueMonth);
+            console.log(this.ordersForDisplay[i].totalPrice);
+            if (this.ordersForDisplay[i].totalPrice.length > 3)
+              this.revenueMonth += +this.ordersForDisplay[i].totalPrice.replace(
+                /,/g,
+                ''
+              );
+            else this.revenueMonth += +this.ordersForDisplay[i].totalPrice;
           }
         }
-        this.revenueTotal += this.ordersForDisplay[i].totalPrice;
       }
+    },
+    setLocaleString() {
+      this.ordersForDisplay.forEach((order) => {
+        order.totalPrice = order.totalPrice.toLocaleString();
+        console.log(order.totalPrice);
+      });
     },
   },
   watch: {
     ordersForDisplay: {
-      handler() {
-        this.$store.dispatch({
-          type: 'loadOrders',
-          user: this.loggedInUser,
-        });
+      async handler() {
+        (this.guestsPast = 0),
+          (this.guestsPresent = 0),
+          (this.guestsFuture = 0),
+          (this.ordersApproved = 0),
+          (this.ordersDeclined = 0),
+          (this.ordersPending = 0),
+          (this.revenueMonth = 0),
+          (this.revenueYear = 0),
+          // this.createAvatars;
+          this.modifyDates;
+        this.setCurrDates;
+        this.setCurrGuests;
+        this.setCurrOrdersData;
+        this.setCurrRevenues;
+        this.setLocaleString;
       },
+      deep: true,
     },
   },
 };
