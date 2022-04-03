@@ -166,7 +166,7 @@ function _save(stays) {
 }
 
 async function _createStays() {
-  console.log('create stays runnnnn')
+  // console.log('create stays runnnnn')
   var stays = (await query()) || []
 
   console.log('result = ', stays)

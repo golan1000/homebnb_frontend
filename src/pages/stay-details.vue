@@ -515,10 +515,12 @@ export default {
         console.log('Ready to order!!!');
       }
 
+      let loggedInUser = this.$store.getters.getLoggedUser;
+
+      console.log('loggedInUser=', loggedInUser);
       let buyerDetails = {
-        _id: 'sdklj3',
-        id: 'iweur903249sdkfjes3984', //mongoId
-        fullname: 'bob bob',
+        _id: loggedInUser._id,
+        fullname: loggedInUser.fullname,
       };
 
       let stayDetails = {
@@ -528,12 +530,7 @@ export default {
       };
 
       let order = {
-        // _id: 'dsjfsdiuiowe3243io2uioeuroeiw'
-        // createdAt: Date.now(),
-
-        // hostId: this.stayToEdit.id, // original
         hostId: '6244a257b33357644ca3d12e',
-        // hostId: this.stayToEdit._id //mongoId
 
         totalPrice: this.totalPrice,
         buyer: buyerDetails,
@@ -787,18 +784,18 @@ export default {
     },
     getTotalNightCost() {
       if (!this.getTotalNights()) return;
-      return '$' + this.stayToEdit.price * this.getTotalNights();
+      return '$' + (this.stayToEdit.price * this.getTotalNights()).toLocaleString();
     },
     getTotalNightsCalc() {
       let str = '';
-      str += '$' + this.stayToEdit.price + ' x ' + this.getTotalNights() + ' nights';
+      str += '$' + this.stayToEdit.price.toLocaleString() + ' x ' + this.getTotalNights() + ' nights';
       console.log('last calc ====', str);
       return str;
     },
     getCleaningFee() {
       let cleaningFee = this.stayToEdit.cleaningFee;
       if (!cleaningFee) cleaningFee = 0;
-      return '$' + cleaningFee;
+      return '$' + cleaningFee.toLocaleString();
     },
     getServiceFee() {
       return '$' + this.serviceFee;
@@ -813,7 +810,7 @@ export default {
 
       let totalCalc = totalNightCost + cleaningFee + serviceFee;
       this.totalPrice = totalCalc;
-      return '$' + totalCalc;
+      return '$' + totalCalc.toLocaleString();
     },
     submitOrderStyle() {
       if (this.submitBtnState) {

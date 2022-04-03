@@ -4,7 +4,10 @@
       <stay-filter v-if="getFilterShown"></stay-filter>
     </div> -->
     <div class="con-sentence">
-      <div class="sentence">Let your curiosity do the booking</div>
+      <div class="sentence">
+        <span>Let your curiosity do the booking</span>
+        <span class="sentence-dot">.</span>
+      </div>
     </div>
   </div>
 
