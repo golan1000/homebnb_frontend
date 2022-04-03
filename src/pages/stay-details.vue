@@ -369,7 +369,9 @@ export default {
   data() {
     return {
       mainPic: null,
-      baseUrl: '../../data/Images/',
+      //
+      baseUrl: '@/assets/gallery/',
+      // baseUrl: '../../src/assets/gallery/',
       isReadyToSubmit: true,
       isDateSelected: false,
       submitBtnState: true,

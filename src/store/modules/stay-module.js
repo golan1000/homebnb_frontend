@@ -124,11 +124,13 @@ export default {
       if (state.exploreFilter.roomType.length > 0) {
         console.log('filter by room type!!!!')
         let roomTypes = state.exploreFilter.roomType
-        // roomType = roomTypes.map((type) => type.toLowerCase())
-        console.log('room types to check=', roomTypes)
+
+        console.log('roomTypes before=', roomTypes)
+        roomTypes = roomTypes.map((type) => type.toLowerCase())
+        console.log('roomTypes after=', roomTypes)
         foundStays = foundStays.filter((stay) => {
-          // return roomTypes.includes(stay.roomType.toLowerCase()
-          return stay.roomType.toLowerCase().search(roomTypes) !== -1
+          // console.log('curr room type of stay = ', stay.roomType.toLowerCase())
+          return roomTypes.includes(stay.roomType.toLowerCase())
         })
       }
 
@@ -159,7 +161,7 @@ export default {
       try {
         // commit({ type: 'setStays', stays: [] });
         const stays = await stayService.query(state.filterBy)
-        await commit({ type: 'setStays', stays })
+        commit({ type: 'setStays', stays })
         await dispatch({ type: 'loadStaysForBackOffice', user })
         // commit({ type: 'updateFilteredStays' })
         console.log('stays from loadstays=', stays)

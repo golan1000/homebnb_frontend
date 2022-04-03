@@ -18,14 +18,14 @@
   <!-- Buttons for additional filtters -->
   <!-- <expolore-btns class="explore-btns" /> -->
   <section class="explore-btns">
-    <button @click="togglePrice" class="explore-btn" :class="{ clicked: isPriceActive }">Price</button>
-    <button @click="toggleType" class="explore-btn" :class="{ clicked: isTypeActive }">Type of place</button>
-    <button @click="toggleWifi" class="explore-btn" :class="{ clicked: isWifiActive }">Wifi</button>
-    <button @click="toggleTv" class="explore-btn" :class="{ clicked: isTvActive }">TV</button>
-    <button @click="toggleKitchen" class="explore-btn" :class="{ clicked: isKitchenActive }">Kitchen</button>
-    <button @click="toggleAc" class="explore-btn" :class="{ clicked: isAcActive }">AC</button>
-    <button @click="toggleSmoking" class="explore-btn" :class="{ clicked: isSmokingAllowedActive }">Smoking allowed</button>
-    <button @click="togglePets" class="explore-btn" :class="{ clicked: isPetsAllowedActive }">Pets allowed</button>
+    <button @click.stop.prevent="togglePrice" class="explore-btn" :class="{ clicked: isPriceActive }">Price</button>
+    <button @click.stop.prevent="toggleType" class="explore-btn" :class="{ clicked: isTypeActive }">Type of place</button>
+    <button @click.stop.prevent="toggleWifi" class="explore-btn" :class="{ clicked: isWifiActive }">Wifi</button>
+    <button @click.stop.prevent="toggleTv" class="explore-btn" :class="{ clicked: isTvActive }">TV</button>
+    <button @click.stop.prevent="toggleKitchen" class="explore-btn" :class="{ clicked: isKitchenActive }">Kitchen</button>
+    <button @click.stop.prevent="toggleAc" class="explore-btn" :class="{ clicked: isAcActive }">AC</button>
+    <button @click.stop.prevent="toggleSmoking" class="explore-btn" :class="{ clicked: isSmokingAllowedActive }">Smoking allowed</button>
+    <button @click.stop.prevent="togglePets" class="explore-btn" :class="{ clicked: isPetsAllowedActive }">Pets allowed</button>
 
     <div v-if="isPriceActive" class="price-modal">
       <h3>Price</h3>
@@ -34,19 +34,19 @@
         <input type="number" placeholder="maximum price" v-model="priceRange.max" />
       </div>
       <div class="action-buttons">
-        <button class="save-btn" @click="setPrice">Save</button>
-        <button class="clear-btn" @click="clearPrice">Clear</button>
+        <button class="save-btn" @click.stop.prevent="setPrice">Save</button>
+        <button class="clear-btn" @click.stop.prevent="clearPrice">Clear</button>
       </div>
     </div>
     <div v-if="isTypeActive" class="type-room-modal">
       <h3>Room type</h3>
       <div class="room-options">
-        <label><input type="checkbox" value="entire home" v-model="exploreBtnsFilter.roomType" /> Entire Home</label>
-        <label><input type="checkbox" value="private room" v-model="exploreBtnsFilter.roomType" /> Privare Room</label>
+        <label><input type="checkbox" class="room-type-checkbox" value="entire home/apt" v-model="exploreBtnsFilter.roomType" /> Entire Home</label>
+        <label><input type="checkbox" class="room-type-checkbox" value="private room" v-model="exploreBtnsFilter.roomType" /> Private Room</label>
       </div>
       <div class="action-buttons">
-        <button class="save-btn" @click="setRoom">Save</button>
-        <button class="clear-btn" @click="clearRoomType">Clear</button>
+        <button class="save-btn" @click.stop.prevent="setRoom">Save</button>
+        <button class="clear-btn" @click.stop.prevent="clearRoomType">Clear</button>
       </div>
     </div>
   </section>
@@ -92,6 +92,7 @@ export default {
   },
   created() {
     // console.log(this.$route.query);
+    console.log('LIST CREATED!!!===================================');
     this.getPriceRange();
   },
   components: {
@@ -160,7 +161,7 @@ export default {
     clearPrice() {
       this.exploreBtnsFilter.priceRange.min = -Infinity;
       this.exploreBtnsFilter.priceRange.max = Infinity;
-      this.$emit('btnsFilter', this.exploreBtnsFilter);
+      // this.$emit('btnsFilter', this.exploreBtnsFilter);
       this.getPriceRange();
     },
 
@@ -169,7 +170,7 @@ export default {
     },
     clearRoomType() {
       this.exploreBtnsFilter.roomType = [];
-      this.$emit('btnsFilter', this.exploreBtnsFilter);
+      // this.$emit('btnsFilter', this.exploreBtnsFilter);
     },
   },
   watch: {
