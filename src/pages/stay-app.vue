@@ -30,6 +30,7 @@ export default {
   components: { stayFilter, stayList },
   created() {
     console.log('STAY APP CREATED!!!===================================');
+    this.$store.commit({ type: 'setWantToSearch', isWantToSearch: false });
     this.stays = this.$store.getters.getStays;
     this.$store.commit({ type: 'setCurrPage', page: 'stayApp' });
   },

@@ -238,7 +238,7 @@
             <div>{{ getButtonText }}</div>
           </button>
           <button v-if="!submitBtnState" class="order-form-submit-disabled" @click="submitOrder">
-            <div>{{ getButtonText }}</div>
+            <div>Reserved</div>
           </button>
 
           <div v-if="costsSectionShown">
@@ -375,6 +375,7 @@ export default {
       //
       baseUrl: 'src/assets/gallery/',
       // baseUrl: '../../src/assets/gallery/',
+      isSubmitted: false,
       isReadyToSubmit: true,
       isDateSelected: false,
       submitBtnState: true,
@@ -771,8 +772,11 @@ export default {
     },
     getButtonText() {
       let totalGuests = this.guests.adults + this.guests.kids;
-      if (!this.isDateSelected || totalGuests === 0) return 'Check availability';
-      else return 'Reserve';
+      if (!this.isDateSelected || totalGuests === 0) {
+        return 'Check availability';
+      } else {
+        return 'Reserve';
+      }
     },
     getTotalGuests() {
       let totalGuests = this.guests.adults + this.guests.kids;
@@ -845,6 +849,8 @@ export default {
     },
   },
   async created() {
+    this.$store.commit({ type: 'setWantToSearch', isWantToSearch: false });
+    this.$store.commit({ type: 'setCurrPage', page: 'stayDetails' });
     let mainPicNum = this.getRandomIntInclusive(1, 50);
 
     this.mainPic = 'https://i.pravatar.cc/200?img=' + mainPicNum;
@@ -944,9 +950,10 @@ img {
   padding-bottom: 25px;
   padding-top: 23px;
   width: 372px;
-  height: fit-content;
+
   /* min-height: 298px; */
-  height: 278px;
+  /* height: 278px; */
+  height: fit-content;
   border-radius: 12px;
   margin-top: -4px;
   border: 1px solid #dddddd;
