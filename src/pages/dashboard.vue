@@ -326,7 +326,7 @@ export default {
       console.log(orderId, status);
       try {
         const order = this.ordersForDisplay.find(
-          (order) => order._id === orderId
+          order => order._id === orderId
         );
         console.log(order);
         order.status = status;
@@ -401,13 +401,13 @@ export default {
     //   // );
     // },
     createAvatars() {
-      this.ordersForDisplay.map((order) => {
+      this.ordersForDisplay.map(order => {
         let mainPicNum = this.getRandomIntInclusive(1, 50);
         order.userImg = 'https://i.pravatar.cc/200?img=' + mainPicNum;
       });
     },
     modifyNames() {
-      this.ordersForDisplay.map((order) => {
+      this.ordersForDisplay.map(order => {
         var a = ['Johnny', 'Matt', 'Tom'];
         var b = ['Levy', 'Malone', 'Stark'];
         var rA = Math.floor(Math.random() * a.length);
@@ -419,10 +419,10 @@ export default {
     },
     modifyDates() {
       console.log(this.ordersForDisplay);
-      this.ordersForDisplay.forEach((order) => {
+      this.ordersForDisplay.forEach(order => {
         order.startDate = new Date(order.startDate).toLocaleDateString();
         order.endDate = new Date(order.endDate).toLocaleDateString();
-        order.createdAt = new Date(order.endDate).toLocaleDateString();
+        order.createdAt = new Date(order.createdAt).toLocaleDateString();
         order.createdAt = order.createdAt.substring(0);
       });
       console.log(this.ordersForDisplay);
@@ -564,7 +564,7 @@ export default {
       }
     },
     setLocaleString() {
-      this.ordersForDisplay.forEach((order) => {
+      this.ordersForDisplay.forEach(order => {
         order.totalPrice = order.totalPrice.toLocaleString();
         console.log(order.totalPrice);
       });
