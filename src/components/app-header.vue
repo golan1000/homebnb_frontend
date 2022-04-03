@@ -13,7 +13,11 @@
                 <h4 class="small-filter-button-txt">Start your search</h4>
               </div>
               <div class="small-filter-button-div">
-                <img class="small-filter-button-img" src="../assets/magnifying.svg" alt="small-filter-button-img" />
+                <img
+                  class="small-filter-button-img"
+                  src="../assets/magnifying.svg"
+                  alt="small-filter-button-img"
+                />
               </div>
             </button>
           </div>
@@ -24,21 +28,53 @@
       </div>
       <div class="main-nav">
         <div class="main-nav-links">
-          <router-link class="menu-link" to="/stay">Explore</router-link>
-          <router-link class="menu-link main-nav-host" to="/dashboard">Become a host</router-link>
+          <router-link class="menu-link" to="/stay" @click="close">
+            Explore</router-link
+          >
+          <router-link class="menu-link main-nav-host" to="/" @click="close"
+            >Become a host</router-link
+          >
         </div>
         <div class="menu">
           <div class="img-globe-div">
             <img class="img-globe" src="../assets/globe.svg" alt="img-globe" />
           </div>
           <button class="menu-btn" @click="toggleModal">
-            <img src="../assets/hamburger.svg" alt="img-hamburger" class="hamburger" />
-            <img class="user-img" src="../assets/user-home.svg" alt="img-user-home" />
+            <img
+              src="../assets/hamburger.svg"
+              alt="img-hamburger"
+              class="hamburger"
+            />
+            <img
+              class="user-img"
+              src="../assets/user-home.svg"
+              alt="img-user-home"
+            />
           </button>
-          <div v-if="isOpen" class="menu-btn-modal" :class="{ modal: modalShort }">
-            <router-link @click="toggleModal" class="menu-modal-link" to="/signup">Log in</router-link>
-            <router-link @click="toggleModal" class="menu-modal-link" to="/dashboard">Host your home</router-link>
-            <router-link @click="toggleModal" class="menu-modal-link" :to="`/user/${loggedInUser._id}`">Account</router-link>
+          <div
+            v-if="isOpen"
+            class="menu-btn-modal"
+            :class="{ modal: modalShort }"
+          >
+            <router-link
+              @click="toggleModal"
+              class="menu-modal-link"
+              to="/signup"
+              >{{ getLoggedInUser ? 'Log out' : 'Log in' }}</router-link
+            >
+            <router-link
+              v-if="getLoggedInUser.isHost"
+              @click="toggleModal"
+              class="menu-modal-link"
+              to="/dashboard"
+              >Backoffice</router-link
+            >
+            <router-link
+              @click="toggleModal"
+              class="menu-modal-link"
+              :to="`/user/${loggedInUser._id}`"
+              >Account</router-link
+            >
           </div>
         </div>
       </div>
@@ -65,6 +101,11 @@ export default {
     stayFilter,
   },
   methods: {
+    close() {
+      console.log('lalalalala', this.isOpen);
+      if (this.isOpen) this.isOpen = false;
+      else return;
+    },
     toggleModal() {
       this.isOpen = !this.isOpen;
     },
@@ -85,11 +126,17 @@ export default {
   },
   computed: {
     headerShort() {
-      if (this.currPage === 'stayDetails' || this.currPage === 'userDetails') return true;
+      if (this.currPage === 'stayDetails' || this.currPage === 'userDetails')
+        return true;
       else return false;
     },
     modalShort() {
-      if (this.currPage === 'stayDetails' || this.currPage === 'userDetails') return true;
+      if (this.currPage === 'stayDetails' || this.currPage === 'userDetails')
+        return true;
+      else return false;
+    },
+    hideFilter() {
+      if (this.currPage === 'dashboard') return true;
       else return false;
     },
     headerStyle() {
@@ -132,6 +179,9 @@ export default {
       }
       if (!this.isFilterUp) return false;
       return true;
+    },
+    getLoggedInUser() {
+      return this.$store.getters.getLoggedUser;
     },
   },
   watch: {

@@ -21,7 +21,7 @@
     <div class="stay-preview-content">
       <div class="stay-preview-content-reviews">
         <img class="img-star" src="../assets/star.svg" alt="" />
-        <p class="reviews-rate">{{ stay.reviewScores.rating }}&nbsp;</p>
+        <p class="reviews-rate">{{ getAvarageRate }}&nbsp;</p>
         <p class="reviews-number">({{ stay.numOfReviews }} Reviews)</p>
       </div>
       <div class="stay-preview-details">
@@ -30,7 +30,7 @@
         <p>{{ stay.address.city }}, {{ stay.address.country }}</p>
       </div>
       <div class="stay-preview-desc">
-        <p>{{ editTextLength }}</p>
+        <p>{{ editTxtLength }}</p>
       </div>
       <div class="stay-preview-price">
         <p>
@@ -65,13 +65,23 @@ export default {
     // },
     getImgUrl() {
       // const imgs = this.stay.imgUrls.map((img) => `../assets/gallery/${img}`);
-      const imgs = this.stay.imgUrls.map(img => `src/assets/gallery/${img}`);
+      const imgs = this.stay.imgUrls.map((img) => `src/assets/gallery/${img}`);
 
       return imgs;
     },
   },
   computed: {
-    editTextLength() {
+    getAvarageRate() {
+      let rate = this.stay.reviewScores.rating;
+
+      let rateDec = rate / 100;
+
+      let finalRate = rateDec * 5;
+
+      return finalRate.toFixed(2);
+    },
+    editTxtLength() {
+      console.log('hello');
       var editedSubject = this.stay.summary.substr(0, 45);
       editedSubject += '..';
       return editedSubject;

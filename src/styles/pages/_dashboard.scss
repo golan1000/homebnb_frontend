@@ -225,6 +225,7 @@
       }
       .stays-table-name {
         width: 35%;
+        text-align: left;
       }
       .stays-table-price {
         width: 10%;
@@ -272,9 +273,11 @@
       }
       .orders-table-guest {
         width: 10%;
+        text-align: left;
       }
       .orders-table-stay {
         width: 25%;
+        text-align: left;
       }
       .orders-table-check {
         width: 20%;
@@ -294,6 +297,11 @@
 
       .orders-table-content-pic {
         width: 5%;
+        .order-img {
+          border-radius: 50%;
+          height: 40px;
+          width: 40px;
+        }
       }
       .orders-table-content-guest {
         width: 10%;
