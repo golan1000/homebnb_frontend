@@ -23,56 +23,56 @@
   <!-- <expolore-btns class="explore-btns" /> -->
   <section class="explore-btns">
     <button
-      @click="togglePrice"
+      @click.stop.prevent="togglePrice"
       class="explore-btn"
       :class="{ clicked: isPriceActive }"
     >
       Price
     </button>
     <button
-      @click="toggleType"
+      @click.stop.prevent="toggleType"
       class="explore-btn"
       :class="{ clicked: isTypeActive }"
     >
       Type of place
     </button>
     <button
-      @click="toggleWifi"
+      @click.stop.prevent="toggleWifi"
       class="explore-btn"
       :class="{ clicked: isWifiActive }"
     >
       Wifi
     </button>
     <button
-      @click="toggleTv"
+      @click.stop.prevent="toggleTv"
       class="explore-btn"
       :class="{ clicked: isTvActive }"
     >
       TV
     </button>
     <button
-      @click="toggleKitchen"
+      @click.stop.prevent="toggleKitchen"
       class="explore-btn"
       :class="{ clicked: isKitchenActive }"
     >
       Kitchen
     </button>
     <button
-      @click="toggleAc"
+      @click.stop.prevent="toggleAc"
       class="explore-btn"
       :class="{ clicked: isAcActive }"
     >
       AC
     </button>
     <button
-      @click="toggleSmoking"
+      @click.stop.prevent="toggleSmoking"
       class="explore-btn"
       :class="{ clicked: isSmokingAllowedActive }"
     >
       Smoking allowed
     </button>
     <button
-      @click="togglePets"
+      @click.stop.prevent="togglePets"
       class="explore-btn"
       :class="{ clicked: isPetsAllowedActive }"
     >
@@ -94,8 +94,10 @@
         />
       </div>
       <div class="action-buttons">
-        <button class="save-btn" @click="setPrice">Save</button>
-        <button class="clear-btn" @click="clearPrice">Clear</button>
+        <button class="save-btn" @click.stop.prevent="setPrice">Save</button>
+        <button class="clear-btn" @click.stop.prevent="clearPrice">
+          Clear
+        </button>
       </div>
     </div>
     <div v-if="isTypeActive" class="type-room-modal">
@@ -118,8 +120,10 @@
         >
       </div>
       <div class="action-buttons">
-        <button class="save-btn" @click="setRoom">Save</button>
-        <button class="clear-btn" @click="clearRoomType">Clear</button>
+        <button class="save-btn" @click.stop.prevent="setRoom">Save</button>
+        <button class="clear-btn" @click.stop.prevent="clearRoomType">
+          Clear
+        </button>
       </div>
     </div>
   </section>
@@ -165,6 +169,7 @@ export default {
   },
   created() {
     // console.log(this.$route.query);
+    console.log('LIST CREATED!!!===================================');
     this.getPriceRange();
   },
   components: {

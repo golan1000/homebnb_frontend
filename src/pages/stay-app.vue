@@ -19,8 +19,6 @@ export default {
   },
   methods: {
     onBtnFilter(exploreFilter) {
-      console.log('staapp', exploreFilter);
-      // this.$store.commit({ type: 'setExploreFilter', exploreFilter });
       this.$store.dispatch({ type: 'setExploreFilter', exploreFilter });
     },
   },
@@ -31,6 +29,7 @@ export default {
   },
   components: { stayFilter, stayList },
   created() {
+    console.log('STAY APP CREATED!!!===================================');
     this.stays = this.$store.getters.getStays;
     this.$store.commit({ type: 'setCurrPage', page: 'stayApp' });
   },
