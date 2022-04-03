@@ -190,6 +190,7 @@ export default {
       });
     },
     setfilterParams() {
+      this.filterBy.address = this.firstCapitalLetter(this.filterBy.address);
       this.setfilter();
       this.$router.push(`/stay?address=${this.filterBy.address}`);
     },
@@ -214,6 +215,11 @@ export default {
     clearDateModal() {
       this.range.start = new Date();
       this.range.end = new Date();
+    },
+    firstCapitalLetter(str) {
+      var firstLetter = str.slice(0, 1).toUpperCase();
+      var newStr = firstLetter + str.substring(1);
+      return newStr;
     },
   },
   computed: {

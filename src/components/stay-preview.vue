@@ -21,7 +21,7 @@
     <div class="stay-preview-content">
       <div class="stay-preview-content-reviews">
         <img class="img-star" src="../assets/star.svg" alt="" />
-        <p class="reviews-rate">{{ stay.reviewScores.rating }}&nbsp;</p>
+        <p class="reviews-rate">{{ getAvarageRate }}&nbsp;</p>
         <p class="reviews-number">({{ stay.numOfReviews }} Reviews)</p>
       </div>
       <div class="stay-preview-details">
@@ -75,6 +75,17 @@ export default {
       var editedSubject = this.stay.summary.substr(0, 45);
       editedSubject += '..';
       return editedSubject;
+    },
+  },
+  computed: {
+    getAvarageRate() {
+      let rate = this.stay.reviewScores.rating;
+
+      let rateDec = rate / 100;
+
+      let finalRate = rateDec * 5;
+
+      return finalRate.toFixed(2);
     },
   },
 };
