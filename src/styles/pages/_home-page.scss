@@ -490,7 +490,8 @@
 .review-date {
   margin-top: 10px;
   margin-right: 5px;
-  width: fit-content;
+  width: 65px;
+  background-color: #e61e4e;
 }
 
 //original
@@ -507,20 +508,20 @@
 //grid test
 
 .review-rates-main-con {
-  background-color: red;
+  // background-color: red;
   display: grid;
   width: 100%;
-  background-color: aqua;
+  // background-color: aqua;
   grid-column-gap: 110px;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
   .rate-sec-middle {
-    background-color: green;
+    // background-color: green;
   }
   .rate-sec1,
   .rate-sec2 {
     width: 100%;
-    background-color: yellow;
+    // background-color: yellow;
   }
 }
 .el-progress-bar {
@@ -615,7 +616,7 @@
 .review-users-grid {
   display: grid;
   width: 100%;
-  background-color: aqua;
+  // background-color: aqua;
   grid-column-gap: 110px;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: repeat(3, 1fr);

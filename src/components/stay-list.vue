@@ -1,16 +1,14 @@
 <template>
   <div v-if="stays.length === 0">
     <div class="full-body">
-      <img src="../assets/img/loading.gif" alt="Loading" />
+      <div class="load-img-con">
+        <img src="../assets/img/loading.gif" alt="Loading" />
+      </div>
     </div>
   </div>
   <div v-else>
     <h4 v-if="stays.length" class="stay-list-title">
-      {{
-        $route.query.address
-          ? `${stays.length} stays in ${$route.query.address}`
-          : 'Explore the world!'
-      }}
+      {{ $route.query.address ? `${stays.length} stays in ${$route.query.address}` : 'Explore the world!' }}
     </h4>
     <h4 v-else>No match found</h4>
 
@@ -24,108 +22,34 @@
     <!-- Buttons for additional filtters -->
     <!-- <expolore-btns class="explore-btns" /> -->
     <section class="explore-btns">
-      <button
-        @click.stop.prevent="togglePrice"
-        class="explore-btn"
-        :class="{ clicked: isPriceActive }"
-      >
-        Price
-      </button>
-      <button
-        @click.stop.prevent="toggleType"
-        class="explore-btn"
-        :class="{ clicked: isTypeActive }"
-      >
-        Type of place
-      </button>
-      <button
-        @click.stop.prevent="toggleWifi"
-        class="explore-btn"
-        :class="{ clicked: isWifiActive }"
-      >
-        Wifi
-      </button>
-      <button
-        @click.stop.prevent="toggleTv"
-        class="explore-btn"
-        :class="{ clicked: isTvActive }"
-      >
-        TV
-      </button>
-      <button
-        @click.stop.prevent="toggleKitchen"
-        class="explore-btn"
-        :class="{ clicked: isKitchenActive }"
-      >
-        Kitchen
-      </button>
-      <button
-        @click.stop.prevent="toggleAc"
-        class="explore-btn"
-        :class="{ clicked: isAcActive }"
-      >
-        AC
-      </button>
-      <button
-        @click.stop.prevent="toggleSmoking"
-        class="explore-btn"
-        :class="{ clicked: isSmokingAllowedActive }"
-      >
-        Smoking allowed
-      </button>
-      <button
-        @click.stop.prevent="togglePets"
-        class="explore-btn"
-        :class="{ clicked: isPetsAllowedActive }"
-      >
-        Pets allowed
-      </button>
+      <button @click.stop.prevent="togglePrice" class="explore-btn" :class="{ clicked: isPriceActive }">Price</button>
+      <button @click.stop.prevent="toggleType" class="explore-btn" :class="{ clicked: isTypeActive }">Type of place</button>
+      <button @click.stop.prevent="toggleWifi" class="explore-btn" :class="{ clicked: isWifiActive }">Wifi</button>
+      <button @click.stop.prevent="toggleTv" class="explore-btn" :class="{ clicked: isTvActive }">TV</button>
+      <button @click.stop.prevent="toggleKitchen" class="explore-btn" :class="{ clicked: isKitchenActive }">Kitchen</button>
+      <button @click.stop.prevent="toggleAc" class="explore-btn" :class="{ clicked: isAcActive }">AC</button>
+      <button @click.stop.prevent="toggleSmoking" class="explore-btn" :class="{ clicked: isSmokingAllowedActive }">Smoking allowed</button>
+      <button @click.stop.prevent="togglePets" class="explore-btn" :class="{ clicked: isPetsAllowedActive }">Pets allowed</button>
 
       <div v-if="isPriceActive" class="price-modal">
         <h3>Price</h3>
         <div class="range-nput">
-          <input
-            type="number"
-            placeholder="minimum price"
-            v-model="priceRange.min"
-          />
-          <input
-            type="number"
-            placeholder="maximum price"
-            v-model="priceRange.max"
-          />
+          <input type="number" placeholder="minimum price" v-model="priceRange.min" />
+          <input type="number" placeholder="maximum price" v-model="priceRange.max" />
         </div>
         <div class="action-buttons">
           <button class="save-btn" @click.stop.prevent="setPrice">Save</button>
-          <button class="clear-btn" @click.stop.prevent="clearPrice">
-            Clear
-          </button>
+          <button class="clear-btn" @click.stop.prevent="clearPrice">Clear</button>
         </div>
       </div>
       <div v-if="isTypeActive" class="type-room-modal">
         <div class="room-options">
-          <label
-            ><input
-              type="checkbox"
-              value="entire home"
-              v-model="exploreBtnsFilter.roomType"
-            />
-            Entire Home</label
-          >
-          <label
-            ><input
-              type="checkbox"
-              value="private room"
-              v-model="exploreBtnsFilter.roomType"
-            />
-            Private Room</label
-          >
+          <label><input type="checkbox" value="entire home" v-model="exploreBtnsFilter.roomType" /> Entire Home</label>
+          <label><input type="checkbox" value="private room" v-model="exploreBtnsFilter.roomType" /> Private Room</label>
         </div>
         <div class="action-buttons">
           <button class="save-btn" @click.stop.prevent="setRoom">Save</button>
-          <button class="clear-btn" @click.stop.prevent="clearRoomType">
-            Clear
-          </button>
+          <button class="clear-btn" @click.stop.prevent="clearRoomType">Clear</button>
         </div>
       </div>
     </section>
@@ -219,9 +143,7 @@ export default {
         if (this.exploreBtnsFilter.amenities.includes(name)) return;
         this.exploreBtnsFilter.amenities.push(name);
       } else {
-        const idx = this.exploreBtnsFilter.amenities.findIndex(
-          amenity => amenity === name
-        );
+        const idx = this.exploreBtnsFilter.amenities.findIndex((amenity) => amenity === name);
         this.exploreBtnsFilter.amenities.splice(idx, 1);
       }
       this.$emit('btnsFilter', this.exploreBtnsFilter);
@@ -229,7 +151,7 @@ export default {
 
     getPriceRange() {
       let allStays = this.$store.getters.getStaysAll;
-      const prices = allStays.map(stay => stay.price);
+      const prices = allStays.map((stay) => stay.price);
       this.priceRange.min = Math.min(...prices);
       console.log(' priceRange.min', this.priceRange.min);
       this.priceRange.max = Math.max(...prices);
@@ -261,10 +183,7 @@ export default {
   watch: {
     // whenever question changes, this function will run
     stays: function (oldProp, newProp) {
-      if (
-        this.exploreBtnsFilter.priceRange.max === Infinity &&
-        this.exploreBtnsFilter.priceRange.min === -Infinity
-      ) {
+      if (this.exploreBtnsFilter.priceRange.max === Infinity && this.exploreBtnsFilter.priceRange.min === -Infinity) {
         console.log('update get price range.........');
         this.getPriceRange();
       }
@@ -287,7 +206,12 @@ export default {
 </script>
 <style scoped>
 .full-body {
-  height: 100%;
+  height: calc(100vh - 150px);
   width: 100%;
+}
+.load-img-con {
+  margin: 0 auto;
+  /* background-color: yellow; */
+  width: fit-content;
 }
 </style>
