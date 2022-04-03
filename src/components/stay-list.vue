@@ -1,135 +1,138 @@
 <template>
-  <h4 v-if="stays.length" class="stay-list-title">
-    {{
-      $route.query.address
-        ? `${stays.length} stays in ${$route.query.address}`
-        : 'Explore the world!'
-    }}
-  </h4>
-  <h4 v-else>No match found</h4>
-  <div v-if="!stays">
-    <div>Loading</div>
-    <div><img src="../assets/img/loading.gif" alt="Loading" /></div>
+  <div v-if="stays.length === 0">
+    <div class="full-body">
+      <img src="../assets/img/loading.gif" alt="Loading" />
+    </div>
   </div>
+  <div v-else>
+    <h4 v-if="stays.length" class="stay-list-title">
+      {{
+        $route.query.address
+          ? `${stays.length} stays in ${$route.query.address}`
+          : 'Explore the world!'
+      }}
+    </h4>
+    <h4 v-else>No match found</h4>
 
-  <!-- <h4 v-if="$route.query.address" class="stay-list-title">
+    <!-- <h4 v-if="$route.query.address" class="stay-list-title">
     {{ stays.length }} stays in
     {{ stays[0].address.city }} 
   </h4>
   <h4 v-else-if="!stays.length">Explore the world!</h4>
   <h4 v-else>No match found</h4> -->
-  <br />
-  <!-- Buttons for additional filtters -->
-  <!-- <expolore-btns class="explore-btns" /> -->
-  <section class="explore-btns">
-    <button
-      @click.stop.prevent="togglePrice"
-      class="explore-btn"
-      :class="{ clicked: isPriceActive }"
-    >
-      Price
-    </button>
-    <button
-      @click.stop.prevent="toggleType"
-      class="explore-btn"
-      :class="{ clicked: isTypeActive }"
-    >
-      Type of place
-    </button>
-    <button
-      @click.stop.prevent="toggleWifi"
-      class="explore-btn"
-      :class="{ clicked: isWifiActive }"
-    >
-      Wifi
-    </button>
-    <button
-      @click.stop.prevent="toggleTv"
-      class="explore-btn"
-      :class="{ clicked: isTvActive }"
-    >
-      TV
-    </button>
-    <button
-      @click.stop.prevent="toggleKitchen"
-      class="explore-btn"
-      :class="{ clicked: isKitchenActive }"
-    >
-      Kitchen
-    </button>
-    <button
-      @click.stop.prevent="toggleAc"
-      class="explore-btn"
-      :class="{ clicked: isAcActive }"
-    >
-      AC
-    </button>
-    <button
-      @click.stop.prevent="toggleSmoking"
-      class="explore-btn"
-      :class="{ clicked: isSmokingAllowedActive }"
-    >
-      Smoking allowed
-    </button>
-    <button
-      @click.stop.prevent="togglePets"
-      class="explore-btn"
-      :class="{ clicked: isPetsAllowedActive }"
-    >
-      Pets allowed
-    </button>
+    <br />
+    <!-- Buttons for additional filtters -->
+    <!-- <expolore-btns class="explore-btns" /> -->
+    <section class="explore-btns">
+      <button
+        @click.stop.prevent="togglePrice"
+        class="explore-btn"
+        :class="{ clicked: isPriceActive }"
+      >
+        Price
+      </button>
+      <button
+        @click.stop.prevent="toggleType"
+        class="explore-btn"
+        :class="{ clicked: isTypeActive }"
+      >
+        Type of place
+      </button>
+      <button
+        @click.stop.prevent="toggleWifi"
+        class="explore-btn"
+        :class="{ clicked: isWifiActive }"
+      >
+        Wifi
+      </button>
+      <button
+        @click.stop.prevent="toggleTv"
+        class="explore-btn"
+        :class="{ clicked: isTvActive }"
+      >
+        TV
+      </button>
+      <button
+        @click.stop.prevent="toggleKitchen"
+        class="explore-btn"
+        :class="{ clicked: isKitchenActive }"
+      >
+        Kitchen
+      </button>
+      <button
+        @click.stop.prevent="toggleAc"
+        class="explore-btn"
+        :class="{ clicked: isAcActive }"
+      >
+        AC
+      </button>
+      <button
+        @click.stop.prevent="toggleSmoking"
+        class="explore-btn"
+        :class="{ clicked: isSmokingAllowedActive }"
+      >
+        Smoking allowed
+      </button>
+      <button
+        @click.stop.prevent="togglePets"
+        class="explore-btn"
+        :class="{ clicked: isPetsAllowedActive }"
+      >
+        Pets allowed
+      </button>
 
-    <div v-if="isPriceActive" class="price-modal">
-      <h3>Price</h3>
-      <div class="range-nput">
-        <input
-          type="number"
-          placeholder="minimum price"
-          v-model="priceRange.min"
-        />
-        <input
-          type="number"
-          placeholder="maximum price"
-          v-model="priceRange.max"
-        />
-      </div>
-      <div class="action-buttons">
-        <button class="save-btn" @click.stop.prevent="setPrice">Save</button>
-        <button class="clear-btn" @click.stop.prevent="clearPrice">
-          Clear
-        </button>
-      </div>
-    </div>
-    <div v-if="isTypeActive" class="type-room-modal">
-      <div class="room-options">
-        <label
-          ><input
-            type="checkbox"
-            value="entire home"
-            v-model="exploreBtnsFilter.roomType"
+      <div v-if="isPriceActive" class="price-modal">
+        <h3>Price</h3>
+        <div class="range-nput">
+          <input
+            type="number"
+            placeholder="minimum price"
+            v-model="priceRange.min"
           />
-          Entire Home</label
-        >
-        <label
-          ><input
-            type="checkbox"
-            value="private room"
-            v-model="exploreBtnsFilter.roomType"
+          <input
+            type="number"
+            placeholder="maximum price"
+            v-model="priceRange.max"
           />
-          Private Room</label
-        >
+        </div>
+        <div class="action-buttons">
+          <button class="save-btn" @click.stop.prevent="setPrice">Save</button>
+          <button class="clear-btn" @click.stop.prevent="clearPrice">
+            Clear
+          </button>
+        </div>
       </div>
-      <div class="action-buttons">
-        <button class="save-btn" @click.stop.prevent="setRoom">Save</button>
-        <button class="clear-btn" @click.stop.prevent="clearRoomType">
-          Clear
-        </button>
+      <div v-if="isTypeActive" class="type-room-modal">
+        <div class="room-options">
+          <label
+            ><input
+              type="checkbox"
+              value="entire home"
+              v-model="exploreBtnsFilter.roomType"
+            />
+            Entire Home</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              value="private room"
+              v-model="exploreBtnsFilter.roomType"
+            />
+            Private Room</label
+          >
+        </div>
+        <div class="action-buttons">
+          <button class="save-btn" @click.stop.prevent="setRoom">Save</button>
+          <button class="clear-btn" @click.stop.prevent="clearRoomType">
+            Clear
+          </button>
+        </div>
       </div>
-    </div>
-  </section>
-  <ul class="stay-list">
-    <stay-preview v-for="stay in stays" :stay="stay" :key="stay._id" />
-  </ul>
+    </section>
+    <ul class="stay-list">
+      <stay-preview v-for="stay in stays" :stay="stay" :key="stay._id" />
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -282,3 +285,9 @@ export default {
   },
 };
 </script>
+<style scoped>
+.full-body {
+  height: 100%;
+  width: 100%;
+}
+</style>

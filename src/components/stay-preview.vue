@@ -1,8 +1,16 @@
 <template>
   <li class="stay-preview" @click="goToDetails">
     <div class="block">
-      <el-carousel :autoplay="false" :loop="false" :trigger="'click'" height="262.25px">
-        <el-carousel-item v-for="(imgUrl, index) in getImgUrl()" :key="`img-${index}`">
+      <el-carousel
+        :autoplay="false"
+        :loop="false"
+        :trigger="'click'"
+        height="262.25px"
+      >
+        <el-carousel-item
+          v-for="(imgUrl, index) in getImgUrl()"
+          :key="`img-${index}`"
+        >
           <img class="stay-preview-img" :src="imgUrl" alt="stay-preview-img" />
         </el-carousel-item>
         <div class="like-stay">
@@ -26,7 +34,9 @@
       </div>
       <div class="stay-preview-price">
         <p>
-          <span class="stay-preview-price-span">{{ $filters.currencyUSD(stay.price) }}</span>
+          <span class="stay-preview-price-span">{{
+            $filters.currencyUSD(stay.price)
+          }}</span>
           / night
         </p>
       </div>
@@ -54,7 +64,9 @@ export default {
     //   return imgUrl;
     // },
     getImgUrl() {
-      const imgs = this.stay.imgUrls.map((img) => `../assets/gallery/${img}`);
+      // const imgs = this.stay.imgUrls.map((img) => `../assets/gallery/${img}`);
+      const imgs = this.stay.imgUrls.map(img => `src/assets/gallery/${img}`);
+
       return imgs;
     },
   },
