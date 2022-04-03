@@ -4,10 +4,21 @@
       <div class="location-input-div">
         <label for="locations" class="location-input-label"
           >Location
-          <input class="location-input" list="addresses" name="addresses" type="text" placeholder="Where are you going?" v-model="filterBy.address" />
+          <input
+            class="location-input"
+            list="addresses"
+            name="addresses"
+            type="text"
+            placeholder="Where are you going?"
+            v-model="filterBy.address"
+          />
         </label>
         <datalist id="addresses">
-          <option v-for="(addres, idx) in getAddresses" :key="idx" :value="addres" />
+          <option
+            v-for="(addres, idx) in getAddresses"
+            :key="idx"
+            :value="addres"
+          />
         </datalist>
       </div>
     </div>
@@ -15,13 +26,17 @@
     <div class="trip-dates-container" @click="openModal('calendar')">
       <div class="check-in-input-container">
         <div class="check-in-input-div">
-          <label class="date-input-label">Check-in <input type="text" placeholder="Add dates" disabled /></label>
+          <label class="date-input-label"
+            >Check-in <input type="text" placeholder="Add dates" disabled
+          /></label>
         </div>
       </div>
       <div class="stay-filter-border"></div>
       <div class="check-out-input-container">
         <div class="check-out-input-div">
-          <label class="date-input-label">Check-out <input type="text" placeholder="Add dates" disabled /></label>
+          <label class="date-input-label"
+            >Check-out <input type="text" placeholder="Add dates" disabled
+          /></label>
         </div>
       </div>
     </div>
@@ -40,7 +55,6 @@
       </div>
     </div>
     <section class="guests-modal" v-if="isGuestModalOpen">
-      <div class="close-modal-btn" title="Close the modal" @click="isGuestModalOpen = false">X</div>
       <div class="adults guest-flex">
         <div class="modal-txt">
           Adults:
@@ -48,9 +62,9 @@
           <!-- <span class="span-input"> </span> -->
         </div>
         <div class="modal-btn">
-          <button class="btn" @click="addGuest('adult')">+</button>
-          <span>{{ filterBy.guests.adults }}</span>
           <button class="btn" @click="removeGuest('adult')">-</button>
+          <span>{{ filterBy.guests.adults }}</span>
+          <button class="btn" @click="addGuest('adult')">+</button>
         </div>
       </div>
 
@@ -61,16 +75,44 @@
           <!-- <span class="span-input">Ages 2-12</span> -->
         </div>
         <div class="modal-btn">
-          <button class="btn" @click="addGuest('child')">+</button>
-          <span>{{ filterBy.guests.children }}</span>
           <button class="btn" @click="removeGuest('child')">-</button>
+          <span>{{ filterBy.guests.children }}</span>
+          <button class="btn" @click="addGuest('child')">+</button>
         </div>
+      </div>
+      <div class="close-modal-btn-container">
+        <button
+          class="close-modal-btn"
+          title="Close the modal"
+          @click="isGuestModalOpen = false"
+        >
+          Close
+        </button>
       </div>
     </section>
 
     <div class="modal-date-picker" v-if="isCalanderModalOpen">
-      <div class="close-modal-btn" title="Close the modal" @click="isCalanderModalOpen = false">X</div>
-      <v-date-picker v-model="filterBy.range" color="gray" is-range rows="1" columns="2" :mask="mask.data" :min-date="new Date()" />
+      <v-date-picker
+        v-model="filterBy.range"
+        color="gray"
+        is-range
+        rows="1"
+        columns="2"
+        :mask="mask.data"
+        :min-date="new Date()"
+      />
+      <div class="close-modal-btn-container">
+        <button class="date-clear-btn" @click="clearDateModal">
+          Clear dates
+        </button>
+        <button
+          class="date-close-btn"
+          title="Close the modal"
+          @click="isCalanderModalOpen = false"
+        >
+          Close
+        </button>
+      </div>
     </div>
 
     <!-- <div class="search-btn-container input-container"> -->
@@ -153,7 +195,8 @@ export default {
     },
     getFilters() {
       const filterFromStore = this.$store.getters.getFilter;
-      if (!filterFromStore) this.filterBy = JSON.parse(JSON.stringify(filterFromStore));
+      if (!filterFromStore)
+        this.filterBy = JSON.parse(JSON.stringify(filterFromStore));
     },
     openModal(modalType) {
       if (modalType === 'calendar') {
@@ -168,12 +211,17 @@ export default {
       this.isGuestModalOpen = false;
       this.isCalanderModalOpen = false;
     },
+    clearDateModal() {
+      this.range.start = new Date();
+      this.range.end = new Date();
+    },
   },
   computed: {
     getAddresses() {
       const addresses = [];
-      this.$store.getters.getStaysAll.map((stay) => {
-        if (!addresses.includes(stay.address.city)) addresses.push(stay.address.city);
+      this.$store.getters.getStaysAll.map(stay => {
+        if (!addresses.includes(stay.address.city))
+          addresses.push(stay.address.city);
       });
       return addresses;
     },
