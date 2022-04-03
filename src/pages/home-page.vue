@@ -80,6 +80,7 @@ export default {
 
   created() {
     this.$store.commit({ type: 'setCurrPage', page: 'homePage' });
+    this.$store.commit({ type: 'setWantToSearch', isWantToSearch: false });
   },
   components: {
     stayFilter,
