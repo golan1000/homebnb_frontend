@@ -105,7 +105,7 @@ export default {
       // console.log('example from store1 ', exploreFilter);
       // console.log('example from store2', state.exploreFilter);
     },
-    updateFilteredStaysLocal(state) {
+    updateExploreFilter(state) {
       let foundStays = state.stays;
       if (
         state.exploreFilter.priceRange.min &&
@@ -165,7 +165,7 @@ export default {
         await dispatch({ type: 'loadStaysForBackOffice', user });
         // commit({ type: 'updateFilteredStays' })
         console.log('stays from loadstays=', stays);
-        commit({ type: 'updateFilteredStaysLocal' });
+        commit({ type: 'updateExploreFilter' });
 
         return state.filteredStays;
       } catch (err) {
@@ -201,7 +201,7 @@ export default {
     filter({ commit, dispatch }, { filterBy }) {
       commit({ type: 'setFilter', filterBy }); //check
       dispatch({ type: 'loadStays' });
-      commit({ type: 'updateFilteredStaysLocal' });
+      commit({ type: 'updateExploreFilter' });
       // commit({ type: 'updateFilteredStays' })
     },
     async loadStaysForBackOffice({ commit, state }, { user }) {
@@ -214,9 +214,8 @@ export default {
       }
     },
     setExploreFilter(context, { exploreFilter }) {
-      console.log('setExploreFilter actionnnn');
       context.commit({ type: 'setExploreFilter', exploreFilter });
-      context.commit({ type: 'updateFilteredStaysLocal' });
+      context.commit({ type: 'updateExploreFilter' });
     },
   },
 };

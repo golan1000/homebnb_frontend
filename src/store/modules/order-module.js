@@ -9,8 +9,17 @@ export default {
   getters: {
     //Barak
     getOrders(state) {
-      console.log(state.orders);
-      return JSON.parse(JSON.stringify(state.orders));
+      let sortedOrders = JSON.parse(JSON.stringify(state.orders));
+      sortedOrders.map(order => console.log('order=', order));
+
+      sortedOrders.sort((a, b) => {
+        let date1 = Date.parse(new Date(a.createdAt));
+        let date2 = Date.parse(new Date(b.createdAt));
+        if (date1 > date2) return -1;
+        if (date1 < date2) return 1;
+      });
+
+      return sortedOrders;
     },
     getModalState(state) {
       if (state.isOrderModalShown) return state.isOrderModalShown;
@@ -21,8 +30,6 @@ export default {
   },
   mutations: {
     submitOrder(state, { order }) {
-      console.log('mutate ---- submitOrder=', order);
-
       state.orders.unshift(order);
     },
     //Barak
@@ -30,11 +37,8 @@ export default {
       console.log(user);
       console.log(orders);
       // Barak original
-      state.orders = orders.filter((order) => user._id === order.hostId);
+      state.orders = orders.filter(order => user._id === order.hostId);
       console.log(state.orders);
-      // Tal temporary fix
-      // state.orders = orders;
-      // console.log(state.orders);
     },
     setCurrOrder(state, { order }) {
       state.currOrder = order;
@@ -48,7 +52,7 @@ export default {
     updateOrder(state, { order }) {
       console.log(order);
       const idx = state.orders.findIndex(
-        (currOrder) => currOrder._id === order._id
+        currOrder => currOrder._id === order._id
       );
       state.orders.splice(idx, 1, order);
       console.log(state.orders[idx]);
@@ -70,9 +74,6 @@ export default {
       } catch (err) {
         console.log('error=', err);
         return null;
-        // context.showMsg(
-        //   'We had an error while submitting your order, try again later',
-        // )
       }
     },
     // Tal
@@ -97,7 +98,7 @@ export default {
       try {
         const orders = await orderService.query();
         console.log(orders);
-        await context.commit('setOrders', { orders, user });
+        context.commit('setOrders', { orders, user });
       } catch (err) {
         console.log('err in order-module in loadOrders:', err);
       }

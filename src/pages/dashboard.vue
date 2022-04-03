@@ -416,7 +416,7 @@ export default {
     },
     createAvatars() {
       this.ordersForDisplay.map((order) => {
-        let mainPicNum = this.getRandomIntInclusive(1, 30);
+        let mainPicNum = this.getRandomIntInclusive(1, 50);
         order.userImg = 'https://i.pravatar.cc/200?img=' + mainPicNum;
       });
     },
