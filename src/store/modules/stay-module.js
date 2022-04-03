@@ -12,7 +12,14 @@ export default {
         children: 0,
       },
     },
-    exploreFilter: {},
+    exploreFilter: {
+      amenities: [],
+      roomType: [],
+      priceRange: {
+        min: -Infinity,
+        max: Infinity,
+      },
+    },
     currPage: 'homePage',
     staysForBackOffice: [],
   },
@@ -21,7 +28,8 @@ export default {
       return state.stays;
     },
     getStays(state) {
-      return state.stays;
+      return state.filteredStays;
+      // return state.stays
     },
 
     //Tal
@@ -47,7 +55,7 @@ export default {
       let regTest = new RegExp(state.filterBy.address, 'i');
 
       console.log('trying to filterrrr');
-      let currFilteredStays = state.stays.filter((currStay) => {
+      let currFilteredStays = state.stays.filter(currStay => {
         if (currStay.address && currStay.address.city) {
           if (regTest.test(currStay.address.city) === true)
             console.log('found city=', currStay.address);
@@ -59,15 +67,15 @@ export default {
         }
       });
     },
-
     setStays(state, { stays }) {
       state.stays = stays;
+      state.filteredStays = stays;
     },
     //golan
     update(state, { stayToUpdate }) {
       console.log('mutate --- stay to update=', stayToUpdate);
       var foundIdx = state.stays.findIndex(
-        (stay) => stay._id === stayToUpdate._id
+        stay => stay._id === stayToUpdate._id
       );
       console.log('foundIdx=', foundIdx);
       state.stays.splice(foundIdx, 1, stayToUpdate);
@@ -84,7 +92,7 @@ export default {
       console.log(user);
       // Barak original
       state.staysForBackOffice = state.stays.filter(
-        (stay) => user._id === stay.host._id
+        stay => user._id === stay.host._id
       );
 
       // Tal fixed temp
@@ -97,18 +105,69 @@ export default {
       // console.log('example from store1 ', exploreFilter);
       // console.log('example from store2', state.exploreFilter);
     },
+    updateFilteredStaysLocal(state) {
+      let foundStays = state.stays;
+      if (
+        state.exploreFilter.priceRange.min &&
+        state.exploreFilter.priceRange.max
+      ) {
+        let priceMin = state.exploreFilter.priceRange.min;
+        let priceMax = state.exploreFilter.priceRange.max;
+
+        foundStays = foundStays.filter(stay => {
+          if (stay.price >= priceMin && stay.price <= priceMax) {
+            return true;
+          }
+        });
+      }
+
+      if (state.exploreFilter.roomType.length > 0) {
+        console.log('filter by room type!!!!');
+        let roomTypes = state.exploreFilter.roomType;
+
+        console.log('roomTypes before=', roomTypes);
+        roomTypes = roomTypes.map(type => type.toLowerCase());
+        console.log('roomTypes after=', roomTypes);
+        foundStays = foundStays.filter(stay => {
+          // console.log('curr room type of stay = ', stay.roomType.toLowerCase())
+          return roomTypes.includes(stay.roomType.toLowerCase());
+        });
+      }
+
+      let filterAmenities = state.exploreFilter.amenities;
+      if (filterAmenities.length > 0) {
+        foundStays = foundStays.filter(currStay => {
+          let foundTotalItems = currStay.amenities.filter(currAmenity => {
+            return filterAmenities.includes(currAmenity);
+          });
+
+          return foundTotalItems.length === filterAmenities.length;
+        });
+      }
+
+      // console.log('found total=', found)
+      console.log('foundStays=', foundStays);
+      state.filteredStays = foundStays;
+      // ExploreBtnsFilter: {
+      //   amenities: [],
+      //   roomType: [],
+      // priceRange
+      // },
+    },
   },
   actions: {
     async loadStays({ commit, dispatch, state }, { user }) {
       console.log(user);
       try {
-        // commit({ type: 'setStays', stays: [] });
+        commit({ type: 'setStays', stays: [] });
         const stays = await stayService.query(state.filterBy);
-        await commit({ type: 'setStays', stays });
+        commit({ type: 'setStays', stays });
         await dispatch({ type: 'loadStaysForBackOffice', user });
         // commit({ type: 'updateFilteredStays' })
         console.log('stays from loadstays=', stays);
-        return stays;
+        commit({ type: 'updateFilteredStaysLocal' });
+
+        return state.filteredStays;
       } catch (err) {
         console.log('err in stay-module in loadToys:', err);
       }
@@ -142,6 +201,7 @@ export default {
     filter({ commit, dispatch }, { filterBy }) {
       commit({ type: 'setFilter', filterBy }); //check
       dispatch({ type: 'loadStays' });
+      commit({ type: 'updateFilteredStaysLocal' });
       // commit({ type: 'updateFilteredStays' })
     },
     async loadStaysForBackOffice({ commit, state }, { user }) {
@@ -152,6 +212,11 @@ export default {
       } catch (err) {
         console.log('err in stay-module loadStaysForBackOffice:', err);
       }
+    },
+    setExploreFilter(context, { exploreFilter }) {
+      console.log('setExploreFilter actionnnn');
+      context.commit({ type: 'setExploreFilter', exploreFilter });
+      context.commit({ type: 'updateFilteredStaysLocal' });
     },
   },
 };

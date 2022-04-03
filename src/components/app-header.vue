@@ -6,7 +6,7 @@
         <div class="logo-txt">Flat-Inn</div>
       </router-link>
       <div v-if="!isStayDetails">
-        <div v-if="!isFilterUp">
+        <div v-if="getShowSmallButton">
           <div class="small-filter-div">
             <button class="small-filter-button" @click="openFilter">
               <div class="small-filter-button-txt-div">
@@ -22,8 +22,8 @@
             </button>
           </div>
         </div>
-        <div v-show="isFilterUp">
-          <stay-filter :class="{ hideFilter: hideFilter }"></stay-filter>
+        <div v-show="getShowFilter">
+          <stay-filter></stay-filter>
         </div>
       </div>
       <div class="main-nav">
@@ -31,10 +31,7 @@
           <router-link class="menu-link" to="/stay" @click="close">
             Explore</router-link
           >
-          <router-link
-            class="menu-link main-nav-host"
-            to="/dashboard"
-            @click="close"
+          <router-link class="menu-link main-nav-host" to="/" @click="close"
             >Become a host</router-link
           >
         </div>
@@ -63,13 +60,14 @@
               @click="toggleModal"
               class="menu-modal-link"
               to="/signup"
-              >Log in</router-link
+              >{{ getLoggedInUser ? 'Log out' : 'Log in' }}</router-link
             >
             <router-link
+              v-if="getLoggedInUser.isHost"
               @click="toggleModal"
               class="menu-modal-link"
               to="/dashboard"
-              >Host your home</router-link
+              >Backoffice</router-link
             >
             <router-link
               @click="toggleModal"
@@ -112,12 +110,12 @@ export default {
       this.isOpen = !this.isOpen;
     },
     openFilter() {
+      console.log('blaaaaaaa');
       this.$store.commit({ type: 'setFilterUp', isFilterUp: true });
+      this.$store.commit({ type: 'setWantToSearch', isWantToSearch: true });
     },
     checkScroll() {
       let scrolled = window.pageYOffset;
-      // console.log('testttt');
-      // console.log('window size=', scrolled);
       if (scrolled > 10) {
         this.$store.commit({ type: 'setFilterUp', isFilterUp: false });
       }
@@ -156,7 +154,34 @@ export default {
     isStayDetails() {
       let loc = window.location.href;
       let strToSearch = '/stay/';
-      console.log('str=', strToSearch.split('/'));
+    },
+    getShowSmallButton() {
+      console.log('show small button');
+
+      console.log('this.isFilterUp ===', this.isFilterUp);
+
+      if (this.$store.getters.getWantToSearch === true) {
+        console.log('is search on ================!!!!');
+        return false;
+      }
+      if (this.currPage === 'stayDetails') {
+        return true;
+      }
+      if (!this.isFilterUp) return true;
+      return false;
+    },
+    getShowFilter() {
+      if (this.$store.getters.getWantToSearch) return true;
+      console.log('show filter');
+      console.log('this.isFilterUp ===', this.isFilterUp);
+      if (this.currPage === 'stayDetails') {
+        return false;
+      }
+      if (!this.isFilterUp) return false;
+      return true;
+    },
+    getLoggedInUser() {
+      return this.$store.getters.getLoggedUser;
     },
   },
   watch: {

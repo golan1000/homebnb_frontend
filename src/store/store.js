@@ -14,6 +14,7 @@ export const store = createStore({
     //golan
     isTransparentMenu: false,
     isFilterUp: true,
+    isWantToSearch: false,
   },
   actions: {},
   mutations: {
@@ -27,6 +28,10 @@ export const store = createStore({
       state.isFilterUp = isFilterUp
       // console.log('changed isFilterShown to ', isFilterUp)
     },
+    setWantToSearch(state, { isWantToSearch }) {
+      state.isWantToSearch = isWantToSearch
+      // console.log('changed isFilterShown to ', isFilterUp)
+    },
   },
   getters: {
     //golan
@@ -36,6 +41,9 @@ export const store = createStore({
     //golan
     isFilterUp(state) {
       return state.isFilterUp
+    },
+    getWantToSearch(state) {
+      return state.isWantToSearch
     },
   },
   modules: {

@@ -98,6 +98,7 @@
 <script>
 export default {
   created() {
+    this.$store.commit({ type: 'setWantToSearch', isWantToSearch: false });
     this.$store.commit({ type: 'setCurrPage', page: 'loginSignup' });
   },
   data() {
@@ -157,6 +158,7 @@ export default {
     async onLogout() {
       try {
         const result = await this.$store.dispatch({ type: 'logout' });
+        this.$router.push('/');
       } catch (err) {
         console.log('error in logout=', err);
       }

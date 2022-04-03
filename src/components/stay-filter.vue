@@ -55,13 +55,6 @@
       </div>
     </div>
     <section class="guests-modal" v-if="isGuestModalOpen">
-      <div
-        class="close-modal-btn"
-        title="Close the modal"
-        @click="isGuestModalOpen = false"
-      >
-        X
-      </div>
       <div class="adults guest-flex">
         <div class="modal-txt">
           Adults:
@@ -69,9 +62,9 @@
           <!-- <span class="span-input"> </span> -->
         </div>
         <div class="modal-btn">
-          <button class="btn" @click="addGuest('adult')">+</button>
-          <span>{{ filterBy.guests.adults }}</span>
           <button class="btn" @click="removeGuest('adult')">-</button>
+          <span>{{ filterBy.guests.adults }}</span>
+          <button class="btn" @click="addGuest('adult')">+</button>
         </div>
       </div>
 
@@ -82,21 +75,23 @@
           <!-- <span class="span-input">Ages 2-12</span> -->
         </div>
         <div class="modal-btn">
-          <button class="btn" @click="addGuest('child')">+</button>
-          <span>{{ filterBy.guests.children }}</span>
           <button class="btn" @click="removeGuest('child')">-</button>
+          <span>{{ filterBy.guests.children }}</span>
+          <button class="btn" @click="addGuest('child')">+</button>
         </div>
+      </div>
+      <div class="close-modal-btn-container">
+        <button
+          class="close-modal-btn"
+          title="Close the modal"
+          @click="isGuestModalOpen = false"
+        >
+          Close
+        </button>
       </div>
     </section>
 
     <div class="modal-date-picker" v-if="isCalanderModalOpen">
-      <div
-        class="close-modal-btn"
-        title="Close the modal"
-        @click="isCalanderModalOpen = false"
-      >
-        X
-      </div>
       <v-date-picker
         v-model="filterBy.range"
         color="gray"
@@ -106,6 +101,18 @@
         :mask="mask.data"
         :min-date="new Date()"
       />
+      <div class="close-modal-btn-container">
+        <button class="date-clear-btn" @click="clearDateModal">
+          Clear dates
+        </button>
+        <button
+          class="date-close-btn"
+          title="Close the modal"
+          @click="isCalanderModalOpen = false"
+        >
+          Close
+        </button>
+      </div>
     </div>
 
     <!-- <div class="search-btn-container input-container"> -->
@@ -121,7 +128,7 @@ import { shallowRef } from 'vue';
 export default {
   props: [],
   created() {
-    console.log('created filter');
+    console.log('FILTER  CREATED!!!===================================');
     const { address } = this.$route.query;
     if (address) {
       this.filterBy.address = address;
@@ -183,6 +190,7 @@ export default {
       });
     },
     setfilterParams() {
+      this.filterBy.address = this.firstCapitalLetter(this.filterBy.address);
       this.setfilter();
       this.$router.push(`/stay?address=${this.filterBy.address}`);
     },
@@ -203,6 +211,15 @@ export default {
     closeAllModals() {
       this.isGuestModalOpen = false;
       this.isCalanderModalOpen = false;
+    },
+    clearDateModal() {
+      this.range.start = new Date();
+      this.range.end = new Date();
+    },
+    firstCapitalLetter(str) {
+      var firstLetter = str.slice(0, 1).toUpperCase();
+      var newStr = firstLetter + str.substring(1);
+      return newStr;
     },
   },
   computed: {
