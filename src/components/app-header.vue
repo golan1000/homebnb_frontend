@@ -186,6 +186,7 @@ export default {
     '$store.getters.getCurrPage': {
       handler() {
         this.currPage = this.$store.getters.getCurrPage;
+        //bla
         this.updateFiltersStatus();
       },
     },
