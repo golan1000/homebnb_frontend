@@ -19,7 +19,6 @@ export default {
   async created() {
     // this.$store.dispatch({ type: 'loadStays' });
     const loadedStays = await this.$store.dispatch({ type: 'loadStays' });
-    // this.$store.commit('loadLoggedInUser');
     console.log('loaded stays=', loadedStays);
   },
   computed: {},

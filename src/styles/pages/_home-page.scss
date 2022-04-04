@@ -344,6 +344,7 @@
   align-items: center;
   // background-color: blue;
   margin-top: -18px;
+  margin-right: 12px;
   .el-avatar {
     margin: 0px;
   }
@@ -647,7 +648,7 @@
   flex-direction: column;
   padding: 15px;
   width: 400px;
-  height: 100px;
+  height: 130px;
   bottom: 0px;
   right: 0px;
   position: fixed;
@@ -672,6 +673,7 @@
 .order-modal-btn-flex {
   display: flex;
   // background-color: green;
+  font-family: airbnb-regular;
   width: 100%;
   flex-direction: row-reverse;
 }
