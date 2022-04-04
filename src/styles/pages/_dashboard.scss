@@ -348,11 +348,19 @@
           color: #1ab11a;
           text-decoration: underline;
           cursor: pointer;
+          height: 60px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
         .orders-table-content-actions-decline {
           color: #df1616;
           text-decoration: underline;
           cursor: pointer;
+          height: 60px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
       }
 

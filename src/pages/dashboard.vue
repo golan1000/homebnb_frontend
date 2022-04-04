@@ -335,7 +335,6 @@ export default {
           order,
           user: this.loggedInUser,
         });
-        this.ordersForDisplay = this.$store.getters.getOrders;
         console.log(this.ordersForDisplay);
         console.log('order updated', updatedOrder);
       } catch (err) {
@@ -360,8 +359,8 @@ export default {
         user: this.loggedInUser,
       });
       this.ordersForDisplay = await this.$store.getters.getOrders;
+      console.log(this.ordersForDisplay);
       // this.ordersForDisplay = this.ordersForDisplay.slice(0, 5);
-      this.sortOrders;
       this.createAvatars;
       this.modifyNames;
       this.modifyDates;
@@ -406,14 +405,6 @@ export default {
     //     return a.createdAt - b.createdAt;
     //   });
     // },
-    sortOrders() {
-      this.ordersForDisplay.sort(function (a, b) {
-        a = a.split('/').reverse().join('');
-        b = b.split('/').reverse().join('');
-        return a > b ? 1 : a < b ? -1 : 0;
-        // return a.localeCompare(b);
-      });
-    },
     createAvatars() {
       this.ordersForDisplay.map((order) => {
         let mainPicNum = this.getRandomIntInclusive(1, 50);
@@ -555,7 +546,7 @@ export default {
         // console.log(date);
         const startMonth = startDate.getMonth() + 1;
         const startYear = startDate.getFullYear();
-        if (startYear === this.currYear) {
+        if (startYear === this.currYear && this.ordersForDisplay[i].status === 'Approved') {
           console.log(this.revenueYear);
           console.log(this.ordersForDisplay[i].totalPrice);
           if (this.ordersForDisplay[i].totalPrice.length > 3)
@@ -564,7 +555,7 @@ export default {
               ''
             );
           else this.revenueYear += +this.ordersForDisplay[i].totalPrice;
-          if (startMonth === this.currMonth) {
+          if (startMonth === this.currMonth && this.ordersForDisplay[i].status === 'Approved') {
             console.log(this.revenueMonth);
             console.log(this.ordersForDisplay[i].totalPrice);
             if (this.ordersForDisplay[i].totalPrice.length > 3)
@@ -597,8 +588,8 @@ export default {
           (this.revenueMonth = 0),
           (this.revenueYear = 0),
           // this.createAvatars;
-          this.modifyDates;
-        this.setCurrDates;
+          // this.modifyNames;
+          this.setCurrDates;
         this.setCurrGuests;
         this.setCurrOrdersData;
         this.setCurrRevenues;
