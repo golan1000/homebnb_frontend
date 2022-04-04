@@ -522,7 +522,7 @@ export default {
       console.log('loggedInUser=', loggedInUser);
       let buyerDetails = {
         _id: loggedInUser._id,
-        fullname: loggedInUser.fullname,
+        // fullname: loggedInUser.fullname,
       };
 
       let stayDetails = {
@@ -853,7 +853,7 @@ export default {
       if (this.$store.getters.getCurrOrder) return this.$store.getters.getCurrOrder;
     },
     getModalState() {
-      // console.log('this.$store.getters.getModalState', this.$store.getters.getModalState);
+      console.log('this.$store.getters.getModalState', this.$store.getters.getModalState);
       if (this.$store.getters.getModalState) return this.$store.getters.getModalState;
     },
   },

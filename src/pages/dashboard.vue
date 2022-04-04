@@ -360,7 +360,8 @@ export default {
         user: this.loggedInUser,
       });
       this.ordersForDisplay = await this.$store.getters.getOrders;
-      // this.sortOrders;
+      // this.ordersForDisplay = this.ordersForDisplay.slice(0, 5);
+      this.sortOrders;
       this.createAvatars;
       this.modifyNames;
       this.modifyDates;
@@ -400,6 +401,19 @@ export default {
     //   //   a.createdAt > b.createdAt ? 1 : -1
     //   // );
     // },
+    // sortOrders() {
+    //   this.orders.sort((a, b) => {
+    //     return a.createdAt - b.createdAt;
+    //   });
+    // },
+    sortOrders() {
+      this.ordersForDisplay.sort(function (a, b) {
+        a = a.split('/').reverse().join('');
+        b = b.split('/').reverse().join('');
+        return a > b ? 1 : a < b ? -1 : 0;
+        // return a.localeCompare(b);
+      });
+    },
     createAvatars() {
       this.ordersForDisplay.map((order) => {
         let mainPicNum = this.getRandomIntInclusive(1, 50);
@@ -422,7 +436,7 @@ export default {
       this.ordersForDisplay.forEach((order) => {
         order.startDate = new Date(order.startDate).toLocaleDateString();
         order.endDate = new Date(order.endDate).toLocaleDateString();
-        order.createdAt = new Date(order.endDate).toLocaleDateString();
+        order.createdAt = new Date(order.createdAt).toLocaleDateString();
         order.createdAt = order.createdAt.substring(0);
       });
       console.log(this.ordersForDisplay);
@@ -573,6 +587,7 @@ export default {
   watch: {
     ordersForDisplay: {
       async handler() {
+        // this.ordersForDisplay = this.ordersForDisplay.slice(0, 5);
         (this.guestsPast = 0),
           (this.guestsPresent = 0),
           (this.guestsFuture = 0),

@@ -15,8 +15,8 @@ export default {
       sortedOrders.sort((a, b) => {
         let date1 = Date.parse(new Date(a.createdAt));
         let date2 = Date.parse(new Date(b.createdAt));
-        if (date1 > date2) return 1;
-        if (date1 < date2) return -1;
+        if (date1 > date2) return -1;
+        if (date1 < date2) return 1;
       });
 
       return sortedOrders;
@@ -98,7 +98,7 @@ export default {
       try {
         const orders = await orderService.query();
         console.log(orders);
-        await context.commit('setOrders', { orders, user });
+        context.commit('setOrders', { orders, user });
       } catch (err) {
         console.log('err in order-module in loadOrders:', err);
       }
