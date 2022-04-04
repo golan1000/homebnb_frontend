@@ -61,6 +61,7 @@ export default {
   },
   created() {
     window.addEventListener('scroll', this.checkScroll);
+    this.updateFiltersStatus();
   },
   components: {
     stayFilter,
@@ -185,6 +186,7 @@ export default {
     '$store.getters.getCurrPage': {
       handler() {
         this.currPage = this.$store.getters.getCurrPage;
+        //bla
         this.updateFiltersStatus();
       },
     },
