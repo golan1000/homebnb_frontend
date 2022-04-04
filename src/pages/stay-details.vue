@@ -356,14 +356,15 @@
   </div>
   <Transition name="slide-fade">
     <div v-if="getModalState" class="order-modal" ref="orderModal">
-      <div>
-        <div class="order-modal-btn-flex">
-          <button class="order-close-btn" @click="closeOrderModal">Close</button>
-          <!-- <button @click="closeOrderModal" class="order-modal-btn">X</button> -->
-        </div>
+      <!-- <button @click="closeOrderModal" class="order-modal-btn">X</button> -->
 
-        <div>Thank you for your order, We will let you know when the host owner will process it.</div>
-      </div>
+      <div>Thank you for your order.</div>
+      <!-- <div class="order-modal-btn-flex"> -->
+      <!-- <button class="order-close-btn" @click="closeOrderModal">X</button> -->
+      <button class="close-modal-fa-sign" @click="closeOrderModal"><i class="fa-solid fa-xmark"></i></button>
+
+      <!-- <div><img class="order-close-btn-img" src="../assets/svg-x.svg" /></div> -->
+      <!-- </div> -->
     </div>
   </Transition>
 </template>
@@ -570,6 +571,8 @@ export default {
       this.$store.commit({
         type: 'orderModalClose',
       });
+      this.isModalEvtSet = false;
+      window.removeEventListener('click', this.handleClkOutside);
     },
     handleClkOutside(ev) {
       // this.$store.commit({
@@ -853,6 +856,7 @@ export default {
       if (this.$store.getters.getCurrOrder) return this.$store.getters.getCurrOrder;
     },
     getModalState() {
+      // return true;
       console.log('this.$store.getters.getModalState', this.$store.getters.getModalState);
       if (this.$store.getters.getModalState) return this.$store.getters.getModalState;
     },
@@ -871,6 +875,7 @@ export default {
       console.log('this.$store.getters.getModalState changed!!!==========', newVer);
       if (this.isModalEvtSet === false) {
         window.addEventListener('click', this.handleClkOutside);
+        setTimeout(this.closeOrderModal, 2500);
         this.isModalEvtSet = true;
       }
     },
@@ -1362,6 +1367,7 @@ hr {
 .guest-modal-btn-layout {
   width: 100%;
   text-align: right;
+  margin-top: -6px;
 }
 
 /* <div v-if="isReadyToSubmit" class="pre-charge-msg">You won't be charged yet</div>

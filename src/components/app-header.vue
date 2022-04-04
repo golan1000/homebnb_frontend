@@ -61,6 +61,7 @@ export default {
   },
   created() {
     window.addEventListener('scroll', this.checkScroll);
+    this.updateFiltersStatus();
   },
   components: {
     stayFilter,
