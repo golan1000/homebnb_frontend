@@ -355,10 +355,11 @@
     </div>
   </div>
   <Transition name="slide-fade">
-    <div v-if="getModalState" class="order-modal">
+    <div v-if="getModalState" class="order-modal" ref="orderModal">
       <div>
         <div class="order-modal-btn-flex">
-          <button @click="closeOrderModal" class="order-modal-btn">X</button>
+          <button class="order-close-btn" @click="closeOrderModal">Close</button>
+          <!-- <button @click="closeOrderModal" class="order-modal-btn">X</button> -->
         </div>
 
         <div>Thank you for your order, We will let you know when the host owner will process it.</div>
@@ -398,6 +399,7 @@ export default {
       isGuestModalOpen: false,
       isCalanderModalOpen: false,
       isDateModalOpen: false,
+      isModalEvtSet: false,
       stays: null,
       stayToEdit: null,
       displayMsg: 'Loading...',
@@ -569,6 +571,27 @@ export default {
         type: 'orderModalClose',
       });
     },
+    handleClkOutside(ev) {
+      // this.$store.commit({
+      //   type: 'orderModalClose',
+      // });
+      console.log('clicked handleClkOutside');
+      console.log('ev=', ev);
+      if (this.isModalEvtSet === false) return;
+      if (ev.target) {
+        let targetClass = ev.target.className;
+        // if (targetClass.indexOf('order-modal') === -1) {
+        if (this.$refs.orderModal.contains(ev.srcElement) === true) {
+        }
+        if (this.$refs.orderModal.contains(ev.srcElement) !== true) {
+          window.removeEventListener('click', this.handleClkOutside);
+          this.$store.commit({
+            type: 'orderModalClose',
+          });
+          this.isModalEvtSet = false;
+        }
+      }
+    },
   },
   computed: {
     galleryImg1() {
@@ -590,7 +613,7 @@ export default {
       return '$' + this.stayToEdit.price;
     },
     getStaySummary() {
-      return this.stayToEdit.summary;
+      return this.stayToEdit.summary.toLowerCase();
     },
     getStayType() {
       if (this.stayToEdit.propertyType) {
@@ -830,7 +853,7 @@ export default {
       if (this.$store.getters.getCurrOrder) return this.$store.getters.getCurrOrder;
     },
     getModalState() {
-      console.log('this.$store.getters.getModalState', this.$store.getters.getModalState);
+      // console.log('this.$store.getters.getModalState', this.$store.getters.getModalState);
       if (this.$store.getters.getModalState) return this.$store.getters.getModalState;
     },
   },
@@ -844,6 +867,14 @@ export default {
       },
       deep: true,
     },
+    '$store.getters.getModalState': function (oldVer, newVer) {
+      console.log('this.$store.getters.getModalState changed!!!==========', newVer);
+      if (this.isModalEvtSet === false) {
+        window.addEventListener('click', this.handleClkOutside);
+        this.isModalEvtSet = true;
+      }
+    },
+    deep: true,
   },
   async created() {
     this.$store.commit({ type: 'setWantToSearch', isWantToSearch: false });

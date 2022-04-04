@@ -3,6 +3,12 @@
     <!-- <div class="filter-cont">
       <stay-filter v-if="getFilterShown"></stay-filter>
     </div> -->
+    <div v-show="isFilterUp">
+      <br />
+      <br />
+      <!-- <button @click="test1000">Test1</button> -->
+      <stay-filter></stay-filter>
+    </div>
     <div class="con-sentence">
       <div class="sentence">
         <span>Let your curiosity do the booking</span>
@@ -82,6 +88,7 @@ export default {
   emits: [],
 
   created() {
+    console.log('set page to homepage!!!!!');
     this.$store.commit({ type: 'setCurrPage', page: 'homePage' });
     this.$store.commit({ type: 'setWantToSearch', isWantToSearch: false });
   },
@@ -123,8 +130,15 @@ export default {
     checkUser() {
       console.log('check user =====', this.$store.getters.getLoggedUser);
     },
+    test1000() {
+      console.log('current page======', this.$store.getters.getCurrPage);
+    },
   },
   computed: {
+    isFilterUp() {
+      console.log('homepage this.$store.getters.isFilterUp =', this.$store.getters.isFilterUp);
+      return this.$store.getters.isFilterUp;
+    },
     getCom() {
       return 'blabla';
     },
