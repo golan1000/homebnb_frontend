@@ -5,8 +5,10 @@
 
   .dashboard {
     min-height: 81vh;
-    padding-left: 80px;
-    padding-right: 80px;
+    // padding-left: 80px;
+    // padding-right: 80px;
+    max-width: 1600px;
+    margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -40,6 +42,7 @@
 
         .data-title {
           margin-top: 14px;
+          font-size: 20px;
         }
       }
 
@@ -167,7 +170,7 @@
       margin: auto;
       align-items: center;
       margin-bottom: 23px;
-      margin-left: 66px;
+      // margin-left: 66px;
 
       .backoffice-img {
         width: 1rem;
@@ -176,42 +179,81 @@
       }
 
       .dashboard-summary-stays {
-        height: 50%;
         display: flex;
-        width: 75px;
-        height: 33px;
-        padding: 8px;
+        height: 38px;
         cursor: pointer;
-        border: 1px solid #dddddd;
-        border-radius: 22px;
-        padding-top: 6px;
-        margin-left: 9px;
+        border: 1px solid #ddd;
+        background-color: #fff;
+        outline: none;
+        margin: 0;
+        border-radius: 30px;
+        color: #222;
+        font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
+          Helvetica Neue, sans-serif;
+        padding: 10px 16px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 18px;
+        margin-right: 8px;
+        margin-top: 4px;
+        margin-bottom: 4px;
+        transition: border-color 0.15s;
 
         .dashboard-summary-stays-title {
-          padding-top: 2px;
         }
       }
       .dashboard-summary-orders {
-        height: 50%;
         display: flex;
-        width: 86px;
-        height: 33px;
-        padding: 8px;
+        height: 38px;
         cursor: pointer;
-        align-items: center;
-        border: 1px solid #dddddd;
-        border-radius: 22px;
-        padding-bottom: 7px;
-        padding-left: 10px;
+        border: 1px solid #ddd;
+        background-color: #fff;
+        outline: none;
+        margin: 0;
+        border-radius: 30px;
+        color: #222;
+        font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
+          Helvetica Neue, sans-serif;
+        padding: 10px 16px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 18px;
+        margin-right: 8px;
+        margin-top: 4px;
+        margin-bottom: 4px;
+        transition: border-color 0.15s;
       }
 
-      .focused {
-        background-color: #ff1d468c;
+      .dashboard-summary-orders:hover {
+        color: rgb(0, 0, 0) !important;
+        border-color: rgb(0, 0, 0) !important;
       }
-      .focused {
-        background-color: #ff1d468c;
+      .dashboard-summary-stays:hover {
+        color: rgb(0, 0, 0) !important;
+        border-color: rgb(0, 0, 0) !important;
+      }
+      .dashboard-summary-orders:focus {
+        background-color: rgb(247, 247, 247) !important;
+        border: 2px solid rgb(0, 0, 0) !important;
+      }
+      .dashboard-summary-stays:focus {
+        background-color: rgb(247, 247, 247) !important;
+        border: 2px solid rgb(0, 0, 0) !important;
       }
     }
+
+    // .explore-btn {
+    // }
+
+    // .explore-btn:hover {
+    //   color: rgb(0, 0, 0) !important;
+    //   border-color: rgb(0, 0, 0) !important;
+    // }
+
+    // .clicked {
+    //   background-color: rgb(247, 247, 247) !important;
+    //   border: 2px solid rgb(0, 0, 0) !important;
+    // }
 
     .dashboard-details {
       table {
@@ -293,6 +335,8 @@
       }
       .orders-table-actions {
         width: 10%;
+        text-align: right;
+        padding-right: 7px;
       }
 
       .orders-table-content-pic {
@@ -301,6 +345,7 @@
           border-radius: 50%;
           height: 40px;
           width: 40px;
+          margin-right: 37px;
         }
       }
       .orders-table-content-guest {
@@ -327,7 +372,7 @@
       .orders-table-content-actions {
         width: 10%;
         .orders-table-content-actions-inner {
-          width: 80px;
+          width: 156px;
           margin: 0 auto;
           cursor: pointer;
           height: 60px;
@@ -342,6 +387,7 @@
           .orders-table-content-actions-decline {
             color: #df1616;
             text-decoration: underline;
+            margin-right: 6px;
           }
         }
         .orders-table-content-actions-approve {
@@ -350,8 +396,9 @@
           cursor: pointer;
           height: 60px;
           display: flex;
-          justify-content: center;
+          justify-content: flex-end;
           align-items: center;
+          margin-right: 1px;
         }
         .orders-table-content-actions-decline {
           color: #df1616;
@@ -359,8 +406,9 @@
           cursor: pointer;
           height: 60px;
           display: flex;
-          justify-content: center;
+          justify-content: flex-end;
           align-items: center;
+          margin-right: 6px;
         }
       }
 

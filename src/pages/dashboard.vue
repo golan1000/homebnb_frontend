@@ -5,7 +5,7 @@
         <div class="dashboard-data-con">
           <div class="dashboard-data data-rate">
             <h4 class="dashboard-data-rate-title data-title">
-              Your stays rating
+              Your Stays Rating
             </h4>
             <div class="dashboard-data-rate-content">
               <div class="dashboard-data-rate-average">
@@ -96,7 +96,7 @@
             <div class="dashboard-data-revenues-period-con">
               <div class="dashboard-data-revenues-period period-month">
                 <span class="dashboard-data-revenues-period-month-title"
-                  ><span class="span-this">this</span>Month</span
+                  >Month</span
                 >
                 <span class="dashboard-data-revenues-period-month-num"
                   >${{ revenueMonth.toLocaleString() }}</span
@@ -104,7 +104,7 @@
               </div>
               <div class="dashboard-data-revenues-period period-year">
                 <span class="dashboard-data-revenues-period-year-title"
-                  ><span class="span-this">this</span>Year</span
+                  >Year</span
                 >
                 <span class="dashboard-data-revenues-period-year-num"
                   >${{ revenueYear.toLocaleString() }}</span
@@ -413,8 +413,8 @@ export default {
     },
     modifyNames() {
       this.ordersForDisplay.map((order) => {
-        var a = ['Johnny', 'Matt', 'Tom'];
-        var b = ['Levy', 'Malone', 'Stark'];
+        var a = ['Johnny', 'Matt', 'Tom', 'Barak', 'Tal', 'Golan', 'Yoni', 'Brian', 'Jeff'];
+        var b = ['Levy', 'Malone', 'Stark', 'James', 'Davies', 'Sherm', 'Glazer', 'Cohen'];
         var rA = Math.floor(Math.random() * a.length);
         var rB = Math.floor(Math.random() * b.length);
         var name = `${a[rA]} ${b[rB]}`;
@@ -546,7 +546,10 @@ export default {
         // console.log(date);
         const startMonth = startDate.getMonth() + 1;
         const startYear = startDate.getFullYear();
-        if (startYear === this.currYear && this.ordersForDisplay[i].status === 'Approved') {
+        if (
+          startYear === this.currYear &&
+          this.ordersForDisplay[i].status === 'Approved'
+        ) {
           console.log(this.revenueYear);
           console.log(this.ordersForDisplay[i].totalPrice);
           if (this.ordersForDisplay[i].totalPrice.length > 3)
@@ -555,7 +558,10 @@ export default {
               ''
             );
           else this.revenueYear += +this.ordersForDisplay[i].totalPrice;
-          if (startMonth === this.currMonth && this.ordersForDisplay[i].status === 'Approved') {
+          if (
+            startMonth === this.currMonth &&
+            this.ordersForDisplay[i].status === 'Approved'
+          ) {
             console.log(this.revenueMonth);
             console.log(this.ordersForDisplay[i].totalPrice);
             if (this.ordersForDisplay[i].totalPrice.length > 3)
