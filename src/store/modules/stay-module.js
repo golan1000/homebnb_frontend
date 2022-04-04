@@ -162,7 +162,8 @@ export default {
         commit({ type: 'setStays', stays: [] });
         const stays = await stayService.query(state.filterBy);
         commit({ type: 'setStays', stays });
-        await dispatch({ type: 'loadStaysForBackOffice', user });
+        // await dispatch({ type: 'loadStaysForBackOffice', user });
+        dispatch({ type: 'loadStaysForBackOffice', user });
         // commit({ type: 'updateFilteredStays' })
         console.log('stays from loadstays=', stays);
         commit({ type: 'updateExploreFilter' });
@@ -208,7 +209,8 @@ export default {
       console.log(state.stays);
       console.log(user);
       try {
-        await commit({ type: 'setStaysForBackOffice', user });
+        // await commit({ type: 'setStaysForBackOffice', user });
+        commit({ type: 'setStaysForBackOffice', user });
       } catch (err) {
         console.log('err in stay-module loadStaysForBackOffice:', err);
       }
