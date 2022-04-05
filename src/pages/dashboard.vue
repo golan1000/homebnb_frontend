@@ -314,7 +314,7 @@ export default {
       ordersDeclined: 0,
       ordersPending: 0,
       revenueMonth: 0,
-      revenueYear: 0,
+      revenueYear: 245,
     };
   },
   methods: {
@@ -413,8 +413,27 @@ export default {
     },
     modifyNames() {
       this.ordersForDisplay.map((order) => {
-        var a = ['Johnny', 'Matt', 'Tom', 'Barak', 'Tal', 'Golan', 'Yoni', 'Brian', 'Jeff'];
-        var b = ['Levy', 'Malone', 'Stark', 'James', 'Davies', 'Sherm', 'Glazer', 'Cohen'];
+        var a = [
+          'Johnny',
+          'Matt',
+          'Tom',
+          'Barak',
+          'Tal',
+          'Golan',
+          'Yoni',
+          'Brian',
+          'Jeff',
+        ];
+        var b = [
+          'Levy',
+          'Malone',
+          'Stark',
+          'James',
+          'Davies',
+          'Sherm',
+          'Glazer',
+          'Cohen',
+        ];
         var rA = Math.floor(Math.random() * a.length);
         var rB = Math.floor(Math.random() * b.length);
         var name = `${a[rA]} ${b[rB]}`;
@@ -592,7 +611,7 @@ export default {
           (this.ordersDeclined = 0),
           (this.ordersPending = 0),
           (this.revenueMonth = 0),
-          (this.revenueYear = 0),
+          (this.revenueYear = 245),
           // this.createAvatars;
           // this.modifyNames;
           this.setCurrDates;

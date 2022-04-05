@@ -1,5 +1,5 @@
 <template>
-  <section class="app-footer">
+  <section class="app-footer" :class="{ details: footerShort }">
     <div class="app-footer-left-div">
       <p class="app-footer-copyrights">©&nbsp;2022 Flat-Inn, Inc.</p>
       <div class="app-footer-links">
@@ -40,7 +40,24 @@
 
 <script>
 export default {
-  components: {},
-  methods: {},
+  data() {
+    return {
+      currPage: null,
+    };
+  },
+  computed: {
+    footerShort() {
+      if (this.currPage === 'stayDetails' || this.currPage === 'userDetails')
+        return true;
+      else return false;
+    },
+  },
+  watch: {
+    '$store.getters.getCurrPage': {
+      handler() {
+        this.currPage = this.$store.getters.getCurrPage;
+      },
+    },
+  },
 };
 </script>

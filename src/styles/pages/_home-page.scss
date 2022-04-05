@@ -85,7 +85,7 @@
   margin-top: 92px;
   display: grid;
   grid-template-rows: max-content max-content max-content max-content;
-  grid-template-columns: 80px 1fr 80px;
+  grid-template-columns: 153px 1fr 153px;
   max-width: 100%;
   background-color: #fff;
   .test-grid11 {
@@ -613,7 +613,8 @@
     letter-spacing: 0.4px;
     font-weight: 600;
     color: rgb(34, 34, 34);
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
+      'Helvetica Neue', sans-serif;
   }
 }
 

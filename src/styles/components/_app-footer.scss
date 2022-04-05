@@ -1,12 +1,19 @@
+.details {
+  // width: 1280px;
+  width: 1119px;
+}
+
 .app-footer {
-  margin-right: 80px;
-  margin-left: 80px;
+  // margin-right: 80px;
+  // margin-left: 80px;
+  margin: auto;
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
   border-top: 1px solid #dddddd;
   display: flex;
   justify-content: space-between;
   height: 7vh;
+  max-width: 1600px;
 
   @media (max-width: 1127px) {
     display: flex;
