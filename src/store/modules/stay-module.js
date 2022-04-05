@@ -175,7 +175,6 @@ export default {
       }
     },
 
-    //golan
     async getById(context, { stayId }) {
       try {
         console.log('trying to find stayId=', stayId)
@@ -189,7 +188,6 @@ export default {
       }
     },
 
-    //golan
     async update(context, { stayToUpdate }) {
       console.log('action ---- stay to update=', stayToUpdate)
       try {
