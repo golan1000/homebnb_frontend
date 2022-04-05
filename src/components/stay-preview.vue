@@ -65,7 +65,10 @@ export default {
     // },
     getImgUrl() {
       // const imgs = this.stay.imgUrls.map((img) => `../assets/gallery/${img}`);
-      const imgs = this.stay.imgUrls.map((img) => `src/assets/gallery/${img}`);
+      const imgs = this.stay.imgUrls.map(
+        img =>
+          `https://res.cloudinary.com/flat-inn/image/upload/v1649107833/assets/gallery/${img}`
+      );
 
       return imgs;
     },
