@@ -540,7 +540,9 @@ export default {
     return {
       mainPic: null,
       //
-      baseUrl: 'src/assets/gallery/',
+      baseUrl:
+        'https://res.cloudinary.com/flat-inn/image/upload/v1649107833/assets/gallery/',
+      // baseUrl: 'src/assets/gallery/',
       // baseUrl: '../../src/assets/gallery/',
       isSubmitted: false,
       isReadyToSubmit: true,

@@ -1,8 +1,9 @@
 // import { userService } from '../../services/user-service-local.js';
 import { userService } from '../../services/user.service.mongo';
+import { utilService } from '../../services/util.service.js';
 export default {
   state: {
-    loggedInUser: {},
+    loggedInUser: utilService.loadFromSessionStorage('loggedInUser') || null,
   },
   getters: {
     // Tal
@@ -18,7 +19,7 @@ export default {
       state.loggedInUser = user;
     },
     loadLoggedInUser(state) {
-      state.loggedInUser = userService.getLoggedInUser();
+      // state.loggedInUser = userService.getLoggedInUser();
     },
   },
   actions: {
@@ -38,6 +39,7 @@ export default {
       try {
         await userService.logout();
         commit({ type: 'setLoggedinUser', user: null });
+        console.log('logout>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
       } catch (err) {
         console.log('userStore: Error in logout', err);
         throw err;
