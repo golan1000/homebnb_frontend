@@ -731,14 +731,14 @@ export default {
     },
     getAmenitiesImg(index) {
       let amenitiesImgs = [
-        '../../src/assets/img/amenities/tv.svg',
-        '../../src/assets/img/amenities/dog.svg',
-        '../../src/assets/img/amenities/jacuzzi.svg',
-        '../../src/assets/img/amenities/kitchen.svg',
-        '../../src/assets/img/amenities/ac.svg',
-        '../../src/assets/img/amenities/wifi.svg',
-        '../../src/assets/img/amenities/refrigerator.svg',
-        '../../src/assets/img/amenities/hair-dryer.svg',
+        'https://res.cloudinary.com/flat-inn/image/upload/v1649107850/assets/img/amenities/tv.svg',
+        'https://res.cloudinary.com/flat-inn/image/upload/v1649107850/assets/img/amenities/dog.svg',
+        'https://res.cloudinary.com/flat-inn/image/upload/v1649107850/assets/img/amenities/jacuzzi.svg',
+        'https://res.cloudinary.com/flat-inn/image/upload/v1649107850/assets/img/amenities/kitchen.svg',
+        'https://res.cloudinary.com/flat-inn/image/upload/v1649107850/assets/img/amenities/ac.svg',
+        'https://res.cloudinary.com/flat-inn/image/upload/v1649107850/assets/img/amenities/wifi.svg',
+        'https://res.cloudinary.com/flat-inn/image/upload/v1649107850/assets/img/amenities/refrigerator.svg',
+        'https://res.cloudinary.com/flat-inn/image/upload/v1649107848/assets/img/amenities/hair-dryer.svg',
       ];
       // console.log('curr amenity img=', amenitiesImgs[index]);
       return amenitiesImgs[index];
